@@ -16,7 +16,7 @@ export default function Header() {
           체다치즈님의 대시보드
         </h1>
       </div>
-      <button type="button">버튼</button>
+      <button type="button"></button>
     </header>
   );
 }
