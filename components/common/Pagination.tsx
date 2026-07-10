@@ -27,8 +27,17 @@ const getPageNumbers = (
   const pages: PageItem[] = [1];
 
   // 가운데 보여주는 범위 (최소 2, 최대 마지막 페이지 - 1)
-  const rangeStart = Math.max(currentPage - siblingCount, 2);
-  const rangeEnd = Math.min(currentPage + siblingCount, totalPages - 1);
+  let rangeStart = Math.max(currentPage - siblingCount, 2);
+  let rangeEnd = Math.min(currentPage + siblingCount, totalPages - 1);
+
+  // 숨겨지는 페이지가 딱 1개뿐이면, ... 말고 그냥 숫자로
+  if (rangeStart === 3) {
+    rangeStart = 2;
+  }
+
+  if (rangeEnd === totalPages - 2) {
+    rangeEnd = totalPages - 1;
+  }
 
   // 앞 ... 여부
   if (rangeStart > 2) {
