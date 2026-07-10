@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import SideMenu from "@/components/layout/SideMenu/SideMenu";
 
 export default function WithHeaderLayout({
   children,
@@ -7,7 +7,7 @@ export default function WithHeaderLayout({
 }>) {
   return (
     <>
-      <Header />
+      <SideMenu />
       {children}
     </>
   );
