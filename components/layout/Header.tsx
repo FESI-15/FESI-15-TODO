@@ -2,10 +2,6 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Header() {
-  const [test, setTest] = useState(1);
-  const handleTest = () => {
-    setTest(test + "0");
-  };
   return (
     <header className="bg-white py-4 px-5 border-b border-gray-200 flex justify-between items-center shadow-sm">
       <div className="flex items-center gap-3">
