@@ -51,6 +51,61 @@ const getPageNumbers = (
   return pages;
 };
 
+export function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
+  // < 버튼
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  // > 버튼
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
+  return (
+    <>
+      {/* 데스크탑, 태블릿 */}
+      <PaginationView
+        boxClassName="h-12 w-12 rounded-2xl"
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageNumbers={getPageNumbers(
+          currentPage,
+          totalPages,
+          SIBLING_COUNT_DESKTOP,
+        )}
+        onPageChange={onPageChange}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        className="hidden sm:flex"
+      />
+      {/* 모바일 */}
+      <PaginationView
+        boxClassName="h-8 w-8 rounded-lg"
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageNumbers={getPageNumbers(
+          currentPage,
+          totalPages,
+          SIBLING_COUNT_MOBILE,
+        )}
+        onPageChange={onPageChange}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        className="flex sm:hidden"
+      />
+    </>
+  );
+}
+
 interface PaginationViewProps {
   boxClassName: string;
   currentPage: number;
