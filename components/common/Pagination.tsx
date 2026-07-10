@@ -1,7 +1,10 @@
+"use client";
+
 import ChevronLeftIcon from "@/public/icons/pagination/chevron-left.svg";
 import ChevronRightIcon from "@/public/icons/pagination/chevron-right.svg";
+import EllipsisIcon from "@/public/icons/pagination/ellipsis.svg";
 import {
-  ELLIPSIS,
+  PAGE_ELLIPSIS,
   SIBLING_COUNT_DESKTOP,
   SIBLING_COUNT_MOBILE,
 } from "@/constants/pagination";
@@ -12,44 +15,38 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-type PageItem = number | typeof ELLIPSIS;
+type PageItem = number | typeof PAGE_ELLIPSIS;
 
 // 페이지 번호 배열 계산 함수
+// 1페이지 & 마지막 페이지는 항상, 그 사이에 현재 페이지 + 양옆 siblingCount 개씩
 const getPageNumbers = (
   currentPage: number,
   totalPages: number,
   siblingCount: number,
 ): PageItem[] => {
-  const totalNumbers = siblingCount * 2 + 3; // 생략 없이 다 보여줄 수 있는 최대 개수
-
-  if (totalPages <= totalNumbers) {
-    return Array.from({ length: totalPages }, (_, index) => index + 1);
-  }
-
-  const leftSibling = Math.max(currentPage - siblingCount, 1); // 왼쪽 보여줄 개수
-  const rightSibling = Math.min(currentPage + siblingCount, totalPages); // 오른쪽 보여줄 개수
-
-  const showLeftEllipsis = leftSibling > 2; // 왼쪽 ... 필요한지 여부
-  const showRightEllipsis = rightSibling < totalPages - 1; // 오른쪽 ... 필요한지 여부
-
-  // 페이지 번호 배열
   const pages: PageItem[] = [1];
 
-  if (showLeftEllipsis) {
-    pages.push(ELLIPSIS);
+  // 가운데 보여주는 범위 (최소 2, 최대 마지막 페이지 - 1)
+  const rangeStart = Math.max(currentPage - siblingCount, 2);
+  const rangeEnd = Math.min(currentPage + siblingCount, totalPages - 1);
+
+  // 앞 ... 여부
+  if (rangeStart > 2) {
+    pages.push(PAGE_ELLIPSIS);
   }
 
-  for (let page = leftSibling; page <= rightSibling; page += 1) {
-    if (page !== 1 && page !== totalPages) {
-      pages.push(page);
-    }
+  for (let page = rangeStart; page <= rangeEnd; page += 1) {
+    pages.push(page);
   }
 
-  if (showRightEllipsis) {
-    pages.push(ELLIPSIS);
+  // 뒤 ... 여부
+  if (rangeEnd < totalPages - 1) {
+    pages.push(PAGE_ELLIPSIS);
   }
 
-  pages.push(totalPages);
+  if (totalPages > 1) {
+    pages.push(totalPages);
+  }
 
   return pages;
 };
