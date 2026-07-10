@@ -20,7 +20,18 @@ export default function SideMenuContainer() {
           height={24}
         />
       </div>
-      <SideMenuList />
+      <SideMenuList
+        goalLists={[
+          {
+            id: 1,
+            name: "목표 1",
+          },
+          {
+            id: 2,
+            name: "목표 2",
+          },
+        ]}
+      />
       <SideMenuUtillMenu />
       <SideMenuActions />
       <SideMenuProfile
