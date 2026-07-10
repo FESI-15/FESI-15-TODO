@@ -1,0 +1,5 @@
+{
+  "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"],
+  "*.{ts,tsx}": ["tsc --noEmit"],
+  "src/**/*.{js,jsx,ts,tsx}": ["jest --findRelatedTests --bail"]
+}
