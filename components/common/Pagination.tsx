@@ -170,10 +170,10 @@ function PaginationView({
               key={page}
               type="button"
               onClick={() => onPageChange(page)}
-              className={`flex items-center justify-center text-sm font-medium ${boxClassName} ${
+              className={`flex items-center justify-center text-sm ${boxClassName} ${
                 page === currentPage
-                  ? "bg-orange-500 text-white"
-                  : "bg-gray-50 text-gray-500"
+                  ? "bg-orange-500 text-white font-semibold"
+                  : "bg-gray-50 text-gray-500 font-medium"
               }`}
               aria-current={page === currentPage ? "page" : undefined}
             >
