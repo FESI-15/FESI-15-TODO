@@ -3,7 +3,14 @@ import { usePathname } from "next/navigation";
 import GoalsMenu from "./GoalsMenu/GoalsMenu";
 import SideMenuListItem from "./SideMenuListItem/SideMenuListItem";
 
-export default function SideMenuList({ goalLists }: { goalLists: any }) {
+interface SideMenuListProps {
+  goalLists: {
+    id: number;
+    name: string;
+  }[];
+}
+
+export default function SideMenuList({ goalLists }: SideMenuListProps) {
   const pathname = usePathname();
   const isActivePath = (href: string) => pathname.startsWith(href);
 

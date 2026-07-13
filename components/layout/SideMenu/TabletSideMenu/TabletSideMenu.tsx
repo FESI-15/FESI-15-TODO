@@ -1,8 +1,6 @@
-import { div } from "motion/react-client";
-import { createPortal } from "react-dom";
 import SideMenuContainer from "../SideMenuContainer/SideMenuContainer";
 import Image from "next/image";
-import Bell from "@/public/icons/header/bell.svg";
+import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
 import {
   tabletSideMenuButtonVariants,
   tabletSideMenuVariants,
@@ -37,12 +35,7 @@ export default function TabletSideMenu({
           onClick={onToggle}
           className={tabletSideMenuButtonVariants({ open })}
         >
-          <Image
-            src="/icons/sidemenu/double_arrow.svg"
-            alt="double_arrow"
-            width={24}
-            height={24}
-          />
+          <DoubleArrow />
         </button>
         {open ? (
           <SideMenuContainer />

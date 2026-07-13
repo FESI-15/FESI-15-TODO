@@ -10,7 +10,10 @@ import {
 import GoalsMenuList from "./GoalsMenuList/GoalsMenuList";
 
 type GoalsMenuProps = {
-  goalLists: any;
+  goalLists: {
+    id: number;
+    name: string;
+  }[];
   item: {
     icon: React.ElementType;
     name: string;

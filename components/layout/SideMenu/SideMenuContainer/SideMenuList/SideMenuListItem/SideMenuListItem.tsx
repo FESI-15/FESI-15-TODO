@@ -32,7 +32,7 @@ export default function SideMenuListItem({
             isActive,
           })}
         />
-        <span className="text-lg font-semibold">{item.name}</span>
+        <span className="text-lg">{item.name}</span>
       </div>
     </Link>
   );
