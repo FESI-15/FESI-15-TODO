@@ -4,7 +4,11 @@ import { InputHTMLAttributes, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { Input as ShadcnInput } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import { inputVariants, inputFieldVariants } from "./Input.variants";
+import {
+  inputVariants,
+  inputFieldVariants,
+  inputLabelClassName,
+} from "./Input.variants";
 
 type InputSize = "desktop" | "mobile";
 
@@ -39,7 +43,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         )}
       >
         {label && (
-          <FieldLabel htmlFor={id} className="text-gray-900">
+          <FieldLabel htmlFor={id} className={inputLabelClassName}>
             {label}
           </FieldLabel>
         )}

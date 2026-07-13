@@ -1,4 +1,4 @@
-import { TextInput } from "@/components/common/Input";
+import { TextInput, PasswordInput } from "@/components/common/input";
 
 export default function Home() {
   return (
@@ -22,6 +22,13 @@ export default function Home() {
         placeholder="이메일을 입력해주세요"
         defaultValue="abc@naver.com"
         type="email"
+      />
+
+      <PasswordInput placeholder="비밀번호를 입력해주세요" />
+      <PasswordInput
+        label="비밀번호 확인"
+        isError
+        errorMessage="비밀번호가 일치하지 않습니다."
       />
     </div>
   );

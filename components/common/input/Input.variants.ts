@@ -1,5 +1,7 @@
 import { cva } from "class-variance-authority";
 
+export const inputLabelClassName = "pl-1 text-base font-semibold text-gray-700";
+
 // Field(바깥 컨테이너)가 실제 크기를 결정
 export const inputFieldVariants = cva("", {
   variants: {
@@ -28,3 +30,15 @@ export const inputVariants = cva(
     },
   },
 );
+
+export const eyeIconVariants = cva("h-6 w-6 text-gray-500", {
+  variants: {
+    size: {
+      desktop: "h-6 w-6",
+      mobile: "h-5 w-5",
+    },
+  },
+  defaultVariants: {
+    size: "desktop",
+  },
+});
