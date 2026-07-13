@@ -1,5 +1,5 @@
 import Image from "next/image";
-export default function SideMenuUtillMenu() {
+export default function SideMenuUtilMenu() {
   return (
     <ul className="mt-6">
       <li>

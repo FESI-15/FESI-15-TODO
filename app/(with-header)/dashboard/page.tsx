@@ -1,3 +1,3 @@
 export default function Header() {
-  return <div></div>;
+  return <div>오픈</div>;
 }

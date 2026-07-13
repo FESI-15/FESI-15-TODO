@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Header from "./Header";
+import Header from "./Header/Header";
 import { useState } from "react";
 import Delete from "@/public/icons/common/delete.svg";
 import SideMenuContainer from "../SideMenuContainer/SideMenuContainer";
@@ -17,7 +17,7 @@ export default function MobileSideMenu() {
     setIsOpen(false);
   };
   return (
-    <div>
+    <div className="block md:hidden">
       <Header
         title="모바일 사이드 메뉴"
         onClickHamburger={handleOpen}

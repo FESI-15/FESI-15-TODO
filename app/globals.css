@@ -10,6 +10,10 @@
   [role="button"][aria-disabled="true"] {
     cursor: not-allowed;
   }
+
+  button {
+    cursor: pointer;
+  }
 }
 
 @theme inline {

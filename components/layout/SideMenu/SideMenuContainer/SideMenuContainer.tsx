@@ -1,6 +1,6 @@
 import SideMenuList from "../SideMenuList/SideMenuList";
 import Image from "next/image";
-import SideMenuUtillMenu from "../SideMenuUtillMenu/SideMenuUtillMenu";
+import SideMenuUtilMenu from "../SideMenuUtilMenu/SideMenuUtilMenu";
 import SideMenuActions from "../SideMenuActions/SideMenuActions";
 import SideMenuProfile from "../SideMenuProfile/SideMenuProfile";
 export default function SideMenuContainer() {
@@ -32,7 +32,7 @@ export default function SideMenuContainer() {
           },
         ]}
       />
-      <SideMenuUtillMenu />
+      <SideMenuUtilMenu />
       <SideMenuActions />
       <SideMenuProfile
         name="John Doe"
