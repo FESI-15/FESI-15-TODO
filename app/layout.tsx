@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Inter } from "next/font/google";
-import { cn } from "@/lib/utils";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+import LazyMotionProvider from "@/providers/LazyMotionProcider";
+import SideMenu from "@/components/layout/SideMenu/SideMenu";
 
 const pretendard = localFont({
   src: [
@@ -70,18 +68,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ko"
-      className={cn(
-        "h-full",
-        "antialiased",
-        pretendard.variable,
-        "font-sans",
-        inter.variable,
-      )}
-    >
+    <html lang="ko" className={`${pretendard.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
-        <Providers>{children}</Providers>
+        <Providers>
+          <LazyMotionProvider>
+            <div className="flex-col flex md:flex-row">
+              <SideMenu />
+              {children}
+            </div>
+          </LazyMotionProvider>
+        </Providers>
       </body>
     </html>
   );
