@@ -1,4 +1,8 @@
-import { TextInput, PasswordInput } from "@/components/common/input";
+import {
+  TextInput,
+  PasswordInput,
+  SearchInput,
+} from "@/components/common/input";
 
 export default function Home() {
   return (
@@ -30,6 +34,8 @@ export default function Home() {
         isError
         errorMessage="비밀번호가 일치하지 않습니다."
       />
+
+      <SearchInput placeholder="할 일을 검색해주세요" />
     </div>
   );
 }

@@ -1,7 +1,9 @@
 import { cva } from "class-variance-authority";
 
+// 라벨
 export const inputLabelClassName = "pl-1 text-base font-semibold text-gray-700";
 
+// 기본 TextInput
 // Field(바깥 컨테이너)가 실제 크기를 결정
 export const inputFieldVariants = cva("", {
   variants: {
@@ -31,7 +33,8 @@ export const inputVariants = cva(
   },
 );
 
-export const eyeIconVariants = cva("h-6 w-6 text-gray-500", {
+// 비밀번호 PasswordInput
+export const eyeIconVariants = cva("text-gray-500", {
   variants: {
     size: {
       desktop: "h-6 w-6",
@@ -42,3 +45,10 @@ export const eyeIconVariants = cva("h-6 w-6 text-gray-500", {
     size: "desktop",
   },
 });
+
+// 검색 SearchInput
+export const searchInputFieldClassName = "w-[302px]";
+
+export const searchInputVariants = cva(
+  "h-12 w-full rounded-full border border-gray-300 bg-white py-3 pl-5 pr-12 text-base text-gray-700 placeholder:text-gray-500 transition-colors focus-visible:border-orange-500 focus-visible:ring-0",
+);
