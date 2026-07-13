@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Bell from "@/public/icons/header/bell.svg";
+import NotificationBell from "@/components/common/NotificationBell";
 
 interface HeaderProps {
   title: string;
@@ -26,9 +26,7 @@ export default function Header({
           {title}님의 대시보드
         </h1>
       </div>
-      <button type="button" onClick={onClickBell}>
-        <Bell className="w-4 h-4 text-gray-400" />
-      </button>
+      <NotificationBell onClickBell={onClickBell} newNotification={true} />
     </header>
   );
 }

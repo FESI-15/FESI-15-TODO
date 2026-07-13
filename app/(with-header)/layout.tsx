@@ -6,7 +6,7 @@ export default function WithHeaderLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex">
+    <div className="flex-col flex md:flex-row">
       <SideMenu />
       {children}
     </div>

@@ -3,9 +3,21 @@ import Image from "next/image";
 import SideMenuUtilMenu from "../SideMenuUtilMenu/SideMenuUtilMenu";
 import SideMenuActions from "../SideMenuActions/SideMenuActions";
 import SideMenuProfile from "../SideMenuProfile/SideMenuProfile";
+import * as m from "motion/react-m";
 export default function SideMenuContainer() {
   return (
-    <div>
+    <m.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+        transition: {
+          duration: 0.3,
+          delay: 0.1,
+        },
+      }}
+    >
       <div className="flex items-center gap-4 pl-2 mb-10">
         <Image
           src="/icons/sidemenu/symbol.svg"
@@ -21,6 +33,7 @@ export default function SideMenuContainer() {
         />
       </div>
       <SideMenuList
+        // 인증, 인가 시스템 연동 시 goallists 전달
         goalLists={[
           {
             id: 1,
@@ -39,6 +52,6 @@ export default function SideMenuContainer() {
         email="john.doe@example.com"
         image="/images/sidemenu/profile.png"
       />
-    </div>
+    </m.div>
   );
 }

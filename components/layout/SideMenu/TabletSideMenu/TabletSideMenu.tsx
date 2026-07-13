@@ -8,6 +8,7 @@ import {
   tabletSideMenuVariants,
 } from "./TabletSideMenuVariants";
 import SideBarUtils from "./SideBarUtills/SideBarUtils";
+import * as m from "motion/react-m";
 
 type TabletSideMenuProps = {
   open: boolean;
@@ -21,7 +22,16 @@ export default function TabletSideMenu({
   return (
     <>
       <div className="lg:w-[362px] md:w-[60px]" />
-      <div className={tabletSideMenuVariants({ open })}>
+      <m.div
+        className={tabletSideMenuVariants({ open })}
+        animate={{
+          width: open ? "362px" : "60px",
+          transition: {
+            duration: 0.3,
+            ease: "easeInOut",
+          },
+        }}
+      >
         <button
           type="button"
           onClick={onToggle}
@@ -39,7 +49,7 @@ export default function TabletSideMenu({
         ) : (
           <SideBarUtils onClickBell={() => {}} newNotification={true} />
         )}
-      </div>
+      </m.div>
     </>
   );
 }
