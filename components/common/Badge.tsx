@@ -1,29 +1,60 @@
 import { cva } from "class-variance-authority";
+import CloseIcon from "@/public/icons/badge/close.svg";
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant:
-    "red" | "green" | "yellow" | "blue" | "purple" | "orange" | "pink" | "gray";
+  variant: "default" | "red" | "green" | "yellow" | "purple";
+  remove?: boolean;
+  onRemove: () => void;
 }
 
-const badgeVariants = cva("px-2 py-1 rounded-md text-white", {
+const badgeVariants = cva(
+  "inline-flex items-center gap-0.5 px-2 py-1 rounded-full text-xs border font-medium",
+  {
+    variants: {
+      variant: {
+        default: "bg-[#fafafa] text-[#414651] border-[#E9EAEB]",
+        red: "bg-[#FEF3F2] text-[#B42318] border-[#FECDCA]",
+        green: "bg-[#ECFDF3] text-[#067647] border-[#ABEFC6]",
+        yellow: "bg-[#FFFAEB] text-[#B54708] border-[#FEDF89]",
+        purple: "bg-[#F9F5FF] text-[#6941C6] border-[#E9D7FE]",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+const badgeIconVariants = cva("", {
   variants: {
     variant: {
-      red: "bg-red-500 text-white",
-      green: "bg-green-500 text-white",
-      yellow: "bg-yellow-500 text-white",
-      blue: "bg-blue-500 text-white",
-      purple: "bg-purple-500 text-white",
-      orange: "bg-orange-500 text-white",
-      pink: "bg-pink-500 text-white",
-      gray: "bg-gray-500 text-white",
+      default: "text-[#A4A7AE]",
+      red: "text-[#F97066]",
+      green: "text-[#47CD89]",
+      yellow: "text-[#FDB022]",
+      purple: "text-[#B692F6]",
     },
   },
   defaultVariants: {
-    variant: "blue",
+    variant: "default",
   },
 });
 
-export function Badge({ children, variant }: BadgeProps) {
-  return <div className={badgeVariants({ variant })}>{children}</div>;
+export function Badge({
+  children,
+  variant,
+  remove = false,
+  onRemove,
+}: BadgeProps) {
+  return (
+    <div className={badgeVariants({ variant })}>
+      {children}
+      {remove && (
+        <button onClick={onRemove}>
+          <CloseIcon className={badgeIconVariants({ variant })} />
+        </button>
+      )}
+    </div>
+  );
 }
