@@ -5,7 +5,7 @@ interface BadgeProps {
   children: React.ReactNode;
   variant: "default" | "red" | "green" | "yellow" | "purple";
   remove?: boolean;
-  onRemove: () => void;
+  onRemove?: () => void;
 }
 
 const badgeVariants = cva(
@@ -51,7 +51,7 @@ export function Badge({
     <div className={badgeVariants({ variant })}>
       {children}
       {remove && (
-        <button onClick={onRemove}>
+        <button type="button" onClick={onRemove}>
           <CloseIcon className={badgeIconVariants({ variant })} />
         </button>
       )}
