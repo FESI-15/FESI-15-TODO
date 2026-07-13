@@ -1,8 +1,8 @@
-import Dashboard from "@/public/icons/sideMenu/dashboard.svg";
-import Goals from "@/public/icons/sideMenu/goals.svg";
-import Calendar from "@/public/icons/sideMenu/calendar.svg";
-import Community from "@/public/icons/sideMenu/community.svg";
-import Favorites from "@/public/icons/sideMenu/favorites.svg";
+import Dashboard from "@/public/icons/sidemenu/dashboard.svg";
+import Goals from "@/public/icons/sidemenu/goals.svg";
+import Calendar from "@/public/icons/sidemenu/calendar.svg";
+import Community from "@/public/icons/sidemenu/community.svg";
+import Favorites from "@/public/icons/sidemenu/favorites.svg";
 
 export interface SideMenuListProps {
   name: string;
