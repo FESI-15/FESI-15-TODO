@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
+import { Inter } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const pretendard = localFont({
   src: [
@@ -66,7 +70,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={`${pretendard.variable} h-full antialiased`}>
+    <html
+      lang="ko"
+      className={cn(
+        "h-full",
+        "antialiased",
+        pretendard.variable,
+        "font-sans",
+        inter.variable,
+      )}
+    >
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
         <Providers>{children}</Providers>
       </body>
