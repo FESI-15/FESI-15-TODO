@@ -18,44 +18,55 @@ interface PaginationProps {
 type PageItem = number | typeof PAGE_ELLIPSIS;
 
 // 페이지 번호 배열 계산 함수
-// 1페이지 & 마지막 페이지는 항상, 그 사이에 현재 페이지 + 양옆 siblingCount 개씩
 const getPageNumbers = (
   currentPage: number,
   totalPages: number,
   siblingCount: number,
 ): PageItem[] => {
+  // 결과 배열
   const pages: PageItem[] = [1];
 
-  // 가운데 보여주는 범위 (최소 2, 최대 마지막 페이지 - 1)
-  let rangeStart = Math.max(currentPage - siblingCount, 2);
-  let rangeEnd = Math.min(currentPage + siblingCount, totalPages - 1);
-
-  // 숨겨지는 페이지가 딱 1개뿐이면, ... 말고 그냥 숫자로
-  if (rangeStart === 3) {
-    rangeStart = 2;
+  if (totalPages <= 1) {
+    return pages;
   }
 
-  if (rangeEnd === totalPages - 2) {
-    rangeEnd = totalPages - 1;
-  }
+  // 양 끝에 근접했을 때 멈추도록 범위 설정
 
-  // 앞 ... 여부
-  if (rangeStart > 2) {
+  // rangeEnd - rangeStart = siblingCount * 2
+
+  // rangeEnd 최대: totalPages - 2
+  // rangeStart 최대: totalPages - 2 - siblingCount * 2 (3보다는 작아지면 안 됨)
+  const rangeStart = Math.max(
+    Math.min(currentPage - siblingCount, totalPages - 2 - siblingCount * 2),
+    3,
+  );
+
+  // rangeStart 최소: 3
+  // rangeEnd 최소: siblingCount * 2 + 3 (totalPages - 2 보다는 커지면 안 됨)
+  const rangeEnd = Math.min(
+    Math.max(currentPage + siblingCount, siblingCount * 2 + 3),
+    totalPages - 2,
+  );
+
+  // 왼쪽 끝 생략되는 페이지가 딱 1칸이면 ... 대신 숫자로 (2)
+  if (rangeStart > 3) {
     pages.push(PAGE_ELLIPSIS);
+  } else if (totalPages > 3) {
+    pages.push(2);
   }
 
   for (let page = rangeStart; page <= rangeEnd; page += 1) {
     pages.push(page);
   }
 
-  // 뒤 ... 여부
-  if (rangeEnd < totalPages - 1) {
+  // 오른쪽 끝 생략되는 페이지가 딱 1칸이면 ... 대신 숫자로 (totalPages - 1)
+  if (rangeEnd < totalPages - 2) {
     pages.push(PAGE_ELLIPSIS);
+  } else if (totalPages > 2) {
+    pages.push(totalPages - 1);
   }
 
-  if (totalPages > 1) {
-    pages.push(totalPages);
-  }
+  pages.push(totalPages);
 
   return pages;
 };
@@ -65,14 +76,12 @@ export function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
-  // < 버튼
   const handlePrev = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
   };
 
-  // > 버튼
   const handleNext = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
@@ -83,7 +92,7 @@ export function Pagination({
     <>
       {/* 데스크탑, 태블릿 */}
       <PaginationView
-        boxClassName="h-12 w-12 rounded-2xl"
+        boxClassName="h-12 w-12 rounded-2xl text-sm"
         currentPage={currentPage}
         totalPages={totalPages}
         pageNumbers={getPageNumbers(
@@ -98,7 +107,7 @@ export function Pagination({
       />
       {/* 모바일 */}
       <PaginationView
-        boxClassName="h-8 w-8 rounded-lg"
+        boxClassName="h-8 w-8 rounded-lg text-xs"
         currentPage={currentPage}
         totalPages={totalPages}
         pageNumbers={getPageNumbers(
@@ -148,7 +157,9 @@ function PaginationView({
         type="button"
         onClick={onPrev}
         disabled={isPrevDisabled}
-        className={`flex items-center justify-center bg-gray-50 ${boxClassName}`}
+        className={`flex items-center justify-center bg-gray-50 ${boxClassName} ${
+          isPrevDisabled ? "cursor-default" : "cursor-pointer"
+        }`}
         aria-label="이전 페이지"
       >
         <ChevronLeftIcon
@@ -161,7 +172,7 @@ function PaginationView({
           page === PAGE_ELLIPSIS ? (
             <span
               key={`PAGE_ELLIPSIS-${index}`}
-              className={`flex items-center justify-center ${boxClassName}`}
+              className={`flex items-center justify-center bg-gray-50 ${boxClassName}`}
             >
               <EllipsisIcon className="h-6 w-6 text-gray-400" />
             </span>
@@ -170,10 +181,10 @@ function PaginationView({
               key={page}
               type="button"
               onClick={() => onPageChange(page)}
-              className={`flex items-center justify-center text-sm ${boxClassName} ${
+              className={`flex items-center justify-center ${boxClassName} ${
                 page === currentPage
-                  ? "bg-orange-500 text-white font-semibold"
-                  : "bg-gray-50 text-gray-500 font-medium"
+                  ? "bg-orange-500 text-white font-semibold shadow-[0px_10px_40px_0px_rgba(255,158,89,0.3)]"
+                  : "bg-gray-50 text-gray-500 font-medium cursor-pointer"
               }`}
               aria-current={page === currentPage ? "page" : undefined}
             >
@@ -187,7 +198,9 @@ function PaginationView({
         type="button"
         onClick={onNext}
         disabled={isNextDisabled}
-        className={`flex items-center justify-center bg-gray-50 ${boxClassName}`}
+        className={`flex items-center justify-center bg-gray-50 ${boxClassName} ${
+          isNextDisabled ? "cursor-default" : "cursor-pointer"
+        }`}
         aria-label="다음 페이지"
       >
         <ChevronRightIcon
