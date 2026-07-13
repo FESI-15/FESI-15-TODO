@@ -50,5 +50,5 @@ export const eyeIconVariants = cva("text-gray-500", {
 export const searchInputFieldClassName = "w-[302px]";
 
 export const searchInputVariants = cva(
-  "h-12 w-full rounded-full border border-gray-300 bg-white py-3 pl-5 pr-12 text-base text-gray-700 placeholder:text-gray-500 transition-colors focus-visible:border-orange-500 focus-visible:ring-0",
+  "h-12 w-full rounded-full border border-gray-300 bg-white py-3 pl-5 pr-11 text-base text-gray-700 placeholder:text-gray-500 transition-colors focus-visible:border-gray-300 focus-visible:ring-0",
 );
