@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
 @theme inline {
   --font-sans: var(--font-pretendard);
 
