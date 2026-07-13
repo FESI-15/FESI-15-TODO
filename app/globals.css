@@ -23,6 +23,8 @@
 @theme inline {
   --font-sans: var(--font-pretendard);
 
+  --color-red-500: #ff3434;
+
   --color-gray-50: #fafafa;
   --color-gray-100: #f2f2f2;
   --color-gray-200: #dddddd;
