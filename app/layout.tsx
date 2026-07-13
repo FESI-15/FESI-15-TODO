@@ -71,12 +71,7 @@ export default function RootLayout({
     <html lang="ko" className={`${pretendard.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
         <Providers>
-          <LazyMotionProvider>
-            <div className="flex-col flex md:flex-row">
-              <SideMenu />
-              {children}
-            </div>
-          </LazyMotionProvider>
+          <LazyMotionProvider>{children}</LazyMotionProvider>
         </Providers>
       </body>
     </html>
