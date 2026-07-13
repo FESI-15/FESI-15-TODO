@@ -3,16 +3,16 @@ import Link from "next/link";
 import {
   sideMenuListIconVariants,
   sideMenuListTextVariants,
-  type SideMenuListIconVariantProps,
-  type SideMenuListTextVariantProps,
 } from "../sideMenuListVariants";
+import { VariantProps } from "class-variance-authority";
 
-type SideMenuListItemProps = {
+interface SideMenuListItemProps
+  extends
+    VariantProps<typeof sideMenuListTextVariants>,
+    VariantProps<typeof sideMenuListIconVariants> {
   item: SideMenuListProps;
   isActivePath: (href: string) => boolean;
-} & SideMenuListTextVariantProps &
-  SideMenuListIconVariantProps;
-
+}
 export default function SideMenuListItem({
   item,
   isActivePath,

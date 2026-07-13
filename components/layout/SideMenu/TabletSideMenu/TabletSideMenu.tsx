@@ -8,10 +8,10 @@ import {
 import SideBarUtils from "./SideBarUtills/SideBarUtils";
 import * as m from "motion/react-m";
 
-type TabletSideMenuProps = {
+interface TabletSideMenuProps {
   open: boolean;
   onToggle: () => void;
-};
+}
 
 export default function TabletSideMenu({
   open,

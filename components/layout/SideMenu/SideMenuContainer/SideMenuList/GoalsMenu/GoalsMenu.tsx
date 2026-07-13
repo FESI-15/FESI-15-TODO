@@ -4,12 +4,14 @@ import { useState } from "react";
 import {
   sideMenuListIconVariants,
   sideMenuListTextVariants,
-  type SideMenuListIconVariantProps,
-  type SideMenuListTextVariantProps,
 } from "../sideMenuListVariants";
 import GoalsMenuList from "./GoalsMenuList/GoalsMenuList";
+import { VariantProps } from "class-variance-authority";
 
-type GoalsMenuProps = {
+interface GoalsMenuProps
+  extends
+    VariantProps<typeof sideMenuListTextVariants>,
+    VariantProps<typeof sideMenuListIconVariants> {
   goalLists: {
     id: number;
     name: string;
@@ -20,8 +22,7 @@ type GoalsMenuProps = {
     href: string;
   };
   isActivePath: (href: string) => boolean;
-} & SideMenuListTextVariantProps &
-  SideMenuListIconVariantProps;
+}
 
 export default function GoalsMenu({
   goalLists,
