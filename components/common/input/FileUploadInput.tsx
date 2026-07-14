@@ -14,7 +14,8 @@ import CloseIcon from "@/public/icons/common/delete.svg";
 import {
   fileInputFieldVariants,
   fileInputBoxVariants,
-  fileInputIconVariants,
+  fileUploadIconVariants,
+  fileDeleteIconVariants,
   fileInputTextVariants,
   inputLabelClassName,
 } from "./Input.variants";
@@ -93,7 +94,7 @@ export const FileUploadInput = forwardRef<
           }}
           className={fileInputBoxVariants({ size: inputSize })}
         >
-          <UploadIcon className={fileInputIconVariants({ size: inputSize })} />
+          <UploadIcon className={fileUploadIconVariants({ size: inputSize })} />
           <span
             className={fileInputTextVariants({
               size: inputSize,
@@ -113,7 +114,7 @@ export const FileUploadInput = forwardRef<
               aria-label="파일 삭제"
             >
               <CloseIcon
-                className={fileInputIconVariants({ size: inputSize })}
+                className={fileDeleteIconVariants({ size: inputSize })}
               />
             </button>
           )}

@@ -77,7 +77,17 @@ export const fileInputBoxVariants = cva(
   },
 );
 
-export const fileInputIconVariants = cva("shrink-0 text-gray-500", {
+export const fileUploadIconVariants = cva("shrink-0 text-gray-500", {
+  variants: {
+    size: {
+      desktop: "h-6 w-6",
+      mobile: "h-5 w-5",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const fileDeleteIconVariants = cva("shrink-0 text-gray-400", {
   variants: {
     size: {
       desktop: "h-6 w-6",
@@ -113,7 +123,7 @@ export const imageInputFieldVariants = cva("", {
 });
 
 export const imageInputBoxVariants = cva(
-  "flex h-[101px] flex-col items-center justify-center gap-0 rounded-2xl border border-dashed border-gray-300 bg-gray-50 cursor-pointer transition-colors",
+  "flex h-[101px] flex-col items-center justify-center gap-0.5 rounded-2xl border border-dashed border-gray-300 bg-gray-50 cursor-pointer transition-colors",
   {
     variants: {
       size: {
