@@ -52,3 +52,51 @@ export const searchInputFieldClassName = "w-[302px]";
 export const searchInputVariants = cva(
   "h-12 w-full rounded-full border border-gray-300 bg-white py-3 pl-5 pr-11 text-base text-gray-700 placeholder:text-gray-500 transition-colors focus-visible:border-gray-300 focus-visible:ring-0",
 );
+
+// 파일 업로드 FileUploadInput
+export const fileInputFieldVariants = cva("", {
+  variants: {
+    size: {
+      desktop: "w-[400px]",
+      mobile: "w-[327px]",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const fileInputBoxVariants = cva(
+  "flex items-center gap-2 rounded-2xl border border-gray-300 bg-gray-50 cursor-pointer transition-colors",
+  {
+    variants: {
+      size: {
+        desktop: "h-14 px-4 text-base",
+        mobile: "h-11 px-3 text-sm",
+      },
+    },
+    defaultVariants: { size: "desktop" },
+  },
+);
+
+export const fileInputIconVariants = cva("shrink-0 text-gray-400", {
+  variants: {
+    size: {
+      desktop: "h-6 w-6",
+      mobile: "h-5 w-5",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const fileInputTextVariants = cva("truncate font-normal", {
+  variants: {
+    size: {
+      desktop: "text-base",
+      mobile: "text-sm",
+    },
+    hasFile: {
+      true: "text-gray-700",
+      false: "text-gray-500",
+    },
+  },
+  defaultVariants: { size: "desktop", hasFile: false },
+});
