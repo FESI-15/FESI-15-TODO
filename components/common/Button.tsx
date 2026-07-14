@@ -1,4 +1,3 @@
-import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils";
@@ -38,7 +37,6 @@ interface ButtonProps
   children: ReactNode;
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
-  asChild?: boolean;
 }
 
 export function Button({
@@ -51,14 +49,11 @@ export function Button({
   children,
   disabled,
   type = "button",
-  asChild = false,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : "button";
-
   return (
-    <Comp
-      type={asChild ? undefined : type}
+    <button
+      type={type}
       disabled={disabled}
       className={cn(buttonVariants({ hierarchy, size, fullWidth }), className)}
       {...props}
@@ -70,6 +65,6 @@ export function Button({
       {rightIcon && (
         <span className="shrink-0 flex items-center">{rightIcon}</span>
       )}
-    </Comp>
+    </button>
   );
 }
