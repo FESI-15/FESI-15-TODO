@@ -23,8 +23,8 @@ export const inputVariants = cva(
   {
     variants: {
       size: {
-        desktop: "h-14 px-4 text-base",
-        mobile: "h-11 px-3 text-sm",
+        desktop: "h-14 px-4 text-base md:text-base", // shadcn 내장 스타일 덮도록
+        mobile: "h-11 px-3 text-sm md:text-sm",
       },
     },
     defaultVariants: {

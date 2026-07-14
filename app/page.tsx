@@ -46,6 +46,7 @@ export default function Home() {
       />
       <PasswordInput placeholder="비밀번호를 입력해주세요" />
       <PasswordInput
+        inputSize="mobile"
         id="password"
         label="비밀번호 확인"
         isError
