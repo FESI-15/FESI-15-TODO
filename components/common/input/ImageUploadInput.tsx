@@ -97,21 +97,23 @@ export const ImageUploadInput = forwardRef<
           </FieldLabel>
         )}
         {previewUrl ? (
-          <div className={imagePreviewClassName}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={previewUrl}
-              alt="첨부 이미지 미리보기"
-              className="h-full w-full object-cover"
-            />
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="absolute right-[10px] top-[10px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/80 cursor-pointer"
-              aria-label="이미지 삭제"
-            >
-              <CloseIcon className="h-full w-full text-gray-500" />
-            </button>
+          <div className="w-fit">
+            <div className={imagePreviewClassName}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={previewUrl}
+                alt="첨부 이미지 미리보기"
+                className="h-full w-full object-cover"
+              />
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="absolute right-[10px] top-[10px] flex h-[18px] w-[18px] items-center justify-center rounded-full bg-white/80 cursor-pointer"
+                aria-label="이미지 삭제"
+              >
+                <CloseIcon className="h-full w-full text-gray-500" />
+              </button>
+            </div>
           </div>
         ) : (
           <div
