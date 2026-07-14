@@ -1,7 +1,8 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { ko } from "date-fns/locale";
 import { Field, FieldLabel } from "@/components/ui/field";
 import {
   Popover,
@@ -12,8 +13,8 @@ import { Calendar } from "@/components/ui/calendar";
 import CalendarIcon from "@/public/icons/input/calendar.svg";
 import {
   dateInputFieldVariants,
-  dateInputIconVariants,
   dateInputTriggerVariants,
+  dateInputIconVariants,
   inputLabelClassName,
 } from "./Input.variants";
 
@@ -42,6 +43,8 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
     },
     ref,
   ) => {
+    const [isOpen, setIsOpen] = useState(false);
+
     const formattedDate = date
       ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(2, "0")}. ${String(date.getDate()).padStart(2, "0")}`
       : null;
@@ -58,13 +61,14 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
             {label}
           </FieldLabel>
         )}
-        <Popover>
+        <Popover open={isOpen} onOpenChange={setIsOpen}>
           <PopoverTrigger
             ref={ref}
             id={id}
             className={dateInputTriggerVariants({
               size: inputSize,
               hasValue: Boolean(date),
+              isOpen,
             })}
           >
             <CalendarIcon
@@ -72,8 +76,19 @@ export const DateInput = forwardRef<HTMLButtonElement, DateInputProps>(
             />
             {formattedDate ?? placeholder}
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar mode="single" selected={date} onSelect={onDateChange} />
+          <PopoverContent className="w-auto px-6 py-5" align="start">
+            <div className="[--cell-radius:9999px] [--cell-size:40px] [--primary-foreground:white] [--primary:var(--color-orange-500)]">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={onDateChange}
+                locale={ko}
+                classNames={{
+                  day: "[&>button]:rounded-full",
+                  today: "[&>button]:rounded-full",
+                }}
+              />
+            </div>
           </PopoverContent>
         </Popover>
       </Field>

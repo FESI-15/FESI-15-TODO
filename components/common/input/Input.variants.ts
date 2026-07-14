@@ -174,7 +174,7 @@ export const dateInputFieldVariants = cva("", {
 });
 
 export const dateInputTriggerVariants = cva(
-  "flex w-full items-center gap-2 rounded-2xl border border-gray-300 bg-white text-left transition-colors outline-none !focus-visible:border-orange-500",
+  "flex w-full items-center gap-2 rounded-2xl border border-gray-300 bg-white text-left transition-colors outline-none",
   {
     variants: {
       size: {
@@ -185,8 +185,12 @@ export const dateInputTriggerVariants = cva(
         true: "text-gray-700",
         false: "text-gray-500",
       },
+      isOpen: {
+        true: "border-orange-500",
+        false: "",
+      },
     },
-    defaultVariants: { size: "desktop", hasValue: false },
+    defaultVariants: { size: "desktop", hasValue: false, isOpen: false },
   },
 );
 
