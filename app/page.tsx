@@ -7,6 +7,7 @@ import {
   FileUploadInput,
   ImageUploadInput,
   TagInput,
+  DateInput,
 } from "@/components/common/input";
 import { Pagination } from "@/components/common/Pagination";
 import { useState } from "react";
@@ -14,9 +15,12 @@ import { useState } from "react";
 const TOTAL_PAGES = 10;
 
 export default function Home() {
+  // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
-
+  // 태그 인풋
   const [tags, setTags] = useState<string[]>(["코딩", "자기계발", "공부"]);
+  // 날짜 인풋
+  const [date, setDate] = useState<Date | undefined>();
 
   return (
     <div>
@@ -54,6 +58,12 @@ export default function Home() {
         onFileChange={(file) => {
           console.log("선택된 파일:", file);
         }}
+      />
+      <DateInput
+        date={date}
+        onDateChange={setDate}
+        label="마감기한"
+        id="deadline"
       />
       <ImageUploadInput
         id="image"

@@ -150,7 +150,7 @@ export const tagInputFieldVariants = cva("", {
 });
 
 export const tagInputBoxVariants = cva(
-  "flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors",
+  "flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors focus-within:border-orange-500",
   {
     variants: {
       size: {
@@ -161,3 +161,41 @@ export const tagInputBoxVariants = cva(
     defaultVariants: { size: "desktop" },
   },
 );
+
+// 날짜 DateInput
+export const dateInputFieldVariants = cva("", {
+  variants: {
+    size: {
+      desktop: "w-[400px]",
+      mobile: "w-[327px]",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const dateInputTriggerVariants = cva(
+  "flex w-full items-center gap-2 rounded-2xl border border-gray-300 bg-white text-left transition-colors outline-none !focus-visible:border-orange-500",
+  {
+    variants: {
+      size: {
+        desktop: "h-14 px-4 text-base",
+        mobile: "h-11 px-3 text-sm",
+      },
+      hasValue: {
+        true: "text-gray-700",
+        false: "text-gray-500",
+      },
+    },
+    defaultVariants: { size: "desktop", hasValue: false },
+  },
+);
+
+export const dateInputIconVariants = cva("shrink-0 text-gray-500", {
+  variants: {
+    size: {
+      desktop: "h-6 w-6",
+      mobile: "h-5 w-5",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
