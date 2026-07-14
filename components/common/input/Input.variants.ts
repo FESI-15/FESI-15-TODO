@@ -77,7 +77,7 @@ export const fileInputBoxVariants = cva(
   },
 );
 
-export const fileInputIconVariants = cva("shrink-0 text-gray-400", {
+export const fileInputIconVariants = cva("shrink-0 text-gray-500", {
   variants: {
     size: {
       desktop: "h-6 w-6",
@@ -100,3 +100,30 @@ export const fileInputTextVariants = cva("truncate font-normal", {
   },
   defaultVariants: { size: "desktop", hasFile: false },
 });
+
+// 이미지 첨부 ImageUploadInput
+export const imageInputFieldVariants = cva("", {
+  variants: {
+    size: {
+      desktop: "w-[424px]",
+      mobile: "w-[327px]",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const imageInputBoxVariants = cva(
+  "flex h-[101px] flex-col items-center justify-center gap-0 rounded-2xl border border-dashed border-gray-300 bg-gray-50 cursor-pointer transition-colors",
+  {
+    variants: {
+      size: {
+        desktop: "w-[424px]",
+        mobile: "w-[327px]",
+      },
+    },
+    defaultVariants: { size: "desktop" },
+  },
+);
+
+export const imagePreviewClassName =
+  "relative h-[101px] w-[160px] rounded-2xl overflow-hidden";

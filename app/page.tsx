@@ -5,6 +5,7 @@ import {
   PasswordInput,
   SearchInput,
   FileUploadInput,
+  ImageUploadInput,
 } from "@/components/common/input";
 import { Pagination } from "@/components/common/Pagination";
 import { useState } from "react";
@@ -51,6 +52,20 @@ export default function Home() {
       <FileUploadInput
         id="file"
         label="파일 업로드"
+        onFileChange={(file) => {
+          console.log("선택된 파일:", file);
+        }}
+      />
+
+      <ImageUploadInput
+        id="image"
+        label="이미지 첨부"
+        onFileChange={(file) => {
+          console.log("선택된 파일:", file);
+        }}
+      />
+      <ImageUploadInput
+        inputSize="mobile"
         onFileChange={(file) => {
           console.log("선택된 파일:", file);
         }}
