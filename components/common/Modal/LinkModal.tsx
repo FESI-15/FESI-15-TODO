@@ -16,9 +16,9 @@ export default function LinkModal({ onConfirm }: LinkModalProps) {
   return (
     <Dialog>
       <DialogTrigger>Open</DialogTrigger>
-      <DialogContent showCloseButton>
+      <DialogContent>
         <DialogHeader>
-          <DialogTitle>링크 업로드</DialogTitle>
+          <DialogTitle showCloseButton={true}>링크 업로드</DialogTitle>
         </DialogHeader>
         <div className="mt-6 md:mt-8">
           <input

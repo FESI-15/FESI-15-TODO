@@ -6,6 +6,7 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { XIcon } from "lucide-react";
+import { div } from "motion/react-m";
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
@@ -42,7 +43,7 @@ function DialogOverlay({
 function DialogContent({
   className,
   children,
-  showCloseButton = true,
+  showCloseButton = false,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean;
@@ -65,7 +66,7 @@ function DialogContent({
             render={
               <Button
                 variant="ghost"
-                className="absolute md:top-5 md:right-5 top-1 right-1"
+                className="absolute top-[6px] right-1 md:top-6 md:right-5"
                 size="icon-lg"
               />
             }
@@ -116,16 +117,30 @@ function DialogFooter({
   );
 }
 
-function DialogTitle({ className, ...props }: DialogPrimitive.Title.Props) {
+function DialogTitle({
+  className,
+  showCloseButton = true,
+  ...props
+}: DialogPrimitive.Title.Props & { showCloseButton?: boolean }) {
   return (
-    <DialogPrimitive.Title
-      data-slot="dialog-title"
-      className={cn(
-        "font-heading text-base leading-none font-semibold md:text-xl",
-        className,
+    <div className="flex items-center justify-between">
+      <DialogPrimitive.Title
+        data-slot="dialog-title"
+        className={cn(
+          "font-heading text-base leading-none font-semibold md:text-xl",
+          className,
+        )}
+        {...props}
+      />
+      {showCloseButton && (
+        <DialogPrimitive.Close
+          render={<Button variant="ghost" size="icon-lg" />}
+        >
+          <XIcon />
+          <span className="sr-only">Close</span>
+        </DialogPrimitive.Close>
       )}
-      {...props}
-    />
+    </div>
   );
 }
 
