@@ -16,9 +16,9 @@ const buttonVariants = cva(
           "bg-transparent border border-gray-300 text-gray-300 hover:border-gray-500 hover:text-gray-500 disabled:border-gray-300 disabled:text-gray-300",
       },
       size: {
-        lg: "h-14 py-[14px] px-[18px] gap-1 text-lg",
-        md: "h-12 py-[12px] px-[18px] gap-1 text-base",
-        sm: "h-10 py-[10px] px-[18px] gap-1 text-sm",
+        lg: "px-4 text-sm md:px-[18px] md:text-base lg:py-[14px] lg:px-[18px] lg:text-lg",
+        md: "px-4 text-sm md:py-[12px] md:px-[18px] md:text-base",
+        sm: "px-3 text-xs md:py-[10px] md:px-[18px] md:text-sm",
       },
       fullWidth: {
         true: "w-full",
