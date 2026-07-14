@@ -16,7 +16,6 @@ const buttonVariants = cva(
           "bg-transparent border border-gray-300 text-gray-300 hover:border-gray-500 hover:text-gray-500 disabled:border-gray-300 disabled:text-gray-300",
       },
       size: {
-        // 모바일에서 py-3을 넣어 높이를 확보하고, md 이상에서 조절합니다.
         lg: "py-3 px-4 text-sm md:py-[14px] md:px-[18px] md:text-base lg:text-lg",
         md: "py-2.5 px-4 text-sm md:py-[12px] md:px-[18px] md:text-base",
         sm: "py-2 px-3 text-xs md:py-[10px] md:px-[18px] md:text-sm",
