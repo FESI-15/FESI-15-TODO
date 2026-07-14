@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 const chipsVariants = cva(
-  "inline-block w-fit p-1 rounded-md text-xs font-semibold",
+  "inline-block w-fit py-1 px-1.5 rounded-md text-xs font-semibold",
   {
     variants: {
       variant: {
