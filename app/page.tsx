@@ -6,10 +6,22 @@ import {
   SearchInput,
   FileUploadInput,
 } from "@/components/common/input";
+import { Pagination } from "@/components/common/Pagination";
+import { useState } from "react";
+
+const TOTAL_PAGES = 10;
 
 export default function Home() {
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={TOTAL_PAGES}
+        onPageChange={setCurrentPage}
+      />
+
       {/* 라벨 작성 (id 꼭 같이 지정), 외부 커스텀 */}
       <TextInput
         id="signup-name"
@@ -37,6 +49,8 @@ export default function Home() {
       <SearchInput placeholder="할 일을 검색해주세요" />
 
       <FileUploadInput
+        id="file"
+        label="파일 업로드"
         onFileChange={(file) => {
           console.log("선택된 파일:", file);
         }}

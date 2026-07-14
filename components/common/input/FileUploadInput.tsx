@@ -8,7 +8,7 @@ import {
   ChangeEvent,
 } from "react";
 import { twMerge } from "tailwind-merge";
-import { Field } from "@/components/ui/field";
+import { Field, FieldLabel } from "@/components/ui/field";
 import UploadIcon from "@/public/icons/input/upload.svg";
 import CloseIcon from "@/public/icons/common/delete.svg";
 import {
@@ -16,6 +16,7 @@ import {
   fileInputBoxVariants,
   fileInputIconVariants,
   fileInputTextVariants,
+  inputLabelClassName,
 } from "./Input.variants";
 
 type InputSize = "desktop" | "mobile";
@@ -27,6 +28,7 @@ interface FileUploadInputProps extends Omit<
   inputSize?: InputSize;
   fieldClassName?: string;
   placeholder?: string;
+  label?: string;
   onFileChange?: (file: File | null) => void;
 }
 
@@ -39,6 +41,8 @@ export const FileUploadInput = forwardRef<
       inputSize = "desktop",
       fieldClassName,
       placeholder = "파일을 선택해주세요",
+      label,
+      id,
       onFileChange,
       ...props
     },
@@ -60,7 +64,7 @@ export const FileUploadInput = forwardRef<
     const handleRemove = () => {
       setFileName(null);
       if (inputRef.current) {
-        inputRef.current.value = ""; // 초기화
+        inputRef.current.value = "";
       }
       onFileChange?.(null);
     };
@@ -72,12 +76,17 @@ export const FileUploadInput = forwardRef<
           fieldClassName,
         )}
       >
+        {label && (
+          <FieldLabel htmlFor={id} className={inputLabelClassName}>
+            {label}
+          </FieldLabel>
+        )}
         <div
+          id={id}
           role="button"
-          tabIndex={0} // Tab으로 포커스 가능
+          tabIndex={0}
           onClick={handleBoxClick}
           onKeyDown={(event) => {
-            // Enter/Space로 선택 가능
             if (event.key === "Enter" || event.key === " ") {
               handleBoxClick();
             }
@@ -97,7 +106,7 @@ export const FileUploadInput = forwardRef<
             <button
               type="button"
               onClick={(event) => {
-                event.stopPropagation(); // 부모(파일 선택)로 전파 방지
+                event.stopPropagation();
                 handleRemove();
               }}
               className="ml-auto shrink-0 cursor-pointer"
@@ -117,8 +126,8 @@ export const FileUploadInput = forwardRef<
                 ref.current = node;
               }
             }}
-            type="file" // 실제 파일 선택 및 업로드 동작
-            className="hidden" // 화면에는 보이지 않음
+            type="file"
+            className="hidden"
             onChange={handleChange}
             {...props}
           />

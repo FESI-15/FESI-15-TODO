@@ -65,7 +65,7 @@ export const fileInputFieldVariants = cva("", {
 });
 
 export const fileInputBoxVariants = cva(
-  "flex items-center gap-2 rounded-2xl border border-gray-300 bg-gray-50 cursor-pointer transition-colors",
+  "flex items-center gap-2 rounded-2xl border border-dashed border-gray-300 bg-gray-50 cursor-pointer transition-colors",
   {
     variants: {
       size: {
