@@ -137,3 +137,27 @@ export const imageInputBoxVariants = cva(
 
 export const imagePreviewClassName =
   "relative h-[101px] w-[160px] rounded-2xl overflow-hidden";
+
+// 태그 TagInput
+export const tagInputFieldVariants = cva("", {
+  variants: {
+    size: {
+      desktop: "w-[400px]",
+      mobile: "w-[327px]",
+    },
+  },
+  defaultVariants: { size: "desktop" },
+});
+
+export const tagInputBoxVariants = cva(
+  "flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors",
+  {
+    variants: {
+      size: {
+        desktop: "min-h-14 px-4 py-4 text-base",
+        mobile: "min-h-11 px-3 py-3 text-sm",
+      },
+    },
+    defaultVariants: { size: "desktop" },
+  },
+);

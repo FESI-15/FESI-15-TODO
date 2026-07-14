@@ -6,6 +6,7 @@ import {
   SearchInput,
   FileUploadInput,
   ImageUploadInput,
+  TagInput,
 } from "@/components/common/input";
 import { Pagination } from "@/components/common/Pagination";
 import { useState } from "react";
@@ -15,6 +16,8 @@ const TOTAL_PAGES = 10;
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [tags, setTags] = useState<string[]>(["코딩", "자기계발", "공부"]);
+
   return (
     <div>
       <Pagination
@@ -22,7 +25,6 @@ export default function Home() {
         totalPages={TOTAL_PAGES}
         onPageChange={setCurrentPage}
       />
-
       {/* 라벨 작성 (id 꼭 같이 지정), 외부 커스텀 */}
       <TextInput
         id="signup-name"
@@ -38,7 +40,6 @@ export default function Home() {
         defaultValue="abc@naver.com"
         type="email"
       />
-
       <PasswordInput placeholder="비밀번호를 입력해주세요" />
       <PasswordInput
         id="password"
@@ -46,9 +47,7 @@ export default function Home() {
         isError
         errorMessage="비밀번호가 일치하지 않습니다."
       />
-
       <SearchInput placeholder="할 일을 검색해주세요" />
-
       <FileUploadInput
         id="file"
         label="파일 업로드"
@@ -56,7 +55,6 @@ export default function Home() {
           console.log("선택된 파일:", file);
         }}
       />
-
       <ImageUploadInput
         id="image"
         label="이미지 첨부"
@@ -70,6 +68,7 @@ export default function Home() {
           console.log("선택된 파일:", file);
         }}
       />
+      <TagInput tags={tags} onTagsChange={setTags} label="태그" id="tags" />
     </div>
   );
 }
