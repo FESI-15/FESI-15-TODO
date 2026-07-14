@@ -4,7 +4,7 @@ import {
   TextInput,
   PasswordInput,
   SearchInput,
-  FileUploadInput,
+  LinkInput,
   ImageUploadInput,
   TagInput,
   DateInput,
@@ -17,6 +17,8 @@ const TOTAL_PAGES = 10;
 export default function Home() {
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
+  // 링크 인풋
+  const [link, setLink] = useState("");
   // 태그 인풋
   const [tags, setTags] = useState<string[]>(["코딩", "자기계발", "공부"]);
   // 날짜 인풋
@@ -53,12 +55,12 @@ export default function Home() {
         errorMessage="비밀번호가 일치하지 않습니다."
       />
       <SearchInput placeholder="할 일을 검색해주세요" />
-      <FileUploadInput
-        id="file"
-        label="파일 업로드"
-        onFileChange={(file) => {
-          console.log("선택된 파일:", file);
-        }}
+      <LinkInput
+        id="link"
+        label="링크"
+        placeholder="링크를 입력해주세요"
+        value={link}
+        onValueChange={setLink}
       />
       <DateInput
         date={date}
