@@ -16,7 +16,7 @@ export default function Popup({ onDelete }: PopupProps) {
     <Dialog>
       <DialogTrigger>Open</DialogTrigger>
       <DialogContent showCloseButton={false}>
-        <div className="flex flex-col gap-1 text-center mt-6">
+        <div className="flex flex-col gap-1 text-center mt-6 mb-8 md:mb-10">
           <p className="font-semibold text-sm md:text-xl text-gray-800">
             정말 삭제하시겠어요?
           </p>
