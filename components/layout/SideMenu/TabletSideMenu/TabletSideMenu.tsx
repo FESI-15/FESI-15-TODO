@@ -47,8 +47,13 @@ export default function TabletSideMenu({
           <DoubleArrow />
         </button>
         {open ? (
-          /* 데스크탑/태블릿 오픈 상태: SideMenuContainer 내부(SideMenuBell)에서 별도 알림 처리 */
-          <SideMenuContainer />
+          /* 데스크탑/태블릿 오픈 상태 */
+          <SideMenuContainer
+            notifications={notifications}
+            newNotification={newNotification}
+            onMarkAsRead={onMarkAsRead}
+            onMarkAllAsRead={onMarkAllAsRead}
+          />
         ) : (
           /* 접힌 상태: SideBarUtils에 알림 데이터 연동 */
           <SideBarUtils

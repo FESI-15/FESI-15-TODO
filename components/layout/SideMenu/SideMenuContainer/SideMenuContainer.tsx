@@ -66,15 +66,15 @@ export default function SideMenuContainer({
           image="/images/sidemenu/profile.png"
         />
 
-        {/* 프로필 우측 알림 버튼 팝오버 연동 (프로필 위쪽 방향) */}
+        {/* 프로필 우측 알림 버튼 팝오버 연동 */}
         <Notification
           trigger={<SideMenuBell newNotification={newNotification} />}
           notifications={notifications}
           onMarkAsRead={onMarkAsRead}
           onMarkAllAsRead={onMarkAllAsRead}
-          align="start"
-          side="top"
-          sideOffset={8}
+          align="end"
+          side="right"
+          sideOffset={12}
         />
       </div>
     </m.div>
