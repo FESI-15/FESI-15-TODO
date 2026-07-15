@@ -1,36 +1,23 @@
 "use client";
 
-import { useState } from "react";
 import { Notification } from "@/components/common/notification/Notification";
-import { NotificationItemType } from "@/types/notification";
-
-const MOCK_NOTIFICATIONS: NotificationItemType[] = [];
+import { NotificationBell } from "@/components/common/NotificationBell";
+import { useNotificationState } from "@/hooks/useNotificationState";
 
 export default function TestNotificationPage() {
-  const [notifications, setNotifications] =
-    useState<NotificationItemType[]>(MOCK_NOTIFICATIONS);
-
-  const handleMarkAsRead = (id: number) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n)),
-    );
-  };
-
-  const handleMarkAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, isRead: true })));
-  };
+  const { notifications, hasUnread, handleMarkAsRead, handleMarkAllAsRead } =
+    useNotificationState();
 
   return (
-    <div className="flex justify-end p-10">
+    <div className="flex h-screen items-start justify-end p-10 bg-slate-50">
       <Notification
-        trigger={
-          <button type="button" className="bg-red-500">
-            테스트 벨
-          </button>
-        }
+        trigger={<NotificationBell newNotification={hasUnread} />}
         notifications={notifications}
         onMarkAsRead={handleMarkAsRead}
         onMarkAllAsRead={handleMarkAllAsRead}
+        align="end"
+        side="bottom"
+        sideOffset={8}
       />
     </div>
   );
