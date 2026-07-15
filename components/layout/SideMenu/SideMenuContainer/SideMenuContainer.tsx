@@ -1,16 +1,31 @@
+"use client";
+
 import SideMenuList from "./SideMenuList/SideMenuList";
 import Image from "next/image";
 import SideMenuUtilMenu from "./SideMenuUtilMenu/SideMenuUtilMenu";
 import SideMenuActions from "./SideMenuActions/SideMenuActions";
 import SideMenuProfile from "./SideMenuProfile/SideMenuProfile";
 import * as m from "motion/react-m";
-import SideMenuBell from "./SideMenuBell/SideMenuBell";
-export default function SideMenuContainer() {
+import { SideMenuBell } from "./SideMenuBell/SideMenuBell";
+import { Notification } from "@/components/common/notification/Notification";
+import { NotificationItemType } from "@/types/notification";
+
+interface SideMenuContainerProps {
+  notifications: NotificationItemType[];
+  newNotification: boolean;
+  onMarkAsRead: (id: number) => void;
+  onMarkAllAsRead: () => void;
+}
+
+export default function SideMenuContainer({
+  notifications,
+  newNotification,
+  onMarkAsRead,
+  onMarkAllAsRead,
+}: SideMenuContainerProps) {
   return (
     <m.div
-      initial={{
-        opacity: 0,
-      }}
+      initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
         transition: {
@@ -33,29 +48,34 @@ export default function SideMenuContainer() {
           height={24}
         />
       </div>
+
       <SideMenuList
-        // 인증, 인가 시스템 연동 시 goallists 전달
         goalLists={[
-          {
-            id: 1,
-            name: "목표 1",
-          },
-          {
-            id: 2,
-            name: "목표 2",
-          },
+          { id: 1, name: "목표 1" },
+          { id: 2, name: "목표 2" },
         ]}
       />
       <SideMenuUtilMenu />
       <SideMenuActions />
-      {/* 인증, 인가 시스템 연동 시 profile 전달 */}
+
+      {/* 프로필 및 알림 벨 영역 */}
       <div className="flex items-center gap-2 mt-6">
         <SideMenuProfile
           name="John Doe"
           email="john.doe@example.com"
           image="/images/sidemenu/profile.png"
         />
-        <SideMenuBell newNotification={true} onClickBell={() => {}} />
+
+        {/* 프로필 우측 알림 버튼 팝오버 연동 */}
+        <Notification
+          trigger={<SideMenuBell newNotification={newNotification} />}
+          notifications={notifications}
+          onMarkAsRead={onMarkAsRead}
+          onMarkAllAsRead={onMarkAllAsRead}
+          align="end"
+          side="right"
+          sideOffset={12}
+        />
       </div>
     </m.div>
   );
