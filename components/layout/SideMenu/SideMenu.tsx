@@ -17,7 +17,12 @@ export default function SideMenu() {
   return (
     <div>
       {/* 1. 모바일 사이드메뉴 상태 바인딩 */}
-      <MobileSideMenu />
+      <MobileSideMenu
+        notifications={notifications}
+        newNotification={hasUnread}
+        onMarkAsRead={handleMarkAsRead}
+        onMarkAllAsRead={handleMarkAllAsRead}
+      />
       {/* 2. 태블릿/데스크탑 사이드메뉴 상태 바인딩 */}
       <TabletSideMenu
         open={open}

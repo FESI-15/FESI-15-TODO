@@ -32,7 +32,7 @@ export default function SideBarUtils({
         onMarkAllAsRead={onMarkAllAsRead}
         align="start" /* 왼쪽 기준으로 정렬 정돈 */
         side="right" /* 접혀있는 사이드바 우측으로 팝오버가 펼쳐지도록 세팅 */
-        sideOffset={15}
+        sideOffset={8}
       />
     </div>
   );
