@@ -9,7 +9,7 @@ export default function Status({ status, onChange }: StatusProps) {
   return (
     <div>
       <Title essential>상태</Title>
-      <div className="flex gap-2 items-center ">
+      <div className="flex gap-3 items-center ">
         <CheckboxBasic
           label={"To do"}
           checked={status === "to do"}

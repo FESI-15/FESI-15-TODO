@@ -1,19 +1,11 @@
 "use client";
 
 import { InputHTMLAttributes, forwardRef } from "react";
-import { twMerge } from "tailwind-merge";
 import { Input as ShadcnInput } from "@/components/ui/input";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
-import {
-  inputVariants,
-  inputFieldVariants,
-  inputLabelClassName,
-} from "./Input.variants";
-
-type InputSize = "desktop" | "mobile";
+import { inputLabelClassName } from "./Input.variants";
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  inputSize?: InputSize;
   isError?: boolean;
   errorMessage?: string;
   fieldClassName?: string; // 외부 커스텀
@@ -21,27 +13,9 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    {
-      inputSize = "desktop",
-      isError = false,
-      errorMessage,
-      className,
-      fieldClassName,
-      label,
-      id,
-      ...props
-    },
-    ref,
-  ) => {
+  ({ isError = false, errorMessage, label, id, ...props }, ref) => {
     return (
-      <Field
-        data-invalid={isError}
-        className={twMerge(
-          inputFieldVariants({ size: inputSize }),
-          fieldClassName,
-        )}
-      >
+      <Field data-invalid={isError}>
         {label && (
           <FieldLabel htmlFor={id} className={inputLabelClassName}>
             {label}
@@ -51,7 +25,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           ref={ref}
           id={id} // 라벨-인풋 연결
           aria-invalid={isError}
-          className={twMerge(inputVariants({ size: inputSize }), className)}
+          className="w-full 
+          p-3 text-sm md:p-4 md:text-base rounded-[12px] md:rounded-[16px] border bg-white text-gray-700 placeholder:text-gray-500 transition-colors placeholder:text-sm md:placeholder:text-base border-gray-300 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0"
           {...props}
         />
         {isError && errorMessage && (

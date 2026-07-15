@@ -12,17 +12,17 @@ export default function CheckboxBasic({
   onChange,
 }: CheckboxBasicProps) {
   return (
-    <FieldGroup>
-      <Field orientation="horizontal">
+    <FieldGroup className="w-fit @container-normal">
+      <Field orientation="horizontal" className="w-fit">
         <Checkbox
-          id="terms-checkbox-basic"
+          id={`${label}-checkbox-basic`}
           name="terms-checkbox-basic"
           checked={checked}
           onCheckedChange={onChange}
         />
         <FieldLabel
-          className="text-gray-500 text-sm font-medium"
-          htmlFor="terms-checkbox-basic"
+          className="flex-none text-sm font-medium whitespace-nowrap text-gray-500"
+          htmlFor={`${label}-checkbox-basic`}
         >
           {label}
         </FieldLabel>
