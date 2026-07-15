@@ -1,24 +1,11 @@
 "use client";
 
-import { Notification } from "@/components/common/notification/Notification";
-import { NotificationBell } from "@/components/common/NotificationBell";
-import { useNotificationState } from "@/hooks/useNotificationState";
+import SideMenu from "@/components/layout/SideMenu/SideMenu";
 
-export default function TestNotificationPage() {
-  const { notifications, hasUnread, handleMarkAsRead, handleMarkAllAsRead } =
-    useNotificationState();
-
+export default function TestPage() {
   return (
-    <div className="flex h-screen items-start justify-end p-10 bg-slate-50">
-      <Notification
-        trigger={<NotificationBell newNotification={hasUnread} />}
-        notifications={notifications}
-        onMarkAsRead={handleMarkAsRead}
-        onMarkAllAsRead={handleMarkAllAsRead}
-        align="end"
-        side="bottom"
-        sideOffset={8}
-      />
+    <div className="flex min-h-screen bg-slate-100">
+      <SideMenu />
     </div>
   );
 }

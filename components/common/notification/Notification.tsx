@@ -14,23 +14,20 @@ import {
   notificationMarkAllClassName,
 } from "./Notification.variants";
 
-type PopoverAlign = "start" | "center" | "end";
-type PopoverSide = "top" | "bottom" | "left" | "right";
-
 interface NotificationProps {
   trigger: ReactElement;
-  notifications: NotificationItemType[];
+  notifications?: NotificationItemType[];
   onMarkAsRead: (id: number) => void;
   onMarkAllAsRead: () => void;
-  align?: PopoverAlign;
-  side?: PopoverSide;
+  align?: "start" | "center" | "end";
+  side?: "top" | "bottom" | "left" | "right";
   sideOffset?: number;
   alignOffset?: number;
 }
 
 export function Notification({
   trigger,
-  notifications,
+  notifications = [],
   onMarkAsRead,
   onMarkAllAsRead,
   align = "end",
