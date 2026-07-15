@@ -8,6 +8,7 @@ import TaskModal from "@/components/common/Modal/TaskModal/TaskModal";
 import Chips from "@/components/common/Chips";
 import CheckboxBasic from "@/components/common/CheckboxBasic";
 import { useState } from "react";
+import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 
 export default function Home() {
   const [checked, setChecked] = useState(false);
@@ -18,6 +19,7 @@ export default function Home() {
       <PluginModal onConfirm={() => {}} />
       <SettingModal onConfirm={() => {}} />
       <TaskModal />
+      <TaskFormModal />
       <Chips variant="to do" />
       <Chips variant="done" />
       <CheckboxBasic
