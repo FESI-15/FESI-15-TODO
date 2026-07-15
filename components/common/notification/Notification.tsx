@@ -68,14 +68,14 @@ export function Notification({
         ) : (
           <div
             className={twMerge(
-              "max-h-[384px] overflow-y-auto pr-[7px] overflow-x-hidden",
+              "max-h-[364px] overflow-y-auto pr-[7px] overflow-x-hidden",
               "[&::-webkit-scrollbar]:w-1",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
               "[&::-webkit-scrollbar-thumb]:bg-slate-300",
               "[&::-webkit-scrollbar-track]:bg-transparent",
             )}
           >
-            <div className="flex flex-col">
+            <div className="gap-2 flex flex-col">
               {notifications.map((notification) => (
                 <NotificationItem
                   key={notification.id}
