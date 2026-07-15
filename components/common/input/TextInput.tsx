@@ -25,8 +25,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           ref={ref}
           id={id} // 라벨-인풋 연결
           aria-invalid={isError}
-          className="w-full 
-          p-3 text-sm md:p-4 md:text-base rounded-[12px] md:rounded-[16px] border bg-white text-gray-700 placeholder:text-gray-500 transition-colors placeholder:text-sm md:placeholder:text-base border-gray-300 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0"
+          className="w-full p-3 text-sm md:p-4 md:text-base rounded-[12px] md:rounded-[16px] border bg-white text-gray-700 placeholder:text-gray-500 transition-colors placeholder:text-sm md:placeholder:text-base border-gray-300 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0"
           {...props}
         />
         {isError && errorMessage && (
