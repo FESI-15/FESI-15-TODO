@@ -9,6 +9,15 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // 임시 이미지 url
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
