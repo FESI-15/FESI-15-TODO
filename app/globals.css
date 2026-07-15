@@ -32,6 +32,8 @@
 @theme inline {
   --font-sans: var(--font-sans);
 
+  --color-red-500: #ff3434;
+
   --color-gray-50: #fafafa;
   --color-gray-100: #f2f2f2;
   --color-gray-200: #dddddd;
@@ -95,6 +97,22 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
+  }
 }
 
 :root {
