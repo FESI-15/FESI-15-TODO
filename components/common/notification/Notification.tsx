@@ -39,7 +39,6 @@ export function Notification({
   alignOffset = 0,
 }: NotificationProps) {
   const hasUnread = notifications.some((notification) => !notification.isRead);
-  const hasFixedHeight = notifications.length >= 4;
 
   return (
     <Popover>
@@ -49,9 +48,9 @@ export function Notification({
         side={side}
         sideOffset={sideOffset}
         alignOffset={alignOffset}
-        className="w-[288px] rounded-3xl border border-gray-200 bg-white px-3 py-5"
+        className="flex w-[295px] flex-col rounded-3xl border border-gray-200 bg-white py-5 pl-3 pr-1 shadow-lg"
       >
-        <div className="mb-4 flex h-5 items-center justify-between px-2">
+        <div className="mb-4 flex h-5 shrink-0 items-center justify-between px-2 pr-3">
           <h2 className={notificationHeaderTextClassName}>알림</h2>
           <button
             type="button"
@@ -69,15 +68,14 @@ export function Notification({
         ) : (
           <div
             className={twMerge(
-              "overflow-y-auto pr-3",
+              "max-h-[384px] overflow-y-auto pr-2",
               "[&::-webkit-scrollbar]:w-1",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
               "[&::-webkit-scrollbar-thumb]:bg-gray-300",
               "[&::-webkit-scrollbar-track]:bg-transparent",
-              hasFixedHeight ? "h-[384px]" : "max-h-[384px]",
             )}
           >
-            <div className="flex flex-col gap-[3px]">
+            <div className="flex flex-col gap-1">
               {notifications.map((notification) => (
                 <NotificationItem
                   key={notification.id}

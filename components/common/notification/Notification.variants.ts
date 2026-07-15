@@ -4,11 +4,11 @@ export const notificationHeaderTextClassName =
   "text-sm font-semibold text-gray-700";
 
 export const notificationMarkAllClassName = cva(
-  "cursor-pointer text-xs font-semibold",
+  "cursor-pointer text-xs font-semibold transition-colors",
   {
     variants: {
       hasUnread: {
-        true: "text-orange-500",
+        true: "text-orange-500 hover:text-orange-600",
         false: "text-gray-300 cursor-default",
       },
     },
