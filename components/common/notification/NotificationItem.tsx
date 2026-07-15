@@ -41,33 +41,38 @@ export function NotificationItem({
       }}
       className={notificationItemVariants()}
     >
-      {/* 안 읽음 표시 뱃지 */}
-      <div className="mt-1 flex h-3 w-3 shrink-0 items-center justify-center">
-        {!isRead && <span className="h-1.5 w-1.5 rounded-full bg-orange-500" />}
+      <div className="flex h-3 w-3 shrink-0 items-center justify-center self-start pt-0.5">
+        <span
+          className={`h-1.5 w-1.5 rounded-full bg-orange-500 transition-opacity ${
+            isRead ? "opacity-0" : "opacity-100"
+          }`}
+        />
       </div>
 
-      {/* 알림 본문 영역 */}
+      {/* 두 줄까지 보여주고 말줄임표 */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        <p className="text-sm font-medium leading-snug text-gray-700 break-keep">
+        <p className="line-clamp-2 text-sm font-medium leading-snug text-slate-700 break-keep">
           {message}
         </p>
+
+        {/* 한 줄까지 보여주고 말줄임표 */}
         {subText && (
-          <p className="mt-0.5 truncate text-sm font-normal text-gray-500">
+          <p className="truncate mt-0.5 text-sm font-normal text-slate-500">
             {subText}
           </p>
         )}
-        <p className="mt-1 text-xs font-normal text-gray-400">
+
+        <p className="mt-1 text-xs font-normal text-slate-400">
           {formatRelativeTime(createdAt)}
         </p>
       </div>
 
-      {/* 우측 프로필/첨부 이미지 */}
       <Image
         src={imageSrc}
         alt=""
         width={40}
         height={40}
-        className="ml-2 h-10 w-10 shrink-0 self-center rounded-full border border-gray-100 object-cover"
+        className="ml-3 h-10 w-10 shrink-0 self-center rounded-full border border-slate-200 object-cover"
       />
     </div>
   );

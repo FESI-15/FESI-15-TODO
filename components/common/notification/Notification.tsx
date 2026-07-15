@@ -48,9 +48,9 @@ export function Notification({
         side={side}
         sideOffset={sideOffset}
         alignOffset={alignOffset}
-        className="flex w-[295px] flex-col rounded-3xl border border-gray-200 bg-white py-5 pl-3 pr-1 shadow-lg"
+        className="gap-0 flex w-auto flex-col overflow-x-hidden rounded-3xl border border-slate-200 bg-white py-5 pl-3 pr-[5px] shadow-[0_0_30px_rgba(0,0,0,0.05)]"
       >
-        <div className="mb-4 flex h-5 shrink-0 items-center justify-between px-2 pr-3">
+        <div className="mb-4 flex h-5 shrink-0 items-center justify-between pl-2 pr-2">
           <h2 className={notificationHeaderTextClassName}>알림</h2>
           <button
             type="button"
@@ -62,20 +62,20 @@ export function Notification({
         </div>
 
         {notifications.length === 0 ? (
-          <div className="flex h-[124px] w-[265px] items-center justify-center text-sm font-medium text-gray-500">
+          <div className="flex h-[124px] w-[265px] items-center justify-center text-sm font-medium text-slate-500">
             아직 알림이 없어요
           </div>
         ) : (
           <div
             className={twMerge(
-              "max-h-[384px] overflow-y-auto pr-2",
+              "max-h-[384px] overflow-y-auto pr-[7px] overflow-x-hidden",
               "[&::-webkit-scrollbar]:w-1",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
-              "[&::-webkit-scrollbar-thumb]:bg-gray-300",
+              "[&::-webkit-scrollbar-thumb]:bg-slate-300",
               "[&::-webkit-scrollbar-track]:bg-transparent",
             )}
           >
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               {notifications.map((notification) => (
                 <NotificationItem
                   key={notification.id}

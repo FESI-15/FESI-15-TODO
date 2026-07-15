@@ -41,7 +41,7 @@ const DEFAULT_AVATARS = [
   "/images/common/profile-3.png",
 ];
 
-// 알림 도메인(todo/comment) 기준 이미지 선택 함수
+// 기본 이미지 매칭 함수 (알림 도메인(todo/comment) 기준)
 export function getNotificationImage(
   notification: NotificationItemType,
 ): string {
