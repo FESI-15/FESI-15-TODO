@@ -7,6 +7,9 @@ import {
 } from "@/components/ui/dialog";
 import Chips from "@/components/common/Chips";
 import MetaInfo from "./MetaInfo/MetaInfo";
+import AttachmentSection from "./AttachmentSection/AttachmentSection";
+import NoteSection from "./NoteSection/NoteSection";
+
 export default function TaskModal() {
   return (
     <Dialog>
@@ -25,6 +28,11 @@ export default function TaskModal() {
           deadline="2026-07-14"
           tags={["자바스크립트", "기초", "챕터1"]}
         />
+        <AttachmentSection
+          link="https://www.google.com"
+          imageUrl="/images/test_image.png"
+        />
+        <NoteSection noteId="1" noteTitle="Note 1" />
       </DialogContent>
     </Dialog>
   );
