@@ -7,6 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { TextInput } from "../input/TextInput";
+import { Button } from "../Button";
 
 interface LinkModalProps {
   onConfirm: () => void;
@@ -21,23 +23,23 @@ export default function LinkModal({ onConfirm }: LinkModalProps) {
           <DialogTitle showCloseButton={true}>링크 업로드</DialogTitle>
         </DialogHeader>
         <div className="mt-6 md:mt-8">
-          <input
-            className="w-full p-4 rounded-[16px] border border-gray-300"
-            type="text"
-            placeholder="링크를 입력해주세요."
+          <TextInput
+            fieldClassName="w-full"
+            placeholder="링크를 입력해주세요"
           />
         </div>
         <DialogFooter>
           <div className="flex gap-2 w-full mt-4 md:mt-6">
             <DialogClose
               render={
-                <button
+                <Button
+                  fullWidth
+                  hierarchy="primary"
+                  size="lg"
                   onClick={onConfirm}
-                  type="button"
-                  className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
                 >
                   확인
-                </button>
+                </Button>
               }
             />
           </div>

@@ -11,6 +11,7 @@ import Image from "next/image";
 import LanguageSelect from "./LanguageSelect/LanguageSelect";
 import DarkModeToggleButton from "./DarkModeToggleButton/DarkModeToggleButton";
 import { useState } from "react";
+import { Button } from "../../Button";
 
 interface SettingModalProps {
   onConfirm: () => void;
@@ -34,21 +35,19 @@ export default function SettingModal({ onConfirm }: SettingModalProps) {
           <div className="flex gap-2 w-full mt-10">
             <DialogClose
               render={
-                <button
-                  type="button"
-                  className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
+                <Button
+                  className="text-gray-500"
+                  fullWidth
+                  hierarchy="tertiary"
+                  size="lg"
                 >
                   취소
-                </button>
+                </Button>
               }
             />
-            <button
-              onClick={onConfirm}
-              type="button"
-              className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
-            >
+            <Button fullWidth onClick={onConfirm} hierarchy="primary" size="lg">
               확인
-            </button>
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>

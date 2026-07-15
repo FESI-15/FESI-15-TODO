@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import Form from "./Form/Form";
+import { Button } from "../../Button";
 
 interface PluginModalProps {
   onConfirm: () => void;
@@ -42,21 +43,19 @@ export default function PluginModal({ onConfirm }: PluginModalProps) {
           <div className="flex gap-2 w-full mt-8 md:mt-6">
             <DialogClose
               render={
-                <button
-                  type="button"
-                  className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
+                <Button
+                  className="text-gray-500"
+                  fullWidth
+                  hierarchy="tertiary"
+                  size="lg"
                 >
                   취소
-                </button>
+                </Button>
               }
             />
-            <button
-              onClick={onConfirm}
-              type="button"
-              className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
-            >
+            <Button fullWidth onClick={onConfirm} hierarchy="primary" size="lg">
               확인
-            </button>
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>

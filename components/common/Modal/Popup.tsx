@@ -6,6 +6,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from "next/image";
+import { Button } from "../Button";
 
 interface PopupProps {
   onDelete: () => void;
@@ -36,21 +37,19 @@ export default function Popup({ onDelete }: PopupProps) {
           <div className="flex gap-2 w-full">
             <DialogClose
               render={
-                <button
-                  type="button"
-                  className="flex-1 rounded-full bg-gray-200 py-2.5 md:py-3.5"
+                <Button
+                  className="text-gray-500"
+                  fullWidth
+                  hierarchy="tertiary"
+                  size="lg"
                 >
                   취소
-                </button>
+                </Button>
               }
             />
-            <button
-              onClick={onDelete}
-              type="button"
-              className="flex-1 py-2.5 rounded-full bg-primary text-white md:py-3.5"
-            >
+            <Button fullWidth hierarchy="primary" size="lg" onClick={onDelete}>
               확인
-            </button>
+            </Button>
           </div>
         </DialogFooter>
       </DialogContent>

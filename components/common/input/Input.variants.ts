@@ -5,7 +5,7 @@ export const inputLabelClassName = "pl-1 text-base font-semibold text-gray-700";
 
 // 기본 TextInput
 // Field(바깥 컨테이너)가 실제 크기를 결정
-export const inputFieldVariants = cva("", {
+export const inputFieldVariants = cva("w-full", {
   variants: {
     size: {
       desktop: "w-[400px]",
