@@ -1,10 +1,10 @@
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import {
-  Controller,
   type Control,
   type FieldPath,
   type FieldValues,
+  useController,
 } from "react-hook-form";
 
 interface CheckboxBasicProps<T extends FieldValues> {
@@ -21,33 +21,31 @@ export default function CheckboxBasic<T extends FieldValues>({
   label,
 }: CheckboxBasicProps<T>) {
   const checkboxId = `${label}-checkbox-basic`;
+  const { field } = useController({
+    control,
+    name,
+  });
 
   return (
-    <Controller
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <FieldGroup className="w-fit @container-normal">
-          <Field orientation="horizontal" className="w-fit">
-            <Checkbox
-              id={checkboxId}
-              name={field.name}
-              checked={field.value === value}
-              onCheckedChange={(checked) => {
-                if (checked === true) {
-                  field.onChange(value);
-                }
-              }}
-            />
-            <FieldLabel
-              className="flex-none text-sm font-medium whitespace-nowrap text-gray-500"
-              htmlFor={checkboxId}
-            >
-              {label}
-            </FieldLabel>
-          </Field>
-        </FieldGroup>
-      )}
-    />
+    <FieldGroup className="w-fit @container-normal">
+      <Field orientation="horizontal" className="w-fit">
+        <Checkbox
+          id={checkboxId}
+          name={field.name}
+          checked={field.value === value}
+          onCheckedChange={(checked) => {
+            if (checked === true) {
+              field.onChange(value);
+            }
+          }}
+        />
+        <FieldLabel
+          className="flex-none text-sm font-medium whitespace-nowrap text-gray-500"
+          htmlFor={checkboxId}
+        >
+          {label}
+        </FieldLabel>
+      </Field>
+    </FieldGroup>
   );
 }

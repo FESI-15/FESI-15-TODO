@@ -20,7 +20,7 @@ export default function Form({ control }: FormProps) {
       <DeadLine control={control} />
       <TagSection control={control} />
       <LinkSection control={control} />
-      <ImageSection />
+      <ImageSection control={control} />
     </div>
   );
 }

@@ -6,7 +6,7 @@ interface TitleProps {
   marginBottom?: boolean;
 }
 
-const variants = cva("flex items-center gap-px", {
+const variants = cva("flex items-center gap-px pl-1 ", {
   variants: {
     marginBottom: {
       true: "mb-2",

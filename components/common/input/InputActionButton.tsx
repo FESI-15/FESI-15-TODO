@@ -1,9 +1,9 @@
+import { twMerge } from "tailwind-merge";
 import LinkIcon from "@/public/icons/input/link.svg";
 import SearchIcon from "@/public/icons/input/search.svg";
 import CloseIcon from "@/public/icons/input/input-delete.svg";
 import EyeIcon from "@/public/icons/input/eye.svg";
 import EyeOffIcon from "@/public/icons/input/eye-off.svg";
-import { twMerge } from "tailwind-merge";
 
 interface InputActionButtonProps {
   variant: "text" | "link" | "search" | "password";
@@ -20,19 +20,23 @@ export function InputActionButton({
   isPasswordVisible,
   onTogglePassword,
 }: InputActionButtonProps) {
-  if (variant === "link" && value) {
-    return (
-      <button type="button" onClick={onClear} className="absolute right-4">
-        <CloseIcon className="shrink-0 text-gray-400 h-5 w-5 md:h-6 md:w-6" />
-      </button>
-    );
-  }
-
   if (variant === "link") {
     return (
-      <span className="pointer-events-none absolute left-4 text-gray-500">
-        <LinkIcon className="h-5 w-5 md:h-6 md:w-6" />
-      </span>
+      <>
+        <span className="pointer-events-none absolute left-4 text-gray-500">
+          <LinkIcon className="h-5 w-5 md:h-6 md:w-6" />
+        </span>
+        {value && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="absolute right-4"
+            aria-label="링크 삭제"
+          >
+            <CloseIcon className="h-5 w-5 shrink-0 text-gray-400 md:h-6 md:w-6" />
+          </button>
+        )}
+      </>
     );
   }
 

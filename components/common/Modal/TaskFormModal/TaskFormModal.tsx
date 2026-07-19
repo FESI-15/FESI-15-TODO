@@ -19,6 +19,7 @@ export interface TaskFormValues {
   deadline: Date | undefined;
   link: string;
   tags: string[];
+  image: File | null;
 }
 
 export default function TaskFormModal() {
@@ -30,6 +31,7 @@ export default function TaskFormModal() {
       deadline: undefined,
       link: "",
       tags: [],
+      image: null,
     },
   });
 
