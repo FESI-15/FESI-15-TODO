@@ -12,7 +12,9 @@ export default function AttachmentSection({
   if (!link && !imageUrl) return null;
   return (
     <div className="mt-6">
-      <p>첨부 자료</p>
+      <p className="text-sm font-semibold text-gray-700 md:text-base">
+        첨부 자료
+      </p>
       {link && (
         <div className="flex items-center gap-1 mt-2">
           <Image

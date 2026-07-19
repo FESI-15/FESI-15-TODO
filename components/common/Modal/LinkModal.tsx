@@ -13,20 +13,24 @@ import { FormInput } from "../input/FormInput";
 import { Button } from "../Button";
 import { useForm } from "react-hook-form";
 
-interface LinkModalProps {
-  onConfirm: () => void;
-}
-
 interface LinkFormValues {
   link: string;
 }
 
-export default function LinkModal({ onConfirm }: LinkModalProps) {
-  const form = useForm<LinkFormValues>({
+export default function LinkModal() {
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<LinkFormValues>({
     defaultValues: {
       link: "",
     },
   });
+
+  const onCreate = (values: LinkFormValues) => {
+    console.log(values);
+  };
 
   return (
     <Dialog>
@@ -35,30 +39,33 @@ export default function LinkModal({ onConfirm }: LinkModalProps) {
         <DialogHeader>
           <DialogTitle showCloseButton={true}>링크 업로드</DialogTitle>
         </DialogHeader>
-        <div className="mt-6 md:mt-8">
-          <FormInput
-            control={form.control}
-            name="link"
-            fieldClassName="w-full"
-            placeholder="링크를 입력해주세요"
-          />
-        </div>
-        <DialogFooter>
-          <div className="flex gap-2 w-full mt-4 md:mt-6">
-            <DialogClose
-              render={
-                <Button
-                  fullWidth
-                  hierarchy="primary"
-                  size="lg"
-                  onClick={onConfirm}
-                >
-                  확인
-                </Button>
-              }
+        <form onSubmit={handleSubmit(onCreate)}>
+          <div className="mt-6 md:mt-8">
+            <FormInput
+              control={control}
+              name="link"
+              fieldClassName="w-full"
+              placeholder="링크를 입력해주세요"
             />
           </div>
-        </DialogFooter>
+          <DialogFooter>
+            <div className="flex gap-2 w-full mt-4 md:mt-6">
+              <DialogClose
+                render={
+                  <Button
+                    type="submit"
+                    fullWidth
+                    hierarchy="primary"
+                    size="lg"
+                    disabled={!isValid}
+                  >
+                    확인
+                  </Button>
+                }
+              />
+            </div>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
