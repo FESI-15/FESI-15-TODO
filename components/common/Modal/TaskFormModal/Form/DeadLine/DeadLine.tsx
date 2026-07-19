@@ -10,7 +10,9 @@ interface DeadLineProps {
 export default function DeadLine({ control }: DeadLineProps) {
   return (
     <div>
-      <Title essential>마감일</Title>
+      <Title essential marginBottom>
+        마감일
+      </Title>
       <div>
         <DateInput control={control} name="deadline" />
       </div>

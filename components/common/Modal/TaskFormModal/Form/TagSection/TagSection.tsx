@@ -9,10 +9,8 @@ export default function TagSection() {
   };
   return (
     <div>
-      <Title>태그</Title>
-      <div>
-        <TagInput tags={tags} onTagsChange={handleTagsChange} />
-      </div>
+      <Title marginBottom>태그</Title>
+      <TagInput tags={tags} onTagsChange={handleTagsChange} />
     </div>
   );
 }

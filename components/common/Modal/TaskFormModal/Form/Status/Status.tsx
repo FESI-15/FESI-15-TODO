@@ -8,7 +8,9 @@ interface StatusProps {
 export default function Status({ status, onChange }: StatusProps) {
   return (
     <div>
-      <Title essential>상태</Title>
+      <Title essential marginBottom>
+        상태
+      </Title>
       <div className="flex gap-3 items-center ">
         <CheckboxBasic
           label={"To do"}

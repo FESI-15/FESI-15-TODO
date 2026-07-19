@@ -61,7 +61,7 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
             {label}
           </FieldLabel>
         )}
-        <div className="px-3 py-2.5 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white transition-colors focus-within:border-orange-500">
+        <div className="p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white transition-colors focus-within:border-orange-500">
           {tags.map((tag, index) => (
             <Badge
               key={`${tag}-${index}`}

@@ -101,7 +101,7 @@ export const tagInputBoxVariants = cva(
 );
 
 export const dateInputTriggerVariants = cva(
-  "p-3 md:p-5 text-sm md:text-base flex w-full items-center gap-2 rounded-2xl border border-gray-300 bg-white text-left transition-colors outline-none",
+  "p-3 md:p-4 text-sm md:text-base flex w-full items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white text-left transition-colors outline-none",
   {
     variants: {
       hasValue: {

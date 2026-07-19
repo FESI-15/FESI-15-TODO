@@ -40,7 +40,6 @@ export function FormInput<T extends FieldValues>({
       ? "text"
       : "password"
     : type;
-  console.log(hasLeftIcon);
 
   return (
     <Controller
