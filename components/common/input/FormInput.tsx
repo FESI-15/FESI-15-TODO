@@ -17,6 +17,7 @@ interface FormInputProps<T extends FieldValues> extends Omit<
   control: Control<T>;
   name: FieldPath<T>;
   variant?: FormInputVariant;
+  fieldClassName?: string;
   label?: ReactNode;
 }
 
@@ -25,6 +26,8 @@ export function FormInput<T extends FieldValues>({
   name,
   variant = "text",
   label,
+  className,
+  fieldClassName,
   type = "text",
   ...props
 }: FormInputProps<T>) {
@@ -50,7 +53,10 @@ export function FormInput<T extends FieldValues>({
         const currentValue = String(field.value ?? "");
 
         return (
-          <Field data-invalid={isError} className="gap-2">
+          <Field
+            data-invalid={isError}
+            className={twMerge("gap-2", fieldClassName)}
+          >
             {label && (
               <FieldLabel
                 htmlFor={name}
@@ -70,6 +76,7 @@ export function FormInput<T extends FieldValues>({
                 aria-invalid={isError}
                 className={twMerge(
                   inputVariants({ hasLeftIcon, hasRightAction }),
+                  className,
                 )}
               />
               <InputActionButton

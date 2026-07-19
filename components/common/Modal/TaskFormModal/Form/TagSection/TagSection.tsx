@@ -1,16 +1,17 @@
 import { TagInput } from "@/components/common/input/TagInput";
 import Title from "../../../Title";
-import { useState } from "react";
+import type { Control } from "react-hook-form";
+import type { TaskFormValues } from "../../TaskFormModal";
 
-export default function TagSection() {
-  const [tags, setTags] = useState<string[]>([]);
-  const handleTagsChange = (tags: string[]) => {
-    setTags(tags);
-  };
+interface TagSectionProps {
+  control: Control<TaskFormValues>;
+}
+
+export default function TagSection({ control }: TagSectionProps) {
   return (
     <div>
       <Title marginBottom>태그</Title>
-      <TagInput tags={tags} onTagsChange={handleTagsChange} />
+      <TagInput control={control} name="tags" />
     </div>
   );
 }

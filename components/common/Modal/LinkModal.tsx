@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { TextInput } from "../input/TextInput";
+import { FormInput } from "../input/FormInput";
 import { Button } from "../Button";
 import { useForm } from "react-hook-form";
 
@@ -36,7 +36,7 @@ export default function LinkModal({ onConfirm }: LinkModalProps) {
           <DialogTitle showCloseButton={true}>링크 업로드</DialogTitle>
         </DialogHeader>
         <div className="mt-6 md:mt-8">
-          <TextInput
+          <FormInput
             control={form.control}
             name="link"
             fieldClassName="w-full"

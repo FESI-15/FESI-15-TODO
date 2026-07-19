@@ -1,7 +1,8 @@
 "use client";
 
-import { KeyboardEvent, forwardRef, useState } from "react";
-import { Field, FieldLabel } from "@/components/ui/field";
+import { KeyboardEvent, useState } from "react";
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Badge } from "@/components/common/Badge";
 
 type BadgeVariant = "default" | "red" | "green" | "yellow" | "purple";
@@ -14,78 +15,94 @@ const BADGE_VARIANTS: BadgeVariant[] = [
   "purple",
 ];
 
-interface TagInputProps {
+interface TagInputProps<T extends FieldValues> {
+  control: Control<T>;
+  name: FieldPath<T>;
   label?: string;
   id?: string;
   placeholder?: string;
-  tags: string[];
-  onTagsChange: (tags: string[]) => void;
 }
 
-export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
-  ({ label, id, placeholder = "입력 후 Enter", tags, onTagsChange }, ref) => {
-    const [inputValue, setInputValue] = useState("");
+export function TagInput<T extends FieldValues>({
+  control,
+  name,
+  label,
+  id,
+  placeholder = "입력 후 Enter",
+}: TagInputProps<T>) {
+  const [inputValue, setInputValue] = useState("");
+  const inputId = id ?? name;
 
-    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter") {
-        event.preventDefault(); // form 안에 있을 때 폼 제출 방지
+  return (
+    <Controller
+      control={control}
+      name={name}
+      render={({ field, fieldState }) => {
+        const tags: string[] = Array.isArray(field.value) ? field.value : [];
 
-        const trimmedValue = inputValue.trim();
+        const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
 
-        // 중복 태그 방지
-        if (trimmedValue && !tags.includes(trimmedValue)) {
-          onTagsChange([...tags, trimmedValue]);
-        }
+            const trimmedValue = inputValue.trim();
 
-        setInputValue("");
-        return;
-      }
+            if (trimmedValue && !tags.includes(trimmedValue)) {
+              field.onChange([...tags, trimmedValue]);
+            }
 
-      // 입력창이 비어있을 때 Backspace 누르면 마지막 태그 삭제
-      if (event.key === "Backspace" && inputValue === "" && tags.length > 0) {
-        onTagsChange(tags.slice(0, -1));
-      }
-    };
+            setInputValue("");
+            return;
+          }
 
-    const handleRemoveTag = (indexToRemove: number) => {
-      onTagsChange(tags.filter((_, index) => index !== indexToRemove));
-    };
+          if (
+            event.key === "Backspace" &&
+            inputValue === "" &&
+            tags.length > 0
+          ) {
+            field.onChange(tags.slice(0, -1));
+          }
+        };
 
-    return (
-      <Field>
-        {label && (
-          <FieldLabel
-            htmlFor={id}
-            className="pl-1 text-base font-semibold text-gray-700"
-          >
-            {label}
-          </FieldLabel>
-        )}
-        <div className="p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white transition-colors focus-within:border-orange-500">
-          {tags.map((tag, index) => (
-            <Badge
-              key={`${tag}-${index}`}
-              variant={BADGE_VARIANTS[index % BADGE_VARIANTS.length]}
-              remove
-              onRemove={() => handleRemoveTag(index)}
-            >
-              {tag}
-            </Badge>
-          ))}
-          <input
-            ref={ref}
-            id={id}
-            type="text"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={tags.length === 0 ? placeholder : ""}
-            className="min-w-[80px] flex-1 bg-transparent text-gray-700 placeholder:text-gray-500 focus:outline-none"
-          />
-        </div>
-      </Field>
-    );
-  },
-);
+        const handleRemoveTag = (indexToRemove: number) => {
+          field.onChange(tags.filter((_, index) => index !== indexToRemove));
+        };
 
-TagInput.displayName = "TagInput";
+        return (
+          <Field data-invalid={fieldState.invalid}>
+            {label && (
+              <FieldLabel
+                htmlFor={inputId}
+                className="pl-1 text-base font-semibold text-gray-700"
+              >
+                {label}
+              </FieldLabel>
+            )}
+            <div className="p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white transition-colors focus-within:border-orange-500">
+              {tags.map((tag, index) => (
+                <Badge
+                  key={`${tag}-${index}`}
+                  variant={BADGE_VARIANTS[index % BADGE_VARIANTS.length]}
+                  remove
+                  onRemove={() => handleRemoveTag(index)}
+                >
+                  {tag}
+                </Badge>
+              ))}
+              <input
+                ref={field.ref}
+                id={inputId}
+                type="text"
+                value={inputValue}
+                onChange={(event) => setInputValue(event.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={tags.length === 0 ? placeholder : ""}
+                className="min-w-[80px] flex-1 bg-transparent text-gray-700 placeholder:text-gray-500 focus:outline-none"
+              />
+            </div>
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        );
+      }}
+    />
+  );
+}

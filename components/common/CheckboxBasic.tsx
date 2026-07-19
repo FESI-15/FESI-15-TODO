@@ -1,32 +1,53 @@
 import { Checkbox } from "../ui/checkbox";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
+import {
+  Controller,
+  type Control,
+  type FieldPath,
+  type FieldValues,
+} from "react-hook-form";
 
-interface CheckboxBasicProps {
+interface CheckboxBasicProps<T extends FieldValues> {
+  control: Control<T>;
+  name: FieldPath<T>;
+  value: string;
   label: string;
-  checked: boolean;
-  onChange: (checked: boolean) => void;
 }
-export default function CheckboxBasic({
+
+export default function CheckboxBasic<T extends FieldValues>({
+  control,
+  name,
+  value,
   label,
-  checked,
-  onChange,
-}: CheckboxBasicProps) {
+}: CheckboxBasicProps<T>) {
+  const checkboxId = `${label}-checkbox-basic`;
+
   return (
-    <FieldGroup className="w-fit @container-normal">
-      <Field orientation="horizontal" className="w-fit">
-        <Checkbox
-          id={`${label}-checkbox-basic`}
-          name="terms-checkbox-basic"
-          checked={checked}
-          onCheckedChange={onChange}
-        />
-        <FieldLabel
-          className="flex-none text-sm font-medium whitespace-nowrap text-gray-500"
-          htmlFor={`${label}-checkbox-basic`}
-        >
-          {label}
-        </FieldLabel>
-      </Field>
-    </FieldGroup>
+    <Controller
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FieldGroup className="w-fit @container-normal">
+          <Field orientation="horizontal" className="w-fit">
+            <Checkbox
+              id={checkboxId}
+              name={field.name}
+              checked={field.value === value}
+              onCheckedChange={(checked) => {
+                if (checked === true) {
+                  field.onChange(value);
+                }
+              }}
+            />
+            <FieldLabel
+              className="flex-none text-sm font-medium whitespace-nowrap text-gray-500"
+              htmlFor={checkboxId}
+            >
+              {label}
+            </FieldLabel>
+          </Field>
+        </FieldGroup>
+      )}
+    />
   );
 }

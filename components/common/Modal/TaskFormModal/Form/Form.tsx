@@ -10,17 +10,15 @@ import type { TaskFormValues } from "../TaskFormModal";
 
 interface FormProps {
   control: Control<TaskFormValues>;
-  status: string;
-  onChange: (status: string) => void;
 }
-export default function Form({ control, status, onChange }: FormProps) {
+export default function Form({ control }: FormProps) {
   return (
     <div className="flex flex-col gap-3 mt-4">
-      <Status status={status} onChange={onChange} />
+      <Status control={control} />
       <TitleInput control={control} />
       <GoalSelect />
       <DeadLine control={control} />
-      <TagSection />
+      <TagSection control={control} />
       <LinkSection control={control} />
       <ImageSection />
     </div>

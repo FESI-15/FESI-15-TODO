@@ -1,6 +1,6 @@
 "use client";
 
-import { TextInput } from "@/components/common/input/TextInput";
+import { FormInput } from "@/components/common/input/FormInput";
 import { useForm } from "react-hook-form";
 
 interface PluginFormValues {
@@ -19,13 +19,13 @@ export default function Form() {
   return (
     <>
       <div className="mt-8 flex flex-col gap-2.5 md:gap-3">
-        <TextInput
+        <FormInput
           control={form.control}
           name="link"
           fieldClassName="w-full"
           placeholder="링크를 입력해주세요"
         />
-        <TextInput
+        <FormInput
           control={form.control}
           name="title"
           fieldClassName="w-full"

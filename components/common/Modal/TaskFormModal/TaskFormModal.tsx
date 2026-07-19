@@ -9,24 +9,27 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Form from "./Form/Form";
 import { Button } from "../../Button";
 
 export interface TaskFormValues {
+  status: "to do" | "done";
   title: string;
   deadline: Date | undefined;
   link: string;
+  tags: string[];
 }
 
 export default function TaskFormModal() {
-  const [status, setStatus] = useState("to do");
-  const form = useForm<TaskFormValues>({
+  const { control, handleSubmit } = useForm<TaskFormValues>({
+    mode: "onChange",
     defaultValues: {
+      status: "to do",
       title: "",
       deadline: undefined,
       link: "",
+      tags: [],
     },
   });
 
@@ -41,7 +44,7 @@ export default function TaskFormModal() {
         <DialogHeader>
           <DialogTitle showCloseButton={true}>할 일 생성</DialogTitle>
         </DialogHeader>
-        <Form control={form.control} status={status} onChange={setStatus} />
+        <Form control={control} />
         <DialogFooter>
           <div className="flex gap-2 w-full mt-4 md:mt-10">
             <DialogClose
@@ -60,7 +63,7 @@ export default function TaskFormModal() {
               fullWidth
               hierarchy="primary"
               size="lg"
-              onClick={form.handleSubmit(onCreate)}
+              onClick={handleSubmit(onCreate)}
             >
               확인
             </Button>
