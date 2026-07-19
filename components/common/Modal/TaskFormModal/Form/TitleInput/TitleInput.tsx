@@ -1,17 +1,18 @@
-import { TextInput } from "@/components/common/input/TextInput";
 import Title from "@/components/common/Modal/Title";
+import type { Control } from "react-hook-form";
+import type { TaskFormValues } from "../../TaskFormModal";
+import { FormInput } from "@/components/common/input/FormInput";
 
 interface TitleInputProps {
-  title: string;
-  onChange: (title: string) => void;
+  control: Control<TaskFormValues>;
 }
-export default function TitleInput({ title, onChange }: TitleInputProps) {
+export default function TitleInput({ control }: TitleInputProps) {
   return (
     <div>
-      <Title essential>제목</Title>
-      <TextInput
-        value={title}
-        onChange={(e) => onChange(e.target.value)}
+      <FormInput
+        label={<Title essential>제목</Title>}
+        control={control}
+        name="title"
         placeholder="할 일의 제목을 입력해주세요."
       />
     </div>

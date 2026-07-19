@@ -1,11 +1,36 @@
+"use client";
+
 import { TextInput } from "@/components/common/input/TextInput";
+import { useForm } from "react-hook-form";
+
+interface PluginFormValues {
+  link: string;
+  title: string;
+}
 
 export default function Form() {
+  const form = useForm<PluginFormValues>({
+    defaultValues: {
+      link: "",
+      title: "",
+    },
+  });
+
   return (
     <>
       <div className="mt-8 flex flex-col gap-2.5 md:gap-3">
-        <TextInput fieldClassName="w-full" placeholder="링크를 입력해주세요" />
-        <TextInput fieldClassName="w-full" placeholder="할 일을 입력해주세요" />
+        <TextInput
+          control={form.control}
+          name="link"
+          fieldClassName="w-full"
+          placeholder="링크를 입력해주세요"
+        />
+        <TextInput
+          control={form.control}
+          name="title"
+          fieldClassName="w-full"
+          placeholder="할 일을 입력해주세요"
+        />
       </div>
       <div className="mt-2.5 md:mt-6">
         <p className="text-sm font-medium text-gray-500 mb-2 md:text-base md:font-semibold">

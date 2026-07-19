@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogClose,
@@ -9,12 +11,23 @@ import {
 } from "@/components/ui/dialog";
 import { TextInput } from "../input/TextInput";
 import { Button } from "../Button";
+import { useForm } from "react-hook-form";
 
 interface LinkModalProps {
   onConfirm: () => void;
 }
 
+interface LinkFormValues {
+  link: string;
+}
+
 export default function LinkModal({ onConfirm }: LinkModalProps) {
+  const form = useForm<LinkFormValues>({
+    defaultValues: {
+      link: "",
+    },
+  });
+
   return (
     <Dialog>
       <DialogTrigger>Open</DialogTrigger>
@@ -24,6 +37,8 @@ export default function LinkModal({ onConfirm }: LinkModalProps) {
         </DialogHeader>
         <div className="mt-6 md:mt-8">
           <TextInput
+            control={form.control}
+            name="link"
             fieldClassName="w-full"
             placeholder="링크를 입력해주세요"
           />

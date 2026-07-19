@@ -4,7 +4,7 @@ interface TitleProps {
 }
 export default function Title({ children, essential = false }: TitleProps) {
   return (
-    <div className="flex items-center gap-px pl-1 mb-2">
+    <div className="flex items-center gap-px">
       <p className="text-sm font-semibold text-gray-700">{children}</p>
       {essential && (
         <span className="text-orange-500 text-sm font-semibold">*</span>

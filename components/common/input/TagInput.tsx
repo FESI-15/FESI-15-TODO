@@ -1,16 +1,9 @@
 "use client";
 
 import { KeyboardEvent, forwardRef, useState } from "react";
-import { twMerge } from "tailwind-merge";
 import { Field, FieldLabel } from "@/components/ui/field";
 import { Badge } from "@/components/common/Badge";
-import {
-  tagInputBoxVariants,
-  tagInputFieldVariants,
-  inputLabelClassName,
-} from "./Input.variants";
 
-type InputSize = "desktop" | "mobile";
 type BadgeVariant = "default" | "red" | "green" | "yellow" | "purple";
 
 const BADGE_VARIANTS: BadgeVariant[] = [
@@ -22,8 +15,6 @@ const BADGE_VARIANTS: BadgeVariant[] = [
 ];
 
 interface TagInputProps {
-  inputSize?: InputSize;
-  fieldClassName?: string;
   label?: string;
   id?: string;
   placeholder?: string;
@@ -32,18 +23,7 @@ interface TagInputProps {
 }
 
 export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
-  (
-    {
-      inputSize = "desktop",
-      fieldClassName,
-      label,
-      id,
-      placeholder = "입력 후 Enter",
-      tags,
-      onTagsChange,
-    },
-    ref,
-  ) => {
+  ({ label, id, placeholder = "입력 후 Enter", tags, onTagsChange }, ref) => {
     const [inputValue, setInputValue] = useState("");
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -72,18 +52,16 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
     };
 
     return (
-      <Field
-        className={twMerge(
-          tagInputFieldVariants({ size: inputSize }),
-          fieldClassName,
-        )}
-      >
+      <Field>
         {label && (
-          <FieldLabel htmlFor={id} className={inputLabelClassName}>
+          <FieldLabel
+            htmlFor={id}
+            className="pl-1 text-base font-semibold text-gray-700"
+          >
             {label}
           </FieldLabel>
         )}
-        <div className={tagInputBoxVariants({ size: inputSize })}>
+        <div className="px-3 py-2.5 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white transition-colors focus-within:border-orange-500">
           {tags.map((tag, index) => (
             <Badge
               key={`${tag}-${index}`}
