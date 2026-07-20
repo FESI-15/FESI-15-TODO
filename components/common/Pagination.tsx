@@ -214,7 +214,7 @@ function PaginationView({
                 "cursor-default",
               )}
             >
-              <EllipsisIcon className="h-6 w-6 text-gray-400" />
+              <EllipsisIcon className="h-6 w-6 text-gray-500" />
             </span>
           ) : (
             <button
