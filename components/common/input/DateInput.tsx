@@ -22,6 +22,7 @@ import {
   dateInputTriggerVariants,
   inputLabelClassName,
 } from "./Input.variants";
+import { format } from "date-fns";
 
 interface DateInputProps<T extends FieldValues> {
   control: Control<T>;
@@ -46,9 +47,7 @@ export function DateInput<T extends FieldValues>({
   });
   const date = field.value as Date | undefined;
   const isError = Boolean(fieldState.error);
-  const formattedDate = date
-    ? `${date.getFullYear()}. ${String(date.getMonth() + 1).padStart(2, "0")}. ${String(date.getDate()).padStart(2, "0")}`
-    : null;
+  const formattedDate = date ? format(date, "yyyy.MM.dd") : null;
 
   return (
     <Field data-invalid={isError}>

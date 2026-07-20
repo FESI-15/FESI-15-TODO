@@ -50,19 +50,15 @@ export default function LinkModal() {
           </div>
           <DialogFooter>
             <div className="flex gap-2 w-full mt-4 md:mt-6">
-              <DialogClose
-                render={
-                  <Button
-                    type="submit"
-                    fullWidth
-                    hierarchy="primary"
-                    size="lg"
-                    disabled={!isValid}
-                  >
-                    확인
-                  </Button>
-                }
-              />
+              <Button
+                type="submit"
+                fullWidth
+                hierarchy="primary"
+                size="lg"
+                disabled={!isValid}
+              >
+                확인
+              </Button>
             </div>
           </DialogFooter>
         </form>

@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
-import LazyMotionProvider from "@/providers/LazyMotionProcider";
-import SideMenu from "@/components/layout/SideMenu/SideMenu";
-import { Geist } from "next/font/google";
+import LazyMotionProvider from "@/providers/LazyMotionProvider";
 import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const pretendard = localFont({
   src: [
@@ -72,7 +68,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={cn("h-full", "antialiased", pretendard.variable, "font-sans", geist.variable)}>
+    <html
+      lang="ko"
+      className={cn("h-full", "antialiased", pretendard.variable, "font-sans")}
+    >
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
         <Providers>
           <LazyMotionProvider>{children}</LazyMotionProvider>

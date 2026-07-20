@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogClose,
@@ -7,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Image from "next/image";
 import LanguageSelect from "./LanguageSelect/LanguageSelect";
 import DarkModeToggleButton from "./DarkModeToggleButton/DarkModeToggleButton";
 import { useState } from "react";
