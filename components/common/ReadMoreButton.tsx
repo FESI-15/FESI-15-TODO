@@ -1,6 +1,12 @@
+import { cva } from "class-variance-authority";
 import { cn } from "@/utils";
 import ChevronDownIcon from "@/public/icons/common/chevron-down.svg";
-import ChevronUpIcon from "@/public/icons/common/chevron-up.svg";
+
+const buttonVariants = cva(
+  "flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white",
+);
+
+const iconVariants = cva("h-6 w-6 transition-transform duration-200");
 
 interface ReadMoreButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;
@@ -16,17 +22,10 @@ export function ReadMoreButton({
       type="button"
       aria-label={isOpen ? "접기" : "더보기"}
       aria-expanded={isOpen}
-      className={cn(
-        "flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white",
-        className,
-      )}
+      className={cn(buttonVariants(), className)}
       {...props}
     >
-      {isOpen ? (
-        <ChevronUpIcon className="h-6 w-6" />
-      ) : (
-        <ChevronDownIcon className="h-6 w-6" />
-      )}
+      <ChevronDownIcon className={cn(iconVariants(), isOpen && "rotate-180")} />
     </button>
   );
 }
