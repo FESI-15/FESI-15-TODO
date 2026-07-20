@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/utils";
+import { cn } from "@/utils/cn";
 import DeleteIcon from "@/public/icons/common/ic_delete_gray.svg";
 
 const deleteButtonVariants = cva(

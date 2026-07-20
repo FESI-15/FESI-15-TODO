@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import { Providers } from "./providers";
+import "@/globals.css";
+import { QueryProviders } from "../providers/Queryproviders";
 import LazyMotionProvider from "@/providers/LazyMotionProvider";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 const pretendard = localFont({
   src: [
@@ -60,6 +60,9 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: "슬리드 투두",
   description: "투두 리스트 서비스입니다.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -73,9 +76,9 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", pretendard.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
-        <Providers>
+        <QueryProviders>
           <LazyMotionProvider>{children}</LazyMotionProvider>
-        </Providers>
+        </QueryProviders>
       </body>
     </html>
   );

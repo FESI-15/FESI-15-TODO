@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 import Image from "next/image";
-import { cn } from "@/utils";
+import { cn } from "@/utils/cn";
 import CommentIcon from "@/public/icons/card/ic_message-circle.svg";
 
 interface PostCardProps extends HTMLAttributes<HTMLDivElement> {

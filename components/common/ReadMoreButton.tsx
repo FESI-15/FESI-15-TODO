@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-import { cn } from "@/utils";
+import { cn } from "@/utils/cn";
 import ChevronDownIcon from "@/public/icons/common/chevron-down.svg";
 
 const buttonVariants = cva(

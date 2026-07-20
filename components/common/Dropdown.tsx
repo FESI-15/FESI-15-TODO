@@ -1,7 +1,7 @@
 "use client";
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
-import { cn } from "@/utils";
+import { cn } from "@/utils/cn";
 import ChevronDownIcon from "@/public/icons/common/chevron-down.svg";
 import {
   triggerVariants,
