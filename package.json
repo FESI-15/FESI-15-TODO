@@ -11,6 +11,7 @@
     "test:watch": "jest --watch",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "api:gen": "orval",
     "prepare": "husky",
     "type-check": "tsc --noEmit"
   },
@@ -50,6 +51,7 @@
     "husky": "^9.1.7",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
+    "orval": "^7.13.2",
     "lint-staged": "^16.4.0",
     "prettier": "^3.9.4",
     "prettier-plugin-tailwindcss": "^0.8.0",
@@ -58,7 +60,7 @@
     "typescript": "^5"
   },
   "optionalDependencies": {
-    "lightningcss-linux-x64-gnu": "^1.29.0",
-    "@tailwindcss/oxide-linux-x64-gnu": "^4.0.0"
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.0.0",
+    "lightningcss-linux-x64-gnu": "^1.29.0"
   }
 }
