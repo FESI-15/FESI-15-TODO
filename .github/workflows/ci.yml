@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: Node.js 설치하기
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: 라이브러리 설치 (npm install)
+        run: npm install
+
+      - name: 타입스크립트 에러 검사
+        run: npx tsc --noEmit
+
+      - name: ESLint 문법 및 포맷 검사
+        run: npm run lint
+
+      - name: Jest 전체 테스트 실행
+        run: npm test -- --passWithNoTests
+
+      - name: Next.js 배포용 빌드 테스트
+        run: npm run build
