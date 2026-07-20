@@ -1,11 +1,11 @@
 import Image from "next/image";
 import KebabMenuIcon from "@/public/icons/card/ic_kebab.svg";
-import { Chip } from "./Chip";
+import Chips from "@/components/common/Chip";
 import imgNoteLarge from "@/public/images/card/img_note_large.png";
 
 interface NoteCardProps {
   title: string;
-  status: "todo" | "done";
+  status: "to do" | "done";
   subText: string;
   date: string;
   onMenuClick?: () => void;
@@ -19,7 +19,7 @@ export function NoteCard({
   onMenuClick,
 }: NoteCardProps) {
   return (
-    <div className="flex w-full flex-col gap-3 rounded-[20px] bg-white p-4 md:gap-4 md:rounded-3xl md:px-[38px] md:pt-7 md:pb-8">
+    <div className="flex w-full flex-col gap-3 rounded-[20px] bg-white p-4 md:gap-4 md:rounded-3xl md:px-9.5 md:pt-7 md:pb-8">
       <div className="flex items-center justify-between">
         <div className="flex min-w-0 items-center gap-2 md:gap-4">
           <Image
@@ -40,7 +40,7 @@ export function NoteCard({
 
       <div className="flex items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
-          <Chip status={status} />
+          <Chips variant={status} />
           <span className="truncate text-xs tracking-[-0.03em] text-gray-700 md:text-sm">
             {subText}
           </span>

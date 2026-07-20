@@ -1,34 +1,7 @@
-import { cva } from "class-variance-authority";
 import { HTMLAttributes } from "react";
 import Image from "next/image";
 import { cn } from "@/utils";
 import CommentIcon from "@/public/icons/card/ic_message-circle.svg";
-
-const cardVariants = cva(
-  "flex w-full flex-col items-start gap-[10px] rounded-3xl bg-white px-6 py-4 transition-all md:gap-4 md:rounded-[32px] md:p-8",
-);
-
-const titleVariants = cva(
-  "w-full truncate text-base leading-6 font-semibold tracking-[-0.03em] text-slate-900 md:text-xl md:leading-[30px]",
-);
-
-const imageRowVariants = cva(
-  "flex w-full flex-row items-center gap-3 md:gap-4",
-);
-
-const authorRowVariants = cva(
-  "flex min-w-0 flex-row items-center gap-1 md:gap-2",
-);
-
-const metaTextVariants = cva(
-  "truncate text-xs leading-4 text-slate-500 md:text-base md:leading-6 md:tracking-[-0.02em]",
-);
-
-const avatarVariants = cva(
-  "h-5 w-5 shrink-0 rounded-full object-cover md:h-6 md:w-6",
-);
-
-const iconVariants = cva("h-4 w-4 text-slate-600 md:h-5 md:w-5");
 
 interface PostCardProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -52,11 +25,19 @@ export function PostCard({
   ...props
 }: PostCardProps) {
   return (
-    <div className={cn(cardVariants(), className)} {...props}>
-      <h3 className={titleVariants()}>{title}</h3>
+    <div
+      className={cn(
+        "flex w-full flex-col items-start gap-2.5 rounded-3xl bg-white px-6 py-4 transition-all md:gap-4 md:rounded-9.5 md:p-8",
+        className,
+      )}
+      {...props}
+    >
+      <h3 className="w-full truncate text-base leading-6 font-semibold tracking-[-0.03em] text-slate-900 md:text-xl md:leading-7.5">
+        {title}
+      </h3>
 
       {images && images.length > 0 && (
-        <div className={imageRowVariants()}>
+        <div className="flex w-full flex-row items-center gap-3 md:gap-4">
           {images.slice(0, 2).map((imgUrl, idx) => (
             <Image
               key={idx}
@@ -71,22 +52,24 @@ export function PostCard({
       )}
 
       <div className="mt-auto flex w-full flex-row items-center justify-between gap-2">
-        <div className={authorRowVariants()}>
+        <div className="flex min-w-0 flex-row items-center gap-1 md:gap-2">
           <Image
             src={authorAvatarUrl || DEFAULT_AVATAR}
             alt={author}
             width={24}
             height={24}
-            className={avatarVariants()}
+            className="h-5 w-5 shrink-0 rounded-full object-cover md:h-6 md:w-6"
           />
-          <span className={metaTextVariants()}>
+          <span className="truncate text-xs leading-4 text-slate-500 md:text-base md:leading-6 md:tracking-[-0.02em]">
             {author} · 조회 {viewCount}
           </span>
         </div>
 
         <div className="flex shrink-0 flex-row items-center gap-1">
-          <CommentIcon className={iconVariants()} />
-          <span className={metaTextVariants()}>{commentCount}</span>
+          <CommentIcon className="h-4 w-4 text-slate-600 md:h-5 md:w-5" />
+          <span className="truncate text-xs leading-4 text-slate-500 md:text-base md:leading-6 md:tracking-[-0.02em]">
+            {commentCount}
+          </span>
         </div>
       </div>
     </div>

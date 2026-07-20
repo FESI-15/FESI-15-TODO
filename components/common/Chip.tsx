@@ -1,34 +1,23 @@
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/utils";
+import { cva } from "class-variance-authority";
 
-const CHIP_LABEL = {
-  todo: "TO DO",
-  done: "DONE",
-} as const;
-
-const chipVariants = cva(
-  "inline-flex shrink-0 items-center justify-center rounded-lg px-1.5 py-0.5 text-xs font-semibold leading-4",
+const chipsVariants = cva(
+  "inline-block w-fit py-1 px-1.5 rounded-md text-xs font-semibold",
   {
     variants: {
-      status: {
-        todo: "bg-[#FEEFDC] text-[#EF6C00]",
-        done: "bg-[#BBBBBB] text-white",
+      variant: {
+        "to do": "text-orange-600 bg-orange-200",
+        done: "text-white bg-[#bbbbbb]",
       },
-    },
-    defaultVariants: {
-      status: "todo",
     },
   },
 );
 
-interface ChipProps extends VariantProps<typeof chipVariants> {
-  className?: string;
+interface ChipsProps {
+  variant: "to do" | "done";
 }
 
-export function Chip({ status, className }: ChipProps) {
+export default function Chips({ variant }: ChipsProps) {
   return (
-    <span className={cn(chipVariants({ status }), className)}>
-      {CHIP_LABEL[status ?? "todo"]}
-    </span>
+    <span className={chipsVariants({ variant })}>{variant.toUpperCase()}</span>
   );
 }
