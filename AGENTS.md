@@ -34,6 +34,8 @@ public/             # 정적 파일
 - 2곳 이상에서 사용하는 함수는 utils로 분리한다.
 - 2개 이상 페이지에서 사용하는 컴포넌트는 `components/common`에 둔다.
 - 특정 페이지에서만 사용하는 컴포넌트는 해당 도메인 폴더에 둔다.
+- 배럴 파일은 생성하지 않는다.
+- 컴파운드 패턴은 사용하지 않는다.
 
 ## Agent Guidelines
 
@@ -46,3 +48,10 @@ public/             # 정적 파일
 - 타입 안정성을 유지한다.
 - 변경 후 가능한 경우 테스트, 타입 체크, 빌드를 실행한다.
 - 단순한 해결책이 있다면 불필요하게 복잡한 구조를 만들지 않는다.
+- 파일 생성 전에 비슷한 로직 있으면 찾아보고 작성한다.
+
+## Component Reuse Rules
+
+- UI 구현 전 `components/common/`, `components/ui/`, `components/layout/`, `public/icons/`를 먼저 확인한다.
+- 기존 컴포넌트가 있으면 새로 만들지 않고 재사용한다.
+- 아이콘은 Figma 원격 URL을 직접 쓰지 않고 export한 SVG를 `public/icons/`에 저장해서 사용한다.
