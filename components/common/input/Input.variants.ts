@@ -3,13 +3,11 @@ import { cva } from "class-variance-authority";
 // 라벨
 export const inputLabelClassName = "pl-1 text-base font-semibold text-gray-700";
 
-// 기본 TextInput
-// Field(바깥 컨테이너)가 실제 크기를 결정
 export const inputFieldVariants = cva("", {
   variants: {
     size: {
-      desktop: "w-[400px]",
-      mobile: "w-[327px]",
+      desktop: "w-full",
+      mobile: "w-full",
     },
   },
   defaultVariants: {
@@ -17,18 +15,16 @@ export const inputFieldVariants = cva("", {
   },
 });
 
-// Input 자체는 Field가 준 너비를 100% 채움 (Field의 *:w-full이 이미 처리)
 export const inputVariants = cva(
-  "w-full rounded-2xl border bg-white text-gray-700 placeholder:text-gray-500 transition-colors border-gray-300 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0",
+  "rounded-[12px] p-3 text-sm placeholder:text-sm md:text-base md:p-4 md:rounded-[16px] md:placeholder:text-base w-full border border-gray-300 bg-white text-gray-700 transition-colors placeholder:text-gray-500 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0",
   {
     variants: {
-      size: {
-        desktop: "h-14 px-4 text-base md:text-base", // shadcn 내장 스타일 덮도록
-        mobile: "h-11 px-3 text-sm md:text-sm",
+      hasLeftIcon: {
+        true: "pl-10 md:pl-12",
       },
-    },
-    defaultVariants: {
-      size: "desktop",
+      hasRightAction: {
+        true: "pr-10 md:pr-12",
+      },
     },
   },
 );
@@ -64,34 +60,13 @@ export const linkIconVariants = cva("shrink-0 text-gray-500", {
   defaultVariants: { size: "desktop" },
 });
 
-export const linkDeleteIconVariants = cva("shrink-0 text-gray-400", {
-  variants: {
-    size: {
-      desktop: "h-6 w-6",
-      mobile: "h-5 w-5",
-    },
-  },
-  defaultVariants: { size: "desktop" },
-});
-
-// 이미지 첨부 ImageUploadInput
-export const imageInputFieldVariants = cva("", {
-  variants: {
-    size: {
-      desktop: "w-[424px]",
-      mobile: "w-[327px]",
-    },
-  },
-  defaultVariants: { size: "desktop" },
-});
-
-export const imageInputBoxVariants = cva(
-  "flex h-[101px] flex-col items-center justify-center gap-0.5 rounded-2xl border border-dashed border-gray-300 bg-gray-50 cursor-pointer transition-colors",
+export const linkDeleteIconVariants = cva(
+  "shrink-0 text-gray-400 h-5 w-5 md:h-6 md:w-6",
   {
     variants: {
       size: {
-        desktop: "w-[424px]",
-        mobile: "w-[327px]",
+        desktop: "h-6 w-6",
+        mobile: "h-5 w-5",
       },
     },
     defaultVariants: { size: "desktop" },
@@ -113,7 +88,7 @@ export const tagInputFieldVariants = cva("", {
 });
 
 export const tagInputBoxVariants = cva(
-  "flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors focus-within:border-orange-500",
+  "p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors focus-within:border-orange-500",
   {
     variants: {
       size: {
@@ -125,44 +100,28 @@ export const tagInputBoxVariants = cva(
   },
 );
 
-// 날짜 DateInput
-export const dateInputFieldVariants = cva("", {
-  variants: {
-    size: {
-      desktop: "w-[400px]",
-      mobile: "w-[327px]",
-    },
-  },
-  defaultVariants: { size: "desktop" },
-});
-
 export const dateInputTriggerVariants = cva(
-  "flex w-full items-center gap-2 rounded-2xl border border-gray-300 bg-white text-left transition-colors outline-none",
+  "p-3 md:p-4 text-sm md:text-base flex w-full items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white text-left transition-colors outline-none",
   {
     variants: {
-      size: {
-        desktop: "h-14 px-4 text-base",
-        mobile: "h-11 px-3 text-sm",
-      },
       hasValue: {
         true: "text-gray-700",
         false: "text-gray-500",
       },
-      isOpen: {
-        true: "border-orange-500",
-        false: "",
-      },
     },
-    defaultVariants: { size: "desktop", hasValue: false, isOpen: false },
+    defaultVariants: { hasValue: false },
   },
 );
 
-export const dateInputIconVariants = cva("shrink-0 text-gray-500", {
-  variants: {
-    size: {
-      desktop: "h-6 w-6",
-      mobile: "h-5 w-5",
+export const dateInputIconVariants = cva(
+  "shrink-0 text-gray-500 h-5 w-5 md:h-6 md:w-6",
+  {
+    variants: {
+      size: {
+        desktop: "h-6 w-6",
+        mobile: "h-5 w-5",
+      },
     },
+    defaultVariants: { size: "desktop" },
   },
-  defaultVariants: { size: "desktop" },
-});
+);
