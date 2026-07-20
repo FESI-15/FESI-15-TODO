@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils";
-import DeleteIcon from "@/public/ic_delete_gray.svg";
+import DeleteIcon from "@/public/icons/common/ic_delete_gray.svg";
 
 const deleteButtonVariants = cva(
   "flex items-center justify-center rounded-full border border-slate-300 bg-white transition-colors",

@@ -1,6 +1,6 @@
 import { cn } from "@/utils";
-import ChevronDownIcon from "@/public/ic_chevron-down.svg";
-import ChevronUpIcon from "@/public/ic_chevron-up.svg";
+import ChevronDownIcon from "@/public/icons/common/chevron-down.svg";
+import ChevronUpIcon from "@/public/icons/common/chevron-up.svg";
 
 interface ReadMoreButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isOpen: boolean;
