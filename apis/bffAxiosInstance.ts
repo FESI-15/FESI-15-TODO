@@ -1,14 +1,15 @@
 import axios, { type AxiosRequestConfig } from "axios";
 
-export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+export const bffClient = axios.create({
+  baseURL: "",
+  withCredentials: true,
 });
 
-export const customInstance = <T>(
+export const bffInstance = <T>(
   config: AxiosRequestConfig,
   options?: AxiosRequestConfig,
 ) => {
-  return apiClient<T>({
+  return bffClient<T>({
     ...config,
     ...options,
     headers: {
