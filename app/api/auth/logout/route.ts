@@ -9,6 +9,7 @@ import {
 } from "@/constants/auth";
 import { postTeamIdAuthLogout } from "@/apis/auth/auth";
 
+// 로그아웃
 export async function POST() {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get(REFRESH_TOKEN_COOKIE_NAME)?.value;

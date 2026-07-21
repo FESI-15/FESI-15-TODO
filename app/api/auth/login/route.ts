@@ -16,9 +16,7 @@ interface LoginRequestBody {
   password?: string;
 }
 
-/**
- * @summary 로그인
- */
+// 로그인
 export async function POST(request: Request) {
   const { email, password } = (await request.json()) as LoginRequestBody;
 

@@ -1,5 +1,4 @@
 import SideMenuContainer from "../SideMenuContainer/SideMenuContainer";
-import Image from "next/image";
 import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
 import {
   tabletSideMenuButtonVariants,

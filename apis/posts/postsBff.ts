@@ -1,0 +1,92 @@
+import type {
+  GetTeamIdPosts200,
+  GetTeamIdPostsParams,
+  GetTeamIdPostsPostId200,
+  PatchTeamIdPostsPostId200,
+  PatchTeamIdPostsPostIdBody,
+  PostTeamIdPosts201,
+  PostTeamIdPostsBody,
+} from "@/apis/model";
+
+import { bffInstance } from "@/apis/bffAxiosInstance";
+
+type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
+
+export interface PostIdVariables {
+  postId: number;
+}
+
+export interface PostPostsVariables {
+  data: PostTeamIdPostsBody;
+}
+
+export interface PatchPostVariables extends PostIdVariables {
+  data: PatchTeamIdPostsPostIdBody;
+}
+
+// 게시글 목록 조회
+export const getPosts = (
+  params?: GetTeamIdPostsParams,
+  options?: SecondParameter<typeof bffInstance>,
+  signal?: AbortSignal,
+) => {
+  return bffInstance<GetTeamIdPosts200>(
+    { url: "/api/posts", method: "GET", params, signal },
+    options,
+  );
+};
+
+// 게시글 생성
+export const postPosts = (
+  { data }: PostPostsVariables,
+  options?: SecondParameter<typeof bffInstance>,
+) => {
+  return bffInstance<PostTeamIdPosts201>(
+    {
+      url: "/api/posts",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data,
+    },
+    options,
+  );
+};
+
+// 게시글 상세 조회
+export const getPost = (
+  { postId }: PostIdVariables,
+  options?: SecondParameter<typeof bffInstance>,
+  signal?: AbortSignal,
+) => {
+  return bffInstance<GetTeamIdPostsPostId200>(
+    { url: `/api/posts/${postId}`, method: "GET", signal },
+    options,
+  );
+};
+
+// 게시글 수정
+export const patchPost = (
+  { postId, data }: PatchPostVariables,
+  options?: SecondParameter<typeof bffInstance>,
+) => {
+  return bffInstance<PatchTeamIdPostsPostId200>(
+    {
+      url: `/api/posts/${postId}`,
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      data,
+    },
+    options,
+  );
+};
+
+// 게시글 삭제
+export const deletePost = (
+  { postId }: PostIdVariables,
+  options?: SecondParameter<typeof bffInstance>,
+) => {
+  return bffInstance<void>(
+    { url: `/api/posts/${postId}`, method: "DELETE" },
+    options,
+  );
+};
