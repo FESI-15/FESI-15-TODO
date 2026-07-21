@@ -21,7 +21,7 @@ export const proxy = (request: NextRequest) => {
   );
 
   if (hasAccessToken && isAuthOnlyPath) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   if (!hasAccessToken && isProtectedPath) {
