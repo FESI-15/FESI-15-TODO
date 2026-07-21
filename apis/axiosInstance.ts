@@ -14,7 +14,7 @@ export const customInstance = <T>(
     headers: {
       ...config.headers,
       ...options?.headers,
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1MzksInRlYW1JZCI6IjIiLCJleHAiOjE3ODQ1NDI3Nzh9.yH8ESSdV6WqPbbwl5UsMigffeFIlGEZldy2Y6gxV_E0`,
+      Authorization: `Bearer ${process.env.ACCESS_TOKEN_SECRET}`,
     },
   });
 };
