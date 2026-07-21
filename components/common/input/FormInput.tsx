@@ -74,7 +74,7 @@ export function FormInput<T extends FieldValues>({
           value={currentValue}
           aria-invalid={isError}
           className={twMerge(
-            inputVariants({ hasLeftIcon, hasRightAction }),
+            inputVariants({ hasLeftIcon, hasRightAction, variant }),
             className,
           )}
         />

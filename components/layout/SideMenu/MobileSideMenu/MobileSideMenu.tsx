@@ -23,7 +23,7 @@ export default function MobileSideMenu() {
         onClickBell={() => {}}
       />
       {isOpen && (
-        <aside className="fixed top-0 left-0 w-full h-full bg-white z-50 py-4 px-5 overflow-y-auto">
+        <aside className="fixed top-0 left-0 flex h-full w-full flex-col bg-white z-50 py-4 px-5 overflow-y-auto">
           <button
             type="button"
             className="ml-auto mb-6 block"

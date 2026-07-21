@@ -14,7 +14,6 @@ interface CheckboxBasicProps<T extends FieldValues> {
   value: string;
   label: string;
   className?: string;
-  checkboxClassName?: string;
   labelClassName?: string;
   disabled?: boolean;
 }
@@ -25,7 +24,6 @@ export default function CheckboxBasic<T extends FieldValues>({
   value,
   label,
   className,
-  checkboxClassName,
   labelClassName,
   disabled = false,
 }: CheckboxBasicProps<T>) {
@@ -43,7 +41,6 @@ export default function CheckboxBasic<T extends FieldValues>({
           name={field.name}
           checked={field.value === value}
           disabled={disabled}
-          className={checkboxClassName}
           onCheckedChange={(checked) => {
             if (checked === true) {
               field.onChange(value);

@@ -25,6 +25,12 @@ export const inputVariants = cva(
       hasRightAction: {
         true: "pr-10 md:pr-12",
       },
+      variant: {
+        text: "",
+        link: "",
+        search: "w-full rounded-full md:rounded-full p-3 md:p-3 pr-10 md:pr-10",
+        password: "",
+      },
     },
   },
 );
@@ -41,37 +47,6 @@ export const eyeIconVariants = cva("text-gray-500", {
     size: "desktop",
   },
 });
-
-// 검색 SearchInput
-export const searchInputFieldClassName = "w-[302px]";
-
-export const searchInputVariants = cva(
-  "h-12 w-full rounded-full border border-gray-300 bg-white py-3 pl-5 pr-11 text-base text-gray-700 placeholder:text-gray-500 transition-colors focus-visible:border-gray-300 focus-visible:ring-0",
-);
-
-// 링크 LinkInput
-export const linkIconVariants = cva("shrink-0 text-gray-500", {
-  variants: {
-    size: {
-      desktop: "h-6 w-6",
-      mobile: "h-5 w-5",
-    },
-  },
-  defaultVariants: { size: "desktop" },
-});
-
-export const linkDeleteIconVariants = cva(
-  "shrink-0 text-gray-400 h-5 w-5 md:h-6 md:w-6",
-  {
-    variants: {
-      size: {
-        desktop: "h-6 w-6",
-        mobile: "h-5 w-5",
-      },
-    },
-    defaultVariants: { size: "desktop" },
-  },
-);
 
 export const imagePreviewClassName =
   "relative h-[101px] w-[160px] rounded-2xl overflow-hidden";

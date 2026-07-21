@@ -33,7 +33,7 @@ export const tabletSideMenuButtonVariants = cva(
   },
 );
 export const tabletSideMenuVariants = cva(
-  "hidden md:block absolute top-0 left-0 min-h-screen bg-white rounded-r-[48px] shadow-xl z-50 h-full",
+  "hidden md:flex fixed top-0 left-0 bg-white rounded-r-[48px] shadow-xl z-50 h-screen flex-col",
   {
     variants: {
       open: {
