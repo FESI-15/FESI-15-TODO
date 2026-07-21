@@ -5,7 +5,7 @@ import MobileSideMenu from "./MobileSideMenu/MobileSideMenu";
 import TabletSideMenu from "./TabletSideMenu/TabletSideMenu";
 
 export default function SideMenu() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const handleToggle = () => {
     setOpen(!open);

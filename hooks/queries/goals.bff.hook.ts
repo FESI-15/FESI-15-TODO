@@ -185,6 +185,7 @@ export const getPostGoalsMutationOptions = <
   return { mutationFn, ...mutationOptions };
 };
 
+// 목표 생성
 export const usePostGoals = <
   TError = PostTeamIdGoals400 | PostTeamIdGoals401,
   TContext = unknown,
