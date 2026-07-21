@@ -14,7 +14,6 @@ export const customInstance = <T>(
     headers: {
       ...config.headers,
       ...options?.headers,
-      Authorization: `Bearer ${process.env.ACCESS_TOKEN_SECRET}`,
     },
   });
 };

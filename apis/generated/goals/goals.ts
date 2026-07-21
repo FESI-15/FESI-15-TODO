@@ -47,9 +47,9 @@ import type {
   PostTeamIdGoals400,
   PostTeamIdGoals401,
   PostTeamIdGoalsBody,
-} from ".././model";
+} from "@/apis/model";
 
-import { customInstance } from "../../axiosInstance";
+import { customInstance } from "@/apis/axiosInstance";
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
