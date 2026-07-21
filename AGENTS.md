@@ -5,15 +5,27 @@
 이 프로젝트는 Next.js 기반 Todo 애플리케이션입니다.  
 모든 작업은 기존 폴더 구조와 개발 컨벤션을 따라 진행합니다.
 
+## Tech Stack
+
+- Next.js 16 (App Router 사용, Pages Router 아님)
+- React 19
+- TanStack Query 5 (React Query)
+- shadcn/ui 사용
+- Tailwind CSS 4
+- Zod 4 — **사용자 입력 유효성 검증 용도로만 사용** (그 외 범용 스키마/타입 생성 용도로 임의 확장하지 않는다)
+
+> AI가 학습 시점 기준 최신 버전으로 임의 추정하지 않도록, 코드 생성 시 위 버전을 기준으로 작성한다.
+
 ## Directory Structure
 
 ```text
 app/                # 라우팅
 components/
-  common/           # 2개 이상 페이지에서 쓰이는 공통 컴포넌트
+  common/           # 2개 이상 컴포넌트에서 쓰이는 공통 컴포넌트
   layout/           # header, footer, nav 등 레이아웃 컴포넌트
   mypage/           # 마이페이지 전용 컴포넌트
   search/           # 검색 페이지 전용 컴포넌트
+  …feature/          # 도메인(페이지) 전용 컴포넌트. 예: components/notes, components/goals
 hooks/              # 커스텀 훅
 apis/               # API 요청 함수
 types/              # 타입 정의
@@ -55,3 +67,16 @@ public/             # 정적 파일
 - UI 구현 전 `components/common/`, `components/ui/`, `components/layout/`, `public/icons/`를 먼저 확인한다.
 - 기존 컴포넌트가 있으면 새로 만들지 않고 재사용한다.
 - 아이콘은 Figma 원격 URL을 직접 쓰지 않고 export한 SVG를 `public/icons/`에 저장해서 사용한다.
+
+| 컴포넌트 (UI 요소) | Figma Node ID | 프로젝트 내 파일 경로 |
+| :--- | :--- | :--- |
+| **FormInput** | `13460:59015` | `components/common/input/FormInput.tsx` |
+| **TagInput** | `13460:59024` | `components/common/input/TagInput.tsx` |
+| **ImageUploadInput** | `13460:59075` | `components/common/input/ImageUploadInput/ImageUploadInput.tsx` |
+| **Button** | `13460:59138` | `components/common/Button.tsx` |
+| **SocialButton** | `13460:59303` | `components/common/SocialButton.tsx` |
+| **ReadMoreButton** | `13460:59298` | `components/common/ReadMoreButton.tsx` |
+| **DeleteButton** | `13460:59323` | `components/common/DeleteButton.tsx` |
+| **Dropdown** | `13460:59110` | `components/common/Dropdown.tsx` |
+| **PostCard** | `13460:64207` | `components/common/PostCard.tsx` |
+| **NoteCard** | `13460:64172` | `components/common/NoteCard.tsx` |
