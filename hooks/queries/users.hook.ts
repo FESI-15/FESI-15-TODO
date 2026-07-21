@@ -172,10 +172,6 @@ export type GetTeamIdUsersMeQueryResult = NonNullable<
 export type GetTeamIdUsersMeQueryError =
   GetTeamIdUsersMe401 | GetTeamIdUsersMe404;
 
-/**
- * @summary 내 프로필 조회
- */
-
 export function useGetTeamIdUsersMe<
   TData = Awaited<ReturnType<typeof getTeamIdUsersMe>>,
   TError = GetTeamIdUsersMe401 | GetTeamIdUsersMe404,
