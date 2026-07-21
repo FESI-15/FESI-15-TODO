@@ -2,7 +2,7 @@ import NewTodo from "@/public/icons/sidemenu/new_todo.svg";
 import GoalsModal from "@/components/common/Modal/GoalsModal/GoalsModal";
 export default function SideMenuActions() {
   return (
-    <div className="flex items-center gap-2 mt-[94px] md:gap-4">
+    <div className="flex items-center gap-2 mt-[94px] md:gap-4 md:mt-23.5">
       <GoalsModal />
       <button
         type="button"

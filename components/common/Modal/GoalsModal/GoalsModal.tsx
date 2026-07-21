@@ -12,15 +12,13 @@ import {
 import { FormInput } from "@/components/common/input/FormInput";
 import { Button } from "@/components/common/Button";
 import { useForm } from "react-hook-form";
-import {
-  getGetTeamIdGoalsQueryKey,
-  usePostTeamIdGoals,
-} from "@/apis/generated/goals/goals";
 import NewGoalButton from "@/components/layout/SideMenu/SideMenuContainer/SideMenuActions/NewGoalButton/NewGoalButton";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
 import { useInvalidateQuery } from "@/hooks/useInvalidateQuery";
+import { PostTeamIdGoals400, PostTeamIdGoals401 } from "@/apis/model";
+import { usePostGoals } from "@/hooks/queries/goals.bff.hook";
+import { getGoalsQueryKey } from "@/hooks/queries/goals.bff.hook";
 
 const GoalsSchema = z.object({
   title: z.string().trim().min(1, "목표를 입력해주세요."),
@@ -42,21 +40,20 @@ export default function GoalsModal() {
   });
   const { invalidateQuery } = useInvalidateQuery();
 
-  const { mutate: createGoal, isPending } = usePostTeamIdGoals({
+  const { mutate: createGoal, isPending } = usePostGoals({
     mutation: {
       onSuccess: () => {
-        invalidateQuery(getGetTeamIdGoalsQueryKey("2"));
+        invalidateQuery(getGoalsQueryKey());
         alert("목표 생성에 성공했습니다.");
       },
-      onError: () => {
-        alert("목표 생성에 실패했습니다.");
+      onError: (error: PostTeamIdGoals400 | PostTeamIdGoals401) => {
+        alert(error.message);
       },
     },
   });
 
   const onCreate = (values: GoalsSchemaType) => {
     createGoal({
-      teamId: "2",
       data: {
         title: values.title,
       },
@@ -100,7 +97,7 @@ export default function GoalsModal() {
                 fullWidth
                 hierarchy="primary"
                 size="lg"
-                disabled={!isValid}
+                disabled={!isValid || isPending}
               >
                 생성
               </Button>
