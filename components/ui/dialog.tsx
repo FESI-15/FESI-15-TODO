@@ -6,14 +6,19 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/ui/button";
 import { XIcon } from "lucide-react";
-import { div } from "motion/react-m";
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;
 }
 
 function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
-  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
+  return (
+    <DialogPrimitive.Trigger
+      className="flex-1"
+      data-slot="dialog-trigger"
+      {...props}
+    />
+  );
 }
 
 function DialogPortal({ ...props }: DialogPrimitive.Portal.Props) {
@@ -102,7 +107,7 @@ function DialogFooter({
     <div
       data-slot="dialog-footer"
       className={cn(
-        "-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-[40px] p-4 pt-0 sm:flex-row sm:justify-end",
+        "-mx-4 -mb-4 flex gap-2 rounded-b-[40px] p-4 pt-0 sm:flex-row sm:justify-end",
         className,
       )}
       {...props}
