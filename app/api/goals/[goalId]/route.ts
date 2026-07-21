@@ -21,9 +21,7 @@ const getGoalId = async (context: RouteContext) => {
   return Number(goalId);
 };
 
-/**
- * @summary 목표 상세 조회
- */
+// 목표 상세 조회
 export async function GET(_request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
@@ -46,9 +44,7 @@ export async function GET(_request: Request, context: RouteContext) {
   }
 }
 
-/**
- * @summary 목표 수정
- */
+// 목표 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
@@ -74,9 +70,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 }
 
-/**
- * @summary 목표 삭제
- */
+// 목표 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);

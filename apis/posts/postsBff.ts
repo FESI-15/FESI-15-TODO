@@ -24,6 +24,7 @@ export interface PatchPostVariables extends PostIdVariables {
   data: PatchTeamIdPostsPostIdBody;
 }
 
+// 게시글 목록 조회
 export const getPosts = (
   params?: GetTeamIdPostsParams,
   options?: SecondParameter<typeof bffInstance>,
@@ -35,6 +36,7 @@ export const getPosts = (
   );
 };
 
+// 게시글 생성
 export const postPosts = (
   { data }: PostPostsVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -50,6 +52,7 @@ export const postPosts = (
   );
 };
 
+// 게시글 상세 조회
 export const getPost = (
   { postId }: PostIdVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -61,6 +64,7 @@ export const getPost = (
   );
 };
 
+// 게시글 수정
 export const patchPost = (
   { postId, data }: PatchPostVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -76,6 +80,7 @@ export const patchPost = (
   );
 };
 
+// 게시글 삭제
 export const deletePost = (
   { postId }: PostIdVariables,
   options?: SecondParameter<typeof bffInstance>,

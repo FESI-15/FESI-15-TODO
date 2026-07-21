@@ -24,9 +24,7 @@ export interface PatchGoalVariables extends GoalIdVariables {
   data: PatchTeamIdGoalsGoalIdBody;
 }
 
-/**
- * @summary 목표 조회
- */
+// 목표 목록 조회
 export const getGoals = (
   params?: GetTeamIdGoalsParams,
   options?: SecondParameter<typeof bffInstance>,
@@ -43,9 +41,7 @@ export const getGoals = (
   );
 };
 
-/**
- * @summary 목표 생성
- */
+// 목표 생성
 export const postGoals = (
   { data }: PostGoalsVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -61,9 +57,7 @@ export const postGoals = (
   );
 };
 
-/**
- * @summary 목표 상세 조회
- */
+// 목표 상세 조회
 export const getGoal = (
   { goalId }: GoalIdVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -79,9 +73,7 @@ export const getGoal = (
   );
 };
 
-/**
- * @summary 목표 수정
- */
+// 목표 수정
 export const patchGoal = (
   { goalId, data }: PatchGoalVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -97,9 +89,7 @@ export const patchGoal = (
   );
 };
 
-/**
- * @summary 목표 삭제
- */
+// 목표 삭제
 export const deleteGoal = (
   { goalId }: GoalIdVariables,
   options?: SecondParameter<typeof bffInstance>,

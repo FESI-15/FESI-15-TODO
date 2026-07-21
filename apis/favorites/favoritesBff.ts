@@ -12,6 +12,7 @@ export interface FavoriteTodoVariables {
   todoId: number;
 }
 
+// 즐겨찾기한 할 일 목록 조회
 export const getTodoFavorites = (
   params?: GetTeamIdTodosFavoritesParams,
   options?: SecondParameter<typeof bffInstance>,
@@ -23,6 +24,7 @@ export const getTodoFavorites = (
   );
 };
 
+// 할 일 즐겨찾기 추가
 export const postTodoFavorite = (
   { todoId }: FavoriteTodoVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -33,6 +35,7 @@ export const postTodoFavorite = (
   );
 };
 
+// 할 일 즐겨찾기 삭제
 export const deleteTodoFavorite = (
   { todoId }: FavoriteTodoVariables,
   options?: SecondParameter<typeof bffInstance>,

@@ -24,6 +24,7 @@ export interface PatchNoteVariables extends NoteIdVariables {
   data: PatchTeamIdNotesNoteIdBody;
 }
 
+// 노트 목록 조회
 export const getNotes = (
   params?: GetTeamIdNotesParams,
   options?: SecondParameter<typeof bffInstance>,
@@ -35,6 +36,7 @@ export const getNotes = (
   );
 };
 
+// 노트 생성
 export const postNotes = (
   { data }: PostNotesVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -50,6 +52,7 @@ export const postNotes = (
   );
 };
 
+// 노트 상세 조회
 export const getNote = (
   { noteId }: NoteIdVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -61,6 +64,7 @@ export const getNote = (
   );
 };
 
+// 노트 수정
 export const patchNote = (
   { noteId, data }: PatchNoteVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -76,6 +80,7 @@ export const patchNote = (
   );
 };
 
+// 노트 삭제
 export const deleteNote = (
   { noteId }: NoteIdVariables,
   options?: SecondParameter<typeof bffInstance>,

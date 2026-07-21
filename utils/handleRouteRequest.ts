@@ -6,6 +6,7 @@ import { getAxiosErrorResponse } from "@/utils/getAxiosErrorResponse";
 
 export const getTeamId = () => TEAM_ID;
 
+// 인증 정보가 없을 때 route handler들이 같은 응답 형식을 쓰도록 모읍니다.
 export const createUnauthorizedResponse = () => {
   return NextResponse.json(
     { message: "Authentication is required." },
@@ -13,6 +14,7 @@ export const createUnauthorizedResponse = () => {
   );
 };
 
+// JSON 응답이 있는 백엔드 요청을 BFF route에서 공통으로 처리합니다.
 export const handleRouteRequest = async <T>(
   request: (
     teamId: string,
@@ -40,6 +42,7 @@ export const handleRouteRequest = async <T>(
   }
 };
 
+// DELETE처럼 응답 body가 없는 백엔드 요청을 BFF route에서 공통으로 처리합니다.
 export const handleEmptyRouteRequest = async (
   request: (
     teamId: string,

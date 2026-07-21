@@ -4,9 +4,7 @@ import { getTeamIdUsersMe } from "@/apis/users/users";
 import { API_BASE_URL, TEAM_ID } from "@/constants/auth";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 
-/**
- * @summary 사용자 정보 조회
- */
+// 내 정보 조회
 export async function GET() {
   const headers = await getAuthorizationHeaders();
 

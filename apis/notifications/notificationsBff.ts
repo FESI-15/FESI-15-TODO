@@ -17,6 +17,7 @@ export interface PatchNotificationVariables extends NotificationIdVariables {
   data: PatchTeamIdNotificationsNotificationIdBody;
 }
 
+// 알림 목록 조회
 export const getNotifications = (
   params?: GetTeamIdNotificationsParams,
   options?: SecondParameter<typeof bffInstance>,
@@ -28,6 +29,7 @@ export const getNotifications = (
   );
 };
 
+// 전체 알림 읽음 처리
 export const patchNotifications = (
   options?: SecondParameter<typeof bffInstance>,
 ) => {
@@ -37,6 +39,7 @@ export const patchNotifications = (
   );
 };
 
+// 전체 알림 삭제
 export const deleteNotifications = (
   options?: SecondParameter<typeof bffInstance>,
 ) => {
@@ -46,6 +49,7 @@ export const deleteNotifications = (
   );
 };
 
+// 알림 수정
 export const patchNotification = (
   { notificationId, data }: PatchNotificationVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -61,6 +65,7 @@ export const patchNotification = (
   );
 };
 
+// 알림 삭제
 export const deleteNotification = (
   { notificationId }: NotificationIdVariables,
   options?: SecondParameter<typeof bffInstance>,

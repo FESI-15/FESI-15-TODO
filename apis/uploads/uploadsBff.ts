@@ -17,6 +17,7 @@ export interface PostFilesVariables {
   data: PostTeamIdFilesBody;
 }
 
+// 이미지 업로드 URL 발급
 export const postImages = (
   { data }: PostImagesVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -32,6 +33,7 @@ export const postImages = (
   );
 };
 
+// 파일 업로드 URL 발급
 export const postFiles = (
   { data }: PostFilesVariables,
   options?: SecondParameter<typeof bffInstance>,

@@ -13,6 +13,7 @@ export interface PostAuthLoginVariables {
   data: PostTeamIdAuthLoginBody;
 }
 
+// 로그인
 export const postAuthLogin = (
   { data }: PostAuthLoginVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -28,6 +29,7 @@ export const postAuthLogin = (
   );
 };
 
+// 내 정보 조회
 export const getAuthMe = (
   options?: SecondParameter<typeof bffInstance>,
   signal?: AbortSignal,
@@ -42,6 +44,7 @@ export const getAuthMe = (
   );
 };
 
+// 로그아웃
 export const postAuthLogout = (
   options?: SecondParameter<typeof bffInstance>,
 ) => {

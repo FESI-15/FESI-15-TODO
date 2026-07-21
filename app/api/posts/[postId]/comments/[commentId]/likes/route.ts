@@ -11,6 +11,7 @@ interface RouteContext {
   }>;
 }
 
+// 댓글 좋아요 추가
 export async function POST(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 
@@ -24,6 +25,7 @@ export async function POST(_request: Request, context: RouteContext) {
   );
 }
 
+// 댓글 좋아요 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 

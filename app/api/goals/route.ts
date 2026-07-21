@@ -6,9 +6,7 @@ import { TEAM_ID } from "@/constants/auth";
 import { getAxiosErrorResponse } from "@/utils/getAxiosErrorResponse";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 
-/**
- * @summary 목표 조회
- */
+// 목표 목록 조회
 export async function GET(request: Request) {
   const headers = await getAuthorizationHeaders();
 
@@ -39,9 +37,7 @@ export async function GET(request: Request) {
   }
 }
 
-/**
- * @summary 목표 생성
- */
+// 목표 생성
 export async function POST(request: Request) {
   const headers = await getAuthorizationHeaders();
 

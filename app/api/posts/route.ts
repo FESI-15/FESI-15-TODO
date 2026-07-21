@@ -2,6 +2,7 @@ import { getTeamIdPosts, postTeamIdPosts } from "@/apis/posts/posts";
 import type { GetTeamIdPostsParams } from "@/apis/model";
 import { handleRouteRequest } from "@/utils/handleRouteRequest";
 
+// 게시글 목록 조회
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const params: GetTeamIdPostsParams = {
@@ -20,6 +21,7 @@ export async function GET(request: Request) {
   );
 }
 
+// 게시글 생성
 export async function POST(request: Request) {
   const data = await request.json();
 

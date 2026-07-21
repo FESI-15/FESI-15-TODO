@@ -20,6 +20,7 @@ const getPostId = async (context: RouteContext) => {
   return Number(postId);
 };
 
+// 게시글 상세 조회
 export async function GET(_request: Request, context: RouteContext) {
   const postId = await getPostId(context);
 
@@ -28,6 +29,7 @@ export async function GET(_request: Request, context: RouteContext) {
   );
 }
 
+// 게시글 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const postId = await getPostId(context);
   const data = await request.json();
@@ -37,6 +39,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
+// 게시글 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const postId = await getPostId(context);
 

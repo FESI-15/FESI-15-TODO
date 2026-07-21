@@ -26,6 +26,7 @@ export interface PatchCommentVariables extends CommentIdVariables {
   data: PatchTeamIdPostsPostIdCommentsCommentIdBody;
 }
 
+// 댓글 목록 조회
 export const getComments = (
   postId: number,
   params?: GetTeamIdPostsPostIdCommentsParams,
@@ -43,6 +44,7 @@ export const getComments = (
   );
 };
 
+// 댓글 생성
 export const postComments = (
   { postId, data }: PostCommentsVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -58,6 +60,7 @@ export const postComments = (
   );
 };
 
+// 댓글 수정
 export const patchComment = (
   { postId, commentId, data }: PatchCommentVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -73,6 +76,7 @@ export const patchComment = (
   );
 };
 
+// 댓글 삭제
 export const deleteComment = (
   { postId, commentId }: CommentIdVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -86,6 +90,7 @@ export const deleteComment = (
   );
 };
 
+// 댓글 좋아요 추가
 export const postCommentLike = (
   { postId, commentId }: CommentIdVariables,
   options?: SecondParameter<typeof bffInstance>,
@@ -99,6 +104,7 @@ export const postCommentLike = (
   );
 };
 
+// 댓글 좋아요 삭제
 export const deleteCommentLike = (
   { postId, commentId }: CommentIdVariables,
   options?: SecondParameter<typeof bffInstance>,

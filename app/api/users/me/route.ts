@@ -4,6 +4,7 @@ import {
   handleRouteRequest,
 } from "@/utils/handleRouteRequest";
 
+// 내 프로필 수정
 export async function PATCH(request: Request) {
   const data = await request.json();
 
@@ -12,6 +13,7 @@ export async function PATCH(request: Request) {
   );
 }
 
+// 회원 탈퇴
 export async function DELETE() {
   return handleEmptyRouteRequest((teamId, headers) =>
     deleteTeamIdUsersMe(teamId, { headers }),

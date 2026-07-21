@@ -11,6 +11,7 @@ interface RouteContext {
   }>;
 }
 
+// 댓글 목록 조회
 export async function GET(request: Request, context: RouteContext) {
   const { postId } = await context.params;
   const { searchParams } = new URL(request.url);
@@ -26,6 +27,7 @@ export async function GET(request: Request, context: RouteContext) {
   );
 }
 
+// 댓글 생성
 export async function POST(request: Request, context: RouteContext) {
   const { postId } = await context.params;
   const data = await request.json();

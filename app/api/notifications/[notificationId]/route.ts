@@ -13,6 +13,7 @@ interface RouteContext {
   }>;
 }
 
+// 알림 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const { notificationId } = await context.params;
   const data = await request.json();
@@ -27,6 +28,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
+// 알림 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { notificationId } = await context.params;
 
