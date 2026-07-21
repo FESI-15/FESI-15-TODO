@@ -12,7 +12,7 @@ export default function SideMenu() {
   };
 
   return (
-    <div>
+    <div className="relative">
       <MobileSideMenu />
       <TabletSideMenu open={open} onToggle={handleToggle} />
     </div>
