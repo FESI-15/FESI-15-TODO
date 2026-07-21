@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Header from "./Header/Header";
 import { useState } from "react";
 import Delete from "@/public/icons/common/delete.svg";
