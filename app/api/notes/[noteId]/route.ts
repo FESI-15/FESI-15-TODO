@@ -20,12 +20,12 @@ const getNoteId = async (context: RouteContext) => {
   return Number(noteId);
 };
 
-// 노트 상세 조회
+// 노트 세부 조회
 export async function GET(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdNotesNoteId(teamId, noteId, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdNotesNoteId(noteId, { headers }),
   );
 }
 
@@ -34,8 +34,8 @@ export async function PATCH(request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdNotesNoteId(teamId, noteId, data, { headers }),
+  return handleRouteRequest((headers) =>
+    patchTeamIdNotesNoteId(noteId, data, { headers }),
   );
 }
 
@@ -43,7 +43,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 export async function DELETE(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdNotesNoteId(teamId, noteId, { headers }),
+  return handleEmptyRouteRequest((headers) =>
+    deleteTeamIdNotesNoteId(noteId, { headers }),
   );
 }

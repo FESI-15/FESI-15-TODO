@@ -1,65 +1,15 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import type {
   MutationFunction,
-  QueryFunction,
-  QueryKey,
   UseMutationOptions,
   UseMutationResult,
-  UseQueryOptions,
-  UseQueryResult,
 } from "@tanstack/react-query";
 
 import type { PostAuthLoginVariables } from "@/apis/auth/authBff";
-import { getAuthMe, postAuthLogin, postAuthLogout } from "@/apis/auth/authBff";
+import { postAuthLogin, postAuthLogout } from "@/apis/auth/authBff";
 import { bffInstance } from "@/apis/bffAxiosInstance";
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
-
-export const getAuthMeQueryKey = () => {
-  return ["/api/auth/me"] as const;
-};
-
-export const getAuthMeQueryOptions = <
-  TData = Awaited<ReturnType<typeof getAuthMe>>,
-  TError = unknown,
->(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof getAuthMe>>, TError, TData>;
-  request?: SecondParameter<typeof bffInstance>;
-}) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-  const queryKey = queryOptions?.queryKey ?? getAuthMeQueryKey();
-
-  const queryFn: QueryFunction<Awaited<ReturnType<typeof getAuthMe>>> = ({
-    signal,
-  }) => getAuthMe(requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    ...queryOptions,
-  } as UseQueryOptions<Awaited<ReturnType<typeof getAuthMe>>, TError, TData> & {
-    queryKey: QueryKey;
-  };
-};
-
-/**
- * @summary 내 프로필 조회
- */
-export function useGetAuthMe<
-  TData = Awaited<ReturnType<typeof getAuthMe>>,
-  TError = unknown,
->(options?: {
-  query?: UseQueryOptions<Awaited<ReturnType<typeof getAuthMe>>, TError, TData>;
-  request?: SecondParameter<typeof bffInstance>;
-}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
-  const queryOptions = getAuthMeQueryOptions(options);
-  const query = useQuery(queryOptions);
-
-  return {
-    ...query,
-    queryKey: queryOptions.queryKey,
-  } as UseQueryResult<TData, TError> & { queryKey: QueryKey };
-}
 
 /**
  * @summary 로그인

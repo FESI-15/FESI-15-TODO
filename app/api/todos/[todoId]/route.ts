@@ -20,30 +20,30 @@ const getTodoId = async (context: RouteContext) => {
   return Number(todoId);
 };
 
-// 할 일 상세 조회
+// 투두 세부 조회
 export async function GET(_request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdTodosTodoId(teamId, todoId, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdTodosTodoId(todoId, { headers }),
   );
 }
 
-// 할 일 수정
+// 투두 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdTodosTodoId(teamId, todoId, data, { headers }),
+  return handleRouteRequest((headers) =>
+    patchTeamIdTodosTodoId(todoId, data, { headers }),
   );
 }
 
-// 할 일 삭제
+// 투두 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
 
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdTodosTodoId(teamId, todoId, { headers }),
+  return handleEmptyRouteRequest((headers) =>
+    deleteTeamIdTodosTodoId(todoId, { headers }),
   );
 }

@@ -29,13 +29,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 할 일 찜하기
  */
 export const postTeamIdTodosTodoIdFavorites = (
-  teamId: string,
   todoId: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdTodosTodoIdFavorites201>(
-    { url: `/${teamId}/todos/${todoId}/favorites`, method: "POST", signal },
+    { url: `/todos/${todoId}/favorites`, method: "POST", signal },
     options,
   );
 };
@@ -45,12 +44,11 @@ export const postTeamIdTodosTodoIdFavorites = (
  * @summary 찜 해제
  */
 export const deleteTeamIdTodosTodoIdFavorites = (
-  teamId: string,
   todoId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/todos/${todoId}/favorites`, method: "DELETE" },
+    { url: `/todos/${todoId}/favorites`, method: "DELETE" },
     options,
   );
 };
@@ -60,13 +58,12 @@ export const deleteTeamIdTodosTodoIdFavorites = (
  * @summary 찜한 할 일 목록 조회
  */
 export const getTeamIdTodosFavorites = (
-  teamId: string,
   params?: GetTeamIdTodosFavoritesParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdTodosFavorites200>(
-    { url: `/${teamId}/todos/favorites`, method: "GET", params, signal },
+    { url: `/todos/favorites`, method: "GET", params, signal },
     options,
   );
 };

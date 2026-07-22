@@ -1,27 +1,35 @@
 import type { GetTeamIdGoalsParams } from "@/apis/model";
-import { getTeamIdGoals } from "@/apis/goals/goals";
-import { TEAM_ID } from "@/constants/auth";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
-import { queryOptions } from "@tanstack/react-query";
-import { getGoalsQueryKey } from "./goals.bff.hook";
+import { getTeamIdGoals } from "@/apis/goals/goals";
+import { getGoal } from "@/apis/goals/goalsBff";
+import { goalsKeys } from "./goals.key";
 
-export const getGoalsQueryOptionsServer = (params?: GetTeamIdGoalsParams) =>
-  queryOptions({
-    queryKey: getGoalsQueryKey(params),
-    queryFn: async ({ signal }) => {
-      const headers = await getAuthorizationHeaders();
+export const getGoalsQueryOptionsServer = (params?: GetTeamIdGoalsParams) => ({
+  queryKey: goalsKeys.list(params),
+  queryFn: async ({ signal }: { signal: AbortSignal }) => {
+    const headers = await getAuthorizationHeaders();
 
-      if (!TEAM_ID || !headers) {
-        throw new Error("Authentication is required.");
-      }
+    if (!headers) {
+      throw new Error("Authentication is required.");
+    }
 
-      const response = await getTeamIdGoals(
-        TEAM_ID,
-        params,
-        { headers },
-        signal,
-      );
+    const response = await getTeamIdGoals(params, { headers }, signal);
 
-      return { data: response.data };
-    },
-  });
+    return { data: response.data };
+  },
+});
+
+export const getGoalQueryOptionsServer = (goalId: number) => ({
+  queryKey: goalsKeys.detail(goalId),
+  queryFn: async ({ signal }: { signal: AbortSignal }) => {
+    const headers = await getAuthorizationHeaders();
+
+    if (!headers) {
+      throw new Error("Authentication is required.");
+    }
+
+    const response = await getGoal({ goalId }, { headers }, signal);
+
+    return { data: response.data };
+  },
+});

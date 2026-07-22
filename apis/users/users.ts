@@ -33,13 +33,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 닉네임 중복 확인
  */
 export const getTeamIdUsersCheckNickname = (
-  teamId: string,
   params: GetTeamIdUsersCheckNicknameParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdUsersCheckNickname200>(
-    { url: `/${teamId}/users/check-nickname`, method: "GET", params, signal },
+    { url: `/users/check-nickname`, method: "GET", params, signal },
     options,
   );
 };
@@ -49,12 +48,11 @@ export const getTeamIdUsersCheckNickname = (
  * @summary 내 프로필 조회
  */
 export const getTeamIdUsersMe = (
-  teamId: string,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdUsersMe200>(
-    { url: `/${teamId}/users/me`, method: "GET", signal },
+    { url: `/users/me`, method: "GET", signal },
     options,
   );
 };
@@ -64,13 +62,12 @@ export const getTeamIdUsersMe = (
  * @summary 내 프로필 수정
  */
 export const patchTeamIdUsersMe = (
-  teamId: string,
   patchTeamIdUsersMeBody: PatchTeamIdUsersMeBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdUsersMe200>(
     {
-      url: `/${teamId}/users/me`,
+      url: `/users/me`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdUsersMeBody,
@@ -84,13 +81,9 @@ export const patchTeamIdUsersMe = (
  * @summary 계정 삭제
  */
 export const deleteTeamIdUsersMe = (
-  teamId: string,
   options?: SecondParameter<typeof customInstance>,
 ) => {
-  return customInstance<void>(
-    { url: `/${teamId}/users/me`, method: "DELETE" },
-    options,
-  );
+  return customInstance<void>({ url: `/users/me`, method: "DELETE" }, options);
 };
 
 /**
@@ -98,13 +91,12 @@ export const deleteTeamIdUsersMe = (
  * @summary 비밀번호 변경
  */
 export const patchTeamIdUsersMePassword = (
-  teamId: string,
   patchTeamIdUsersMePasswordBody: PatchTeamIdUsersMePasswordBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdUsersMePassword200>(
     {
-      url: `/${teamId}/users/me/password`,
+      url: `/users/me/password`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdUsersMePasswordBody,

@@ -1,10 +1,4 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type {
-  QueryFunction,
-  QueryKey,
-  UseQueryOptions,
-} from "@tanstack/react-query";
-
 import type { GetTeamIdTodosParams } from "@/apis/model";
 import type {
   PatchTodoVariables,
@@ -18,6 +12,7 @@ import {
   patchTodo,
   postTodos,
 } from "@/apis/todos/todosBff";
+import { todosKeys } from "./todos.key";
 
 export const getTodosQueryKey = (params?: GetTeamIdTodosParams) => {
   return ["/api/todos", ...(params ? [params] : [])] as const;
@@ -25,7 +20,7 @@ export const getTodosQueryKey = (params?: GetTeamIdTodosParams) => {
 
 export const useGetTodos = (params?: GetTeamIdTodosParams) => {
   return useQuery({
-    queryKey: getTodosQueryKey(params),
+    queryKey: todosKeys.list(params),
     queryFn: ({ signal }) => getTodos(params, undefined, signal),
     enabled: !!params,
   });
@@ -33,7 +28,7 @@ export const useGetTodos = (params?: GetTeamIdTodosParams) => {
 
 export const useGetTodo = ({ todoId }: TodoIdVariables) => {
   return useQuery({
-    queryKey: [`/api/todos/${todoId}`],
+    queryKey: todosKeys.detail(todoId),
     queryFn: ({ signal }) => getTodo({ todoId }, undefined, signal),
     enabled: !!todoId,
   });

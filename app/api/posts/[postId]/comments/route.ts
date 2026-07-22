@@ -11,7 +11,7 @@ interface RouteContext {
   }>;
 }
 
-// 댓글 목록 조회
+// 게시글 댓글 목록 조회
 export async function GET(request: Request, context: RouteContext) {
   const { postId } = await context.params;
   const { searchParams } = new URL(request.url);
@@ -22,17 +22,17 @@ export async function GET(request: Request, context: RouteContext) {
       : undefined,
   };
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdPostsPostIdComments(teamId, Number(postId), params, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdPostsPostIdComments(Number(postId), params, { headers }),
   );
 }
 
-// 댓글 생성
+// 게시글 댓글 생성
 export async function POST(request: Request, context: RouteContext) {
   const { postId } = await context.params;
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    postTeamIdPostsPostIdComments(teamId, Number(postId), data, { headers }),
+  return handleRouteRequest((headers) =>
+    postTeamIdPostsPostIdComments(Number(postId), data, { headers }),
   );
 }

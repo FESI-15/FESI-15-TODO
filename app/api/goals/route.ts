@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import { getTeamIdGoals, postTeamIdGoals } from "@/apis/goals/goals";
 import type { GetTeamIdGoalsParams } from "@/apis/model";
-import { TEAM_ID } from "@/constants/auth";
 import { getAxiosErrorResponse } from "@/utils/getAxiosErrorResponse";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 
@@ -10,7 +9,7 @@ import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 export async function GET(request: Request) {
   const headers = await getAuthorizationHeaders();
 
-  if (!headers || !TEAM_ID) {
+  if (!headers) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -27,7 +26,7 @@ export async function GET(request: Request) {
         ? Number(searchParams.get("limit"))
         : undefined,
     };
-    const response = await getTeamIdGoals(TEAM_ID, params, { headers });
+    const response = await getTeamIdGoals(params, { headers });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
@@ -41,7 +40,7 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const headers = await getAuthorizationHeaders();
 
-  if (!headers || !TEAM_ID) {
+  if (!headers) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -50,7 +49,7 @@ export async function POST(request: Request) {
 
   try {
     const data = await request.json();
-    const response = await postTeamIdGoals(TEAM_ID, data, { headers });
+    const response = await postTeamIdGoals(data, { headers });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {

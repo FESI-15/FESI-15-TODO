@@ -4,18 +4,14 @@ import {
   handleRouteRequest,
 } from "@/utils/handleRouteRequest";
 
-// 내 프로필 수정
+// 사용자 정보 수정
 export async function PATCH(request: Request) {
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdUsersMe(teamId, data, { headers }),
-  );
+  return handleRouteRequest((headers) => patchTeamIdUsersMe(data, { headers }));
 }
 
-// 회원 탈퇴
+// 사용자 탈퇴
 export async function DELETE() {
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdUsersMe(teamId, { headers }),
-  );
+  return handleEmptyRouteRequest((headers) => deleteTeamIdUsersMe({ headers }));
 }

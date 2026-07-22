@@ -34,7 +34,6 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 댓글 목록 조회
  */
 export const getTeamIdPostsPostIdComments = (
-  teamId: string,
   postId: number,
   params?: GetTeamIdPostsPostIdCommentsParams,
   options?: SecondParameter<typeof customInstance>,
@@ -42,7 +41,7 @@ export const getTeamIdPostsPostIdComments = (
 ) => {
   return customInstance<GetTeamIdPostsPostIdComments200>(
     {
-      url: `/${teamId}/posts/${postId}/comments`,
+      url: `/posts/${postId}/comments`,
       method: "GET",
       params,
       signal,
@@ -56,7 +55,6 @@ export const getTeamIdPostsPostIdComments = (
  * @summary 댓글 생성
  */
 export const postTeamIdPostsPostIdComments = (
-  teamId: string,
   postId: number,
   postTeamIdPostsPostIdCommentsBody: PostTeamIdPostsPostIdCommentsBody,
   options?: SecondParameter<typeof customInstance>,
@@ -64,7 +62,7 @@ export const postTeamIdPostsPostIdComments = (
 ) => {
   return customInstance<PostTeamIdPostsPostIdComments201>(
     {
-      url: `/${teamId}/posts/${postId}/comments`,
+      url: `/posts/${postId}/comments`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdPostsPostIdCommentsBody,
@@ -79,7 +77,6 @@ export const postTeamIdPostsPostIdComments = (
  * @summary 댓글 수정
  */
 export const patchTeamIdPostsPostIdCommentsCommentId = (
-  teamId: string,
   postId: number,
   commentId: number,
   patchTeamIdPostsPostIdCommentsCommentIdBody: PatchTeamIdPostsPostIdCommentsCommentIdBody,
@@ -87,7 +84,7 @@ export const patchTeamIdPostsPostIdCommentsCommentId = (
 ) => {
   return customInstance<PatchTeamIdPostsPostIdCommentsCommentId200>(
     {
-      url: `/${teamId}/posts/${postId}/comments/${commentId}`,
+      url: `/posts/${postId}/comments/${commentId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdPostsPostIdCommentsCommentIdBody,
@@ -101,14 +98,13 @@ export const patchTeamIdPostsPostIdCommentsCommentId = (
  * @summary 댓글 삭제
  */
 export const deleteTeamIdPostsPostIdCommentsCommentId = (
-  teamId: string,
   postId: number,
   commentId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
     {
-      url: `/${teamId}/posts/${postId}/comments/${commentId}`,
+      url: `/posts/${postId}/comments/${commentId}`,
       method: "DELETE",
     },
     options,
@@ -120,7 +116,6 @@ export const deleteTeamIdPostsPostIdCommentsCommentId = (
  * @summary 댓글 좋아요
  */
 export const postTeamIdPostsPostIdCommentsCommentIdLikes = (
-  teamId: string,
   postId: number,
   commentId: number,
   options?: SecondParameter<typeof customInstance>,
@@ -128,7 +123,7 @@ export const postTeamIdPostsPostIdCommentsCommentIdLikes = (
 ) => {
   return customInstance<PostTeamIdPostsPostIdCommentsCommentIdLikes200>(
     {
-      url: `/${teamId}/posts/${postId}/comments/${commentId}/likes`,
+      url: `/posts/${postId}/comments/${commentId}/likes`,
       method: "POST",
       signal,
     },
@@ -141,14 +136,13 @@ export const postTeamIdPostsPostIdCommentsCommentIdLikes = (
  * @summary 댓글 좋아요 취소
  */
 export const deleteTeamIdPostsPostIdCommentsCommentIdLikes = (
-  teamId: string,
   postId: number,
   commentId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<DeleteTeamIdPostsPostIdCommentsCommentIdLikes200>(
     {
-      url: `/${teamId}/posts/${postId}/comments/${commentId}/likes`,
+      url: `/posts/${postId}/comments/${commentId}/likes`,
       method: "DELETE",
     },
     options,

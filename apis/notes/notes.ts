@@ -33,13 +33,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 노트 목록 조회
  */
 export const getTeamIdNotes = (
-  teamId: string,
   params?: GetTeamIdNotesParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdNotes200>(
-    { url: `/${teamId}/notes`, method: "GET", params, signal },
+    { url: `/notes`, method: "GET", params, signal },
     options,
   );
 };
@@ -49,14 +48,13 @@ export const getTeamIdNotes = (
  * @summary 노트 생성
  */
 export const postTeamIdNotes = (
-  teamId: string,
   postTeamIdNotesBody: PostTeamIdNotesBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdNotes201>(
     {
-      url: `/${teamId}/notes`,
+      url: `/notes`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdNotesBody,
@@ -71,13 +69,12 @@ export const postTeamIdNotes = (
  * @summary 노트 상세 조회
  */
 export const getTeamIdNotesNoteId = (
-  teamId: string,
   noteId: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdNotesNoteId200>(
-    { url: `/${teamId}/notes/${noteId}`, method: "GET", signal },
+    { url: `/notes/${noteId}`, method: "GET", signal },
     options,
   );
 };
@@ -87,14 +84,13 @@ export const getTeamIdNotesNoteId = (
  * @summary 노트 수정
  */
 export const patchTeamIdNotesNoteId = (
-  teamId: string,
   noteId: number,
   patchTeamIdNotesNoteIdBody: PatchTeamIdNotesNoteIdBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdNotesNoteId200>(
     {
-      url: `/${teamId}/notes/${noteId}`,
+      url: `/notes/${noteId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdNotesNoteIdBody,
@@ -108,12 +104,11 @@ export const patchTeamIdNotesNoteId = (
  * @summary 노트 삭제
  */
 export const deleteTeamIdNotesNoteId = (
-  teamId: string,
   noteId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/notes/${noteId}`, method: "DELETE" },
+    { url: `/notes/${noteId}`, method: "DELETE" },
     options,
   );
 };

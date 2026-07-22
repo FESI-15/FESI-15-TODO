@@ -23,16 +23,12 @@ export async function GET(request: Request) {
       : undefined,
   };
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdNotes(teamId, params, { headers }),
-  );
+  return handleRouteRequest((headers) => getTeamIdNotes(params, { headers }));
 }
 
 // 노트 생성
 export async function POST(request: Request) {
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    postTeamIdNotes(teamId, data, { headers }),
-  );
+  return handleRouteRequest((headers) => postTeamIdNotes(data, { headers }));
 }
