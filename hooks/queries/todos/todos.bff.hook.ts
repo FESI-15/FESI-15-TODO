@@ -13,17 +13,18 @@ import {
   patchTodo,
   postTodos,
 } from "@/apis/todos/todosBff";
+import { todosKeys } from "./todos.key";
 
 export const useGetTodos = (params?: GetTeamIdTodosParams) => {
   return useQuery({
-    queryKey: ["/api/todos", params],
+    queryKey: todosKeys.list(params),
     queryFn: ({ signal }) => getTodos(params, undefined, signal),
   });
 };
 
 export const useGetTodo = ({ todoId }: TodoIdVariables) => {
   return useQuery({
-    queryKey: [`/api/todos/${todoId}`],
+    queryKey: todosKeys.detail(todoId),
     queryFn: ({ signal }) => getTodo({ todoId }, undefined, signal),
     enabled: !!todoId,
   });

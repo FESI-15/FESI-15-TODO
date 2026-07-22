@@ -6,6 +6,7 @@ import type {
   PatchCommentVariables,
   PostCommentsVariables,
 } from "@/apis/comments/commentsBff";
+import { commentsKeys } from "./comments.key";
 import {
   deleteComment,
   deleteCommentLike,
@@ -20,7 +21,7 @@ export const useGetComments = (
   params?: GetTeamIdPostsPostIdCommentsParams,
 ) => {
   return useQuery({
-    queryKey: [`/api/posts/${postId}/comments`, params],
+    queryKey: commentsKeys.list(postId, params),
     queryFn: ({ signal }) => getComments(postId, params, undefined, signal),
     enabled: !!postId,
   });

@@ -36,14 +36,13 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 회원가입
  */
 export const postTeamIdAuthSignup = (
-  teamId: string,
   postTeamIdAuthSignupBody: PostTeamIdAuthSignupBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdAuthSignup201>(
     {
-      url: `/${teamId}/auth/signup`,
+      url: `/auth/signup`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdAuthSignupBody,
@@ -58,14 +57,13 @@ export const postTeamIdAuthSignup = (
  * @summary 로그인
  */
 export const postTeamIdAuthLogin = (
-  teamId: string,
   postTeamIdAuthLoginBody: PostTeamIdAuthLoginBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdAuthLogin200>(
     {
-      url: `/${teamId}/auth/login`,
+      url: `/auth/login`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdAuthLoginBody,
@@ -80,14 +78,13 @@ export const postTeamIdAuthLogin = (
  * @summary 토큰 재발급
  */
 export const postTeamIdAuthRefresh = (
-  teamId: string,
   postTeamIdAuthRefreshBody: PostTeamIdAuthRefreshBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdAuthRefresh200>(
     {
-      url: `/${teamId}/auth/refresh`,
+      url: `/auth/refresh`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdAuthRefreshBody,
@@ -102,14 +99,13 @@ export const postTeamIdAuthRefresh = (
  * @summary 로그아웃
  */
 export const postTeamIdAuthLogout = (
-  teamId: string,
   postTeamIdAuthLogoutBody: PostTeamIdAuthLogoutBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdAuthLogout200>(
     {
-      url: `/${teamId}/auth/logout`,
+      url: `/auth/logout`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdAuthLogoutBody,
@@ -124,7 +120,6 @@ export const postTeamIdAuthLogout = (
  * @summary OAuth 로그인
  */
 export const postTeamIdOauthProvider = (
-  teamId: string,
   provider: "google" | "kakao",
   postTeamIdOauthProviderBody: PostTeamIdOauthProviderBody,
   options?: SecondParameter<typeof customInstance>,
@@ -132,7 +127,7 @@ export const postTeamIdOauthProvider = (
 ) => {
   return customInstance<PostTeamIdOauthProvider200>(
     {
-      url: `/${teamId}/oauth/${provider}`,
+      url: `/oauth/${provider}`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdOauthProviderBody,

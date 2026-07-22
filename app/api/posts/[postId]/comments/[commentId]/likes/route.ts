@@ -11,13 +11,12 @@ interface RouteContext {
   }>;
 }
 
-// 댓글 좋아요 추가
+// 게시글 댓글 좋아요 생성
 export async function POST(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 
-  return handleRouteRequest((teamId, headers) =>
+  return handleRouteRequest((headers) =>
     postTeamIdPostsPostIdCommentsCommentIdLikes(
-      teamId,
       Number(postId),
       Number(commentId),
       { headers },
@@ -25,13 +24,12 @@ export async function POST(_request: Request, context: RouteContext) {
   );
 }
 
-// 댓글 좋아요 삭제
+// 게시글 댓글 좋아요 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 
-  return handleRouteRequest((teamId, headers) =>
+  return handleRouteRequest((headers) =>
     deleteTeamIdPostsPostIdCommentsCommentIdLikes(
-      teamId,
       Number(postId),
       Number(commentId),
       { headers },

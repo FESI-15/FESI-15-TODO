@@ -20,12 +20,12 @@ const getPostId = async (context: RouteContext) => {
   return Number(postId);
 };
 
-// 게시글 상세 조회
+// 게시글 세부 조회
 export async function GET(_request: Request, context: RouteContext) {
   const postId = await getPostId(context);
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdPostsPostId(teamId, postId, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdPostsPostId(postId, { headers }),
   );
 }
 
@@ -34,8 +34,8 @@ export async function PATCH(request: Request, context: RouteContext) {
   const postId = await getPostId(context);
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdPostsPostId(teamId, postId, data, { headers }),
+  return handleRouteRequest((headers) =>
+    patchTeamIdPostsPostId(postId, data, { headers }),
   );
 }
 
@@ -43,7 +43,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 export async function DELETE(_request: Request, context: RouteContext) {
   const postId = await getPostId(context);
 
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdPostsPostId(teamId, postId, { headers }),
+  return handleEmptyRouteRequest((headers) =>
+    deleteTeamIdPostsPostId(postId, { headers }),
   );
 }

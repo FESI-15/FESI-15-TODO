@@ -33,13 +33,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 목표 목록 조회
  */
 export const getTeamIdGoals = (
-  teamId: string,
   params?: GetTeamIdGoalsParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdGoals200>(
-    { url: `/${teamId}/goals`, method: "GET", params, signal },
+    { url: `/goals`, method: "GET", params, signal },
     options,
   );
 };
@@ -49,14 +48,13 @@ export const getTeamIdGoals = (
  * @summary 목표 생성
  */
 export const postTeamIdGoals = (
-  teamId: string,
   postTeamIdGoalsBody: PostTeamIdGoalsBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdGoals201>(
     {
-      url: `/${teamId}/goals`,
+      url: `/goals`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdGoalsBody,
@@ -71,13 +69,12 @@ export const postTeamIdGoals = (
  * @summary 목표 상세 조회
  */
 export const getTeamIdGoalsGoalId = (
-  teamId: string,
   goalId: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdGoalsGoalId200>(
-    { url: `/${teamId}/goals/${goalId}`, method: "GET", signal },
+    { url: `/goals/${goalId}`, method: "GET", signal },
     options,
   );
 };
@@ -87,14 +84,13 @@ export const getTeamIdGoalsGoalId = (
  * @summary 목표 수정
  */
 export const patchTeamIdGoalsGoalId = (
-  teamId: string,
   goalId: number,
   patchTeamIdGoalsGoalIdBody: PatchTeamIdGoalsGoalIdBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdGoalsGoalId200>(
     {
-      url: `/${teamId}/goals/${goalId}`,
+      url: `/goals/${goalId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdGoalsGoalIdBody,
@@ -108,12 +104,11 @@ export const patchTeamIdGoalsGoalId = (
  * @summary 목표 삭제
  */
 export const deleteTeamIdGoalsGoalId = (
-  teamId: string,
   goalId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/goals/${goalId}`, method: "DELETE" },
+    { url: `/goals/${goalId}`, method: "DELETE" },
     options,
   );
 };

@@ -33,13 +33,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 할 일 목록 조회
  */
 export const getTeamIdTodos = (
-  teamId: string,
   params?: GetTeamIdTodosParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdTodos200>(
-    { url: `/${teamId}/todos`, method: "GET", params, signal },
+    { url: `/todos`, method: "GET", params, signal },
     options,
   );
 };
@@ -49,14 +48,13 @@ export const getTeamIdTodos = (
  * @summary 할 일 생성
  */
 export const postTeamIdTodos = (
-  teamId: string,
   postTeamIdTodosBody: PostTeamIdTodosBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdTodos201>(
     {
-      url: `/${teamId}/todos`,
+      url: `/todos`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdTodosBody,
@@ -71,13 +69,12 @@ export const postTeamIdTodos = (
  * @summary 할 일 상세 조회
  */
 export const getTeamIdTodosTodoId = (
-  teamId: string,
   todoId: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdTodosTodoId200>(
-    { url: `/${teamId}/todos/${todoId}`, method: "GET", signal },
+    { url: `/todos/${todoId}`, method: "GET", signal },
     options,
   );
 };
@@ -87,14 +84,13 @@ export const getTeamIdTodosTodoId = (
  * @summary 할 일 수정
  */
 export const patchTeamIdTodosTodoId = (
-  teamId: string,
   todoId: number,
   patchTeamIdTodosTodoIdBody: PatchTeamIdTodosTodoIdBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdTodosTodoId200>(
     {
-      url: `/${teamId}/todos/${todoId}`,
+      url: `/todos/${todoId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdTodosTodoIdBody,
@@ -108,12 +104,11 @@ export const patchTeamIdTodosTodoId = (
  * @summary 할 일 삭제
  */
 export const deleteTeamIdTodosTodoId = (
-  teamId: string,
   todoId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/todos/${todoId}`, method: "DELETE" },
+    { url: `/todos/${todoId}`, method: "DELETE" },
     options,
   );
 };

@@ -13,17 +13,18 @@ import {
   patchPost,
   postPosts,
 } from "@/apis/posts/postsBff";
+import { postsKeys } from "./posts.key";
 
 export const useGetPosts = (params?: GetTeamIdPostsParams) => {
   return useQuery({
-    queryKey: ["/api/posts", params],
+    queryKey: postsKeys.list(params),
     queryFn: ({ signal }) => getPosts(params, undefined, signal),
   });
 };
 
 export const useGetPost = ({ postId }: PostIdVariables) => {
   return useQuery({
-    queryKey: [`/api/posts/${postId}`],
+    queryKey: postsKeys.detail(postId),
     queryFn: ({ signal }) => getPost({ postId }, undefined, signal),
     enabled: !!postId,
   });

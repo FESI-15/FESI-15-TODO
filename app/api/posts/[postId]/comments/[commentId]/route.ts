@@ -14,14 +14,13 @@ interface RouteContext {
   }>;
 }
 
-// 댓글 수정
+// 게시글 댓글 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
+  return handleRouteRequest((headers) =>
     patchTeamIdPostsPostIdCommentsCommentId(
-      teamId,
       Number(postId),
       Number(commentId),
       data,
@@ -30,13 +29,12 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
-// 댓글 삭제
+// 게시글 댓글 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 
-  return handleEmptyRouteRequest((teamId, headers) =>
+  return handleEmptyRouteRequest((headers) =>
     deleteTeamIdPostsPostIdCommentsCommentId(
-      teamId,
       Number(postId),
       Number(commentId),
       { headers },

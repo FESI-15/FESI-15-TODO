@@ -30,14 +30,13 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 이미지 업로드 presigned URL 발급
  */
 export const postTeamIdImages = (
-  teamId: string,
   postTeamIdImagesBody: PostTeamIdImagesBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdImages200>(
     {
-      url: `/${teamId}/images`,
+      url: `/images`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdImagesBody,
@@ -52,14 +51,13 @@ export const postTeamIdImages = (
  * @summary 파일 업로드 presigned URL 발급
  */
 export const postTeamIdFiles = (
-  teamId: string,
   postTeamIdFilesBody: PostTeamIdFilesBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdFiles200>(
     {
-      url: `/${teamId}/files`,
+      url: `/files`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdFilesBody,
