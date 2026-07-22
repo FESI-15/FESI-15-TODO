@@ -2,7 +2,7 @@ import { getTeamIdNotes, postTeamIdNotes } from "@/apis/notes/notes";
 import type { GetTeamIdNotesParams } from "@/apis/model";
 import { handleRouteRequest } from "@/utils/handleRouteRequest";
 
-// 노트 목록 조회
+// ?�트 목록 조회
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const params: GetTeamIdNotesParams = {
@@ -23,16 +23,12 @@ export async function GET(request: Request) {
       : undefined,
   };
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdNotes(teamId, params, { headers }),
-  );
+  return handleRouteRequest((headers) => getTeamIdNotes(params, { headers }));
 }
 
-// 노트 생성
+// ?�트 ?�성
 export async function POST(request: Request) {
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    postTeamIdNotes(teamId, data, { headers }),
-  );
+  return handleRouteRequest((headers) => postTeamIdNotes(data, { headers }));
 }

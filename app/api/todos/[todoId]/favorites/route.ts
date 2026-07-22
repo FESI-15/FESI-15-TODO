@@ -10,20 +10,20 @@ interface RouteContext {
   }>;
 }
 
-// 할 일 즐겨찾기 추가
+// ????즐겨찾기 추�?
 export async function POST(_request: Request, context: RouteContext) {
   const { todoId } = await context.params;
 
-  return handleRouteRequest((teamId, headers) =>
-    postTeamIdTodosTodoIdFavorites(teamId, Number(todoId), { headers }),
+  return handleRouteRequest((headers) =>
+    postTeamIdTodosTodoIdFavorites(Number(todoId), { headers }),
   );
 }
 
-// 할 일 즐겨찾기 삭제
+// ????즐겨찾기 ??��
 export async function DELETE(_request: Request, context: RouteContext) {
   const { todoId } = await context.params;
 
-  return handleRouteRequest((teamId, headers) =>
-    deleteTeamIdTodosTodoIdFavorites(teamId, Number(todoId), { headers }),
+  return handleRouteRequest((headers) =>
+    deleteTeamIdTodosTodoIdFavorites(Number(todoId), { headers }),
   );
 }

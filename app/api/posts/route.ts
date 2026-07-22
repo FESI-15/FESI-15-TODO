@@ -16,16 +16,12 @@ export async function GET(request: Request) {
       : undefined,
   };
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdPosts(teamId, params, { headers }),
-  );
+  return handleRouteRequest((headers) => getTeamIdPosts(params, { headers }));
 }
 
-// 게시글 생성
+// 게시글 ?�성
 export async function POST(request: Request) {
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    postTeamIdPosts(teamId, data, { headers }),
-  );
+  return handleRouteRequest((headers) => postTeamIdPosts(data, { headers }));
 }

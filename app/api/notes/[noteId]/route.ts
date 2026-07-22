@@ -20,30 +20,30 @@ const getNoteId = async (context: RouteContext) => {
   return Number(noteId);
 };
 
-// 노트 상세 조회
+// ?�트 ?�세 조회
 export async function GET(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdNotesNoteId(teamId, noteId, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdNotesNoteId(noteId, { headers }),
   );
 }
 
-// 노트 수정
+// ?�트 ?�정
 export async function PATCH(request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
   const data = await request.json();
 
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdNotesNoteId(teamId, noteId, data, { headers }),
+  return handleRouteRequest((headers) =>
+    patchTeamIdNotesNoteId(noteId, data, { headers }),
   );
 }
 
-// 노트 삭제
+// ?�트 ??��
 export async function DELETE(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdNotesNoteId(teamId, noteId, { headers }),
+  return handleEmptyRouteRequest((headers) =>
+    deleteTeamIdNotesNoteId(noteId, { headers }),
   );
 }

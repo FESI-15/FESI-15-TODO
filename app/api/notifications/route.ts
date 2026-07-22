@@ -9,7 +9,7 @@ import {
   handleRouteRequest,
 } from "@/utils/handleRouteRequest";
 
-// 알림 목록 조회
+// ?�림 목록 조회
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const params: GetTeamIdNotificationsParams = {
@@ -21,21 +21,19 @@ export async function GET(request: Request) {
       : undefined,
   };
 
-  return handleRouteRequest((teamId, headers) =>
-    getTeamIdNotifications(teamId, params, { headers }),
+  return handleRouteRequest((headers) =>
+    getTeamIdNotifications(params, { headers }),
   );
 }
 
-// 전체 알림 읽음 처리
+// ?�체 ?�림 ?�음 처리
 export async function PATCH() {
-  return handleRouteRequest((teamId, headers) =>
-    patchTeamIdNotifications(teamId, { headers }),
-  );
+  return handleRouteRequest((headers) => patchTeamIdNotifications({ headers }));
 }
 
-// 전체 알림 삭제
+// ?�체 ?�림 ??��
 export async function DELETE() {
-  return handleEmptyRouteRequest((teamId, headers) =>
-    deleteTeamIdNotifications(teamId, { headers }),
+  return handleEmptyRouteRequest((headers) =>
+    deleteTeamIdNotifications({ headers }),
   );
 }
