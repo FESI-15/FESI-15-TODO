@@ -3,24 +3,11 @@ import Image from "next/image";
 import SideMenuUtilMenu from "./SideMenuUtilMenu/SideMenuUtilMenu";
 import SideMenuActions from "./SideMenuActions/SideMenuActions";
 import SideMenuProfile from "./SideMenuProfile/SideMenuProfile";
-import * as m from "motion/react-m";
 import SideMenuBell from "./SideMenuBell/SideMenuBell";
 
 export default function SideMenuContainer() {
   return (
-    <m.div
-      className="flex flex-col md:justify-between flex-1"
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-        transition: {
-          duration: 0.3,
-          delay: 0.2,
-        },
-      }}
-    >
+    <div className="flex flex-col md:justify-between flex-1">
       <div>
         <div className="flex items-center gap-4 pl-2 mb-10">
           <Image
@@ -63,6 +50,6 @@ export default function SideMenuContainer() {
           <SideMenuBell newNotification={true} onClickBell={() => {}} />
         </div>
       </div>
-    </m.div>
+    </div>
   );
 }

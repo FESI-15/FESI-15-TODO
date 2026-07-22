@@ -1,25 +1,28 @@
-import { getGoals } from "@/apis/goals/goalsBff";
-import { getTodos } from "@/apis/todos/todosBff";
 import Dashboard from "@/components/dashboard/Dashboard";
+import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
+import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todo.server";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["/api/todos"],
-    queryFn: () => getTodos(),
-  });
+  const todos = await queryClient.fetchQuery(getTodosQueryOptionsServer());
+  const goals = await queryClient.fetchQuery(getGoalsQueryOptionsServer());
 
-  await queryClient.prefetchQuery({
-    queryKey: ["/api/goals"],
-    queryFn: () => getGoals(),
-  });
+  if (!todos || !goals) notFound();
 
+  await Promise.all(
+    goals.data.goals.map((goal) =>
+      queryClient.prefetchQuery(
+        getTodosQueryOptionsServer({ goalId: goal.id }),
+      ),
+    ),
+  );
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Dashboard />

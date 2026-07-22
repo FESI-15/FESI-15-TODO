@@ -1,7 +1,6 @@
 import SideMenuContainer from "../SideMenuContainer/SideMenuContainer";
 import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
 import SideBarUtils from "./SideBarUtills/SideBarUtils";
-import * as m from "motion/react-m";
 import { cva } from "class-variance-authority";
 
 interface TabletSideMenuProps {
@@ -51,16 +50,7 @@ export default function TabletSideMenu({
   return (
     <>
       <div className={sideMenuSpaceVariants({ open })} />
-      <m.div
-        className={tabletSideMenuVariants({ open })}
-        animate={{
-          width: open ? "362px" : "60px",
-          transition: {
-            duration: 0.3,
-            ease: "easeInOut",
-          },
-        }}
-      >
+      <div className={tabletSideMenuVariants({ open })}>
         <button
           type="button"
           onClick={onToggle}
@@ -73,7 +63,7 @@ export default function TabletSideMenu({
         ) : (
           <SideBarUtils onClickBell={() => {}} newNotification={true} />
         )}
-      </m.div>
+      </div>
     </>
   );
 }

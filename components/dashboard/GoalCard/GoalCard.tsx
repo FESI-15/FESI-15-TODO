@@ -1,7 +1,7 @@
 import type { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 import GoalHeader from "@/components/dashboard/GoalCard/GoalHeader";
 import TaskColumn from "../TaskColumn/TaskColumn";
-import { useGetTodos } from "@/hooks/queries/todos.bff.hook";
+import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 
 interface GoalCardProps {
   goal: GetTeamIdGoals200GoalsItem;
