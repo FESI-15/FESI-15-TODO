@@ -1,28 +1,38 @@
 import Dashboard from "@/components/dashboard/Dashboard";
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
-import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todo.server";
+import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
+import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { notFound } from "next/navigation";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
 
-  const todos = await queryClient.fetchQuery(getTodosQueryOptionsServer());
-  const goals = await queryClient.fetchQuery(getGoalsQueryOptionsServer());
+  await Promise.all([
+    queryClient.prefetchQuery(getTodosQueryOptionsServer()),
+    queryClient.prefetchQuery(getGoalsQueryOptionsServer()),
+    queryClient.prefetchQuery(getUserMeQueryOptionsServer()),
+  ]);
 
-  if (!todos || !goals) notFound();
+  const goals = queryClient.getQueryData<
+    Awaited<
+      ReturnType<ReturnType<typeof getGoalsQueryOptionsServer>["queryFn"]>
+    >
+  >(getGoalsQueryOptionsServer().queryKey);
 
-  await Promise.all(
-    goals.data.goals.map((goal) =>
-      queryClient.prefetchQuery(
-        getTodosQueryOptionsServer({ goalId: goal.id }),
+  if (goals) {
+    await Promise.all(
+      goals.data.goals.map((goal) =>
+        queryClient.prefetchQuery(
+          getTodosQueryOptionsServer({ goalId: goal.id }),
+        ),
       ),
-    ),
-  );
+    );
+  }
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Dashboard />

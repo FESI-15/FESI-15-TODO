@@ -1,13 +1,21 @@
-import { PieChart } from "lucide-react";
-
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
+import Image from "next/image";
 
-export default function ProgressCard() {
+interface ProgressCardProps {
+  title: string;
+}
+export default function ProgressCard({ title }: ProgressCardProps) {
   return (
     <section className="flex min-w-0 flex-1 flex-col gap-2.5">
       <SectionTitle
-        icon={<PieChart className="size-6 fill-blue-200 text-blue-300" />}
-        iconClassName="bg-blue-100"
+        icon={
+          <Image
+            src="/icons/dashboard/progress.svg"
+            alt="progress"
+            width={40}
+            height={40}
+          />
+        }
       >
         내 진행 상황
       </SectionTitle>
@@ -18,15 +26,20 @@ export default function ProgressCard() {
             <div className="absolute -right-1 top-16 size-7 rounded-full bg-white" />
           </div>
           <div className="z-10 text-white">
-            <p className="text-xl font-semibold">체다치즈님의 진행도는</p>
+            <p className="text-xl font-semibold">{title}님의 진행도는</p>
             <div className="mt-3 flex items-end gap-1">
               <strong className="text-[80px] leading-[74px]">74</strong>
               <span className="text-3xl font-medium leading-9">%</span>
             </div>
           </div>
         </div>
-        <div className="absolute bottom-[-28px] right-9 size-36 rounded-full bg-blue-100/30" />
-        <div className="absolute bottom-2 right-20 h-9 w-28 rotate-[18deg] rounded-full bg-blue-300/50" />
+        <Image
+          className="absolute -bottom-12 -right-3"
+          src="/icons/dashboard/progress_background.svg"
+          alt="progress"
+          width={222}
+          height={215}
+        />
       </div>
     </section>
   );

@@ -30,7 +30,7 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-pretendard);
 
   --color-red-500: #ff3434;
 
