@@ -5,7 +5,6 @@ import {
   getTeamIdGoalsGoalId,
   patchTeamIdGoalsGoalId,
 } from "@/apis/goals/goals";
-import { TEAM_ID } from "@/constants/auth";
 import { getAxiosErrorResponse } from "@/utils/getAxiosErrorResponse";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 
@@ -26,7 +25,7 @@ export async function GET(_request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || !TEAM_ID || Number.isNaN(goalId)) {
+  if (!headers || Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -34,7 +33,7 @@ export async function GET(_request: Request, context: RouteContext) {
   }
 
   try {
-    const response = await getTeamIdGoalsGoalId(TEAM_ID, goalId, { headers });
+    const response = await getTeamIdGoalsGoalId(goalId, { headers });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
@@ -49,7 +48,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || !TEAM_ID || Number.isNaN(goalId)) {
+  if (!headers || Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -58,7 +57,7 @@ export async function PATCH(request: Request, context: RouteContext) {
 
   try {
     const data = await request.json();
-    const response = await patchTeamIdGoalsGoalId(TEAM_ID, goalId, data, {
+    const response = await patchTeamIdGoalsGoalId(goalId, data, {
       headers,
     });
 
@@ -75,7 +74,7 @@ export async function DELETE(_request: Request, context: RouteContext) {
   const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || !TEAM_ID || Number.isNaN(goalId)) {
+  if (!headers || Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -83,7 +82,7 @@ export async function DELETE(_request: Request, context: RouteContext) {
   }
 
   try {
-    const response = await deleteTeamIdGoalsGoalId(TEAM_ID, goalId, {
+    const response = await deleteTeamIdGoalsGoalId(goalId, {
       headers,
     });
 

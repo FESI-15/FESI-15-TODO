@@ -17,8 +17,7 @@ import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useInvalidateQuery } from "@/hooks/useInvalidateQuery";
 import { PostTeamIdGoals400, PostTeamIdGoals401 } from "@/apis/model";
-import { usePostGoals } from "@/hooks/queries/goals.bff.hook";
-import { getGoalsQueryKey } from "@/hooks/queries/goals.bff.hook";
+import { usePostGoals } from "@/hooks/queries/goals/goals.bff.hook";
 
 const GoalsSchema = z.object({
   title: z.string().trim().min(1, "목표를 입력해주세요."),
@@ -43,7 +42,7 @@ export default function GoalsModal() {
   const { mutate: createGoal, isPending } = usePostGoals({
     mutation: {
       onSuccess: () => {
-        invalidateQuery(getGoalsQueryKey());
+        invalidateQuery(["/api/goals", undefined]);
         alert("목표 생성에 성공했습니다.");
       },
       onError: (error: PostTeamIdGoals400 | PostTeamIdGoals401) => {

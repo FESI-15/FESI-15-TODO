@@ -7,7 +7,6 @@ import {
   API_BASE_URL,
   REFRESH_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_MAX_AGE,
-  TEAM_ID,
 } from "@/constants/auth";
 import { postTeamIdAuthLogin } from "@/apis/auth/auth";
 
@@ -20,14 +19,14 @@ interface LoginRequestBody {
 export async function POST(request: Request) {
   const { email, password } = (await request.json()) as LoginRequestBody;
 
-  if (!API_BASE_URL || !TEAM_ID || !email || !password) {
+  if (!API_BASE_URL || !email || !password) {
     return NextResponse.json(
       { message: "Invalid login request." },
       { status: 400 },
     );
   }
 
-  const response = await postTeamIdAuthLogin(TEAM_ID, {
+  const response = await postTeamIdAuthLogin({
     email,
     password,
   });
