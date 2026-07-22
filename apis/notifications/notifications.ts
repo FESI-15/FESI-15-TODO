@@ -30,13 +30,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 알림 목록 조회
  */
 export const getTeamIdNotifications = (
-  teamId: string,
   params?: GetTeamIdNotificationsParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdNotifications200>(
-    { url: `/${teamId}/notifications`, method: "GET", params, signal },
+    { url: `/notifications`, method: "GET", params, signal },
     options,
   );
 };
@@ -46,11 +45,10 @@ export const getTeamIdNotifications = (
  * @summary 전체 알림 읽음 처리
  */
 export const patchTeamIdNotifications = (
-  teamId: string,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/notifications`, method: "PATCH" },
+    { url: `/notifications`, method: "PATCH" },
     options,
   );
 };
@@ -60,11 +58,10 @@ export const patchTeamIdNotifications = (
  * @summary 전체 알림 삭제
  */
 export const deleteTeamIdNotifications = (
-  teamId: string,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/notifications`, method: "DELETE" },
+    { url: `/notifications`, method: "DELETE" },
     options,
   );
 };
@@ -74,14 +71,13 @@ export const deleteTeamIdNotifications = (
  * @summary 알림 읽음 상태 변경
  */
 export const patchTeamIdNotificationsNotificationId = (
-  teamId: string,
   notificationId: number,
   patchTeamIdNotificationsNotificationIdBody: PatchTeamIdNotificationsNotificationIdBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdNotificationsNotificationId200>(
     {
-      url: `/${teamId}/notifications/${notificationId}`,
+      url: `/notifications/${notificationId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdNotificationsNotificationIdBody,
@@ -95,12 +91,11 @@ export const patchTeamIdNotificationsNotificationId = (
  * @summary 알림 단건 삭제
  */
 export const deleteTeamIdNotificationsNotificationId = (
-  teamId: string,
   notificationId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/notifications/${notificationId}`, method: "DELETE" },
+    { url: `/notifications/${notificationId}`, method: "DELETE" },
     options,
   );
 };

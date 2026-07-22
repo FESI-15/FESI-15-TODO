@@ -33,13 +33,12 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
  * @summary 게시글 목록 조회
  */
 export const getTeamIdPosts = (
-  teamId: string,
   params?: GetTeamIdPostsParams,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdPosts200>(
-    { url: `/${teamId}/posts`, method: "GET", params, signal },
+    { url: `/posts`, method: "GET", params, signal },
     options,
   );
 };
@@ -49,14 +48,13 @@ export const getTeamIdPosts = (
  * @summary 게시글 생성
  */
 export const postTeamIdPosts = (
-  teamId: string,
   postTeamIdPostsBody: PostTeamIdPostsBody,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<PostTeamIdPosts201>(
     {
-      url: `/${teamId}/posts`,
+      url: `/posts`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
       data: postTeamIdPostsBody,
@@ -71,13 +69,12 @@ export const postTeamIdPosts = (
  * @summary 게시글 상세 조회
  */
 export const getTeamIdPostsPostId = (
-  teamId: string,
   postId: number,
   options?: SecondParameter<typeof customInstance>,
   signal?: AbortSignal,
 ) => {
   return customInstance<GetTeamIdPostsPostId200>(
-    { url: `/${teamId}/posts/${postId}`, method: "GET", signal },
+    { url: `/posts/${postId}`, method: "GET", signal },
     options,
   );
 };
@@ -87,14 +84,13 @@ export const getTeamIdPostsPostId = (
  * @summary 게시글 수정
  */
 export const patchTeamIdPostsPostId = (
-  teamId: string,
   postId: number,
   patchTeamIdPostsPostIdBody: PatchTeamIdPostsPostIdBody,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<PatchTeamIdPostsPostId200>(
     {
-      url: `/${teamId}/posts/${postId}`,
+      url: `/posts/${postId}`,
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       data: patchTeamIdPostsPostIdBody,
@@ -108,12 +104,11 @@ export const patchTeamIdPostsPostId = (
  * @summary 게시글 삭제
  */
 export const deleteTeamIdPostsPostId = (
-  teamId: string,
   postId: number,
   options?: SecondParameter<typeof customInstance>,
 ) => {
   return customInstance<void>(
-    { url: `/${teamId}/posts/${postId}`, method: "DELETE" },
+    { url: `/posts/${postId}`, method: "DELETE" },
     options,
   );
 };
