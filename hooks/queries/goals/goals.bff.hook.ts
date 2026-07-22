@@ -12,17 +12,18 @@ import {
   patchGoal,
   postGoals,
 } from "@/apis/goals/goalsBff";
+import { goalsKeys } from "./goals.key";
 
 export const useGetGoals = (params?: GetTeamIdGoalsParams) => {
   return useQuery({
-    queryKey: ["/api/goals", params],
+    queryKey: goalsKeys.list(),
     queryFn: ({ signal }) => getGoals(params, undefined, signal),
   });
 };
 
 export const useGetGoal = (goalId: number) => {
   return useQuery({
-    queryKey: [`/api/goals/${goalId}`],
+    queryKey: goalsKeys.detail(goalId),
     queryFn: ({ signal }) => getGoal({ goalId }, undefined, signal),
     enabled: !!goalId,
   });
