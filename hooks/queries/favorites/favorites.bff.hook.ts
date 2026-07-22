@@ -7,10 +7,11 @@ import {
   getTodoFavorites,
   postTodoFavorite,
 } from "@/apis/favorites/favoritesBff";
+import { favoritesKeys } from "./favorites.key";
 
 export const useGetTodoFavorites = (params?: GetTeamIdTodosFavoritesParams) => {
   return useQuery({
-    queryKey: ["/api/todos/favorites", params],
+    queryKey: favoritesKeys.todos(params),
     queryFn: ({ signal }) => getTodoFavorites(params, undefined, signal),
   });
 };

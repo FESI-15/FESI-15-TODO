@@ -1,5 +1,6 @@
+import type { GetTeamIdGoalsParams } from "@/apis/model";
+
 export const goalsKeys = {
-  all: ["goals"] as const,
-  list: () => [...goalsKeys.all, "list"] as const,
-  detail: (id: number) => [...goalsKeys.all, id] as const,
+  list: (params?: GetTeamIdGoalsParams) => ["/api/goals", params] as const,
+  detail: (id: number) => [`/api/goals/${id}`] as const,
 };

@@ -1,5 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type { GetTeamIdGoalsParams } from "@/apis/model";
+import type { UseMutationOptions } from "@tanstack/react-query";
+import type {
+  GetTeamIdGoalsParams,
+  PostTeamIdGoals400,
+  PostTeamIdGoals401,
+} from "@/apis/model";
 import type {
   GoalIdVariables,
   PatchGoalVariables,
@@ -16,7 +21,7 @@ import { goalsKeys } from "./goals.key";
 
 export const useGetGoals = (params?: GetTeamIdGoalsParams) => {
   return useQuery({
-    queryKey: goalsKeys.list(),
+    queryKey: goalsKeys.list(params),
     queryFn: ({ signal }) => getGoals(params, undefined, signal),
   });
 };
@@ -29,10 +34,21 @@ export const useGetGoal = (goalId: number) => {
   });
 };
 
-export const usePostGoals = () => {
+export const usePostGoals = <
+  TError = PostTeamIdGoals400 | PostTeamIdGoals401,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof postGoals>>,
+    TError,
+    PostGoalsVariables,
+    TContext
+  >;
+}) => {
   return useMutation({
     mutationKey: ["postGoals"],
     mutationFn: (variables: PostGoalsVariables) => postGoals(variables),
+    ...options?.mutation,
   });
 };
 

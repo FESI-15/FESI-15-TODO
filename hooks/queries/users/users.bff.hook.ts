@@ -11,12 +11,21 @@ import {
   patchUserMe,
   patchUserPassword,
 } from "@/apis/users/usersBff";
+import { getTeamIdUsersMe } from "@/apis/users/users";
+import { usersKeys } from "./users.key";
+
+export function useGetUserMe() {
+  return useQuery({
+    queryKey: usersKeys.me(),
+    queryFn: ({ signal }) => getTeamIdUsersMe(undefined, signal),
+  });
+}
 
 export const useGetUsersCheckNickname = (
   params: GetTeamIdUsersCheckNicknameParams,
 ) => {
   return useQuery({
-    queryKey: ["/api/users/check-nickname", params],
+    queryKey: usersKeys.checkNickname(params),
     queryFn: ({ signal }) => getUsersCheckNickname(params, undefined, signal),
     enabled: !!params.name,
   });

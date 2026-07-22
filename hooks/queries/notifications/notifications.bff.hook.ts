@@ -12,10 +12,11 @@ import {
   patchNotification,
   patchNotifications,
 } from "@/apis/notifications/notificationsBff";
+import { notificationsKeys } from "./notifications.key";
 
 export const useGetNotifications = (params?: GetTeamIdNotificationsParams) => {
   return useQuery({
-    queryKey: ["/api/notifications", params],
+    queryKey: notificationsKeys.list(params),
     queryFn: ({ signal }) => getNotifications(params, undefined, signal),
   });
 };

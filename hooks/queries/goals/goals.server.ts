@@ -2,9 +2,10 @@ import type { GetTeamIdGoalsParams } from "@/apis/model";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 import { getTeamIdGoals } from "@/apis/goals/goals";
 import { getGoal } from "@/apis/goals/goalsBff";
+import { goalsKeys } from "./goals.key";
 
 export const getGoalsQueryOptionsServer = (params?: GetTeamIdGoalsParams) => ({
-  queryKey: ["/api/goals", params],
+  queryKey: goalsKeys.list(params),
   queryFn: async ({ signal }: { signal: AbortSignal }) => {
     const headers = await getAuthorizationHeaders();
 
@@ -19,7 +20,7 @@ export const getGoalsQueryOptionsServer = (params?: GetTeamIdGoalsParams) => ({
 });
 
 export const getGoalQueryOptionsServer = (goalId: number) => ({
-  queryKey: ["/api/goals", goalId],
+  queryKey: goalsKeys.detail(goalId),
   queryFn: async ({ signal }: { signal: AbortSignal }) => {
     const headers = await getAuthorizationHeaders();
 
