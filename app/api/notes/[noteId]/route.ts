@@ -20,7 +20,7 @@ const getNoteId = async (context: RouteContext) => {
   return Number(noteId);
 };
 
-// ?�트 ?�세 조회
+// 노트 세부 조회
 export async function GET(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 
@@ -29,7 +29,7 @@ export async function GET(_request: Request, context: RouteContext) {
   );
 }
 
-// ?�트 ?�정
+// 노트 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
   const data = await request.json();
@@ -39,7 +39,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
-// ?�트 ??��
+// 노트 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const noteId = await getNoteId(context);
 

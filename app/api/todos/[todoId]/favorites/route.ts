@@ -10,7 +10,7 @@ interface RouteContext {
   }>;
 }
 
-// ????즐겨찾기 추�?
+// 투두 즐겨찾기 추가
 export async function POST(_request: Request, context: RouteContext) {
   const { todoId } = await context.params;
 
@@ -19,7 +19,7 @@ export async function POST(_request: Request, context: RouteContext) {
   );
 }
 
-// ????즐겨찾기 ??��
+// 투두 즐겨찾기 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { todoId } = await context.params;
 

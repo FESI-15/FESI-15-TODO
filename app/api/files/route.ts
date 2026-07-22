@@ -1,7 +1,7 @@
 import { postTeamIdFiles } from "@/apis/uploads/uploads";
 import { handleRouteRequest } from "@/utils/handleRouteRequest";
 
-// ?�일 ?�로??URL 발급
+// 파일 업로드
 export async function POST(request: Request) {
   const data = await request.json();
 

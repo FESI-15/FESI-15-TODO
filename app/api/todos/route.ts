@@ -2,7 +2,7 @@ import { getTeamIdTodos, postTeamIdTodos } from "@/apis/todos/todos";
 import type { GetTeamIdTodosParams } from "@/apis/model";
 import { handleRouteRequest } from "@/utils/handleRouteRequest";
 
-// ????목록 조회
+// 투두 목록 조회
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const params: GetTeamIdTodosParams = {
@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   return handleRouteRequest((headers) => getTeamIdTodos(params, { headers }));
 }
 
-// ?????�성
+// 투두 생성
 export async function POST(request: Request) {
   const data = await request.json();
 

@@ -14,6 +14,7 @@ interface RouteContext {
   }>;
 }
 
+// 게시글 댓글 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
   const data = await request.json();
@@ -28,6 +29,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
+// 게시글 댓글 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const { postId, commentId } = await context.params;
 

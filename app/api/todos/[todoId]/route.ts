@@ -20,7 +20,7 @@ const getTodoId = async (context: RouteContext) => {
   return Number(todoId);
 };
 
-// ?????�세 조회
+// 투두 세부 조회
 export async function GET(_request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
 
@@ -29,7 +29,7 @@ export async function GET(_request: Request, context: RouteContext) {
   );
 }
 
-// ?????�정
+// 투두 수정
 export async function PATCH(request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
   const data = await request.json();
@@ -39,7 +39,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   );
 }
 
-// ??????��
+// 투두 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
   const todoId = await getTodoId(context);
 

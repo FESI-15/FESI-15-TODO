@@ -19,7 +19,7 @@ export async function GET(request: Request) {
   return handleRouteRequest((headers) => getTeamIdPosts(params, { headers }));
 }
 
-// 게시글 ?�성
+// 게시글 생성
 export async function POST(request: Request) {
   const data = await request.json();
 
