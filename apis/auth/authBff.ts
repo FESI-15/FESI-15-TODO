@@ -3,6 +3,9 @@ import type {
   PostTeamIdAuthLogin200,
   PostTeamIdAuthLoginBody,
   PostTeamIdAuthLogout200,
+  PostTeamIdAuthSignupBody,
+  PostTeamIdOauthProvider200,
+  PostTeamIdOauthProviderBody,
 } from "@/apis/model";
 
 import { bffInstance } from "@/apis/bffAxiosInstance";
@@ -53,6 +56,47 @@ export const postAuthLogout = (
       url: "/api/auth/logout",
       method: "POST",
       headers: { "Content-Type": "application/json" },
+    },
+    options,
+  );
+};
+
+export interface PostAuthSignupVariables {
+  data: PostTeamIdAuthSignupBody;
+}
+
+// 회원가입
+export const postAuthSignup = (
+  { data }: PostAuthSignupVariables,
+  options?: SecondParameter<typeof bffInstance>,
+) => {
+  return bffInstance<PostTeamIdAuthLogin200["user"]>(
+    {
+      url: "/api/auth/signup",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data,
+    },
+    options,
+  );
+};
+
+export interface PostAuthOauthVariables {
+  provider: "google";
+  data: PostTeamIdOauthProviderBody;
+}
+
+// OAuth 로그인
+export const postAuthOauth = (
+  { provider, data }: PostAuthOauthVariables,
+  options?: SecondParameter<typeof bffInstance>,
+) => {
+  return bffInstance<PostTeamIdOauthProvider200["user"]>(
+    {
+      url: `/api/auth/oauth/${provider}`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      data,
     },
     options,
   );

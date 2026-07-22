@@ -1,6 +1,6 @@
 import Image from "next/image";
 import KebabMenuIcon from "@/public/icons/card/ic_kebab.svg";
-import Chips from "@/components/common/Chip";
+import Chips from "@/components/common/Chips";
 import imgNoteLarge from "@/public/images/card/img_note_large.png";
 
 interface NoteCardProps {
