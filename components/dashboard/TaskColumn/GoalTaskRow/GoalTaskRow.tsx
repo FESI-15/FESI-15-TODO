@@ -28,7 +28,7 @@ export default function GoalTaskRow({ task, done = false }: GoalTaskRowProps) {
               : "text-gray-800",
         )}
       />
-      <TaskIcons task={task} dense />
+      <TaskIcons task={task} dense recentTodo={false} favorite={true} />
     </li>
   );
 }

@@ -14,7 +14,7 @@ export default function RecentTaskRow({ task }: RecentTaskRowProps) {
         label={task.title}
         labelClassName="max-w-[390px] text-sm font-semibold text-white"
       />
-      <TaskIcons task={task} />
+      <TaskIcons task={task} favorite={false} recentTodo={true} />
     </li>
   );
 }
