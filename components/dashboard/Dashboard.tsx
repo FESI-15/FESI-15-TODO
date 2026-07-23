@@ -1,13 +1,11 @@
 "use client";
 
-import { Flag } from "lucide-react";
 import GoalCard from "@/components/dashboard/GoalCard/GoalCard";
 import ProgressCard from "@/components/dashboard/ProgressCard/ProgressCard";
 import RecentTasksCard from "@/components/dashboard/RecentTasksCard/RecentTasksCard";
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
-import { usePostAuthLogin } from "@/hooks/queries/auth/auth.bff.hook";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import Image from "next/image";
 
@@ -15,7 +13,6 @@ export default function Dashboard() {
   const { data: goals } = useGetGoals();
   const { data: todos } = useGetTodos();
   const { data: user } = useGetUserMe();
-  const { mutate: login } = usePostAuthLogin();
 
   return (
     <main className="min-w-0 flex-1 px-5 py-10 md:px-8 lg:px-12 xl:px-[88px]">
@@ -63,19 +60,6 @@ export default function Dashboard() {
           )}
         </section>
       </div>
-      <button
-        type="button"
-        onClick={() =>
-          login({
-            data: {
-              email: "ilhai3@naver.com",
-              password: "sks98sk11",
-            },
-          })
-        }
-      >
-        Login
-      </button>
     </main>
   );
 }
