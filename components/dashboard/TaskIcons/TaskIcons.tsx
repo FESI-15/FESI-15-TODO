@@ -7,6 +7,7 @@ import MoreIcon from "@/public/icons/dashboard/more.svg";
 import StarIcon from "@/public/icons/dashboard/star.svg";
 import { cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
 
 const IconVariants = cva(
   "bg-orange-200 rounded-full size-6 items-center justify-center flex",
@@ -58,25 +59,20 @@ const starIconVariants = cva("size-6", {
 
 interface TaskIconsProps {
   task: DashboardTask;
-  dense?: boolean;
   recentTodo: boolean;
-  favorite: boolean;
 }
 
 export default function TaskIcons({
   task,
-  dense = false,
   recentTodo = false,
-  favorite = true,
 }: TaskIconsProps) {
   return (
     <div className="flex h-6 shrink-0 items-center justify-end gap-2">
-      <button type="button" className={cn(IconVariants({ recentTodo }))}>
-        <FileIcon />
-      </button>
-      <button type="button" className={cn(IconVariants({ recentTodo }))}>
-        <LinkIcon />
-      </button>
+      {task.note && (
+        <button type="button" className={cn(IconVariants({ recentTodo }))}>
+          <FileIcon />
+        </button>
+      )}
       <button
         type="button"
         className={cn(moreIconVariants({ recentTodo, moreActive: false }))}
@@ -88,7 +84,7 @@ export default function TaskIcons({
           className={cn(
             starIconVariants({
               recentTodo,
-              favorite,
+              favorite: task.favorite,
             }),
           )}
         />

@@ -7,14 +7,15 @@ interface RecentTaskRowProps {
 }
 
 export default function RecentTaskRow({ task }: RecentTaskRowProps) {
+  console.log(task);
   return (
-    <li className="flex h-11 items-center justify-between gap-4 px-2 py-2.5">
+    <li className="flex items-center justify-between gap-4 px-2 py-2.5">
       <DashboardCheckbox
         checked={task.done}
         label={task.title}
         labelClassName="max-w-[390px] text-sm font-semibold text-white"
       />
-      <TaskIcons task={task} favorite={false} recentTodo={true} />
+      <TaskIcons task={task} recentTodo={true} />
     </li>
   );
 }
