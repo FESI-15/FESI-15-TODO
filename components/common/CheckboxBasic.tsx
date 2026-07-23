@@ -16,6 +16,7 @@ interface CheckboxBasicProps<T extends FieldValues> {
   className?: string;
   labelClassName?: string;
   disabled?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
 }
 
 export default function CheckboxBasic<T extends FieldValues>({
@@ -26,6 +27,7 @@ export default function CheckboxBasic<T extends FieldValues>({
   className,
   labelClassName,
   disabled = false,
+  onCheckedChange,
 }: CheckboxBasicProps<T>) {
   const checkboxId = `${label}-checkbox-basic`;
   const { field } = useController({
@@ -44,18 +46,27 @@ export default function CheckboxBasic<T extends FieldValues>({
           onCheckedChange={(checked) => {
             if (checked === true) {
               field.onChange(value);
+
+              onCheckedChange?.(true);
+
+              return;
             }
+
+            field.onChange("");
+            onCheckedChange?.(false);
           }}
         />
-        <FieldLabel
-          className={cn(
-            "flex-none text-sm font-medium whitespace-nowrap text-gray-500",
-            labelClassName,
-          )}
-          htmlFor={checkboxId}
-        >
-          {label}
-        </FieldLabel>
+        {label && (
+          <FieldLabel
+            className={cn(
+              "flex-none text-sm font-medium whitespace-nowrap text-gray-500",
+              labelClassName,
+            )}
+            htmlFor={checkboxId}
+          >
+            {label}
+          </FieldLabel>
+        )}
       </Field>
     </FieldGroup>
   );

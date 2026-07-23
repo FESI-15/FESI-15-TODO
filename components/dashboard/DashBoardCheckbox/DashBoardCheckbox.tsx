@@ -1,37 +1,53 @@
 "use client";
 
 import CheckboxBasic from "@/components/common/CheckboxBasic";
-import { cn } from "@/utils/cn";
+import { usePatchTodo } from "@/hooks/queries/todos/todos.bff.hook";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface DashboardCheckboxValues {
   checked: string;
 }
 
+interface DashboardCheckboxProps {
+  checked?: boolean;
+  taskId: number;
+}
+
 export default function DashboardCheckbox({
   checked = false,
-  label,
-  labelClassName,
-}: {
-  checked?: boolean;
-  label: string;
-  labelClassName?: string;
-}) {
-  const { control } = useForm<DashboardCheckboxValues>({
+  taskId,
+}: DashboardCheckboxProps) {
+  const taskValue = String(taskId);
+  const { mutate: patchTodo } = usePatchTodo();
+
+  const { control, reset } = useForm<DashboardCheckboxValues>({
     defaultValues: {
-      checked: checked ? "checked" : "",
+      checked: checked ? taskValue : "",
     },
   });
+
+  useEffect(() => {
+    reset({
+      checked: checked ? taskValue : "",
+    });
+  }, [checked, reset, taskValue]);
+
+  const handleCheckedChange = (isChecked: boolean) => {
+    if (isChecked) {
+      patchTodo({ todoId: taskId, data: { done: true } });
+    } else {
+      patchTodo({ todoId: taskId, data: { done: false } });
+    }
+  };
 
   return (
     <CheckboxBasic
       control={control}
       name="checked"
-      value="checked"
-      label={label}
-      className="min-w-0"
-      labelClassName={cn("min-w-0 truncate text-base", labelClassName)}
-      disabled
+      value={taskValue}
+      label={""}
+      onCheckedChange={handleCheckedChange}
     />
   );
 }

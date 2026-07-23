@@ -6,13 +6,16 @@ interface TaskColumnProps {
   title: string;
   tasks: GetTeamIdTodos200TodosItem[];
   done?: boolean;
+  goalTitle: string;
 }
 
 export default function TaskColumn({
   title,
   tasks,
   done = false,
+  goalTitle,
 }: TaskColumnProps) {
+  console.log(goalTitle);
   return (
     <div
       className={cn(
@@ -35,7 +38,7 @@ export default function TaskColumn({
       ) : (
         <ul className="flex flex-col gap-1">
           {tasks.map((task) => (
-            <GoalTaskRow key={task.id} task={task} done={done} />
+            <GoalTaskRow key={task.id} task={task} goalTitle={goalTitle} />
           ))}
         </ul>
       )}

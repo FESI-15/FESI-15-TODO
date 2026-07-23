@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { GetTeamIdTodosParams } from "@/apis/model";
 import type {
   PatchTodoVariables,
@@ -41,9 +41,13 @@ export const usePostTodos = () => {
 };
 
 export const usePatchTodo = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchTodo"],
     mutationFn: (variables: PatchTodoVariables) => patchTodo(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+    },
   });
 };
 

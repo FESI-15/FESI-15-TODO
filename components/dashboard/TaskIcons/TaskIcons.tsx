@@ -9,7 +9,7 @@ import {
   useDeleteTodoFavorite,
   usePostTodoFavorite,
 } from "@/hooks/queries/favorites/favorites.bff.hook";
-import type { DashboardTask } from "@/components/dashboard/types";
+import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 
 const IconVariants = cva(
   "bg-orange-200 rounded-full size-6 items-center justify-center flex",
@@ -33,7 +33,7 @@ const starIconVariants = cva("size-6 fill-none text-orange-300", {
 });
 
 interface TaskIconsProps {
-  task: Pick<DashboardTask, "id" | "note" | "favorite">;
+  task: GetTeamIdTodos200TodosItem;
   recentTodo: boolean;
 }
 
@@ -45,7 +45,7 @@ export default function TaskIcons({
   const { mutate: deleteFavorite } = useDeleteTodoFavorite();
 
   const handleFavorite = () => {
-    if (task.favorite) {
+    if (task.isFavorite) {
       deleteFavorite({ todoId: task.id });
     } else {
       updateFavorite({ todoId: task.id });
@@ -54,7 +54,7 @@ export default function TaskIcons({
 
   return (
     <div className="flex h-6 shrink-0 items-center justify-end gap-2">
-      {task.note && (
+      {task.noteIds.length > 0 && (
         <button type="button" className={cn(IconVariants({ recentTodo }))}>
           <FileIcon />
         </button>
@@ -65,7 +65,7 @@ export default function TaskIcons({
           <StarIcon
             className={cn(
               starIconVariants({
-                favorite: task.favorite,
+                favorite: task.isFavorite,
               }),
             )}
           />

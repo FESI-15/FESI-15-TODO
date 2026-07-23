@@ -16,7 +16,6 @@ export default function Dashboard() {
   const { data: todos } = useGetTodos();
   const { data: user } = useGetUserMe();
   const { mutate: login } = usePostAuthLogin();
-  console.log(goals);
 
   return (
     <main className="min-w-0 flex-1 px-5 py-10 md:px-8 lg:px-12 xl:px-[88px]">

@@ -1,22 +1,12 @@
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
-import RecentTaskRow from "@/components/dashboard/RecentTasksCard/RecentTaskRow";
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
-import type { DashboardTask } from "@/components/dashboard/types";
 import Image from "next/image";
 import Link from "next/link";
+import RecentTaskRow from "./RecentTaskRow";
 
 interface RecentTasksCardProps {
   todos: GetTeamIdTodos200TodosItem[];
 }
-
-const getRecentTask = (todo: GetTeamIdTodos200TodosItem): DashboardTask => ({
-  id: todo.id,
-  title: todo.title,
-  done: todo.done,
-  note: todo.noteIds.length > 0,
-  link: !!todo.linkUrl,
-  favorite: todo.isFavorite,
-});
 
 export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
   return (
@@ -48,7 +38,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
           />
         </Link>
       </div>
-      <div className="h-[186px] lg:h-64 rounded-[28px] lg:rounded-[40px] bg-orange-500 flex flex-col px-8 py-[30px] shadow-[0_10px_40px_rgba(255,158,89,0.4)]">
+      <div className="h-[186px] lg:h-64 rounded-[28px] lg:rounded-[40px] bg-orange-500 flex flex-col p-4 lg:px-8 lg:py-[30px] shadow-[0_10px_40px_rgba(255,158,89,0.4)]">
         {todos.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="text-white font-semibold">
@@ -58,7 +48,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
         ) : (
           <ul className="flex flex-col gap-1.5">
             {todos.slice(0, 4).map((todo) => (
-              <RecentTaskRow key={todo.id} task={getRecentTask(todo)} />
+              <RecentTaskRow key={todo.id} task={todo} />
             ))}
           </ul>
         )}
