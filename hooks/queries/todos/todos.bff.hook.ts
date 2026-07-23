@@ -22,7 +22,6 @@ export const useGetTodos = (params?: GetTeamIdTodosParams) => {
   return useQuery({
     queryKey: todosKeys.list(params),
     queryFn: ({ signal }) => getTodos(params, undefined, signal),
-    enabled: !!params,
   });
 };
 

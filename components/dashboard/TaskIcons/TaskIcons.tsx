@@ -2,12 +2,10 @@
 
 import type { DashboardTask } from "@/components/dashboard/types";
 import FileIcon from "@/public/icons/dashboard/file.svg";
-import LinkIcon from "@/public/icons/dashboard/link.svg";
-import MoreIcon from "@/public/icons/dashboard/more.svg";
 import StarIcon from "@/public/icons/dashboard/star.svg";
 import { cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
-import Link from "next/link";
+import MoreIcon from "./MoreIcon/MoreIcon";
 
 const IconVariants = cva(
   "bg-orange-200 rounded-full size-6 items-center justify-center flex",
@@ -18,29 +16,6 @@ const IconVariants = cva(
         false: "bg-[#ff9e59]/20",
       },
     },
-  },
-);
-
-const moreIconVariants = cva(
-  "bg-orange-200 rounded-full size-6 items-center justify-center flex ",
-  {
-    variants: {
-      moreActive: {
-        true: "bg-white",
-        false: "bg-white/40",
-      },
-      recentTodo: {
-        true: "bg-white/40",
-        false: "bg-[#ff9e59]/20",
-      },
-    },
-    compoundVariants: [
-      {
-        recentTodo: false,
-        moreActive: false,
-        class: "bg-[#ff9e59]/20",
-      },
-    ],
   },
 );
 
@@ -73,12 +48,7 @@ export default function TaskIcons({
           <FileIcon />
         </button>
       )}
-      <button
-        type="button"
-        className={cn(moreIconVariants({ recentTodo, moreActive: false }))}
-      >
-        <MoreIcon />
-      </button>
+      <MoreIcon recentTodo={recentTodo} todoId={task.id} />
       <button type="button">
         <StarIcon
           className={cn(

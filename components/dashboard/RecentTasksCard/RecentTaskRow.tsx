@@ -7,7 +7,6 @@ interface RecentTaskRowProps {
 }
 
 export default function RecentTaskRow({ task }: RecentTaskRowProps) {
-  console.log(task);
   return (
     <li className="flex items-center justify-between gap-4 px-2 py-2.5">
       <DashboardCheckbox
