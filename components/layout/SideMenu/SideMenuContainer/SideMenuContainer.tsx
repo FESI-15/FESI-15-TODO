@@ -30,11 +30,7 @@ export default function SideMenuContainer() {
         <SideMenuActions />
         {/* 인증, 인가 시스템 연동 시 profile 전달 */}
         <div className="flex items-center gap-2 mt-6">
-          <SideMenuProfile
-            name="John Doe"
-            email="john.doe@example.com"
-            image="/images/sidemenu/profile.png"
-          />
+          <SideMenuProfile />
           <SideMenuBell newNotification={true} onClickBell={() => {}} />
         </div>
       </div>
