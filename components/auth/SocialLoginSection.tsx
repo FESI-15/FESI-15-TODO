@@ -12,7 +12,7 @@ export function SocialLoginSection({
   isGooglePending,
 }: SocialLoginSectionProps) {
   return (
-    <div className="flex flex-col items-center gap-4 md:gap-6">
+    <div className="flex flex-col items-center gap-4">
       <div className="flex w-full items-center gap-2">
         <span className="h-px flex-1 bg-gray-200" />
         <span className="whitespace-nowrap text-xs text-gray-400 md:text-sm">
