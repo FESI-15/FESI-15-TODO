@@ -69,7 +69,6 @@ export function SignupForm() {
           label="SNS 계정으로 회원가입"
           onClickGoogle={loginWithGoogle}
           isGooglePending={isGooglePending}
-          className="flex flex-col items-center gap-6 md:gap-4"
         />
       </div>
     </div>

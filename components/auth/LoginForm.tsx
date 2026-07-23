@@ -67,7 +67,6 @@ export function LoginForm() {
           label="SNS 계정으로 로그인"
           onClickGoogle={loginWithGoogle}
           isGooglePending={isGooglePending}
-          className="flex flex-col items-center gap-4"
         />
       </div>
     </div>
