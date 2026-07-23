@@ -11,10 +11,6 @@ interface GoalsMenuProps
   extends
     VariantProps<typeof sideMenuListTextVariants>,
     VariantProps<typeof sideMenuListIconVariants> {
-  goalLists: {
-    id: number;
-    name: string;
-  }[];
   item: {
     icon: React.ElementType;
     name: string;
@@ -23,11 +19,7 @@ interface GoalsMenuProps
   isActivePath: (href: string) => boolean;
 }
 
-export default function GoalsMenu({
-  goalLists,
-  item,
-  isActivePath,
-}: GoalsMenuProps) {
+export default function GoalsMenu({ item, isActivePath }: GoalsMenuProps) {
   const [isGoalListOpen, setIsGoalListOpen] = useState(false);
   const isActive = isActivePath(item.href);
 
@@ -56,7 +48,7 @@ export default function GoalsMenu({
           height={24}
         />
       </button>
-      {isGoalListOpen && <GoalsMenuList goalLists={goalLists} />}
+      {isGoalListOpen && <GoalsMenuList />}
     </>
   );
 }

@@ -15,7 +15,6 @@ export default function TaskColumn({
   done = false,
   goalTitle,
 }: TaskColumnProps) {
-  console.log(goalTitle);
   return (
     <div
       className={cn(

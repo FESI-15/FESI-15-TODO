@@ -23,19 +23,7 @@ export default function SideMenuContainer() {
             height={24}
           />
         </div>
-        <SideMenuList
-          // 인증, 인가 시스템 연동 시 goallists 전달
-          goalLists={[
-            {
-              id: 1,
-              name: "목표 1",
-            },
-            {
-              id: 2,
-              name: "목표 2",
-            },
-          ]}
-        />
+        <SideMenuList />
         <SideMenuUtilMenu />
       </div>
       <div>
