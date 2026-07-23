@@ -16,7 +16,7 @@ export default function MobileSideMenu() {
     setIsOpen(false);
   };
   return (
-    <div className="block md:hidden">
+    <div className="block fixed top-0 left-0 w-full h-full z-50 md:hidden">
       <Header
         title="모바일 사이드 메뉴"
         onClickHamburger={handleOpen}
