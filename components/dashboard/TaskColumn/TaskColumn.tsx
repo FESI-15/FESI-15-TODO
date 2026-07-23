@@ -16,7 +16,7 @@ export default function TaskColumn({
   return (
     <div
       className={cn(
-        "max-h-[324px] min-w-0 flex-1 overflow-hidden rounded-3xl p-4 lg:p-6 flex flex-col",
+        "max-h-[324px] min-w-0 flex-1 rounded-3xl p-4 lg:p-6 flex flex-col",
         done ? "bg-white" : "bg-orange-100",
       )}
     >

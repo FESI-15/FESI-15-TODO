@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 flex-row items-center justify-center rounded-full font-semibold box-border transition-colors duration-200",
+  "inline-flex flex-row items-center justify-center rounded-full font-semibold box-border transition-colors duration-200",
   {
     variants: {
       hierarchy: {

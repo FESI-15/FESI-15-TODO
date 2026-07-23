@@ -2,7 +2,10 @@ import {
   deleteTeamIdTodosTodoIdFavorites,
   postTeamIdTodosTodoIdFavorites,
 } from "@/apis/favorites/favorites";
-import { handleRouteRequest } from "@/utils/handleRouteRequest";
+import {
+  handleEmptyRouteRequest,
+  handleRouteRequest,
+} from "@/utils/handleRouteRequest";
 
 interface RouteContext {
   params: Promise<{
@@ -23,7 +26,7 @@ export async function POST(_request: Request, context: RouteContext) {
 export async function DELETE(_request: Request, context: RouteContext) {
   const { todoId } = await context.params;
 
-  return handleRouteRequest((headers) =>
+  return handleEmptyRouteRequest((headers) =>
     deleteTeamIdTodosTodoIdFavorites(Number(todoId), { headers }),
   );
 }

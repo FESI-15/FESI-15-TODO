@@ -14,7 +14,7 @@ function Dialog({ ...props }: DialogPrimitive.Root.Props) {
 function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
   return (
     <DialogPrimitive.Trigger
-      className="flex-1"
+      className="flex-1 w-full"
       data-slot="dialog-trigger"
       {...props}
     />
