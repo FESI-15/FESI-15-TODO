@@ -16,14 +16,14 @@ export default function MobileSideMenu() {
     setIsOpen(false);
   };
   return (
-    <div className="block md:hidden">
+    <div className="block fixed top-0 left-0 w-full z-50 md:hidden">
       <Header
         title="모바일 사이드 메뉴"
         onClickHamburger={handleOpen}
         onClickBell={() => {}}
       />
       {isOpen && (
-        <aside className="fixed top-0 left-0 w-full h-full bg-white z-50 py-4 px-5 overflow-y-auto">
+        <aside className="fixed top-0 left-0 flex h-full w-full flex-col bg-white z-50 py-4 px-5 overflow-y-auto">
           <button
             type="button"
             className="ml-auto mb-6 block"

@@ -14,8 +14,9 @@ export const proxy = (request: NextRequest) => {
   );
 
   // const isAuthOnlyPath = AUTH_ONLY_PATHS.some((path) =>
-  //   pathname.startsWith(path),
+  //   path === "/" ? pathname === "/" : pathname.startsWith(path),
   // );
+
   // const isProtectedPath = PROTECTED_PATHS.some((path) =>
   //   pathname.startsWith(path),
   // );

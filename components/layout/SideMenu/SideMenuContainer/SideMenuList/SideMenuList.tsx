@@ -3,14 +3,7 @@ import { usePathname } from "next/navigation";
 import GoalsMenu from "./GoalsMenu/GoalsMenu";
 import SideMenuListItem from "./SideMenuListItem/SideMenuListItem";
 
-interface SideMenuListProps {
-  goalLists: {
-    id: number;
-    name: string;
-  }[];
-}
-
-export default function SideMenuList({ goalLists }: SideMenuListProps) {
+export default function SideMenuList() {
   const pathname = usePathname();
   const isActivePath = (href: string) => pathname.startsWith(href);
 
@@ -21,11 +14,7 @@ export default function SideMenuList({ goalLists }: SideMenuListProps) {
           {item.name !== "목표" ? (
             <SideMenuListItem item={item} isActivePath={isActivePath} />
           ) : (
-            <GoalsMenu
-              goalLists={goalLists}
-              item={item}
-              isActivePath={isActivePath}
-            />
+            <GoalsMenu item={item} isActivePath={isActivePath} />
           )}
         </li>
       ))}

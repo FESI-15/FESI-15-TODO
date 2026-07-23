@@ -22,7 +22,14 @@ export interface TaskFormValues {
   image: File | null;
 }
 
-export default function TaskFormModal() {
+interface TaskFormModalProps {
+  children: React.ReactNode;
+  isModify?: boolean;
+}
+export default function TaskFormModal({
+  children,
+  isModify = false,
+}: TaskFormModalProps) {
   const {
     control,
     handleSubmit,
@@ -45,10 +52,12 @@ export default function TaskFormModal() {
 
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger>{children}</DialogTrigger>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
-          <DialogTitle showCloseButton={true}>할 일 생성</DialogTitle>
+          <DialogTitle showCloseButton={true}>
+            {isModify ? "할 일 수정" : "할 일 생성"}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onCreate)}>
           <Form control={control} />
