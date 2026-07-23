@@ -21,17 +21,8 @@ export default function GoalCard({ goal }: GoalCardProps) {
     <article className="rounded-[40px] bg-white px-5 py-6 lg:px-8">
       <GoalHeader title={goal.title} />
       <div className="mt-4 flex flex-col gap-8 md:flex-row">
-        <TaskColumn
-          title="TO DO"
-          tasks={todoTasks || []}
-          goalTitle={goal.title}
-        />
-        <TaskColumn
-          title="DONE"
-          tasks={doneTasks || []}
-          goalTitle={goal.title}
-          done
-        />
+        <TaskColumn title="TO DO" tasks={todoTasks || []} />
+        <TaskColumn title="DONE" tasks={doneTasks || []} done />
       </div>
     </article>
   );

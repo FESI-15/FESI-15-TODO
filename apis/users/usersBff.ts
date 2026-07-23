@@ -1,6 +1,7 @@
 import type {
   GetTeamIdUsersCheckNickname200,
   GetTeamIdUsersCheckNicknameParams,
+  GetTeamIdUsersMe200,
   PatchTeamIdUsersMe200,
   PatchTeamIdUsersMeBody,
   PatchTeamIdUsersMePassword200,
@@ -64,6 +65,16 @@ export const patchUserPassword = (
       headers: { "Content-Type": "application/json" },
       data,
     },
+    options,
+  );
+};
+
+export const getUserMe = (
+  options?: SecondParameter<typeof bffInstance>,
+  signal?: AbortSignal,
+) => {
+  return bffInstance<GetTeamIdUsersMe200>(
+    { url: "/api/users/me", method: "GET", signal },
     options,
   );
 };

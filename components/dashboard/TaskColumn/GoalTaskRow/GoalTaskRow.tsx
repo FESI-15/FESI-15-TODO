@@ -8,7 +8,6 @@ import { cva } from "class-variance-authority";
 
 interface GoalTaskRowProps {
   task: GetTeamIdTodos200TodosItem;
-  goalTitle?: string;
 }
 const taskTitleVariant = cva(
   "truncate text-left text-sm font-medium lg:text-base group-hover:text-orange-600 group-hover:font-semibold pr-4",
@@ -22,10 +21,21 @@ const taskTitleVariant = cva(
   },
 );
 
-export default function GoalTaskRow({ task, goalTitle }: GoalTaskRowProps) {
-  const { data: todo } = useGetTodo({ todoId: task.id });
+export default function GoalTaskRow({ task }: GoalTaskRowProps) {
+  const {
+    data: todo,
+    isFetching,
+    refetch,
+  } = useGetTodo({ todoId: task.id }, false);
 
-  if (!todo) return null;
+  const handleLoadTaskModal = () => {
+    if (todo || isFetching) {
+      return;
+    }
+
+    refetch();
+  };
+
   return (
     <li
       className={cn(
@@ -34,7 +44,11 @@ export default function GoalTaskRow({ task, goalTitle }: GoalTaskRowProps) {
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <DashboardCheckbox checked={task.done} taskId={task.id} />
-        <TaskModal todo={todo.data}>
+        <TaskModal
+          todo={todo?.data}
+          isLoading={isFetching}
+          onTriggerMouseEnter={handleLoadTaskModal}
+        >
           <p className={taskTitleVariant({ done: task.done })}>{task.title}</p>
         </TaskModal>
       </div>

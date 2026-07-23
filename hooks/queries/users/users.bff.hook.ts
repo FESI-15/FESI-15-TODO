@@ -7,17 +7,17 @@ import type {
 } from "@/apis/users/usersBff";
 import {
   deleteUserMe,
+  getUserMe,
   getUsersCheckNickname,
   patchUserMe,
   patchUserPassword,
 } from "@/apis/users/usersBff";
-import { getTeamIdUsersMe } from "@/apis/users/users";
 import { usersKeys } from "./users.key";
 
 export function useGetUserMe() {
   return useQuery({
     queryKey: usersKeys.me(),
-    queryFn: ({ signal }) => getTeamIdUsersMe(undefined, signal),
+    queryFn: ({ signal }) => getUserMe(undefined, signal),
   });
 }
 

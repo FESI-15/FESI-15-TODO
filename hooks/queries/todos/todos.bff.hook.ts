@@ -25,11 +25,11 @@ export const useGetTodos = (params?: GetTeamIdTodosParams) => {
   });
 };
 
-export const useGetTodo = ({ todoId }: TodoIdVariables) => {
+export const useGetTodo = ({ todoId }: TodoIdVariables, enabled = true) => {
   return useQuery({
     queryKey: todosKeys.detail(todoId),
     queryFn: ({ signal }) => getTodo({ todoId }, undefined, signal),
-    enabled: !!todoId,
+    enabled: !!todoId && enabled,
   });
 };
 
