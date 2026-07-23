@@ -12,10 +12,11 @@ import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import Image from "next/image";
 
 export default function Dashboard() {
-  const { data: goals, isLoading: goalsLoading } = useGetGoals();
-  const { data: todos, isLoading: todosLoading } = useGetTodos();
-  const { data: user, isLoading: userLoading } = useGetUserMe();
+  const { data: goals } = useGetGoals();
+  const { data: todos } = useGetTodos();
+  const { data: user } = useGetUserMe();
   const { mutate: login } = usePostAuthLogin();
+  console.log(goals);
 
   return (
     <main className="min-w-0 flex-1 px-5 py-10 md:px-8 lg:px-12 xl:px-[88px]">
@@ -31,6 +32,7 @@ export default function Dashboard() {
           <SectionTitle
             icon={
               <Image
+                className="w-[32px] h-[32px] lg:w-[40px] lg:h-[40px]"
                 src="/icons/dashboard/goal.svg"
                 alt="flag"
                 width={40}
@@ -40,11 +42,26 @@ export default function Dashboard() {
           >
             목표 별 할일
           </SectionTitle>
-          <div className="flex flex-col gap-8">
-            {goals?.data.goals.map((goal) => (
-              <GoalCard key={goal.id} goal={goal} />
-            ))}
-          </div>
+          {goals?.data.goals.length === 0 ? (
+            <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
+              <Image
+                className="md:w-[130px] md:h-[140px]"
+                src="/icons/dashboard/no_goal.svg"
+                alt="flag"
+                width={80}
+                height={85}
+              />
+              <p className="text-gray-500 text-sm font-medium md:text-base">
+                최근에 등록한 목표가 없어요
+              </p>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-8">
+              {goals?.data.goals.map((goal) => (
+                <GoalCard key={goal.id} goal={goal} />
+              ))}
+            </div>
+          )}
         </section>
       </div>
       <button
