@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
-import GoogleIcon from "@/public.icons/common/google.svg";
+import GoogleIcon from "@/public/icons/common/google.svg";
 import KakaoIcon from "@/public/icons/common/kakao.svg";
 
 const socialButtonVariants = cva(
