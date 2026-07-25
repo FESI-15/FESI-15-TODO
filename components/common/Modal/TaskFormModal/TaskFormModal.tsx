@@ -12,41 +12,44 @@ import {
 import { useForm } from "react-hook-form";
 import Form from "./Form/Form";
 import { Button } from "../../Button";
+import { PostTeamIdTodosBody } from "@/apis/model";
 
 export interface TaskFormValues {
-  status: "to do" | "done";
   title: string;
-  deadline: Date | undefined;
-  link: string;
+  goalId: number;
+  dueDate: string;
+  linkUrl: string;
   tags: string[];
-  image: File | null;
+  fileUrl: string;
 }
 
 interface TaskFormModalProps {
   children: React.ReactNode;
   isModify?: boolean;
+  defaultValues?: TaskFormValues;
 }
 export default function TaskFormModal({
   children,
   isModify = false,
+  defaultValues,
 }: TaskFormModalProps) {
   const {
     control,
     handleSubmit,
     formState: { isValid },
-  } = useForm<TaskFormValues>({
+  } = useForm<PostTeamIdTodosBody>({
     mode: "onChange",
-    defaultValues: {
-      status: "to do",
+    defaultValues: defaultValues ?? {
       title: "",
-      deadline: undefined,
-      link: "",
+      goalId: undefined,
+      dueDate: undefined,
+      linkUrl: "",
       tags: [],
-      image: null,
+      fileUrl: "",
     },
   });
 
-  const onCreate = (values: TaskFormValues) => {
+  const onSubmit = (values: PostTeamIdTodosBody) => {
     console.log(values);
   };
 
@@ -59,7 +62,7 @@ export default function TaskFormModal({
             {isModify ? "할 일 수정" : "할 일 생성"}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onCreate)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Form control={control} />
           <DialogFooter>
             <div className="flex gap-2 w-full mt-4 md:mt-10">

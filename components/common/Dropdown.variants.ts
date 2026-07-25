@@ -9,7 +9,7 @@ export const iconVariants = cva(
 );
 
 export const popupVariants = cva(
-  "w-[var(--anchor-width)] p-[6px] rounded-2xl bg-white shadow-lg outline-none",
+  "w-[var(--anchor-width)] p-[6px] rounded-2xl bg-white shadow-[0_4px_16px_0_rgba(0,0,0,0.1)] outline-none",
 );
 
 export const itemVariants = cva(
