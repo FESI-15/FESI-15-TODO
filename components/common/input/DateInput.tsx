@@ -77,10 +77,10 @@ export function DateInput<T extends FieldValues>({
                 setIsOpen(false);
               }}
               locale={ko}
-              classNames={{
-                day: "[&>button]:rounded-full",
-                today: "[&>button]:rounded-full",
-              }}
+              // classNames={{
+              //   day: "[&>button]:rounded-full",
+              //   today: "[&>button]:rounded-full",
+              // }}
             />
           </div>
         </PopoverContent>
