@@ -34,9 +34,14 @@ export const useGetTodo = ({ todoId }: TodoIdVariables, enabled = true) => {
 };
 
 export const usePostTodos = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["postTodos"],
     mutationFn: (variables: PostTodosVariables) => postTodos(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+    },
   });
 };
 

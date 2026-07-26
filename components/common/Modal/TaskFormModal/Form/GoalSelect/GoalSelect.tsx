@@ -20,7 +20,7 @@ export default function GoalSelect({ control }: GoalSelectProps) {
           name="goalId"
           options={
             goals?.data.goals.map((goal) => ({
-              id: goal.id.toString(),
+              id: goal.id,
               label: goal.title,
             })) || []
           }

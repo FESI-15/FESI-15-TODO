@@ -15,6 +15,8 @@ import { Button } from "../../Button";
 import { PostTeamIdTodosBody } from "@/apis/model";
 import { formatDate } from "date-fns";
 import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { usePostTodos } from "@/hooks/queries/todos/todos.bff.hook";
 
 export interface TaskFormValues {
   title: string;
@@ -45,28 +47,32 @@ export default function TaskFormModal({
   isModify = false,
   defaultValues,
 }: TaskFormModalProps) {
+  const { mutate: postTodos } = usePostTodos();
   const {
     control,
     handleSubmit,
     formState: { isValid },
   } = useForm<PostTeamIdTodosBody>({
+    resolver: zodResolver(zodSchema),
     mode: "onChange",
     defaultValues: defaultValues ?? {
       title: "",
       goalId: undefined,
       dueDate: undefined,
-      linkUrl: "",
+      linkUrl: undefined,
       tags: [],
-      fileUrl: "",
+      fileUrl: undefined,
     },
   });
 
   const onSubmit = (values: PostTeamIdTodosBody) => {
     const payload = {
       ...values,
-      dueDate: formatDate(new Date(values.dueDate ?? ""), "yyyy-MM-dd"),
+      dueDate: values.dueDate
+        ? formatDate(new Date(values.dueDate), "yyyy-MM-dd")
+        : undefined,
     };
-    console.log(payload);
+    postTodos({ data: payload });
   };
 
   return (

@@ -17,7 +17,7 @@ import {
 } from "./Dropdown.variants";
 
 interface DropdownOption {
-  id: string;
+  id: number;
   label: string;
 }
 
@@ -42,11 +42,11 @@ export function Dropdown<T extends FieldValues>({
     control,
     name,
   });
-  const items = Object.fromEntries(options.map((opt) => [opt.id, opt.label]));
+  const items = Object.fromEntries(
+    options.map((opt) => [String(opt.id), opt.label]),
+  );
   const selectedValue =
-    typeof field.value === "string" && field.value.length > 0
-      ? field.value
-      : null;
+    typeof field.value === "number" ? String(field.value) : null;
 
   return (
     <SelectPrimitive.Root
@@ -55,13 +55,15 @@ export function Dropdown<T extends FieldValues>({
       name={field.name}
       value={selectedValue}
       onValueChange={(id) => {
-        field.onChange(id ?? "");
+        const selectedId = id ? Number(id) : undefined;
 
-        if (!id) {
+        field.onChange(selectedId);
+
+        if (!selectedId) {
           return;
         }
 
-        const selected = options.find((opt) => opt.id === id);
+        const selected = options.find((opt) => opt.id === selectedId);
         if (selected) {
           onSelect?.(selected);
         }
@@ -88,7 +90,7 @@ export function Dropdown<T extends FieldValues>({
               {options.map((option) => (
                 <SelectPrimitive.Item
                   key={option.id}
-                  value={option.id}
+                  value={String(option.id)}
                   className={cn(itemVariants())}
                 >
                   <SelectPrimitive.ItemText>
