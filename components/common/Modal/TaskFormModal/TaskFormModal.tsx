@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import Form from "./Form/Form";
 import { Button } from "../../Button";
 import { PostTeamIdTodosBody } from "@/apis/model";
+import { formatDate } from "date-fns";
+import { z } from "zod";
 
 export interface TaskFormValues {
   title: string;
@@ -28,6 +30,16 @@ interface TaskFormModalProps {
   isModify?: boolean;
   defaultValues?: TaskFormValues;
 }
+
+const zodSchema = z.object({
+  title: z.string().min(1),
+  goalId: z.number().optional(),
+  dueDate: z.string().optional(),
+  linkUrl: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  fileUrl: z.string().optional(),
+});
+
 export default function TaskFormModal({
   children,
   isModify = false,
@@ -50,7 +62,11 @@ export default function TaskFormModal({
   });
 
   const onSubmit = (values: PostTeamIdTodosBody) => {
-    console.log(values);
+    const payload = {
+      ...values,
+      dueDate: formatDate(new Date(values.dueDate ?? ""), "yyyy-MM-dd"),
+    };
+    console.log(payload);
   };
 
   return (

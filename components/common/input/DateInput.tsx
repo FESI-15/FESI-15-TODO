@@ -9,7 +9,6 @@ import {
   FieldValues,
   useController,
 } from "react-hook-form";
-import { ko } from "date-fns/locale";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import {
   Popover,
@@ -40,6 +39,7 @@ export function DateInput<T extends FieldValues>({
   placeholder = "날짜를 선택해주세요",
 }: DateInputProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
+  const [calendarMonth, setCalendarMonth] = useState<Date | undefined>();
   const inputId = id ?? name;
   const { field, fieldState } = useController({
     control,
@@ -49,6 +49,14 @@ export function DateInput<T extends FieldValues>({
   const isError = Boolean(fieldState.error);
   const formattedDate = date ? format(date, "yyyy.MM.dd") : null;
 
+  const handleOpenChange = (open: boolean) => {
+    if (open) {
+      setCalendarMonth(date ?? new Date());
+    }
+
+    setIsOpen(open);
+  };
+
   return (
     <Field data-invalid={isError}>
       {label && (
@@ -56,7 +64,7 @@ export function DateInput<T extends FieldValues>({
           {label}
         </FieldLabel>
       )}
-      <Popover open={isOpen} onOpenChange={setIsOpen}>
+      <Popover open={isOpen} onOpenChange={handleOpenChange}>
         <PopoverTrigger
           ref={field.ref}
           id={inputId}
@@ -71,16 +79,13 @@ export function DateInput<T extends FieldValues>({
           <div className="[--cell-radius:9999px] [--cell-size:40px] [--primary-foreground:white] [--primary:var(--color-orange-500)]">
             <Calendar
               mode="single"
+              month={calendarMonth}
+              onMonthChange={setCalendarMonth}
               selected={date}
               onSelect={(selectedDate) => {
                 field.onChange(selectedDate);
                 setIsOpen(false);
               }}
-              locale={ko}
-              // classNames={{
-              //   day: "[&>button]:rounded-full",
-              //   today: "[&>button]:rounded-full",
-              // }}
             />
           </div>
         </PopoverContent>
