@@ -1,4 +1,3 @@
-import Status from "./Status/Status";
 import TitleInput from "./TitleInput/TitleInput";
 import GoalSelect from "./GoalSelect/GoalSelect";
 import DeadLine from "./DeadLine/DeadLine";
@@ -14,8 +13,6 @@ interface FormProps {
 export default function Form({ control }: FormProps) {
   return (
     <div className="flex flex-col gap-3 mt-4">
-      {/* 디자인에 없음 */}
-      {/* <Status control={control} /> */}
       <TitleInput control={control} />
       <GoalSelect control={control} />
       <DeadLine control={control} />
