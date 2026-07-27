@@ -30,14 +30,24 @@ export interface TaskFormValues {
   fileUrl: string;
 }
 
-interface TaskFormModalProps {
+interface BaseTaskFormModalProps {
   children: React.ReactNode;
-  isModify?: boolean;
   defaultValues?: TaskFormValues;
-  todoId?: number;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
+
+interface CreateTaskFormModalProps extends BaseTaskFormModalProps {
+  isModify?: false;
+  todoId?: never;
+}
+
+interface ModifyTaskFormModalProps extends BaseTaskFormModalProps {
+  isModify: true;
+  todoId: number;
+}
+
+type TaskFormModalProps = CreateTaskFormModalProps | ModifyTaskFormModalProps;
 
 const zodSchema = z.object({
   title: z.string().min(1, "할 일 제목을 입력해주세요."),
@@ -55,14 +65,9 @@ const getOptionalString = (value: string | undefined) => {
   return value ? value : undefined;
 };
 
-export default function TaskFormModal({
-  children,
-  isModify = false,
-  defaultValues,
-  todoId,
-  open,
-  onOpenChange,
-}: TaskFormModalProps) {
+export default function TaskFormModal(props: TaskFormModalProps) {
+  const { children, defaultValues, open, onOpenChange } = props;
+  const isModify = props.isModify ?? false;
   const [internalOpen, setInternalOpen] = useState(false);
   const isOpen = open ?? internalOpen;
   const { mutate: postTodos } = usePostTodos();
@@ -101,9 +106,9 @@ export default function TaskFormModal({
       linkUrl: getOptionalString(values.linkUrl),
       dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
     };
-    if (isModify) {
+    if (props.isModify) {
       patchTodo(
-        { todoId: todoId!, data: payload },
+        { todoId: props.todoId, data: payload },
         {
           onSuccess: () => {
             handleOpenChange(false);

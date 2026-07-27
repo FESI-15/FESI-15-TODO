@@ -103,22 +103,24 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
       {moreActive && (
         <KebabPopup onEdit={handleEditTodo} onDelete={handleDeleteTodo} />
       )}
-      <TaskFormModal
-        isModify={true}
-        defaultValues={{
-          title: todo.title,
-          goalId: todo.goalId ?? undefined,
-          dueDate: todo.dueDate ?? "",
-          linkUrl: todo.linkUrl ?? "",
-          tags: todo.tags.map((tag) => tag.name),
-          fileUrl: todo.fileUrl ?? "",
-        }}
-        todoId={todo.id}
-        open={taskFormOpen}
-        onOpenChange={setTaskFormOpen}
-      >
-        <span className="hidden" />
-      </TaskFormModal>
+      {taskFormOpen && (
+        <TaskFormModal
+          isModify={true}
+          defaultValues={{
+            title: todo.title,
+            goalId: todo.goalId ?? undefined,
+            dueDate: todo.dueDate ?? "",
+            linkUrl: todo.linkUrl ?? "",
+            tags: todo.tags.map((tag) => tag.name),
+            fileUrl: todo.fileUrl ?? "",
+          }}
+          todoId={todo.id}
+          open={taskFormOpen}
+          onOpenChange={setTaskFormOpen}
+        >
+          <span className="hidden" />
+        </TaskFormModal>
+      )}
     </div>
   );
 }
