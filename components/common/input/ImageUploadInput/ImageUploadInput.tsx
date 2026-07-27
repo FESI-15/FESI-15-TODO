@@ -53,9 +53,15 @@ export function ImageUploadInput<T extends FieldValues>({
       await fetch(data.uploadUrl, {
         method: "PUT",
         body: file,
-      });
-
-      field.onChange(data.url);
+      })
+        .then((response) => {
+          if (!response.ok) {
+            field.onChange(data.url);
+          }
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     } catch {
       setSelectedFile(null);
       field.onChange(undefined);
