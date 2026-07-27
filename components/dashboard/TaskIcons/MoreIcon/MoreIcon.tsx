@@ -7,6 +7,7 @@ import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
 import { useQueryClient } from "@tanstack/react-query";
 import { todosKeys } from "@/hooks/queries/todos/todos.key";
 import { GetTeamIdTodos200TodosItem } from "@/apis/model";
+import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 
 const moreIconVariants = cva(
   "rounded-full size-6 items-center justify-center flex",
@@ -47,6 +48,7 @@ interface MoreIconProps {
 
 export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
   const [moreActive, setMoreActive] = useState(false);
+  const [taskFormOpen, setTaskFormOpen] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
   const { mutate: deleteTodo } = useDeleteTodo();
   const queryClient = useQueryClient();
@@ -65,7 +67,14 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (!moreIconRef.current?.contains(event.target as Node)) {
+      const target = event.target as Element;
+      const isDialogContent = target.closest('[data-slot="dialog-content"]');
+
+      if (isDialogContent) {
+        return;
+      }
+
+      if (!moreIconRef.current?.contains(target)) {
         setMoreActive(false);
       }
     };
@@ -81,6 +90,11 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
     setMoreActive((prevMoreActive) => !prevMoreActive);
   };
 
+  const handleEditTodo = () => {
+    setTaskFormOpen(true);
+    setMoreActive(false);
+  };
+
   return (
     <div ref={moreIconRef} className="relative">
       <button
@@ -91,8 +105,24 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
         <More />
       </button>
       {moreActive && (
-        <KebabPopup onEdit={() => {}} onDelete={handleDeleteTodo} />
+        <KebabPopup onEdit={handleEditTodo} onDelete={handleDeleteTodo} />
       )}
+      <TaskFormModal
+        isModify={true}
+        defaultValues={{
+          title: todo.title,
+          goalId: todo.goalId ?? undefined,
+          dueDate: todo.dueDate ?? "",
+          linkUrl: todo.linkUrl ?? "",
+          tags: todo.tags.map((tag) => tag.name),
+          fileUrl: todo.fileUrl ?? "",
+        }}
+        todoId={todo.id}
+        open={taskFormOpen}
+        onOpenChange={setTaskFormOpen}
+      >
+        <span className="hidden" />
+      </TaskFormModal>
     </div>
   );
 }

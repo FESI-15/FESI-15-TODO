@@ -15,12 +15,15 @@ import { Button } from "../../Button";
 import { PostTeamIdTodosBody } from "@/apis/model";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePostTodos } from "@/hooks/queries/todos/todos.bff.hook";
+import {
+  usePatchTodo,
+  usePostTodos,
+} from "@/hooks/queries/todos/todos.bff.hook";
 import { useState } from "react";
 
 export interface TaskFormValues {
   title: string;
-  goalId: number;
+  goalId: number | undefined;
   dueDate: string;
   linkUrl: string;
   tags: string[];
@@ -31,13 +34,19 @@ interface TaskFormModalProps {
   children: React.ReactNode;
   isModify?: boolean;
   defaultValues?: TaskFormValues;
+  todoId?: number;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const zodSchema = z.object({
-  title: z.string().min(1),
+  title: z.string().min(1, "할 일 제목을 입력해주세요."),
   goalId: z.number().optional(),
   dueDate: z.string().optional(),
-  linkUrl: z.string().optional(),
+  linkUrl: z.union([
+    z.url("http 또는 https 링크를 입력해주세요.").optional(),
+    z.literal(""),
+  ]),
   tags: z.array(z.string()).optional(),
   fileUrl: z.string().optional(),
 });
@@ -50,12 +59,18 @@ export default function TaskFormModal({
   children,
   isModify = false,
   defaultValues,
+  todoId,
+  open,
+  onOpenChange,
 }: TaskFormModalProps) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = open ?? internalOpen;
   const { mutate: postTodos } = usePostTodos();
+  const { mutate: patchTodo } = usePatchTodo();
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isValid },
   } = useForm<PostTeamIdTodosBody>({
     resolver: zodResolver(zodSchema),
@@ -70,6 +85,14 @@ export default function TaskFormModal({
     },
   });
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    if (open === undefined) {
+      setInternalOpen(nextOpen);
+    }
+
+    onOpenChange?.(nextOpen);
+  };
+
   const onSubmit = (values: PostTeamIdTodosBody) => {
     const dueDate = getOptionalString(values.dueDate);
     const payload = {
@@ -78,18 +101,30 @@ export default function TaskFormModal({
       linkUrl: getOptionalString(values.linkUrl),
       dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
     };
-    postTodos(
-      { data: payload },
-      {
-        onSuccess: () => {
-          setOpen(false);
+    if (isModify) {
+      patchTodo(
+        { todoId: todoId!, data: payload },
+        {
+          onSuccess: () => {
+            handleOpenChange(false);
+          },
         },
-      },
-    );
+      );
+    } else {
+      postTodos(
+        { data: payload },
+        {
+          onSuccess: () => {
+            reset();
+            handleOpenChange(false);
+          },
+        },
+      );
+    }
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
