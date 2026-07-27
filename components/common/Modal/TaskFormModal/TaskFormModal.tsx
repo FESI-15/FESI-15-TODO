@@ -17,6 +17,7 @@ import { formatDate } from "date-fns";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePostTodos } from "@/hooks/queries/todos/todos.bff.hook";
+import { useState } from "react";
 
 export interface TaskFormValues {
   title: string;
@@ -42,11 +43,16 @@ const zodSchema = z.object({
   fileUrl: z.string().optional(),
 });
 
+const getOptionalString = (value: string | undefined) => {
+  return value ? value : undefined;
+};
+
 export default function TaskFormModal({
   children,
   isModify = false,
   defaultValues,
 }: TaskFormModalProps) {
+  const [open, setOpen] = useState(false);
   const { mutate: postTodos } = usePostTodos();
   const {
     control,
@@ -66,17 +72,25 @@ export default function TaskFormModal({
   });
 
   const onSubmit = (values: PostTeamIdTodosBody) => {
+    const dueDate = getOptionalString(values.dueDate);
     const payload = {
       ...values,
-      dueDate: values.dueDate
-        ? formatDate(new Date(values.dueDate), "yyyy-MM-dd")
-        : undefined,
+      fileUrl: getOptionalString(values.fileUrl),
+      linkUrl: getOptionalString(values.linkUrl),
+      dueDate: dueDate ? new Date(dueDate).toISOString() : undefined,
     };
-    postTodos({ data: payload });
+    postTodos(
+      { data: payload },
+      {
+        onSuccess: () => {
+          setOpen(false);
+        },
+      },
+    );
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{children}</DialogTrigger>
       <DialogContent showCloseButton={false}>
         <DialogHeader>

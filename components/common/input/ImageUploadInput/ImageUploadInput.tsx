@@ -1,6 +1,6 @@
 "use client";
 
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import {
   Control,
   FieldPath,
@@ -11,6 +11,7 @@ import { Field, FieldError } from "@/components/ui/field";
 import UploadIcon from "@/public/icons/input/upload.svg";
 import { useImageUpload } from "@/hooks/useImageUpload";
 import PreviewImage from "./PreviewImage/PreviewImage";
+import { usePostImages } from "@/hooks/queries/uploads/uploads.bff.hook";
 
 interface ImageUploadInputProps<T extends FieldValues> extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -27,15 +28,44 @@ export function ImageUploadInput<T extends FieldValues>({
   ...props
 }: ImageUploadInputProps<T>) {
   const inputId = id ?? name;
+  const { mutateAsync: postImages } = usePostImages();
   const { field, fieldState } = useController({
     control,
     name,
   });
-  const fieldValue = field.value as File | null;
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileChange = async (file: File | null) => {
+    setSelectedFile(file);
+
+    if (!file) {
+      field.onChange(undefined);
+      return;
+    }
+
+    try {
+      const { data } = await postImages({
+        data: {
+          fileName: file.name,
+        },
+      });
+
+      await fetch(data.uploadUrl, {
+        method: "PUT",
+        body: file,
+      });
+
+      field.onChange(data.url);
+    } catch {
+      setSelectedFile(null);
+      field.onChange(undefined);
+    }
+  };
+
   const { inputRef, previewUrl, handleBoxClick, handleChange, handleRemove } =
     useImageUpload({
-      file: fieldValue,
-      onFileChange: field.onChange,
+      file: selectedFile,
+      onFileChange: handleFileChange,
     });
 
   return (

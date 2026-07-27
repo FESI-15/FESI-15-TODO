@@ -45,7 +45,7 @@ export function DateInput<T extends FieldValues>({
     control,
     name,
   });
-  const date = field.value as Date | undefined;
+  const date = field.value ? new Date(field.value) : undefined;
   const isError = Boolean(fieldState.error);
   const formattedDate = date ? format(date, "yyyy.MM.dd") : null;
 
@@ -83,7 +83,9 @@ export function DateInput<T extends FieldValues>({
               onMonthChange={setCalendarMonth}
               selected={date}
               onSelect={(selectedDate) => {
-                field.onChange(selectedDate);
+                field.onChange(
+                  selectedDate ? format(selectedDate, "yyyy-MM-dd") : undefined,
+                );
                 setIsOpen(false);
               }}
             />
