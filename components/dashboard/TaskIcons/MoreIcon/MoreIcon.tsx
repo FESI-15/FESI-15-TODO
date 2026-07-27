@@ -4,8 +4,6 @@ import { cva } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
 import KebabPopup from "@/components/common/KebabPopup";
 import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
-import { useQueryClient } from "@tanstack/react-query";
-import { todosKeys } from "@/hooks/queries/todos/todos.key";
 import { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 
@@ -51,14 +49,12 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
   const [taskFormOpen, setTaskFormOpen] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
   const { mutate: deleteTodo } = useDeleteTodo();
-  const queryClient = useQueryClient();
 
   const handleDeleteTodo = () => {
     deleteTodo(
       { todoId: todo.id },
       {
         onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: todosKeys.all() });
           setMoreActive(false);
         },
       },
