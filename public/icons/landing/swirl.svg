@@ -1,0 +1,21 @@
+<svg viewBox="0 0 241 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_swirl)">
+<path d="M143.63 60C164.126 60 180.741 76.6154 180.741 97.1113C180.741 117.607 164.126 134.223 143.63 134.223H97.1113C95.8919 134.223 94.6864 134.162 93.4971 134.047L90.3184 140.304C88.8359 143.221 84.6689 143.221 83.1865 140.304L77.1328 128.391C66.8299 121.796 60 110.252 60 97.1113C60.0002 76.6155 76.6155 60.0002 97.1113 60H143.63Z" fill="#FFA7A7"/>
+<g>
+<path d="M127.143 101.41C127.707 104.91 128.712 108.326 130.124 111.188C130.334 108.446 129.15 104.896 127.143 101.41C122.991 94.2023 115.316 87.27 109.147 88.3248C99.8317 89.9177 105.185 106.878 107.161 111.516C107.241 111.705 107.316 111.873 107.383 112.018C107.318 111.853 107.244 111.686 107.161 111.516C105.185 106.878 99.8317 89.9177 109.147 88.3248C115.316 87.27 122.991 94.2023 127.143 101.41Z" fill="#FFA7A7"/>
+<path d="M151.825 109.59C151.586 99.026 143.465 77.7748 132.926 80.4145C125.251 82.337 124.885 100.567 130.124 111.188C130.767 102.775 118.299 86.7599 109.147 88.3248C99.4536 89.9824 105.643 108.28 107.383 112.018C105.432 107.067 95.2468 100.248 86.9074 99.489" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_swirl" x="0" y="0" width="240.741" height="202.492" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="30"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_swirl"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_swirl" result="shape"/>
+</filter>
+</defs>
+</svg>
