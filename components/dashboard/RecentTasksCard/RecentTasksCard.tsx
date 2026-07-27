@@ -48,7 +48,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
         ) : (
           <ul className="flex flex-col gap-1.5">
             {todos.slice(0, 4).map((todo) => (
-              <RecentTaskRow key={todo.id} task={todo} />
+              <RecentTaskRow key={todo.id} todo={todo} />
             ))}
           </ul>
         )}

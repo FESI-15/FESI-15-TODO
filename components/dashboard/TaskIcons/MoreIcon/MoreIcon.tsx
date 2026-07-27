@@ -6,6 +6,7 @@ import KebabPopup from "@/components/common/KebabPopup";
 import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
 import { useQueryClient } from "@tanstack/react-query";
 import { todosKeys } from "@/hooks/queries/todos/todos.key";
+import { GetTeamIdTodos200TodosItem } from "@/apis/model";
 
 const moreIconVariants = cva(
   "rounded-full size-6 items-center justify-center flex",
@@ -41,13 +42,10 @@ const moreIconVariants = cva(
 
 interface MoreIconProps {
   recentTodo: boolean;
-  todoId: number;
+  todo: GetTeamIdTodos200TodosItem;
 }
 
-export default function MoreIcon({
-  recentTodo = false,
-  todoId,
-}: MoreIconProps) {
+export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
   const [moreActive, setMoreActive] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
   const { mutate: deleteTodo } = useDeleteTodo();
@@ -55,7 +53,7 @@ export default function MoreIcon({
 
   const handleDeleteTodo = () => {
     deleteTodo(
-      { todoId },
+      { todoId: todo.id },
       {
         onSuccess: () => {
           queryClient.invalidateQueries({ queryKey: todosKeys.all() });
