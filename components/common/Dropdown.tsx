@@ -1,6 +1,12 @@
 "use client";
 
 import { Select as SelectPrimitive } from "@base-ui/react/select";
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from "react-hook-form";
 import { cn } from "@/utils/cn";
 import ChevronDownIcon from "@/public/icons/common/chevron-down.svg";
 import {
@@ -11,30 +17,53 @@ import {
 } from "./Dropdown.variants";
 
 interface DropdownOption {
-  id: string;
+  id: number;
   label: string;
 }
 
-interface DropdownProps {
+interface DropdownProps<T extends FieldValues> {
+  control: Control<T>;
+  name: FieldPath<T>;
   options: DropdownOption[];
   onSelect?: (option: DropdownOption) => void;
   className?: string;
   placeholder?: string;
 }
 
-export function Dropdown({
+export function Dropdown<T extends FieldValues>({
+  control,
+  name,
   options,
   onSelect,
   className,
   placeholder = "선택해주세요",
-}: DropdownProps) {
-  const items = Object.fromEntries(options.map((opt) => [opt.id, opt.label]));
+}: DropdownProps<T>) {
+  const { field } = useController({
+    control,
+    name,
+  });
+  const items = Object.fromEntries(
+    options.map((opt) => [String(opt.id), opt.label]),
+  );
+  const selectedValue =
+    typeof field.value === "number" ? String(field.value) : null;
 
   return (
     <SelectPrimitive.Root
       items={items}
+      inputRef={field.ref}
+      name={field.name}
+      value={selectedValue}
       onValueChange={(id) => {
-        const selected = options.find((opt) => opt.id === id);
+        const selectedId = id ? Number(id) : undefined;
+
+        field.onChange(selectedId);
+
+        if (!selectedId) {
+          return;
+        }
+
+        const selected = options.find((opt) => opt.id === selectedId);
         if (selected) {
           onSelect?.(selected);
         }
@@ -61,7 +90,7 @@ export function Dropdown({
               {options.map((option) => (
                 <SelectPrimitive.Item
                   key={option.id}
-                  value={option.id}
+                  value={String(option.id)}
                   className={cn(itemVariants())}
                 >
                   <SelectPrimitive.ItemText>

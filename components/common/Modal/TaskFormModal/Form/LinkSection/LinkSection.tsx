@@ -1,10 +1,10 @@
 import { FormInput } from "@/components/common/input/FormInput";
 import Title from "../../../Title";
 import type { Control } from "react-hook-form";
-import type { TaskFormValues } from "../../TaskFormModal";
+import { PostTeamIdTodosBody } from "@/apis/model";
 
 interface LinkSectionProps {
-  control: Control<TaskFormValues>;
+  control: Control<PostTeamIdTodosBody>;
 }
 
 export default function LinkSection({ control }: LinkSectionProps) {
@@ -12,7 +12,7 @@ export default function LinkSection({ control }: LinkSectionProps) {
     <FormInput
       label={<Title>링크</Title>}
       control={control}
-      name="link"
+      name="linkUrl"
       variant="link"
     />
   );

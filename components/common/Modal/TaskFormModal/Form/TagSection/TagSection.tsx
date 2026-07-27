@@ -1,10 +1,10 @@
 import { TagInput } from "@/components/common/input/TagInput";
 import Title from "../../../Title";
 import type { Control } from "react-hook-form";
-import type { TaskFormValues } from "../../TaskFormModal";
+import { PostTeamIdTodosBody } from "@/apis/model";
 
 interface TagSectionProps {
-  control: Control<TaskFormValues>;
+  control: Control<PostTeamIdTodosBody>;
 }
 
 export default function TagSection({ control }: TagSectionProps) {

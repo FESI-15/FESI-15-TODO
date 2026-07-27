@@ -1,10 +1,10 @@
 import Title from "@/components/common/Modal/Title";
 import type { Control } from "react-hook-form";
-import type { TaskFormValues } from "../../TaskFormModal";
+import { PostTeamIdTodosBody } from "@/apis/model";
 import { FormInput } from "@/components/common/input/FormInput";
 
 interface TitleInputProps {
-  control: Control<TaskFormValues>;
+  control: Control<PostTeamIdTodosBody>;
 }
 export default function TitleInput({ control }: TitleInputProps) {
   return (
