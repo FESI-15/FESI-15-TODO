@@ -39,7 +39,7 @@ export default function GoalTaskRow({ task }: GoalTaskRowProps) {
   return (
     <li
       className={cn(
-        "flex min-w-0 items-center justify-between gap-4 rounded-xl px-2 py-2.5 hover:bg-orange-alpha-20 group",
+        "flex min-w-0 items-center justify-between gap-4 rounded-[12px] px-1.5 py-1.5 hover:bg-orange-alpha-20 group",
       )}
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">

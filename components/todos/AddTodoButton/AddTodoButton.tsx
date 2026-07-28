@@ -1,15 +1,13 @@
-import { Button } from "@/components/common/Button";
+import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 import PlusIcon from "@/public/icons/common/plus.svg";
 
 export default function AddTodoButton() {
   return (
-    <Button
-      className="text-gray-500 font-semibold"
-      size="md"
-      hierarchy="tertiary"
-      leftIcon={<PlusIcon />}
-    >
-      할 일 추가
-    </Button>
+    <TaskFormModal>
+      <div className="inline-flex items-center gap-2 text-gray-500 py-2.5 px-3 border border-gray-300 rounded-full">
+        <PlusIcon />
+        <p className="text-sm font-semibold">할 일 추가</p>
+      </div>
+    </TaskFormModal>
   );
 }
