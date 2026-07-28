@@ -10,7 +10,7 @@ export default function TodoList({
     <div className="bg-white rounded-[24px] p-4 mt-3 min-h-[640px]">
       <ul className="flex flex-col gap-2">
         {todos.map((todo) => (
-          <GoalTaskRow key={todo.id} task={todo} />
+          <GoalTaskRow key={todo.id} todo={todo} />
         ))}
       </ul>
     </div>
