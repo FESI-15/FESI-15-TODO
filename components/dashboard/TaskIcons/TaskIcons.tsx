@@ -10,6 +10,9 @@ import {
   usePostTodoFavorite,
 } from "@/hooks/queries/favorites/favorites.bff.hook";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
+import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
+import { useState } from "react";
+import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 
 const IconVariants = cva(
   "bg-orange-200 rounded-full size-6 items-center justify-center flex",
@@ -43,6 +46,23 @@ export default function TaskIcons({
 }: TaskIconsProps) {
   const { mutate: updateFavorite } = usePostTodoFavorite();
   const { mutate: deleteFavorite } = useDeleteTodoFavorite();
+  const { mutate: deleteTodo } = useDeleteTodo();
+  const [taskFormOpen, setTaskFormOpen] = useState(false);
+
+  const handleDeleteTodo = () => {
+    deleteTodo(
+      { todoId: todo.id },
+      {
+        onSuccess: () => {
+          setTaskFormOpen(false);
+        },
+      },
+    );
+  };
+
+  const handleEditTodo = () => {
+    setTaskFormOpen(true);
+  };
 
   const handleFavorite = () => {
     if (todo.isFavorite) {
@@ -59,7 +79,11 @@ export default function TaskIcons({
           <FileIcon />
         </button>
       )}
-      <MoreIcon recentTodo={recentTodo} todo={todo} />
+      <MoreIcon
+        recentTodo={recentTodo}
+        onEdit={handleEditTodo}
+        onDelete={handleDeleteTodo}
+      />
       {!recentTodo && (
         <button type="button" onClick={handleFavorite}>
           <StarIcon
@@ -70,6 +94,22 @@ export default function TaskIcons({
             )}
           />
         </button>
+      )}
+      {taskFormOpen && (
+        <TaskFormModal
+          isModify={true}
+          defaultValues={{
+            title: todo.title,
+            goalId: todo.goalId ?? undefined,
+            dueDate: todo.dueDate ?? "",
+            linkUrl: todo.linkUrl ?? "",
+            tags: todo.tags.map((tag) => tag.name),
+            fileUrl: todo.fileUrl ?? "",
+          }}
+          todoId={todo.id}
+          open={taskFormOpen}
+          onOpenChange={setTaskFormOpen}
+        />
       )}
     </div>
   );

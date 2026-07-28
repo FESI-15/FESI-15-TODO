@@ -3,15 +3,12 @@ import More from "@/public/icons/dashboard/more.svg";
 import { cva } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
 import KebabPopup from "@/components/common/KebabPopup";
-import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
-import { GetTeamIdTodos200TodosItem } from "@/apis/model";
-import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 
-const moreIconVariants = cva(
+const moreButtonVariants = cva(
   "rounded-full size-6 items-center justify-center flex",
   {
     variants: {
-      moreActive: {
+      open: {
         true: "",
         false: "",
       },
@@ -19,47 +16,56 @@ const moreIconVariants = cva(
         true: "",
         false: "",
       },
+      goal: {
+        true: "",
+      },
     },
     compoundVariants: [
       {
-        moreActive: true,
+        open: true,
         class: "bg-white",
       },
       {
-        moreActive: false,
+        open: false,
         recentTodo: true,
         class: "bg-white/40",
       },
       {
-        moreActive: false,
+        open: false,
         recentTodo: false,
         class: "bg-[#ff9e59]/20",
+      },
+      {
+        goal: true,
+        class: "bg-transparent",
       },
     ],
   },
 );
 
+const moreIconVariants = cva("size-[14px] text-orange-600", {
+  variants: {
+    goal: {
+      true: "text-gray-400 size-6",
+    },
+  },
+});
+
 interface MoreIconProps {
-  recentTodo: boolean;
-  todo: GetTeamIdTodos200TodosItem;
+  recentTodo?: boolean;
+  goal?: boolean;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
-export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
-  const [moreActive, setMoreActive] = useState(false);
-  const [taskFormOpen, setTaskFormOpen] = useState(false);
+export default function MoreIcon({
+  recentTodo = false,
+  goal = false,
+  onEdit,
+  onDelete,
+}: MoreIconProps) {
+  const [open, setOpen] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
-  const { mutate: deleteTodo } = useDeleteTodo();
-
-  const handleDeleteTodo = () => {
-    deleteTodo(
-      { todoId: todo.id },
-      {
-        onSuccess: () => {
-          setMoreActive(false);
-        },
-      },
-    );
-  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -71,7 +77,7 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
       }
 
       if (!moreIconRef.current?.contains(target)) {
-        setMoreActive(false);
+        setOpen(false);
       }
     };
 
@@ -83,43 +89,20 @@ export default function MoreIcon({ recentTodo = false, todo }: MoreIconProps) {
   }, []);
 
   const handleMoreActive = () => {
-    setMoreActive((prevMoreActive) => !prevMoreActive);
-  };
-
-  const handleEditTodo = () => {
-    setTaskFormOpen(true);
-    setMoreActive(false);
+    setOpen((prevOpen) => !prevOpen);
   };
 
   return (
     <div ref={moreIconRef} className="relative">
       <button
         type="button"
-        className={cn(moreIconVariants({ recentTodo, moreActive }))}
+        className={cn(moreButtonVariants({ recentTodo, open, goal }))}
         onClick={handleMoreActive}
       >
-        <More />
+        <More className={cn(moreIconVariants({ goal }))} />
       </button>
-      {moreActive && (
-        <KebabPopup onEdit={handleEditTodo} onDelete={handleDeleteTodo} />
-      )}
-      {taskFormOpen && (
-        <TaskFormModal
-          isModify={true}
-          defaultValues={{
-            title: todo.title,
-            goalId: todo.goalId ?? undefined,
-            dueDate: todo.dueDate ?? "",
-            linkUrl: todo.linkUrl ?? "",
-            tags: todo.tags.map((tag) => tag.name),
-            fileUrl: todo.fileUrl ?? "",
-          }}
-          todoId={todo.id}
-          open={taskFormOpen}
-          onOpenChange={setTaskFormOpen}
-        >
-          <span className="hidden" />
-        </TaskFormModal>
+      {open && (
+        <KebabPopup setOpen={setOpen} onEdit={onEdit} onDelete={onDelete} />
       )}
     </div>
   );

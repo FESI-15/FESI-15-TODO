@@ -31,7 +31,7 @@ export interface TaskFormValues {
 }
 
 interface BaseTaskFormModalProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   defaultValues?: TaskFormValues;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;

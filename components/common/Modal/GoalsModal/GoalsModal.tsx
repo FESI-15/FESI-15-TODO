@@ -12,7 +12,6 @@ import {
 import { FormInput } from "@/components/common/input/FormInput";
 import { Button } from "@/components/common/Button";
 import { useForm } from "react-hook-form";
-import NewGoalButton from "@/components/layout/SideMenu/SideMenuContainer/SideMenuActions/NewGoalButton/NewGoalButton";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useInvalidateQuery } from "@/hooks/useInvalidateQuery";
@@ -26,7 +25,17 @@ const GoalsSchema = z.object({
 
 type GoalsSchemaType = z.infer<typeof GoalsSchema>;
 
-export default function GoalsModal() {
+interface GoalsModalProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: React.ReactNode;
+}
+
+export default function GoalsModal({
+  children,
+  open,
+  onOpenChange,
+}: GoalsModalProps) {
   const {
     control,
     handleSubmit,
@@ -61,10 +70,8 @@ export default function GoalsModal() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger>
-        <NewGoalButton />
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {children && <DialogTrigger>{children}</DialogTrigger>}
       <DialogContent>
         <DialogHeader>
           <DialogTitle>새 목표 생성</DialogTitle>
