@@ -41,10 +41,10 @@ export default function TodosTab() {
       {TABS.map((tab) => (
         <Link
           className={TodosTabVariants({
-            isActive: currentUrl === `/todos${tab.value}`,
+            isActive: currentUrl === `/dashboard/todos${tab.value}`,
           })}
           key={tab.value}
-          href={`/todos${tab.value}`}
+          href={`/dashboard/todos${tab.value}`}
         >
           {tab.label.toUpperCase()}
         </Link>
