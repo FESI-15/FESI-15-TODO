@@ -1,6 +1,6 @@
 # 마이페이지 - 내 정보 관리 설계
 
-Figma: `내 정보 관리` 섹션, node `13460:62915` (파일 `0IkM9YTgD0h4KdlUpclGiB`)
+Figma: `내 정보 관리` 섹션, node `13460:62915` (파일 `0IkM9YTgD0h4KdlUpclGiB`). 입력완료 상태 데스크톱 프레임(`13460:62988`)에서 `get_design_context`로 실제 레퍼런스 코드 확인 완료.
 
 ## 목표
 
@@ -39,18 +39,19 @@ react-hook-form 하나로 아래 필드를 관리:
 
 | 필드 | 컴포넌트 | 비고 |
 |---|---|---|
-| image | `ProfileImageInput` (신규) | 원형 미리보기 + 연필 아이콘, 업로드 로직은 기존 훅 재사용 |
-| email | `FormInput` (재사용) | `readOnly` — API상 변경 불가 |
-| name | `FormInput` (재사용) | `useGetUsersCheckNickname`을 디바운스(400ms)로 호출, "사용 가능한 이름입니다" / "이미 사용 중인 이름입니다" 힌트 |
+| image | `ProfileImageInput` (신규) | 원형 미리보기(132px) + 연필 아이콘 배지(주황 `#FF8442`, 35.5px, 아이콘은 `public/icons/modal/ic_pencil.svg` 재사용), 업로드 로직은 기존 훅 재사용 |
+| email | `FormInput` (재사용) | `readOnly`, 배경 `bg-[#FAFAFA]`로 다른 input과 시각적으로 구분 (Figma 실측값) |
+| name | `FormInput` (재사용) | `useGetUsersCheckNickname`을 디바운스(400ms)로 호출, 힌트 텍스트 색상 `text-[#009D97]` (Figma 실측값, 기존 토큰 없어 arbitrary value 사용) |
 | currentPassword / newPassword / confirmPassword | `FormInput variant="password"` (재사용) | 선택 입력 — 아래 검증 참고 |
 
-버튼은 화면 전체에 1개("저장"), Figma 디자인과 동일.
+버튼은 화면 전체에 1개("저장하기" — Figma 실제 라벨), Figma 디자인과 동일.
 
 ### zod 검증
 
 - `name`: 1~20자
 - 비밀번호 3필드: 기본 `optional`. `superRefine`으로 — 셋 다 비어있으면 통과, 하나라도 채워지면 `currentPassword` 필수 + `newPassword` 8~72자 + `confirmPassword`가 `newPassword`와 일치해야 함
   - 불일치 에러 메시지는 `components/auth/authForm.types.ts`의 `signupSchema`와 동일하게 `"비밀번호가 일치하지 않습니다"` 문구를 재사용 (필드 아래 인라인, `FieldError`)
+  - 에러 상태 색상은 Figma 실측값 `#FF3434`인데, 이미 `globals.css`에 `--color-red-500: #ff3434`로 정의되어 있고 [DateInput.tsx](../../../components/common/input/DateInput.tsx)가 `FieldError`에 `text-red-500`을 오버라이드해서 쓰는 것과 동일한 패턴 — `field.tsx` 기본 `text-destructive`(다른 색)가 아니라 이 패턴을 따라 `text-red-500`/`border-red-500`으로 맞춘다
 - `confirmPassword`는 프론트 전용 필드, API에는 전송하지 않음
 
 ## 제출 흐름
