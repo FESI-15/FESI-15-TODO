@@ -24,7 +24,7 @@ const STEPS = [
 
 export function Steps() {
   return (
-    <section className="flex w-full flex-col items-center bg-gray-50 px-4 py-11 md:gap-13.5 md:px-6 md:pt-25 md:pb-17.5 lg:px-0 lg:py-30">
+    <section className="flex w-full flex-col items-center bg-gray-50 px-4 py-11 md:gap-13.5 md:px-6 md:pt-25 md:pb-17.5 lg:px-10 lg:py-30">
       <div className="flex w-full max-w-348 flex-col items-center gap-11 md:gap-18 lg:gap-22">
         <SectionHeading
           subtitle="목표 설정부터 기록까지"
@@ -34,12 +34,12 @@ export function Steps() {
           {STEPS.map(({ icon, title, description }, index) => (
             <li
               key={title}
-              className="flex flex-1 flex-col items-center gap-6 rounded-3xl bg-white px-6 py-10 shadow-[0px_0px_60px_0px_rgba(0,0,0,0.05)] md:gap-8 md:px-8 md:py-12 lg:gap-6 lg:rounded-[40px] lg:px-12 lg:pt-12 lg:pb-16"
+              className="flex flex-1 flex-col items-center gap-6 rounded-3xl bg-white px-6 py-10 shadow-[0px_0px_60px_0px_rgba(0,0,0,0.05)] md:gap-8 md:px-8 md:py-12 lg:gap-6 lg:rounded-[40px] lg:px-12 lg:py-16"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 text-xl leading-7.5 font-bold text-white shadow-[0px_4px_8px_0px_rgba(255,158,89,0.2)]">
                 {index + 1}
               </span>
-              <div className="flex flex-col items-center gap-6 md:gap-8">
+              <div className="flex flex-col items-center gap-6 md:gap-8 lg:gap-10">
                 <Image
                   src={icon}
                   alt=""
