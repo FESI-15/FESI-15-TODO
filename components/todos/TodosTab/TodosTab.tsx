@@ -37,7 +37,7 @@ export default function TodosTab() {
     ? `${pathname}?${searchParams.toString()}`
     : pathname;
   return (
-    <div className="mt-4">
+    <div>
       {TABS.map((tab) => (
         <Link
           className={TodosTabVariants({
