@@ -2,9 +2,9 @@ import { cn } from "@/utils/cn";
 import More from "@/public/icons/dashboard/more.svg";
 import { cva } from "class-variance-authority";
 import { useEffect, useRef, useState } from "react";
-import KebabPopup from "@/components/common/KebabPopup";
+import KebabPopup from "./KebabPopup";
 
-const moreButtonVariants = cva(
+const kebabButtonVariants = cva(
   "rounded-full size-6 items-center justify-center flex",
   {
     variants: {
@@ -12,58 +12,49 @@ const moreButtonVariants = cva(
         true: "",
         false: "",
       },
-      recentTodo: {
-        true: "",
-        false: "",
-      },
-      goal: {
-        true: "",
+      variant: {
+        default: "bg-[#ff9e59]/20",
+        recentTodo: "bg-white/40",
+        goal: "bg-transparent",
       },
     },
     compoundVariants: [
       {
         open: true,
+        variant: ["default", "recentTodo"],
         class: "bg-white",
       },
-      {
-        open: false,
-        recentTodo: true,
-        class: "bg-white/40",
-      },
-      {
-        open: false,
-        recentTodo: false,
-        class: "bg-[#ff9e59]/20",
-      },
-      {
-        goal: true,
-        class: "bg-transparent",
-      },
     ],
+    defaultVariants: {
+      variant: "default",
+    },
   },
 );
 
-const moreIconVariants = cva("size-[14px] text-orange-600", {
+const kebabButtonIconVariants = cva("size-[14px] text-orange-600", {
   variants: {
-    goal: {
-      true: "text-gray-400 size-6",
+    variant: {
+      default: "",
+      recentTodo: "",
+      goal: "text-gray-400 size-6",
     },
+  },
+  defaultVariants: {
+    variant: "default",
   },
 });
 
-interface MoreIconProps {
-  recentTodo?: boolean;
-  goal?: boolean;
+interface KebabButtonProps {
+  variant?: "recentTodo" | "goal" | "default";
   onEdit: () => void;
   onDelete: () => void;
 }
 
-export default function MoreIcon({
-  recentTodo = false,
-  goal = false,
+export default function KebabButton({
+  variant = "default",
   onEdit,
   onDelete,
-}: MoreIconProps) {
+}: KebabButtonProps) {
   const [open, setOpen] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
 
@@ -96,10 +87,10 @@ export default function MoreIcon({
     <div ref={moreIconRef} className="relative">
       <button
         type="button"
-        className={cn(moreButtonVariants({ recentTodo, open, goal }))}
+        className={cn(kebabButtonVariants({ variant, open }))}
         onClick={handleMoreActive}
       >
-        <More className={cn(moreIconVariants({ goal }))} />
+        <More className={cn(kebabButtonIconVariants({ variant }))} />
       </button>
       {open && (
         <KebabPopup setOpen={setOpen} onEdit={onEdit} onDelete={onDelete} />

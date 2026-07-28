@@ -2,7 +2,6 @@
 
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import GoalCard from "./GoalCard/GoalCard";
-import MoreIcon from "../dashboard/TaskIcons/MoreIcon/MoreIcon";
 
 export default function Goals({ goalId }: { goalId: number }) {
   const { data: userMe } = useGetUserMe();

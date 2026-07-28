@@ -1,5 +1,5 @@
 import { useGetGoal } from "@/hooks/queries/goals/goals.bff.hook";
-import MoreIcon from "@/components/dashboard/TaskIcons/MoreIcon/MoreIcon";
+import KebabButton from "@/components/common/KebabButton/KebabButton";
 import { useState } from "react";
 import GoalsModal from "@/components/common/Modal/GoalsModal/GoalsModal";
 import Image from "next/image";
@@ -23,7 +23,7 @@ export default function GoalCard({ goalId }: { goalId: number }) {
         />
         <div className="font-semibold text-gray-700">{goal?.data.title}</div>
       </div>
-      <MoreIcon goal onEdit={handleEdit} onDelete={() => {}} />
+      <KebabButton variant="goal" onEdit={handleEdit} onDelete={() => {}} />
       {modalOpen && <GoalsModal open={modalOpen} onOpenChange={setModalOpen} />}
     </div>
   );

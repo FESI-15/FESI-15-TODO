@@ -4,7 +4,7 @@ import FileIcon from "@/public/icons/dashboard/file.svg";
 import StarIcon from "@/public/icons/dashboard/star.svg";
 import { cva } from "class-variance-authority";
 import { cn } from "@/utils/cn";
-import MoreIcon from "./MoreIcon/MoreIcon";
+import KebabButton from "../../common/KebabButton/KebabButton";
 import {
   useDeleteTodoFavorite,
   usePostTodoFavorite,
@@ -79,8 +79,8 @@ export default function TaskIcons({
           <FileIcon />
         </button>
       )}
-      <MoreIcon
-        recentTodo={recentTodo}
+      <KebabButton
+        variant={recentTodo ? "recentTodo" : "default"}
         onEdit={handleEditTodo}
         onDelete={handleDeleteTodo}
       />
