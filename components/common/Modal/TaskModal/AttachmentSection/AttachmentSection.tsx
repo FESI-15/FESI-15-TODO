@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface AttachmentSectionProps {
   link: string;
@@ -23,7 +24,13 @@ export default function AttachmentSection({
             width={24}
             height={24}
           />
-          <p className="text-gray-700">{link}</p>
+          <Link
+            href={link}
+            className="text-gray-700 hover:underline"
+            target="_blank"
+          >
+            {link}
+          </Link>
         </div>
       )}
       {imageUrl && (

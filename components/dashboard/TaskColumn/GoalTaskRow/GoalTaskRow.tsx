@@ -3,11 +3,10 @@ import TaskIcons from "@/components/dashboard/TaskIcons/TaskIcons";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
 import TaskModal from "@/components/common/Modal/TaskModal/TaskModal";
-import { useGetTodo } from "@/hooks/queries/todos/todos.bff.hook";
 import { cva } from "class-variance-authority";
 
 interface GoalTaskRowProps {
-  task: GetTeamIdTodos200TodosItem;
+  todo: GetTeamIdTodos200TodosItem;
 }
 const taskTitleVariant = cva(
   "truncate text-left text-sm font-medium lg:text-base group-hover:text-orange-600 group-hover:font-semibold pr-4",
@@ -21,21 +20,7 @@ const taskTitleVariant = cva(
   },
 );
 
-export default function GoalTaskRow({ task }: GoalTaskRowProps) {
-  const {
-    data: todo,
-    isFetching,
-    refetch,
-  } = useGetTodo({ todoId: task.id }, false);
-
-  const handleLoadTaskModal = () => {
-    if (todo || isFetching) {
-      return;
-    }
-
-    refetch();
-  };
-
+export default function GoalTaskRow({ todo }: GoalTaskRowProps) {
   return (
     <li
       className={cn(
@@ -43,16 +28,12 @@ export default function GoalTaskRow({ task }: GoalTaskRowProps) {
       )}
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">
-        <DashboardCheckbox checked={task.done} taskId={task.id} />
-        <TaskModal
-          todo={todo?.data}
-          isLoading={isFetching}
-          onTriggerMouseEnter={handleLoadTaskModal}
-        >
-          <p className={taskTitleVariant({ done: task.done })}>{task.title}</p>
+        <DashboardCheckbox checked={todo.done} taskId={todo.id} />
+        <TaskModal todo={todo}>
+          <p className={taskTitleVariant({ done: todo.done })}>{todo.title}</p>
         </TaskModal>
       </div>
-      <TaskIcons task={task} recentTodo={false} />
+      <TaskIcons todo={todo} recentTodo={false} />
     </li>
   );
 }
