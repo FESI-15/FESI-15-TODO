@@ -7,16 +7,8 @@ import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 
 // 목표 목록 조회
 export async function GET(request: Request) {
-  const headers = await getAuthorizationHeaders();
-
-  if (!headers) {
-    return NextResponse.json(
-      { message: "Authentication is required." },
-      { status: 401 },
-    );
-  }
-
   try {
+    const headers = await getAuthorizationHeaders();
     const { searchParams } = new URL(request.url);
     const params: GetTeamIdGoalsParams = {
       cursor: searchParams.has("cursor")
@@ -26,7 +18,9 @@ export async function GET(request: Request) {
         ? Number(searchParams.get("limit"))
         : undefined,
     };
-    const response = await getTeamIdGoals(params, { headers });
+    const response = await getTeamIdGoals(params, {
+      headers: headers ?? undefined,
+    });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
@@ -38,18 +32,12 @@ export async function GET(request: Request) {
 
 // 목표 생성
 export async function POST(request: Request) {
-  const headers = await getAuthorizationHeaders();
-
-  if (!headers) {
-    return NextResponse.json(
-      { message: "Authentication is required." },
-      { status: 401 },
-    );
-  }
-
   try {
+    const headers = await getAuthorizationHeaders();
     const data = await request.json();
-    const response = await postTeamIdGoals(data, { headers });
+    const response = await postTeamIdGoals(data, {
+      headers: headers ?? undefined,
+    });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {

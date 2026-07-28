@@ -1,4 +1,8 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios, {
+  AxiosError,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+} from "axios";
 import { cookies } from "next/headers";
 
 import type {
@@ -8,12 +12,36 @@ import type {
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   ACCESS_TOKEN_MAX_AGE,
+  NO_AUTH_API_PATHS,
   REFRESH_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_MAX_AGE,
 } from "@/constants/auth";
 
 export const apiClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
+});
+
+apiClient.interceptors.request.use((config) => {
+  const isNoAuthPath = NO_AUTH_API_PATHS.some((path) =>
+    config.url?.startsWith(path),
+  );
+
+  if (isNoAuthPath || config.headers?.Authorization) {
+    return config;
+  }
+
+  return Promise.reject(
+    new AxiosError(
+      "Authentication is required.",
+      "ERR_UNAUTHORIZED",
+      config,
+      undefined,
+      {
+        status: 401,
+        data: { message: "Authentication is required." },
+      } as AxiosResponse,
+    ),
+  );
 });
 
 let refreshPromise: Promise<PostTeamIdAuthRefresh200> | null = null;

@@ -10,6 +10,15 @@ export const GOOGLE_OAUTH_SCOPE = "openid email profile";
 
 export const AUTH_ONLY_PATHS = ["/", "/login", "/signup"];
 
+// apiClient(백엔드) 요청 중 Authorization 헤더가 없어도 되는 경로
+export const NO_AUTH_API_PATHS = [
+  "/auth/login",
+  "/auth/signup",
+  "/auth/refresh",
+  "/auth/logout",
+  "/oauth",
+];
+
 export const PROTECTED_PATHS = [
   "/dashboard",
   "/goals",

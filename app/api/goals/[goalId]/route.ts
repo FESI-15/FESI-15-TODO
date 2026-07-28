@@ -22,10 +22,9 @@ const getGoalId = async (context: RouteContext) => {
 
 // 목표 상세 조회
 export async function GET(_request: Request, context: RouteContext) {
-  const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || Number.isNaN(goalId)) {
+  if (Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -33,7 +32,10 @@ export async function GET(_request: Request, context: RouteContext) {
   }
 
   try {
-    const response = await getTeamIdGoalsGoalId(goalId, { headers });
+    const headers = await getAuthorizationHeaders();
+    const response = await getTeamIdGoalsGoalId(goalId, {
+      headers: headers ?? undefined,
+    });
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
@@ -45,10 +47,9 @@ export async function GET(_request: Request, context: RouteContext) {
 
 // 목표 수정
 export async function PATCH(request: Request, context: RouteContext) {
-  const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || Number.isNaN(goalId)) {
+  if (Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -56,9 +57,10 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 
   try {
+    const headers = await getAuthorizationHeaders();
     const data = await request.json();
     const response = await patchTeamIdGoalsGoalId(goalId, data, {
-      headers,
+      headers: headers ?? undefined,
     });
 
     return NextResponse.json(response.data, { status: response.status });
@@ -71,10 +73,9 @@ export async function PATCH(request: Request, context: RouteContext) {
 
 // 목표 삭제
 export async function DELETE(_request: Request, context: RouteContext) {
-  const headers = await getAuthorizationHeaders();
   const goalId = await getGoalId(context);
 
-  if (!headers || Number.isNaN(goalId)) {
+  if (Number.isNaN(goalId)) {
     return NextResponse.json(
       { message: "Authentication is required." },
       { status: 401 },
@@ -82,8 +83,9 @@ export async function DELETE(_request: Request, context: RouteContext) {
   }
 
   try {
+    const headers = await getAuthorizationHeaders();
     const response = await deleteTeamIdGoalsGoalId(goalId, {
-      headers,
+      headers: headers ?? undefined,
     });
 
     return new NextResponse(null, { status: response.status });
