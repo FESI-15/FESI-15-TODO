@@ -34,8 +34,8 @@ export default function TaskColumn({
         </div>
       ) : (
         <ul className="flex flex-col gap-1">
-          {tasks.map((task) => (
-            <GoalTaskRow key={task.id} task={task} />
+          {tasks.map((todo) => (
+            <GoalTaskRow key={todo.id} todo={todo} />
           ))}
         </ul>
       )}

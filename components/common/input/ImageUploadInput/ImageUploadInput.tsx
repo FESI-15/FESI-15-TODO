@@ -34,6 +34,8 @@ export function ImageUploadInput<T extends FieldValues>({
     name,
   });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fieldPreviewUrl =
+    typeof field.value === "string" ? field.value : undefined;
 
   const handleFileChange = async (file: File | null) => {
     setSelectedFile(file);
@@ -50,18 +52,16 @@ export function ImageUploadInput<T extends FieldValues>({
         },
       });
 
-      await fetch(data.uploadUrl, {
+      const response = await fetch(data.uploadUrl, {
         method: "PUT",
         body: file,
-      })
-        .then((response) => {
-          if (!response.ok) {
-            field.onChange(data.url);
-          }
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
+      });
+
+      if (!response.ok) {
+        throw new Error("이미지 업로드에 실패했습니다.");
+      }
+
+      field.onChange(data.url);
     } catch {
       setSelectedFile(null);
       field.onChange(undefined);
@@ -73,11 +73,12 @@ export function ImageUploadInput<T extends FieldValues>({
       file: selectedFile,
       onFileChange: handleFileChange,
     });
+  const imagePreviewUrl = previewUrl ?? fieldPreviewUrl ?? "";
 
   return (
     <Field data-invalid={fieldState.invalid}>
-      <PreviewImage previewUrl={previewUrl ?? ""} handleRemove={handleRemove} />
-      {!previewUrl && (
+      <PreviewImage previewUrl={imagePreviewUrl} handleRemove={handleRemove} />
+      {!imagePreviewUrl && (
         <>
           <div
             id={inputId}

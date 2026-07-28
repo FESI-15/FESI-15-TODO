@@ -33,39 +33,39 @@ const starIconVariants = cva("size-6 fill-none text-orange-300", {
 });
 
 interface TaskIconsProps {
-  task: GetTeamIdTodos200TodosItem;
+  todo: GetTeamIdTodos200TodosItem;
   recentTodo: boolean;
 }
 
 export default function TaskIcons({
-  task,
+  todo,
   recentTodo = false,
 }: TaskIconsProps) {
   const { mutate: updateFavorite } = usePostTodoFavorite();
   const { mutate: deleteFavorite } = useDeleteTodoFavorite();
 
   const handleFavorite = () => {
-    if (task.isFavorite) {
-      deleteFavorite({ todoId: task.id });
+    if (todo.isFavorite) {
+      deleteFavorite({ todoId: todo.id });
     } else {
-      updateFavorite({ todoId: task.id });
+      updateFavorite({ todoId: todo.id });
     }
   };
 
   return (
     <div className="flex h-6 shrink-0 items-center justify-end gap-2">
-      {task.noteIds.length > 0 && (
+      {todo.noteIds.length > 0 && (
         <button type="button" className={cn(IconVariants({ recentTodo }))}>
           <FileIcon />
         </button>
       )}
-      <MoreIcon recentTodo={recentTodo} todoId={task.id} />
+      <MoreIcon recentTodo={recentTodo} todo={todo} />
       {!recentTodo && (
         <button type="button" onClick={handleFavorite}>
           <StarIcon
             className={cn(
               starIconVariants({
-                favorite: task.isFavorite,
+                favorite: todo.isFavorite,
               }),
             )}
           />

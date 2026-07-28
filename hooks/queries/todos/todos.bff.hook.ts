@@ -57,8 +57,12 @@ export const usePatchTodo = () => {
 };
 
 export const useDeleteTodo = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["deleteTodo"],
     mutationFn: (variables: TodoIdVariables) => deleteTodo(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+    },
   });
 };
