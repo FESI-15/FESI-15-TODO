@@ -1,3 +1,4 @@
+import type { GetTeamIdTodosParams } from "@/apis/model";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
 import {
   dehydrate,
@@ -6,9 +7,21 @@ import {
 } from "@tanstack/react-query";
 import Todos from "@/components/todos/Todos";
 
-export default async function TodosPage() {
+interface TodosPageProps {
+  searchParams: Promise<{
+    done?: string;
+  }>;
+}
+
+export default async function TodosPage({ searchParams }: TodosPageProps) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(getTodosQueryOptionsServer());
+  const { done } = await searchParams;
+
+  const params: GetTeamIdTodosParams | undefined =
+    done === "true" || done === "false" ? { done } : { done: undefined };
+
+  await queryClient.prefetchQuery(getTodosQueryOptionsServer(params));
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Todos />

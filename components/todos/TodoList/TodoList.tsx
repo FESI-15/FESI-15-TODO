@@ -7,7 +7,7 @@ export default function TodoList({
   todos: GetTeamIdTodos200TodosItem[];
 }) {
   return (
-    <div className="bg-white rounded-[24px] p-4 mt-3 min-h-[640px]">
+    <div className="bg-white rounded-[24px] p-4 mt-3 min-h-[640px] md:min-h-[800px]">
       <ul className="flex flex-col gap-2">
         {todos.map((todo) => (
           <GoalTaskRow key={todo.id} todo={todo} />
