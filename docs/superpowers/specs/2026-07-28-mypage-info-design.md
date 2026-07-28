@@ -50,6 +50,7 @@ react-hook-form 하나로 아래 필드를 관리:
 
 - `name`: 1~20자
 - 비밀번호 3필드: 기본 `optional`. `superRefine`으로 — 셋 다 비어있으면 통과, 하나라도 채워지면 `currentPassword` 필수 + `newPassword` 8~72자 + `confirmPassword`가 `newPassword`와 일치해야 함
+  - 불일치 에러 메시지는 `components/auth/authForm.types.ts`의 `signupSchema`와 동일하게 `"비밀번호가 일치하지 않습니다"` 문구를 재사용 (필드 아래 인라인, `FieldError`)
 - `confirmPassword`는 프론트 전용 필드, API에는 전송하지 않음
 
 ## 제출 흐름
