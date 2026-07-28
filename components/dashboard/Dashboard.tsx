@@ -42,7 +42,7 @@ export default function Dashboard() {
             <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
               <Image
                 className="md:w-[130px] md:h-[140px]"
-                src="/icons/dashboard/no_goal.svg"
+                src="/icons/common/no_data.svg"
                 alt="flag"
                 width={80}
                 height={85}
