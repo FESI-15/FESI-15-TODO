@@ -1,7 +1,6 @@
 import { cva } from "class-variance-authority";
-import { RouterContext } from "next/dist/shared/lib/router-context.shared-runtime";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const TABS = [
   {

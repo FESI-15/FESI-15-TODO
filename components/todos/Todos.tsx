@@ -5,15 +5,21 @@ import TodosTab from "./TodosTab/TodosTab";
 import AddTodoButton from "./AddTodoButton/AddTodoButton";
 import TodoList from "./TodoList/TodoList";
 import { useSearchParams } from "next/navigation";
-import { GetTeamIdTodosDone } from "@/apis/model";
+import { GetTeamIdTodosParams } from "@/apis/model";
 
 export default function Todos() {
   const searchParams = useSearchParams();
-  const done = searchParams.get("done") as GetTeamIdTodosDone | undefined;
+  const doneParam = searchParams.get("done");
+  const isGetTeamIdTodosDone = (value: string | null) => {
+    return value === "true" || value === "false";
+  };
+  const params: GetTeamIdTodosParams | undefined = isGetTeamIdTodosDone(
+    doneParam,
+  )
+    ? { done: doneParam }
+    : { done: undefined };
 
-  const { data: todos } = useGetTodos({
-    ...(done !== null && done !== undefined ? { done } : {}),
-  });
+  const { data: todos } = useGetTodos(params);
 
   return (
     <div className="max-w-[720px] mx-auto w-full mt-6 px-4 md:mt-12 pb-12">
