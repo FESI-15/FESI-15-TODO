@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const triggerVariants = cva(
-  "group flex w-full items-center justify-between px-[16px] py-[16px] text-base font-pretendard font-medium tracking-[-0.03em] text-gray-700 rounded-2xl bg-white border-2 border-gray-200 select-none transition-colors data-popup-open:border-orange-500 data-popup-open:shadow-md",
+  "group flex w-full items-center justify-between px-3 py-2.5 md:p-4 text-sm md:text-base font-pretendard tracking-[-0.03em] text-gray-700 rounded-[12px] md:rounded-2xl bg-white border-1 border-gray-300 select-none transition-colors data-popup-open:border-orange-500 data-popup-open:shadow-md",
 );
 
 export const iconVariants = cva(
