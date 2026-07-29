@@ -3,19 +3,19 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { Button } from "../Button";
 
 interface PopupProps {
   onDelete: () => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export default function Popup({ onDelete }: PopupProps) {
+export default function Popup({ onDelete, open, onOpenChange }: PopupProps) {
   return (
-    <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent showCloseButton={false}>
         <div className="flex flex-col gap-1 text-center mt-6 mb-8 md:mb-10">
           <p className="font-semibold text-sm md:text-xl text-gray-800">

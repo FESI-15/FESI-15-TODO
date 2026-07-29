@@ -1,7 +1,6 @@
 import type { GetTeamIdGoalsParams } from "@/apis/model";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
-import { getTeamIdGoals } from "@/apis/goals/goals";
-import { getGoal } from "@/apis/goals/goalsBff";
+import { getTeamIdGoals, getTeamIdGoalsGoalId } from "@/apis/goals/goals";
 import { goalsKeys } from "./goals.key";
 
 export const getGoalsQueryOptionsServer = (params?: GetTeamIdGoalsParams) => ({
@@ -28,7 +27,7 @@ export const getGoalQueryOptionsServer = (goalId: number) => ({
       throw new Error("Authentication is required.");
     }
 
-    const response = await getGoal({ goalId }, { headers }, signal);
+    const response = await getTeamIdGoalsGoalId(goalId, { headers }, signal);
 
     return { data: response.data };
   },

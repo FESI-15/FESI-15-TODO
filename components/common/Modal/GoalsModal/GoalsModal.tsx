@@ -12,13 +12,12 @@ import {
 import { FormInput } from "@/components/common/input/FormInput";
 import { Button } from "@/components/common/Button";
 import { useForm } from "react-hook-form";
-import NewGoalButton from "@/components/layout/SideMenu/SideMenuContainer/SideMenuActions/NewGoalButton/NewGoalButton";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useInvalidateQuery } from "@/hooks/useInvalidateQuery";
-import { PostTeamIdGoals400, PostTeamIdGoals401 } from "@/apis/model";
-import { usePostGoals } from "@/hooks/queries/goals/goals.bff.hook";
-import { goalsKeys } from "@/hooks/queries/goals/goals.key";
+import {
+  usePatchGoal,
+  usePostGoals,
+} from "@/hooks/queries/goals/goals.bff.hook";
 
 const GoalsSchema = z.object({
   title: z.string().trim().min(1, "목표를 입력해주세요."),
@@ -26,7 +25,19 @@ const GoalsSchema = z.object({
 
 type GoalsSchemaType = z.infer<typeof GoalsSchema>;
 
-export default function GoalsModal() {
+interface GoalsModalProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  defaultValues?: GoalsSchemaType & { id: number };
+  children?: React.ReactNode;
+}
+
+export default function GoalsModal({
+  children,
+  open,
+  onOpenChange,
+  defaultValues,
+}: GoalsModalProps) {
   const {
     control,
     handleSubmit,
@@ -35,39 +46,59 @@ export default function GoalsModal() {
     resolver: zodResolver(GoalsSchema),
     mode: "onChange",
     defaultValues: {
-      title: "",
+      title: defaultValues?.title ?? "",
     },
   });
-  const { invalidateQuery } = useInvalidateQuery();
+  const { mutate: createGoal, isPending } = usePostGoals();
+  const { mutate: updateGoal, isPending: isUpdating } = usePatchGoal(
+    defaultValues?.id ?? 0,
+  );
 
-  const { mutate: createGoal, isPending } = usePostGoals({
-    mutation: {
-      onSuccess: () => {
-        invalidateQuery(goalsKeys.list());
-        alert("목표 생성에 성공했습니다.");
-      },
-      onError: (error: PostTeamIdGoals400 | PostTeamIdGoals401) => {
-        alert(error.message);
-      },
-    },
-  });
+  const handleSuccess = () => {
+    onOpenChange?.(false);
+  };
+
+  const handleError = (error: Error) => {
+    alert(error.message);
+  };
 
   const onCreate = (values: GoalsSchemaType) => {
-    createGoal({
-      data: {
-        title: values.title,
-      },
-    });
+    if (defaultValues) {
+      updateGoal(
+        {
+          goalId: defaultValues.id,
+          data: {
+            title: values.title,
+          },
+        },
+        {
+          onSuccess: handleSuccess,
+          onError: handleError,
+        },
+      );
+    } else {
+      createGoal(
+        {
+          data: {
+            title: values.title,
+          },
+        },
+        {
+          onSuccess: handleSuccess,
+          onError: handleError,
+        },
+      );
+    }
   };
 
   return (
-    <Dialog>
-      <DialogTrigger>
-        <NewGoalButton />
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      {children && <DialogTrigger>{children}</DialogTrigger>}
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>새 목표 생성</DialogTitle>
+          <DialogTitle>
+            {defaultValues ? "목표 수정" : "새 목표 생성"}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit(onCreate)}>
           <div className="mt-6 md:mt-8">
@@ -97,9 +128,9 @@ export default function GoalsModal() {
                 fullWidth
                 hierarchy="primary"
                 size="lg"
-                disabled={!isValid || isPending}
+                disabled={!isValid || isPending || isUpdating}
               >
-                생성
+                {defaultValues ? "수정" : "생성"}
               </Button>
             </DialogFooter>
           </div>
