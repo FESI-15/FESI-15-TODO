@@ -4,6 +4,8 @@ import "@/globals.css";
 import { QueryProviders } from "../providers/Queryproviders";
 import LazyMotionProvider from "@/providers/LazyMotionProvider";
 import { cn } from "@/utils/cn";
+import { Toaster } from "@/components/ui/toast";
+import { SideMenuProvider } from "@/components/layout/SideMenu/SideMenuContext";
 
 const pretendard = localFont({
   src: [
@@ -76,9 +78,12 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", pretendard.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col font-sans bg-gray-100">
-        <QueryProviders>
-          <LazyMotionProvider>{children}</LazyMotionProvider>
-        </QueryProviders>
+        <SideMenuProvider>
+          <QueryProviders>
+            <LazyMotionProvider>{children}</LazyMotionProvider>
+          </QueryProviders>
+          <Toaster />
+        </SideMenuProvider>
       </body>
     </html>
   );
