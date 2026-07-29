@@ -1,6 +1,7 @@
 "use client";
 
 import { InputHTMLAttributes, useState } from "react";
+import Image from "next/image";
 import {
   Control,
   FieldPath,
@@ -66,9 +67,12 @@ export function ProfileImageInput<T extends FieldValues>({
   return (
     <div className="relative size-[132px] shrink-0">
       <div className="size-[132px] overflow-hidden rounded-full bg-gray-100">
-        <img
+        <Image
           src={displayUrl}
           alt="프로필 이미지 미리보기"
+          width={132}
+          height={132}
+          unoptimized={displayUrl.startsWith("blob:")}
           className="size-full object-cover"
         />
       </div>

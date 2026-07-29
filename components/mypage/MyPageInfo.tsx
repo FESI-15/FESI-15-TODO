@@ -42,19 +42,23 @@ export function MyPageInfo() {
     },
   });
 
+  const userName = user?.name;
+  const userImage = user?.image;
+  const hasUser = user !== undefined;
+
   useEffect(() => {
-    if (!user) {
+    if (!hasUser) {
       return;
     }
 
     reset({
-      name: user.name,
-      image: user.image ?? undefined,
+      name: userName,
+      image: userImage ?? undefined,
       currentPassword: "",
       newPassword: "",
       confirmPassword: "",
     });
-  }, [user?.name, user?.image, reset]);
+  }, [hasUser, userName, userImage, reset]);
 
   const nameValue = watch("name");
   const [debouncedName, setDebouncedName] = useState(nameValue);
