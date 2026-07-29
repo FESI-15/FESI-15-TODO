@@ -10,11 +10,13 @@ import { Button } from "../Button";
 
 interface PopupProps {
   onDelete: () => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
-export default function Popup({ onDelete }: PopupProps) {
+export default function Popup({ onDelete, open, onOpenChange }: PopupProps) {
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger>Open</DialogTrigger>
       <DialogContent showCloseButton={false}>
         <div className="flex flex-col gap-1 text-center mt-6 mb-8 md:mb-10">

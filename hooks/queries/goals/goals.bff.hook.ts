@@ -1,10 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import type { UseMutationOptions } from "@tanstack/react-query";
-import type {
-  GetTeamIdGoalsParams,
-  PostTeamIdGoals400,
-  PostTeamIdGoals401,
-} from "@/apis/model";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { GetTeamIdGoalsParams } from "@/apis/model";
 import type {
   GoalIdVariables,
   PatchGoalVariables,
@@ -18,6 +13,7 @@ import {
   postGoals,
 } from "@/apis/goals/goalsBff";
 import { goalsKeys } from "./goals.key";
+import { useRouter } from "next/navigation";
 
 export const useGetGoals = (params?: GetTeamIdGoalsParams) => {
   return useQuery({
@@ -34,34 +30,38 @@ export const useGetGoal = (goalId: number) => {
   });
 };
 
-export const usePostGoals = <
-  TError = PostTeamIdGoals400 | PostTeamIdGoals401,
-  TContext = unknown,
->(options?: {
-  mutation?: UseMutationOptions<
-    Awaited<ReturnType<typeof postGoals>>,
-    TError,
-    PostGoalsVariables,
-    TContext
-  >;
-}) => {
+export const usePostGoals = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["postGoals"],
     mutationFn: (variables: PostGoalsVariables) => postGoals(variables),
-    ...options?.mutation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: goalsKeys.list() });
+    },
   });
 };
 
-export const usePatchGoal = () => {
+export const usePatchGoal = (goalId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchGoal"],
     mutationFn: (variables: PatchGoalVariables) => patchGoal(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: goalsKeys.detail(goalId) });
+    },
   });
 };
 
 export const useDeleteGoal = () => {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   return useMutation({
     mutationKey: ["deleteGoal"],
     mutationFn: (variables: GoalIdVariables) => deleteGoal(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: goalsKeys.list() });
+      router.replace("/dashboard");
+    },
   });
 };
