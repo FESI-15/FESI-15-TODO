@@ -6,13 +6,9 @@ import { useState } from "react";
 export default function SideMenuActions() {
   const [open, setOpen] = useState(false);
 
-  const handleOpenChange = (open: boolean) => {
-    setOpen(open);
-  };
-
   return (
     <div className="flex items-center gap-2 md:gap-4 md:mt-0 mt-10">
-      <GoalsModal open={open} onOpenChange={handleOpenChange}>
+      <GoalsModal open={open} onOpenChange={setOpen}>
         <NewGoalButton />
       </GoalsModal>
       <TaskFormModal>

@@ -50,14 +50,7 @@ export default function TaskIcons({
   const [taskFormOpen, setTaskFormOpen] = useState(false);
 
   const handleDeleteTodo = () => {
-    deleteTodo(
-      { todoId: todo.id },
-      {
-        onSuccess: () => {
-          setTaskFormOpen(false);
-        },
-      },
-    );
+    deleteTodo({ todoId: todo.id });
   };
 
   const handleEditTodo = () => {

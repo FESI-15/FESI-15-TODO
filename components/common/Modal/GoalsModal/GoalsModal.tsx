@@ -54,6 +54,14 @@ export default function GoalsModal({
     defaultValues?.id ?? 0,
   );
 
+  const handleSuccess = () => {
+    onOpenChange?.(false);
+  };
+
+  const handleError = (error: Error) => {
+    alert(error.message);
+  };
+
   const onCreate = (values: GoalsSchemaType) => {
     if (defaultValues) {
       updateGoal(
@@ -64,12 +72,8 @@ export default function GoalsModal({
           },
         },
         {
-          onSuccess: () => {
-            onOpenChange?.(false);
-          },
-          onError: (error) => {
-            alert(error.message);
-          },
+          onSuccess: handleSuccess,
+          onError: handleError,
         },
       );
     } else {
@@ -80,12 +84,8 @@ export default function GoalsModal({
           },
         },
         {
-          onSuccess: () => {
-            onOpenChange?.(false);
-          },
-          onError: (error) => {
-            alert(error.message);
-          },
+          onSuccess: handleSuccess,
+          onError: handleError,
         },
       );
     }
