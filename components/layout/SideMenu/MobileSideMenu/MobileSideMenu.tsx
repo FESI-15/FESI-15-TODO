@@ -4,9 +4,11 @@ import Header from "./Header/Header";
 import { useState } from "react";
 import Delete from "@/public/icons/common/delete.svg";
 import SideMenuContainer from "../SideMenuContainer/SideMenuContainer";
+import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 
 export default function MobileSideMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: userMe } = useGetUserMe();
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -18,7 +20,7 @@ export default function MobileSideMenu() {
   return (
     <div className="block fixed top-0 left-0 w-full z-50 md:hidden">
       <Header
-        title="모바일 사이드 메뉴"
+        title={userMe?.data.name || ""}
         onClickHamburger={handleOpen}
         onClickBell={() => {}}
       />

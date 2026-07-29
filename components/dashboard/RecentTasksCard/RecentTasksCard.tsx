@@ -26,7 +26,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
           최근 등록한 할일
         </SectionTitle>
         <Link
-          href="/todos"
+          href="/dashboard/todos"
           className="flex items-center pr-2 text-sm lg:text-base font-semibold text-orange-600"
         >
           모두 보기

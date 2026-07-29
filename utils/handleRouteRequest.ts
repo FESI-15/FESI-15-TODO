@@ -3,29 +3,17 @@ import { NextResponse } from "next/server";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 import { getAxiosErrorResponse } from "@/utils/getAxiosErrorResponse";
 
-// 인증 정보가 없을 때 route handler들이 같은 응답 형식을 쓰도록 모읍니다.
-export const createUnauthorizedResponse = () => {
-  return NextResponse.json(
-    { message: "Authentication is required." },
-    { status: 401 },
-  );
-};
-
 // JSON 응답이 있는 백엔드 요청을 BFF route에서 공통으로 처리합니다.
+// 헤더 유무 검증은 apiClient의 request 인터셉터가 담당합니다.
 export const handleRouteRequest = async <T>(
-  request: (headers: { Authorization: string }) => Promise<{
+  request: (headers: { Authorization: string } | undefined) => Promise<{
     data: T;
     status: number;
   }>,
 ) => {
-  const headers = await getAuthorizationHeaders();
-
-  if (!headers) {
-    return createUnauthorizedResponse();
-  }
-
   try {
-    const response = await request(headers);
+    const headers = await getAuthorizationHeaders();
+    const response = await request(headers ?? undefined);
 
     return NextResponse.json(response.data, { status: response.status });
   } catch (error) {
@@ -37,18 +25,13 @@ export const handleRouteRequest = async <T>(
 
 // DELETE처럼 응답 body가 없는 백엔드 요청을 BFF route에서 공통으로 처리합니다.
 export const handleEmptyRouteRequest = async (
-  request: (headers: { Authorization: string }) => Promise<{
+  request: (headers: { Authorization: string } | undefined) => Promise<{
     status: number;
   }>,
 ) => {
-  const headers = await getAuthorizationHeaders();
-
-  if (!headers) {
-    return createUnauthorizedResponse();
-  }
-
   try {
-    const response = await request(headers);
+    const headers = await getAuthorizationHeaders();
+    const response = await request(headers ?? undefined);
 
     return new NextResponse(null, { status: response.status });
   } catch (error) {

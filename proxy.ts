@@ -13,21 +13,21 @@ export const proxy = (request: NextRequest) => {
     request.cookies.get(ACCESS_TOKEN_COOKIE_NAME)?.value,
   );
 
-  // const isAuthOnlyPath = AUTH_ONLY_PATHS.some((path) =>
-  //   path === "/" ? pathname === "/" : pathname.startsWith(path),
-  // );
+  const isAuthOnlyPath = AUTH_ONLY_PATHS.some((path) =>
+    path === "/" ? pathname === "/" : pathname.startsWith(path),
+  );
 
-  // const isProtectedPath = PROTECTED_PATHS.some((path) =>
-  //   pathname.startsWith(path),
-  // );
+  const isProtectedPath = PROTECTED_PATHS.some((path) =>
+    pathname.startsWith(path),
+  );
 
-  // if (hasAccessToken && isAuthOnlyPath) {
-  //   return NextResponse.redirect(new URL("/dashboard", request.url));
-  // }
+  if (hasAccessToken && isAuthOnlyPath) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
 
-  // if (!hasAccessToken && isProtectedPath) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  if (!hasAccessToken && isProtectedPath) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return NextResponse.next();
 };

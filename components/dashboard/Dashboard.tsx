@@ -15,9 +15,9 @@ export default function Dashboard() {
   const { data: user } = useGetUserMe();
 
   return (
-    <main className="min-w-0 flex-1 px-5 py-10 md:px-8 lg:px-12 xl:px-[88px]">
+    <main className="min-w-0 flex-1 py-8 md:py-12 lg:py-20 px-4 md:px-6">
       <div className="mx-auto flex max-w-[1312px] flex-col gap-8">
-        <h1 className="px-2 text-2xl font-semibold text-gray-900">
+        <h1 className="px-2 text-2xl font-semibold text-gray-900 hidden md:block">
           {user?.data.name}님의 대시보드
         </h1>
         <div className="grid gap-8 lg:grid-cols-2">
@@ -42,7 +42,7 @@ export default function Dashboard() {
             <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
               <Image
                 className="md:w-[130px] md:h-[140px]"
-                src="/icons/dashboard/no_goal.svg"
+                src="/icons/common/no_data.svg"
                 alt="flag"
                 width={80}
                 height={85}

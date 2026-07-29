@@ -74,7 +74,7 @@ export const getUserMe = (
   signal?: AbortSignal,
 ) => {
   return bffInstance<GetTeamIdUsersMe200>(
-    { url: "/api/users/me", method: "GET", signal },
+    { url: "/api/auth/me", method: "GET", signal },
     options,
   );
 };
