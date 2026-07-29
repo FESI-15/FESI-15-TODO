@@ -2,10 +2,17 @@ import NewTodo from "@/public/icons/sidemenu/new_todo.svg";
 import GoalsModal from "@/components/common/Modal/GoalsModal/GoalsModal";
 import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 import NewGoalButton from "./NewGoalButton/NewGoalButton";
+import { useState } from "react";
 export default function SideMenuActions() {
+  const [open, setOpen] = useState(false);
+
+  const handleOpenChange = (open: boolean) => {
+    setOpen(open);
+  };
+
   return (
     <div className="flex items-center gap-2 md:gap-4 md:mt-0 mt-10">
-      <GoalsModal>
+      <GoalsModal open={open} onOpenChange={handleOpenChange}>
         <NewGoalButton />
       </GoalsModal>
       <TaskFormModal>

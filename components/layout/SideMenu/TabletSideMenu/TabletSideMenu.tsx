@@ -11,7 +11,7 @@ interface TabletSideMenuProps {
 const sideMenuSpaceVariants = cva("w-[60px]", {
   variants: {
     open: {
-      true: "lg:w-[362px]",
+      true: "lg:w-[300px]",
       false: "lg:w-[60px]",
     },
   },

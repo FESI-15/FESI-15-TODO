@@ -1,12 +1,18 @@
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
 import GoalTaskRow from "@/components/dashboard/TaskColumn/GoalTaskRow/GoalTaskRow";
+import Image from "next/image";
 
 interface GoalTodoColumnProps {
   title: "TO DO" | "DONE";
   todos: GetTeamIdTodos200TodosItem[];
   showMobileTitle?: boolean;
 }
+
+const emptyMessage = {
+  "TO DO": "해야할 일이 아직 없어요.",
+  DONE: "완료한 일이 아직 없어요.",
+};
 
 export default function GoalTodoColumn({
   title,
@@ -33,8 +39,15 @@ export default function GoalTodoColumn({
             ))}
           </ul>
         ) : (
-          <div className="flex flex-1 items-center justify-center text-sm font-medium text-gray-400">
-            할 일이 없습니다.
+          <div className="flex flex-1 flex-col items-center justify-center gap-2.5 text-sm font-medium text-gray-400 md:text-base md:gap-4">
+            <Image
+              className="md:w-[130px] md:h-[140px]"
+              src="/icons/common/no_data.svg"
+              alt="flag"
+              width={80}
+              height={85}
+            />
+            {emptyMessage[title]}
           </div>
         )}
       </div>
