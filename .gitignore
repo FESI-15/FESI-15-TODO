@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 
 .swc/
+
+# superpowers scratch state (progress ledgers, review packages)
+.superpowers/

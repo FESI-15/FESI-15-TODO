@@ -6,7 +6,7 @@ export default function SideMenuProfile() {
   const { data: user } = useGetUserMe();
   return (
     <Link
-      href="/profile"
+      href="/mypage"
       className="flex items-center gap-2 p-2 border border-gray-200 rounded-full flex-1"
     >
       <div className="w-[38px] h-[38px] rounded-full bg-gray-200">

@@ -23,7 +23,9 @@ interface FormInputProps<T extends FieldValues> extends Omit<
   name: FieldPath<T>;
   variant?: FormInputVariant;
   fieldClassName?: string;
+  errorClassName?: string;
   label?: ReactNode;
+  hideError?: boolean;
 }
 
 export function FormInput<T extends FieldValues>({
@@ -33,6 +35,8 @@ export function FormInput<T extends FieldValues>({
   label,
   className,
   fieldClassName,
+  errorClassName,
+  hideError = false,
   type = "text",
   ...props
 }: FormInputProps<T>) {
@@ -86,7 +90,9 @@ export function FormInput<T extends FieldValues>({
           onTogglePassword={() => setIsPasswordVisible((prev) => !prev)}
         />
       </div>
-      {isError && <FieldError errors={[fieldState.error]} />}
+      {isError && !hideError && (
+        <FieldError errors={[fieldState.error]} className={errorClassName} />
+      )}
     </Field>
   );
 }

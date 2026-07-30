@@ -4,6 +4,7 @@ import "@/globals.css";
 import { QueryProviders } from "../providers/Queryproviders";
 import LazyMotionProvider from "@/providers/LazyMotionProvider";
 import { cn } from "@/utils/cn";
+import { Toaster } from "@/components/ui/toast";
 
 const pretendard = localFont({
   src: [
@@ -79,6 +80,7 @@ export default function RootLayout({
         <QueryProviders>
           <LazyMotionProvider>{children}</LazyMotionProvider>
         </QueryProviders>
+        <Toaster />
       </body>
     </html>
   );

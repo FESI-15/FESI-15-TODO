@@ -1,5 +1,20 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { usePostAuthLogout } from "@/hooks/queries/auth/auth.bff.hook";
+
 export default function SideMenuUtilMenu() {
+  const router = useRouter();
+  const { mutate: logout } = usePostAuthLogout({
+    mutation: {
+      onSuccess: () => {
+        router.replace("/login");
+        router.refresh();
+      },
+    },
+  });
+
   return (
     <ul className="mt-6">
       <li>
@@ -19,6 +34,7 @@ export default function SideMenuUtilMenu() {
       <li>
         <button
           type="button"
+          onClick={() => logout()}
           className="flex items-center gap-2.5 text-gray-500 px-4 py-3.5 w-full"
         >
           <Image
