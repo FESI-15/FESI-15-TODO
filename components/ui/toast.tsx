@@ -1,13 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { usePathname } from "next/navigation";
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/ui/button";
-import { useSideMenu } from "@/components/layout/SideMenu/SideMenuContext";
 import CheckboxIcon from "@/public/icons/mypage/ic_checkbox.svg";
 import {
   XIcon,
@@ -21,8 +19,9 @@ const toast = ToastPrimitive.createToastManager();
 
 const toastVariants = cva(
   [
-    "group/toast pointer-events-auto relative w-full rounded-2xl border shadow-lg outline-none",
+    "group/toast pointer-events-auto relative w-full border shadow-lg outline-none",
     "transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+    "hover:-translate-y-0.5 hover:shadow-xl",
     "data-starting-style:opacity-0 data-starting-style:translate-y-8",
     "data-ending-style:opacity-0 data-ending-style:scale-95",
   ].join(" "),
@@ -31,9 +30,9 @@ const toastVariants = cva(
       type: {
         default: "bg-popover text-popover-foreground",
         success:
-          "rounded-[28px] bg-[#FFF8E4] text-[#EF6C00] text-sm font-semibold",
+          "bg-[#FFF8E4] text-[#EF6C00] text-sm font-semibold shadow-[0_8px_24px_-4px_rgba(239,108,0,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(239,108,0,0.35)]",
         error:
-          "rounded-[28px] bg-[#FEF3F2] text-[#B42318] text-sm font-semibold",
+          "bg-[#FEF3F2] text-[#B42318] text-sm font-semibold shadow-[0_8px_24px_-4px_rgba(180,35,24,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(180,35,24,0.35)]",
         info: "bg-popover text-popover-foreground",
         warning: "bg-popover text-popover-foreground",
         loading: "bg-popover text-popover-foreground",
@@ -54,22 +53,11 @@ function ToastPortal({ ...props }: ToastPrimitive.Portal.Props) {
 }
 
 function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {
-  const pathname = usePathname();
-  const { open } = useSideMenu();
-  const hasSidebar =
-    pathname.startsWith("/dashboard") || pathname.startsWith("/mypage");
-
   return (
     <ToastPrimitive.Viewport
       data-slot="toast-viewport"
       className={cn(
-        "pointer-events-none fixed bottom-8 right-8 z-50 flex max-w-[570px] flex-col gap-3 outline-none",
-        "left-8",
-        hasSidebar && [
-          "md:left-[92px]",
-          open ? "lg:left-[394px]" : "lg:left-[92px]",
-          "lg:mx-auto lg:bottom-12",
-        ],
+        "pointer-events-none fixed right-8 bottom-0 z-50 flex w-[500px] flex-col gap-3 py-10 outline-none",
         className,
       )}
       {...props}
@@ -204,6 +192,7 @@ function ToastList() {
           <ToastTitle />
           <ToastDescription />
         </div>
+        <ToastClose />
       </ToastContent>
     </Toast>
   ));

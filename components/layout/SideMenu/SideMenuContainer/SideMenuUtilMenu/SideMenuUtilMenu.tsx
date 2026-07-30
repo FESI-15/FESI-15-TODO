@@ -9,7 +9,7 @@ export default function SideMenuUtilMenu() {
   const { mutate: logout } = usePostAuthLogout({
     mutation: {
       onSuccess: () => {
-        router.push("/login");
+        router.replace("/login");
         router.refresh();
       },
     },

@@ -1,16 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import MobileSideMenu from "./MobileSideMenu/MobileSideMenu";
 import TabletSideMenu from "./TabletSideMenu/TabletSideMenu";
-import { useSideMenu } from "./SideMenuContext";
 
 export default function SideMenu() {
-  const { open, onToggle } = useSideMenu();
+  const [open, setOpen] = useState(true);
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
 
   return (
     <div className="relative pt-[57px] md:pt-0">
       <MobileSideMenu />
-      <TabletSideMenu open={open} onToggle={onToggle} />
+      <TabletSideMenu open={open} onToggle={handleToggle} />
     </div>
   );
 }

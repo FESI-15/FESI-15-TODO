@@ -1,15 +1,16 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { MyPageInfo } from "@/components/mypage/MyPageInfo";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
+import { getQueryClient } from "@/utils/getQueryClient";
 
 export default async function MyPagePage() {
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery(getUserMeQueryOptionsServer());
+  try {
+    await queryClient.fetchQuery(getUserMeQueryOptionsServer());
+  } catch (error) {
+    throw error;
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
