@@ -1,40 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Control, useWatch } from "react-hook-form";
+import { Control } from "react-hook-form";
 import { twMerge } from "tailwind-merge";
+import { Button } from "@/components/common/Button";
 import { FormInput } from "@/components/common/input/FormInput";
-import { useGetUsersCheckNickname } from "@/hooks/queries/users/users.bff.hook";
 import type { MyPageFormValues } from "./myPageForm.types";
-
-const NICKNAME_CHECK_DEBOUNCE_MS = 400;
 
 interface MyPageNameFieldProps {
   control: Control<MyPageFormValues>;
-  savedName?: string;
+  isNameChanged: boolean;
+  canCheck: boolean;
+  isNameAvailable: boolean | undefined;
+  onCheck: () => void;
 }
 
-export function MyPageNameField({ control, savedName }: MyPageNameFieldProps) {
-  const nameValue = useWatch({ control, name: "name" });
-  const [debouncedName, setDebouncedName] = useState(nameValue);
-
-  useEffect(() => {
-    const timer = setTimeout(
-      () => setDebouncedName(nameValue),
-      NICKNAME_CHECK_DEBOUNCE_MS,
-    );
-    return () => clearTimeout(timer);
-  }, [nameValue]);
-
-  const isNameChanged = savedName !== undefined && debouncedName !== savedName;
-  const { data: nicknameCheck } = useGetUsersCheckNickname({
-    name: isNameChanged ? debouncedName : "",
-  });
-  const isNameAvailable = nicknameCheck?.data.available;
-
+export function MyPageNameField({
+  control,
+  isNameChanged,
+  canCheck,
+  isNameAvailable,
+  onCheck,
+}: MyPageNameFieldProps) {
   return (
     <div className="flex w-full flex-col gap-2">
-      <FormInput control={control} name="name" label="이름" />
+      <div className="flex w-full items-end gap-2">
+        <FormInput
+          control={control}
+          name="name"
+          label="이름"
+          className="flex-1"
+        />
+        <Button
+          type="button"
+          hierarchy="secondary"
+          className="shrink-0 whitespace-nowrap rounded-[12px] p-3 text-sm md:rounded-[16px] md:p-4 md:text-base lg:text-base"
+          disabled={!canCheck}
+          onClick={onCheck}
+        >
+          중복확인
+        </Button>
+      </div>
       {isNameChanged && (
         <p
           className={twMerge(

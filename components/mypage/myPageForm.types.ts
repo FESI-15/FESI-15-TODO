@@ -2,6 +2,11 @@ import { z } from "zod";
 
 const optionalPasswordField = z.string().optional();
 
+const newPasswordSchema = z
+  .string()
+  .min(8, "비밀번호는 8자 이상 입력해주세요")
+  .max(72, "비밀번호는 72자 이하로 입력해주세요");
+
 export const myPageFormSchema = z
   .object({
     name: z
@@ -33,10 +38,11 @@ export const myPageFormSchema = z
       });
     }
 
-    if (newPassword.length < 8 || newPassword.length > 72) {
+    const newPasswordResult = newPasswordSchema.safeParse(newPassword);
+    if (!newPasswordResult.success) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "비밀번호는 8자 이상 입력해주세요",
+        message: newPasswordResult.error.issues[0].message,
         path: ["newPassword"],
       });
     }

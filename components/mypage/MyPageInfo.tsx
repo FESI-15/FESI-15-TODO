@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/common/Button";
 import { ProfileImageInput } from "./ProfileImageInput";
@@ -12,6 +12,7 @@ import { myPageFormSchema, type MyPageFormValues } from "./myPageForm.types";
 import { showSaveFailureToast, showSaveSuccessToast } from "./toast";
 import {
   useGetUserMe,
+  useGetUsersCheckNickname,
   usePatchUserMe,
   usePatchUserPassword,
 } from "@/hooks/queries/users/users.bff.hook";
@@ -23,77 +24,74 @@ export function MyPageInfo() {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<MyPageFormValues>({
     resolver: zodResolver(myPageFormSchema),
     defaultValues: {
-      name: "",
-      image: undefined,
+      name: user?.name ?? "",
+      image: user?.image ?? undefined,
       currentPassword: "",
       newPassword: "",
       confirmPassword: "",
     },
   });
 
-  const userName = user?.name;
-  const userImage = user?.image;
-  const hasUser = user !== undefined;
+  const nameValue = useWatch({ control, name: "name" });
+  const [checkedName, setCheckedName] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (!hasUser) {
-      return;
-    }
+  const isNameChanged = user !== undefined && nameValue !== user.name;
+  const isChecked = checkedName !== null && checkedName === nameValue;
+  const canCheck = isNameChanged && nameValue.length > 0 && !isChecked;
 
-    reset({
-      name: userName,
-      image: userImage ?? undefined,
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
-  }, [hasUser, userName, userImage, reset]);
+  const { data: nicknameCheck } = useGetUsersCheckNickname({
+    name: checkedName ?? "",
+  });
+  const isNameAvailable = isChecked ? nicknameCheck?.data.available : undefined;
 
   const { mutateAsync: patchUserMe } = usePatchUserMe();
   const { mutateAsync: patchUserPassword } = usePatchUserPassword();
 
   const onSubmit = async (values: MyPageFormValues) => {
     if (!user) {
+      return;
+    }
+
+    if (isNameChanged && isNameAvailable !== true) {
       showSaveFailureToast();
       return;
     }
 
     const currentPassword = values.currentPassword ?? "";
-    const newPassword = values.newPassword ?? "";
 
     const shouldUpdateProfile =
       values.name !== user.name || values.image !== (user.image ?? undefined);
     const shouldUpdatePassword = currentPassword !== "";
 
     if (!shouldUpdateProfile && !shouldUpdatePassword) {
-      showSaveFailureToast();
       return;
     }
 
-    const results = await Promise.allSettled([
+    const toastOptions = {
+      onSuccess: showSaveSuccessToast,
+      onError: showSaveFailureToast,
+    };
+
+    await Promise.allSettled([
       shouldUpdateProfile
-        ? patchUserMe({ data: { name: values.name, image: values.image } })
+        ? patchUserMe(
+            { data: { name: values.name, image: values.image } },
+            toastOptions,
+          )
         : Promise.resolve(),
       shouldUpdatePassword
-        ? patchUserPassword({
-            data: { currentPassword, newPassword },
-          })
+        ? patchUserPassword(
+            {
+              data: { currentPassword, newPassword: values.newPassword ?? "" },
+            },
+            toastOptions,
+          )
         : Promise.resolve(),
     ]);
-
-    const hasFailure = results.some((result) => result.status === "rejected");
-
-    if (hasFailure) {
-      showSaveFailureToast();
-      return;
-    }
-
-    showSaveSuccessToast();
   };
 
   return (
@@ -106,7 +104,13 @@ export function MyPageInfo() {
       <div className="flex w-full flex-col gap-10">
         <div className="flex w-full flex-col gap-4">
           <MyPageEmailField email={user?.email} />
-          <MyPageNameField control={control} savedName={user?.name} />
+          <MyPageNameField
+            control={control}
+            isNameChanged={isNameChanged}
+            canCheck={canCheck}
+            isNameAvailable={isNameAvailable}
+            onCheck={() => setCheckedName(nameValue)}
+          />
         </div>
 
         <MyPagePasswordFields control={control} errors={errors} />
