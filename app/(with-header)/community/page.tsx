@@ -3,6 +3,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { getPostsQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
 import { Community } from "@/components/community/Community";
 
@@ -26,7 +27,9 @@ export default async function CommunityPage({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Community />
+      <Suspense>
+        <Community />
+      </Suspense>
     </HydrationBoundary>
   );
 }
