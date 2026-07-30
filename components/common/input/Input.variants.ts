@@ -29,7 +29,7 @@ export const inputVariants = cva(
         text: "",
         link: "",
         search:
-          "w-full rounded-full md:rounded-full pl-3 py-2 lg:py-2 pr-10 md:pr-10",
+          "w-full rounded-full md:rounded-full pl-3 py-2 md:py-2.5 md:px-5 pr-10",
         password: "",
       },
     },
