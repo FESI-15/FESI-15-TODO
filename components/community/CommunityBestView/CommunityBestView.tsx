@@ -7,6 +7,7 @@ import { BestViewCard } from "./BestViewCard/BestViewCard";
 
 export function CommunityBestView() {
   const { data } = useGetPosts({ type: "best" });
+  if (!data?.data.posts.length) return null;
   return (
     <div className="w-full min-w-0 overflow-hidden">
       <Swiper

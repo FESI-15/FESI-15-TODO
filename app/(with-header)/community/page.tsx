@@ -6,10 +6,23 @@ import {
 import { getPostsQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
 import { Community } from "@/components/community/Community";
 
-export default async function CommunityPage() {
+interface CommunityPageProps {
+  searchParams: {
+    search: string;
+  };
+}
+
+export default async function CommunityPage({
+  searchParams,
+}: CommunityPageProps) {
   const queryClient = new QueryClient();
 
-  await Promise.all([queryClient.prefetchQuery(getPostsQueryOptionsServer())]);
+  await Promise.all([
+    queryClient.prefetchQuery(
+      getPostsQueryOptionsServer({ search: searchParams.search ?? "" }),
+    ),
+    queryClient.prefetchQuery(getPostsQueryOptionsServer({ type: "best" })),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

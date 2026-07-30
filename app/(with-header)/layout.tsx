@@ -14,7 +14,7 @@ export default async function WithHeaderLayout({
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(getUserMeQueryOptionsServer());
   return (
-    <div className="flex-col flex md:flex-row">
+    <div className="flex-col flex md:flex-row flex-1">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SideMenu />
       </HydrationBoundary>
