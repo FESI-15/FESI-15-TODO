@@ -1,11 +1,16 @@
 "use client";
 import { FormInput } from "@/components/common/input/FormInput";
 import { FieldValues, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function CommunityHeader() {
   const router = useRouter();
-  const { control, handleSubmit } = useForm();
+  const searchParams = useSearchParams();
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      search: searchParams.get("search") || "",
+    },
+  });
   const onSubmit = (data: FieldValues) => {
     router.push(`/community?search=${data.search}`);
   };
