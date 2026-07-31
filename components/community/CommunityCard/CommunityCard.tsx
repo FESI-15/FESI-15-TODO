@@ -2,8 +2,10 @@ import { GetTeamIdPosts200PostsItem } from "@/apis/model";
 import { CardInformation } from "./CardInformation/CardInformation";
 import Image from "next/image";
 import Link from "next/link";
+import DOMPurify from "dompurify";
 
 export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
+  const sanitizedContent = DOMPurify.sanitize(post.content);
   return (
     <li>
       <Link
@@ -15,7 +17,7 @@ export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
             {post.title}
           </p>
           <div
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: sanitizedContent }}
             className="text-sm text-gray-700 line-clamp-2"
           />
           <div className="mt-3 md:mt-6">
@@ -25,7 +27,8 @@ export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
         {post.image && (
           <Image
             className="md:w-[120px] md:h-[120px]"
-            src={"/images/test_image.png"}
+            objectFit="cover"
+            src={post.image}
             alt={post.title}
             width={72}
             height={72}
