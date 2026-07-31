@@ -1,0 +1,45 @@
+"use client";
+
+import { addMonths, format, subMonths } from "date-fns";
+import { ko } from "date-fns/locale";
+import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
+import CalendarGoalFilter from "./CalendarGoalFilter";
+
+interface CalendarNavProps {
+  month: Date;
+  onMonthChange: (month: Date) => void;
+  goalId: number | undefined;
+  onGoalIdChange: (goalId: number | undefined) => void;
+}
+
+export default function CalendarNav({
+  month,
+  onMonthChange,
+  goalId,
+  onGoalIdChange,
+}: CalendarNavProps) {
+  return (
+    <div className="flex flex-col items-center gap-3 lg:flex-row lg:justify-between">
+      <div className="flex shrink-0 items-center gap-4">
+        <button
+          type="button"
+          aria-label="이전 달"
+          onClick={() => onMonthChange(subMonths(month, 1))}
+        >
+          <DoubleArrow className="size-6 rotate-180 text-gray-400" />
+        </button>
+        <span className="text-lg font-semibold whitespace-nowrap text-gray-800">
+          {format(month, "yyyy년 M월", { locale: ko })}
+        </span>
+        <button
+          type="button"
+          aria-label="다음 달"
+          onClick={() => onMonthChange(addMonths(month, 1))}
+        >
+          <DoubleArrow className="size-6 text-gray-400" />
+        </button>
+      </div>
+      <CalendarGoalFilter goalId={goalId} onGoalIdChange={onGoalIdChange} />
+    </div>
+  );
+}

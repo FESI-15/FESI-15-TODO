@@ -56,7 +56,7 @@ export default function TabletSideMenu({
           onClick={onToggle}
           className={tabletSideMenuButtonVariants({ open })}
         >
-          <DoubleArrow />
+          <DoubleArrow className="size-8" />
         </button>
         {open ? (
           <SideMenuContainer />
