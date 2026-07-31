@@ -31,7 +31,7 @@ export default function CalendarGoalFilter({
     onGoalIdChange(
       selectedGoalId === ALL_GOALS_ID ? undefined : selectedGoalId,
     );
-  }, [selectedGoalId]);
+  }, [selectedGoalId, onGoalIdChange]);
 
   const options = [
     { id: ALL_GOALS_ID, label: "전체 목표" },
@@ -43,7 +43,7 @@ export default function CalendarGoalFilter({
     <div className="flex w-full items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 px-3 py-2 lg:w-[350px]">
       <Image
         src="/icons/dashboard/goal.svg"
-        alt=""
+        alt="목표"
         width={32}
         height={32}
         className="size-8 shrink-0"

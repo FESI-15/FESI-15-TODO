@@ -11,7 +11,7 @@ export default function CalendarHeader() {
 
   return (
     <div className="flex items-center justify-between px-2">
-      <h1 className="flex h-10 items-center text-2xl font-semibold text-gray-900">
+      <h1 className="py-2 text-2xl font-semibold text-gray-900">
         {user?.data.name}님의 캘린더
       </h1>
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-gray-200 bg-white px-4 py-3 md:static md:inset-auto md:border-t-0 md:bg-transparent md:p-0">
