@@ -1,14 +1,20 @@
 import { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import GoalTaskRow from "@/components/dashboard/TaskColumn/GoalTaskRow/GoalTaskRow";
+import ListCard from "@/components/common/ListCard";
 import Image from "next/image";
 
 export default function TodoList({
   todos,
+  emptyMessage = "아직 등록한 할 일이 없어요",
+  filterSlot,
 }: {
   todos: GetTeamIdTodos200TodosItem[];
+  emptyMessage?: string;
+  filterSlot?: React.ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-[24px] p-4 mt-3 min-h-[640px] md:min-h-[800px] flex flex-col">
+    <ListCard>
+      {filterSlot && <div className="mb-5 shrink-0">{filterSlot}</div>}
       {todos.length === 0 ? (
         <div className="flex flex-col items-center justify-center flex-1">
           <Image
@@ -19,7 +25,7 @@ export default function TodoList({
             height={85}
           />
           <p className="text-gray-500 text-sm font-medium md:text-base mt-2.5 md:mt-4 md:text-base">
-            아직 등록한 할 일이 없어요
+            {emptyMessage}
           </p>
         </div>
       ) : (
@@ -29,6 +35,6 @@ export default function TodoList({
           ))}
         </ul>
       )}
-    </div>
+    </ListCard>
   );
 }
