@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { GetTeamIdPostsParams } from "@/apis/model";
 import type {
@@ -31,9 +31,13 @@ export const useGetPost = ({ postId }: PostIdVariables) => {
 };
 
 export const usePostPosts = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["postPosts"],
     mutationFn: (variables: PostPostsVariables) => postPosts(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postsKeys.list() });
+    },
   });
 };
 

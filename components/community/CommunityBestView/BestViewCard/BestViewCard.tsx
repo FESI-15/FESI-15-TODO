@@ -14,12 +14,17 @@ export function BestViewCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
           <p className="font-semibold text-gray-900 mb-3 md:text-xl md:font-semibold md:mb-4">
             {post.title}
           </p>
-          <Image
-            src={"/images/test_image.png"}
-            alt={post.title}
-            width={100}
-            height={100}
-          />
+          <div className="size-[100px] relative">
+            {post.image && (
+              <Image
+                className="size-full object-cover"
+                src={post.image}
+                alt={post.title}
+                width={100}
+                height={100}
+              />
+            )}
+          </div>
           <div className="mt-4">
             <CardInformation variant="best" post={post} />
           </div>
