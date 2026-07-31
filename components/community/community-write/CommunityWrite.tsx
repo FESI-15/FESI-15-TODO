@@ -1,6 +1,5 @@
 "use client";
 import { WriteHeader } from "./WriteHeader/WriteHeader";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { WriteTitleInput } from "./WriteTitleInput/WriteTitleInput";
@@ -12,18 +11,16 @@ import {
   showSaveSuccessToast,
   showSaveFailureToast,
 } from "@/components/mypage/toast";
-
-export const WRITE_FORM_SCHEMA = z.object({
-  title: z.string().min(1).max(30),
-  content: z.string().min(1),
-  image: z.string().optional(),
-});
+import {
+  WRITE_FORM_SCHEMA,
+  type WriteFormValues,
+} from "@/types/communityWriteSchema";
 
 export function CommunityWrite() {
   const router = useRouter();
   const { mutate } = usePostPosts();
   const { register, handleSubmit, watch, setValue, formState, control } =
-    useForm<z.infer<typeof WRITE_FORM_SCHEMA>>({
+    useForm<WriteFormValues>({
       defaultValues: {
         title: "",
         content: "",
@@ -32,7 +29,7 @@ export function CommunityWrite() {
       resolver: zodResolver(WRITE_FORM_SCHEMA),
     });
 
-  const onSubmit = (data: z.infer<typeof WRITE_FORM_SCHEMA>) => {
+  const onSubmit = (data: WriteFormValues) => {
     mutate(
       {
         data: {

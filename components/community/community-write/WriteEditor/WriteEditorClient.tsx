@@ -6,12 +6,11 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
 import type { UseFormSetValue } from "react-hook-form";
-import type { z } from "zod";
-import type { WRITE_FORM_SCHEMA } from "../CommunityWrite";
+import type { WriteFormValues } from "@/types/communityWriteSchema";
 import { EditorToolbar } from "./EditorToolbar";
 
 export interface WriteEditorClientProps {
-  setValue: UseFormSetValue<z.infer<typeof WRITE_FORM_SCHEMA>>;
+  setValue: UseFormSetValue<WriteFormValues>;
 }
 
 export default function WriteEditorClient({
@@ -29,7 +28,7 @@ export default function WriteEditorClient({
       }),
     ],
     onUpdate({ editor }) {
-      setValue("content", editor.getHTML(), {
+      setValue("content", editor.isEmpty ? "" : editor.getHTML(), {
         shouldDirty: true,
         shouldValidate: true,
       });

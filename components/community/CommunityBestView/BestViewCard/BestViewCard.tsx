@@ -17,8 +17,7 @@ export function BestViewCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
           <div className="size-[100px] relative">
             {post.image && (
               <Image
-                className="size-full"
-                objectFit="cover"
+                className="size-full object-cover"
                 src={post.image}
                 alt={post.title}
                 width={100}

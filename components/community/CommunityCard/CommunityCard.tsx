@@ -26,8 +26,7 @@ export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
         </div>
         {post.image && (
           <Image
-            className="md:w-[120px] md:h-[120px]"
-            objectFit="cover"
+            className="md:w-[120px] md:h-[120px] object-cover"
             src={post.image}
             alt={post.title}
             width={72}
