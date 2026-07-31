@@ -52,7 +52,7 @@ export default function CalendarGoalFilter({
         control={control}
         name="goalId"
         options={options}
-        className="flex-1 rounded-2xl border-none bg-transparent p-0 text-sm shadow-none md:rounded-2xl md:p-0 md:text-sm"
+        className="flex-1 rounded-2xl border-none bg-transparent p-0 text-sm shadow-none data-popup-open:border-none data-popup-open:shadow-none md:rounded-2xl md:p-0 md:text-sm"
       />
     </div>
   );

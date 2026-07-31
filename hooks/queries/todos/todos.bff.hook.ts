@@ -13,6 +13,7 @@ import {
   postTodos,
 } from "@/apis/todos/todosBff";
 import { todosKeys } from "./todos.key";
+import { favoritesKeys } from "../favorites/favorites.key";
 
 export const getTodosQueryKey = (params?: GetTeamIdTodosParams) => {
   return ["/api/todos", ...(params ? [params] : [])] as const;
@@ -52,6 +53,7 @@ export const usePatchTodo = () => {
     mutationFn: (variables: PatchTodoVariables) => patchTodo(variables),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
     },
   });
 };
@@ -63,6 +65,7 @@ export const useDeleteTodo = () => {
     mutationFn: (variables: TodoIdVariables) => deleteTodo(variables),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
     },
   });
 };
