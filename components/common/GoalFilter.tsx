@@ -5,24 +5,27 @@ import { useEffect } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { Dropdown } from "@/components/common/Dropdown";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
+import { cn } from "@/utils/cn";
 
 const ALL_GOALS_ID = 0;
 
-interface CalendarGoalFilterValues {
+interface GoalFilterValues {
   goalId: number;
 }
 
-interface CalendarGoalFilterProps {
+interface GoalFilterProps {
   goalId: number | undefined;
   onGoalIdChange: (goalId: number | undefined) => void;
+  className?: string;
 }
 
-export default function CalendarGoalFilter({
+export default function GoalFilter({
   goalId,
   onGoalIdChange,
-}: CalendarGoalFilterProps) {
+  className,
+}: GoalFilterProps) {
   const { data: goals } = useGetGoals();
-  const { control } = useForm<CalendarGoalFilterValues>({
+  const { control } = useForm<GoalFilterValues>({
     defaultValues: { goalId: goalId ?? ALL_GOALS_ID },
   });
   const selectedGoalId = useWatch({ control, name: "goalId" });
@@ -40,7 +43,12 @@ export default function CalendarGoalFilter({
   ];
 
   return (
-    <div className="flex w-full items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 px-3 py-2 lg:w-[350px]">
+    <div
+      className={cn(
+        "flex w-full items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 px-3 py-2",
+        className,
+      )}
+    >
       <Image
         src="/icons/dashboard/goal.svg"
         alt="목표"

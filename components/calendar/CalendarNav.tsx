@@ -3,7 +3,7 @@
 import { addMonths, format, subMonths } from "date-fns";
 import { ko } from "date-fns/locale";
 import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
-import CalendarGoalFilter from "./CalendarGoalFilter";
+import GoalFilter from "@/components/common/GoalFilter";
 
 interface CalendarNavProps {
   month: Date;
@@ -39,7 +39,11 @@ export default function CalendarNav({
           <DoubleArrow className="size-6 text-gray-400" />
         </button>
       </div>
-      <CalendarGoalFilter goalId={goalId} onGoalIdChange={onGoalIdChange} />
+      <GoalFilter
+        goalId={goalId}
+        onGoalIdChange={onGoalIdChange}
+        className="lg:w-[350px]"
+      />
     </div>
   );
 }

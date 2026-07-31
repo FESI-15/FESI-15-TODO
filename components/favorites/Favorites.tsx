@@ -2,9 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { useGetTodoFavorites } from "@/hooks/queries/favorites/favorites.bff.hook";
-import TodoList from "@/components/todos/TodoList/TodoList";
 import FavoritesTab, { FavoritesTabValue } from "./FavoritesTab";
-import FavoritesGoalFilter from "./FavoritesGoalFilter";
+import FavoritesTodoList from "./FavoritesTodoList";
 
 const FAVORITES_LIMIT = 100;
 
@@ -16,16 +15,11 @@ export default function Favorites() {
 
   const filteredTodos = useMemo(() => {
     return (data?.data.favorites ?? [])
-      .filter((favorite) => {
-        const statusMatch =
-          tab === "all"
-            ? true
-            : tab === "done"
-              ? favorite.todo.done
-              : !favorite.todo.done;
-        const goalMatch = !goalId || favorite.todo.goal?.id === goalId;
-        return statusMatch && goalMatch;
-      })
+      .filter(
+        ({ todo }) =>
+          (tab === "all" || todo.done === (tab === "done")) &&
+          (!goalId || todo.goal?.id === goalId),
+      )
       .map((favorite) => favorite.todo);
   }, [data, tab, goalId]);
 
@@ -40,12 +34,10 @@ export default function Favorites() {
       <div className="px-2 flex justify-between items-center mt-4 lg:mt-6">
         <FavoritesTab value={tab} onChange={setTab} />
       </div>
-      <TodoList
+      <FavoritesTodoList
         todos={filteredTodos}
-        emptyMessage="아직 찜한 할 일이 없어요"
-        filterSlot={
-          <FavoritesGoalFilter goalId={goalId} onGoalIdChange={setGoalId} />
-        }
+        goalId={goalId}
+        onGoalIdChange={setGoalId}
       />
     </div>
   );
