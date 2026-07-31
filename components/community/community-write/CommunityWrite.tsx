@@ -53,7 +53,7 @@ export function CommunityWrite() {
     );
   };
   return (
-    <div className="max-w-[768px] mx-auto w-full flex flex-col p-4">
+    <div className="max-w-[768px] mx-auto w-full flex flex-col p-4 md:mt-8 lg:mt-[60px]">
       <form onSubmit={handleSubmit(onSubmit)}>
         <WriteHeader isValid={formState.isValid} />
         <div className="p-4 bg-white rounded-[24px] flex-1">
