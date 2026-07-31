@@ -11,7 +11,7 @@ export function EditorToolbar({ editor }: EditorToolbarProps) {
 
   return (
     <div
-      className="flex flex-wrap items-center gap-1 py-1 px-2 md:px-4 bg-gray-50 rounded-full mt-3"
+      className="flex flex-wrap items-center gap-1 py-1 px-2 md:px-4 bg-gray-50 rounded-2xl md:rounded-full mt-3"
       aria-label="게시글 편집 도구"
     >
       {TOOLBAR_GROUPS.map((group, groupIndex) => (

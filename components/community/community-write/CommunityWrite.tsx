@@ -53,10 +53,10 @@ export function CommunityWrite() {
     );
   };
   return (
-    <div className="max-w-[768px] mx-auto w-full flex flex-col p-4 md:mt-8 lg:mt-[60px]">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1 p-4 pb-15 md:mt-8 lg:mt-[60px]">
+      <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
         <WriteHeader isValid={formState.isValid} />
-        <div className="p-4 bg-white rounded-[24px] flex-1">
+        <div className="p-4 bg-white rounded-[24px] flex-1 flex flex-col">
           <WriteTitleInput register={register} watch={watch} />
           <WriteEditor setValue={setValue} />
           <ImageUploadInput control={control} name="image" />
