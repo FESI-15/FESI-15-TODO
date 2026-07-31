@@ -2,22 +2,29 @@
 
 import { isSameDay } from "date-fns";
 import type { DayProps } from "react-day-picker";
+import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
-import { useCalendarGridContext } from "./CalendarGridContext";
 import CalendarEventChip from "../CalendarEventChip";
 import CalendarDayDot from "../CalendarDayDot";
 import CalendarDayOverflow from "../CalendarDayOverflow";
 
 const MAX_VISIBLE_TODOS = 3;
 
+interface CalendarMonthDayProps extends DayProps {
+  todosByDate: Record<string, GetTeamIdTodos200TodosItem[]>;
+  selectedDate: Date;
+  onSelectedDateChange: (date: Date) => void;
+}
+
 export default function CalendarMonthDay({
   day,
   className,
   children,
+  todosByDate,
+  selectedDate,
+  onSelectedDateChange,
   ...tdProps
-}: DayProps) {
-  const { todosByDate, selectedDate, onSelectedDateChange } =
-    useCalendarGridContext();
+}: CalendarMonthDayProps) {
   const dayTodos = todosByDate[day.isoDate] ?? [];
   const visible = dayTodos.slice(0, MAX_VISIBLE_TODOS);
   const hiddenCount = dayTodos.length - visible.length;
