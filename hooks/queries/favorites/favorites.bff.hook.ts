@@ -27,6 +27,7 @@ export const usePostTodoFavorite = () => {
       postTodoFavorite(variables),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
     },
   });
 };
@@ -40,6 +41,7 @@ export const useDeleteTodoFavorite = () => {
       deleteTodoFavorite(variables),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
+      queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
     },
   });
 };
