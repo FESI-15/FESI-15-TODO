@@ -2,8 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { useGetTodoFavorites } from "@/hooks/queries/favorites/favorites.bff.hook";
+import TodoList from "@/components/todos/TodoList/TodoList";
+import GoalFilter from "@/components/common/GoalFilter";
 import FavoritesTab, { FavoritesTabValue } from "./FavoritesTab";
-import FavoritesTodoList from "./FavoritesTodoList";
 
 const FAVORITES_LIMIT = 100;
 
@@ -34,10 +35,10 @@ export default function Favorites() {
       <div className="px-2 flex justify-between items-center mt-4 lg:mt-6">
         <FavoritesTab value={tab} onChange={setTab} />
       </div>
-      <FavoritesTodoList
+      <TodoList
         todos={filteredTodos}
-        goalId={goalId}
-        onGoalIdChange={setGoalId}
+        emptyMessage="아직 찜한 할 일이 없어요"
+        filterSlot={<GoalFilter goalId={goalId} onGoalIdChange={setGoalId} />}
       />
     </div>
   );
