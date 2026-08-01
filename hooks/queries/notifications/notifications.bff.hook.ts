@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { GetTeamIdNotificationsParams } from "@/apis/model";
 import type {
@@ -22,9 +22,14 @@ export const useGetNotifications = (params?: GetTeamIdNotificationsParams) => {
 };
 
 export const usePatchNotifications = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["patchNotifications"],
     mutationFn: () => patchNotifications(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
+    },
   });
 };
 
@@ -36,10 +41,15 @@ export const useDeleteNotifications = () => {
 };
 
 export const usePatchNotification = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationKey: ["patchNotification"],
     mutationFn: (variables: PatchNotificationVariables) =>
       patchNotification(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
+    },
   });
 };
 

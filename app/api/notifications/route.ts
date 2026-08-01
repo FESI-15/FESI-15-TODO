@@ -28,7 +28,9 @@ export async function GET(request: Request) {
 
 // 알림 읽음 처리
 export async function PATCH() {
-  return handleRouteRequest((headers) => patchTeamIdNotifications({ headers }));
+  return handleEmptyRouteRequest((headers) =>
+    patchTeamIdNotifications({ headers }),
+  );
 }
 
 // 알림 삭제

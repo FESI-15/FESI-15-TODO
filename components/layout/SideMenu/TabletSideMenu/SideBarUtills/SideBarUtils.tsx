@@ -1,14 +1,7 @@
 import Image from "next/image";
 import NotificationBell from "@/components/common/NotificationBell";
 
-interface SideBarUtilsProps {
-  onClickBell: () => void;
-  newNotification: boolean;
-}
-export default function SideBarUtils({
-  onClickBell,
-  newNotification,
-}: SideBarUtilsProps) {
+export default function SideBarUtils() {
   return (
     <div className="mt-10 flex flex-col items-center gap-8">
       <Image
@@ -17,10 +10,7 @@ export default function SideBarUtils({
         width={32}
         height={32}
       />
-      <NotificationBell
-        onClickBell={onClickBell}
-        newNotification={newNotification}
-      />
+      <NotificationBell panelClassName="absolute top-0 left-full z-50 ml-2" />
     </div>
   );
 }

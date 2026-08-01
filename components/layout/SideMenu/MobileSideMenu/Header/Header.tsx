@@ -3,9 +3,8 @@ import NotificationBell from "@/components/common/NotificationBell";
 
 interface HeaderProps {
   onClickHamburger: () => void;
-  onClickBell: () => void;
 }
-export default function Header({ onClickHamburger, onClickBell }: HeaderProps) {
+export default function Header({ onClickHamburger }: HeaderProps) {
   return (
     <header className="bg-white py-4 px-5 border-b border-gray-200 flex justify-between items-center shadow-sm">
       <div className="flex items-center gap-3">
@@ -22,7 +21,7 @@ export default function Header({ onClickHamburger, onClickBell }: HeaderProps) {
           {title}님의 대시보드
         </h1> */}
       </div>
-      <NotificationBell onClickBell={onClickBell} newNotification={true} />
+      <NotificationBell />
     </header>
   );
 }

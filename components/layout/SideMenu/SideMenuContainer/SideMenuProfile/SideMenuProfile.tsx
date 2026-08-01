@@ -9,13 +9,13 @@ export default function SideMenuProfile() {
       href="/mypage"
       className="flex items-center gap-2 p-2 border border-gray-200 rounded-full flex-1"
     >
-      <div className="w-[38px] h-[38px] rounded-full bg-gray-200">
+      <div className="w-[38px] h-[38px] rounded-full bg-gray-200 overflow-hidden">
         <Image
           src={user?.data.image || "/images/sidemenu/profile.png"}
           alt="profile"
           width={38}
           height={38}
-          className="object-cover"
+          className="object-cover rounded-full"
         />
       </div>
       <div>

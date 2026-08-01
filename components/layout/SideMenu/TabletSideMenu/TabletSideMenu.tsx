@@ -58,11 +58,7 @@ export default function TabletSideMenu({
         >
           <DoubleArrow className="size-8" />
         </button>
-        {open ? (
-          <SideMenuContainer />
-        ) : (
-          <SideBarUtils onClickBell={() => {}} newNotification={true} />
-        )}
+        {open ? <SideMenuContainer /> : <SideBarUtils />}
       </div>
     </>
   );
