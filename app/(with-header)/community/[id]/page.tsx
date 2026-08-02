@@ -1,5 +1,26 @@
 import { CommunityDetail } from "@/components/community/CommunityDetail/CommunityDetail";
+import { getPostQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
+import { getQueryClient } from "@/utils/getQueryClient";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
-export default function CommunityDetailPage() {
-  return <CommunityDetail />;
+export default async function CommunityDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const queryClient = getQueryClient();
+
+  try {
+    await queryClient.fetchQuery(getPostQueryOptionsServer(Number(id)));
+  } catch {
+    return notFound();
+  }
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <CommunityDetail id={Number(id)} />
+    </HydrationBoundary>
+  );
 }
