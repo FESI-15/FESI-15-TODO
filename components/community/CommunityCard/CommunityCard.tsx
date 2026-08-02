@@ -2,7 +2,7 @@ import { GetTeamIdPosts200PostsItem } from "@/apis/model";
 import { CardInformation } from "./CardInformation/CardInformation";
 import Image from "next/image";
 import Link from "next/link";
-import DOMPurify from "dompurify";
+import DOMPurify from "isomorphic-dompurify";
 
 export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
   const sanitizedContent = DOMPurify.sanitize(post.content);
