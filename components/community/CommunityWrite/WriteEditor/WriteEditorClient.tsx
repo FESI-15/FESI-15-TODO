@@ -5,16 +5,19 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
-import type { UseFormSetValue } from "react-hook-form";
+import type { UseFormSetValue, useWatch } from "react-hook-form";
 import type { WriteFormValues } from "@/types/communityWriteSchema";
 import { EditorToolbar } from "./EditorToolbar";
+import { useEffect } from "react";
 
 export interface WriteEditorClientProps {
   setValue: UseFormSetValue<WriteFormValues>;
+  content: string;
 }
 
 export default function WriteEditorClient({
   setValue,
+  content,
 }: WriteEditorClientProps) {
   const editor = useEditor({
     extensions: [
@@ -35,6 +38,16 @@ export default function WriteEditorClient({
     },
     immediatelyRender: false,
   });
+
+  useEffect(() => {
+    if (!editor || !content) return;
+
+    editor.commands.setContent(content, {
+      parseOptions: {
+        preserveWhitespace: "full",
+      },
+    });
+  }, [editor, content]);
 
   return (
     <div className="flex flex-col flex-1">
