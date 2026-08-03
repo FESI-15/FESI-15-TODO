@@ -45,10 +45,14 @@ export const usePatchComment = () => {
   });
 };
 
-export const useDeleteComment = () => {
+export const useDeleteComment = (postId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["deleteComment"],
     mutationFn: (variables: CommentIdVariables) => deleteComment(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: commentsKeys.list(postId) });
+    },
   });
 };
 

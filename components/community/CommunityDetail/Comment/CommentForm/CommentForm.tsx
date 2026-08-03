@@ -12,7 +12,7 @@ const zodSchema = z.object({
 type CommentFormValues = z.infer<typeof zodSchema>;
 
 export function CommentForm({ postId }: { postId: number }) {
-  const mutate = usePostComments(postId);
+  const { mutate, isPending } = usePostComments(postId);
   const { control, handleSubmit } = useForm<CommentFormValues>({
     defaultValues: {
       comment: "",
@@ -20,7 +20,7 @@ export function CommentForm({ postId }: { postId: number }) {
     resolver: zodResolver(zodSchema),
   });
   const onSubmit = (data: CommentFormValues) => {
-    mutate.mutate({
+    mutate({
       postId: postId,
       data: {
         content: data.comment,
@@ -39,7 +39,7 @@ export function CommentForm({ postId }: { postId: number }) {
           placeholder="댓글을 입력해주세요."
         />
         <div className="w-16 shrink-0">
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" disabled={isPending}>
             등록
           </Button>
         </div>

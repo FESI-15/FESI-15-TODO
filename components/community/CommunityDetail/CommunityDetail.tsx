@@ -14,7 +14,7 @@ export function CommunityDetail({ id }: CommunityDetailProps) {
 
   if (!postData) return null;
   return (
-    <div className="p-4">
+    <div className="p-4 w-full">
       <div className="max-w-[768px] mx-auto w-full bg-white rounded-[24px] py-6 px-4">
         <CommunityDetailHeader post={postData.data} id={id} />
         <CommunityDetailContent post={postData.data} />
