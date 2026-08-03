@@ -7,6 +7,7 @@ import WriteEditor from "./WriteEditor/WriteEditor";
 import { ImageUploadInput } from "@/components/common/input/ImageUploadInput/ImageUploadInput";
 import { usePostPosts } from "@/hooks/queries/posts/posts.bff.hook";
 import { useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
 import {
   WRITE_FORM_SCHEMA,
   type WriteFormValues,
@@ -26,30 +27,39 @@ export function CommunityWrite() {
       resolver: zodResolver(WRITE_FORM_SCHEMA),
     });
 
-  const onSubmit = (data: WriteFormValues) => {
-    mutate(
-      {
-        data: {
-          title: data.title,
-          content: data.content,
-          image: data.image,
+  const onSubmit = useCallback(
+    (data: WriteFormValues) => {
+      mutate(
+        {
+          data: {
+            title: data.title,
+            content: data.content,
+            image: data.image,
+          },
         },
-      },
-      {
-        onSuccess: () => {
-          router.push(`/community`);
-          showSaveSuccessToast("게시물이 성공적으로 등록되었습니다.");
+        {
+          onSuccess: () => {
+            router.push(`/community`);
+            showSaveSuccessToast("게시물이 성공적으로 등록되었습니다.");
+          },
+          onError: () => {
+            showSaveFailureToast("게시물 등록에 실패하였습니다.");
+          },
         },
-        onError: () => {
-          showSaveFailureToast("게시물 등록에 실패하였습니다.");
-        },
-      },
-    );
-  };
+      );
+    },
+    [mutate, router],
+  );
+
+  const submitForm = useMemo(
+    () => handleSubmit(onSubmit),
+    [handleSubmit, onSubmit],
+  );
+
   return (
     <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1 p-4 pb-15 md:mt-8 lg:mt-[60px]">
-      <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
-        <WriteHeader isValid={formState.isValid} />
+      <form className="flex flex-col flex-1" onSubmit={submitForm}>
+        <WriteHeader isValid={formState.isValid} onSubmit={submitForm} />
         <div className="p-4 bg-white rounded-[24px] flex-1 flex flex-col">
           <WriteTitleInput register={register} watch={watch} />
           <WriteEditor setValue={setValue} content={watch("content")} />

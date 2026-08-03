@@ -11,7 +11,7 @@ import {
 } from "@/types/communityWriteSchema";
 import { WriteHeader } from "../CommunityWrite/WriteHeader/WriteHeader";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import { showSaveFailureToast } from "@/utils/toast";
 
@@ -35,22 +35,30 @@ export function CommunityEdit({ id }: CommunityEditProps) {
       resolver: zodResolver(WRITE_FORM_SCHEMA),
     });
   const router = useRouter();
-  const onSubmit = (data: WriteFormValues) => {
-    patchPost(
-      {
-        postId: id,
-        data: data,
-      },
-      {
-        onSuccess: () => {
-          router.replace(`/community/${id}`);
+  const onSubmit = useCallback(
+    (data: WriteFormValues) => {
+      patchPost(
+        {
+          postId: id,
+          data: data,
         },
-        onError: () => {
-          showSaveFailureToast("수정에 실패하였습니다.");
+        {
+          onSuccess: () => {
+            router.replace(`/community/${id}`);
+          },
+          onError: () => {
+            showSaveFailureToast("수정에 실패하였습니다.");
+          },
         },
-      },
-    );
-  };
+      );
+    },
+    [id, patchPost, router],
+  );
+
+  const submitForm = useMemo(
+    () => handleSubmit(onSubmit),
+    [handleSubmit, onSubmit],
+  );
 
   useEffect(() => {
     if (isPostLoading || isMeLoading) return;
@@ -65,8 +73,8 @@ export function CommunityEdit({ id }: CommunityEditProps) {
   }, [isPostLoading, isMeLoading, postData, meData, id, router]);
   return (
     <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1 p-4 pb-15 md:mt-8 lg:mt-[60px]">
-      <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
-        <WriteHeader isValid={formState.isValid} isEdit />
+      <form className="flex flex-col flex-1" onSubmit={submitForm}>
+        <WriteHeader isValid={formState.isValid} isEdit onSubmit={submitForm} />
         <div className="p-4 bg-white rounded-[24px] flex-1 flex flex-col">
           <WriteTitleInput register={register} watch={watch} />
           <WriteEditor setValue={setValue} content={watch("content")} />
