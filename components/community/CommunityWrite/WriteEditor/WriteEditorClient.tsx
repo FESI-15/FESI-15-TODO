@@ -8,7 +8,7 @@ import StarterKit from "@tiptap/starter-kit";
 import type { UseFormSetValue, useWatch } from "react-hook-form";
 import type { WriteFormValues } from "@/types/communityWriteSchema";
 import { EditorToolbar } from "./EditorToolbar";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export interface WriteEditorClientProps {
   setValue: UseFormSetValue<WriteFormValues>;
@@ -19,6 +19,7 @@ export default function WriteEditorClient({
   setValue,
   content,
 }: WriteEditorClientProps) {
+  const hasInitializedContent = useRef(false);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -40,13 +41,17 @@ export default function WriteEditorClient({
   });
 
   useEffect(() => {
-    if (!editor || !content) return;
+    if (!editor || hasInitializedContent.current) return;
+    if (!content) return;
 
     editor.commands.setContent(content, {
+      emitUpdate: false,
       parseOptions: {
         preserveWhitespace: "full",
       },
     });
+
+    hasInitializedContent.current = true;
   }, [editor, content]);
 
   return (
