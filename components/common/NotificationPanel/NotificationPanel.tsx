@@ -1,6 +1,16 @@
+import { cva } from "class-variance-authority";
 import type { GetTeamIdNotifications200NotificationsItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
 import NotificationItem from "./NotificationItem";
+
+const markAllReadButtonVariants = cva("text-xs font-semibold", {
+  variants: {
+    hasUnread: {
+      true: "text-orange-500",
+      false: "text-gray-300",
+    },
+  },
+});
 
 interface NotificationPanelProps {
   notifications: GetTeamIdNotifications200NotificationsItem[];
@@ -32,10 +42,7 @@ export default function NotificationPanel({
           type="button"
           onClick={onMarkAllRead}
           disabled={!hasUnread}
-          className={cn(
-            "text-xs font-semibold",
-            hasUnread ? "text-orange-500" : "text-gray-300",
-          )}
+          className={markAllReadButtonVariants({ hasUnread })}
         >
           모두 읽기
         </button>
