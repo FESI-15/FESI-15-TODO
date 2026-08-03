@@ -48,12 +48,14 @@ interface KebabButtonProps {
   variant?: "recentTodo" | "goal" | "default";
   onEdit: () => void;
   onDelete: () => void;
+  className?: string;
 }
 
 export default function KebabButton({
   variant = "default",
   onEdit,
   onDelete,
+  className,
 }: KebabButtonProps) {
   const [open, setOpen] = useState(false);
   const moreIconRef = useRef<HTMLDivElement>(null);
@@ -90,7 +92,7 @@ export default function KebabButton({
         className={cn(kebabButtonVariants({ variant, open }))}
         onClick={handleMoreActive}
       >
-        <More className={cn(kebabButtonIconVariants({ variant }))} />
+        <More className={cn(kebabButtonIconVariants({ variant }), className)} />
       </button>
       {open && (
         <KebabPopup setOpen={setOpen} onEdit={onEdit} onDelete={onDelete} />

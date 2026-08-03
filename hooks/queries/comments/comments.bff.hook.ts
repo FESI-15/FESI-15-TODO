@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { GetTeamIdPostsPostIdCommentsParams } from "@/apis/model";
 import type {
@@ -27,24 +27,36 @@ export const useGetComments = (
   });
 };
 
-export const usePostComments = () => {
+export const usePostComments = (postId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["postComments"],
     mutationFn: (variables: PostCommentsVariables) => postComments(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: commentsKeys.list(postId) });
+    },
   });
 };
 
-export const usePatchComment = () => {
+export const usePatchComment = (postId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchComment"],
     mutationFn: (variables: PatchCommentVariables) => patchComment(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: commentsKeys.list(postId) });
+    },
   });
 };
 
-export const useDeleteComment = () => {
+export const useDeleteComment = (postId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["deleteComment"],
     mutationFn: (variables: CommentIdVariables) => deleteComment(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: commentsKeys.list(postId) });
+    },
   });
 };
 

@@ -116,7 +116,7 @@
 }
 
 @utility after-content-dot {
-  @apply relative after:content-['•'] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-2 after:text-xs after:text-gray-500 md:after:-right-2.5;
+  @apply relative after:content-['•'] after:absolute after:top-1/2 after:-translate-y-1/2 after:-right-[7px] after:text-xs after:text-gray-500 md:after:-right-[9px];
 }
 
 :root {
