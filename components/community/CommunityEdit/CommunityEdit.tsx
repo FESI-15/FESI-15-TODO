@@ -13,6 +13,7 @@ import { WriteHeader } from "../CommunityWrite/WriteHeader/WriteHeader";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
+import { showSaveFailureToast } from "@/utils/toast";
 
 interface CommunityEditProps {
   id: number;
@@ -43,6 +44,9 @@ export function CommunityEdit({ id }: CommunityEditProps) {
       {
         onSuccess: () => {
           router.replace(`/community/${id}`);
+        },
+        onError: () => {
+          showSaveFailureToast("수정에 실패하였습니다.");
         },
       },
     );
