@@ -26,7 +26,6 @@ export function SocialLoginSection({
           onClick={onClickGoogle}
           disabled={isGooglePending}
         />
-        <SocialButton provider="kakao" />
       </div>
     </div>
   );

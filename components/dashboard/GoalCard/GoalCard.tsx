@@ -1,25 +1,36 @@
+import { useState } from "react";
 import type { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 import GoalHeader from "@/components/dashboard/GoalCard/GoalHeader";
 import TaskColumn from "../TaskColumn/TaskColumn";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
+import { getGoalProgress } from "@/utils/getGoalProgress";
 
 interface GoalCardProps {
   goal: GetTeamIdGoals200GoalsItem;
 }
 
 export default function GoalCard({ goal }: GoalCardProps) {
+  const [keyword, setKeyword] = useState("");
   const { data: todos, isLoading: todosLoading } = useGetTodos({
     goalId: goal.id,
   });
 
   if (todosLoading) return <div>Loading...</div>;
 
-  const todoTasks = todos?.data.todos.filter((todo) => !todo.done);
-  const doneTasks = todos?.data.todos.filter((todo) => todo.done);
+  const filteredTodos = todos?.data.todos.filter((todo) =>
+    todo.title.toLowerCase().includes(keyword.toLowerCase()),
+  );
+  const todoTasks = filteredTodos?.filter((todo) => !todo.done);
+  const doneTasks = filteredTodos?.filter((todo) => todo.done);
+  const progress = getGoalProgress(todos?.data.todos ?? []);
 
   return (
     <article className="rounded-[40px] bg-white px-5 py-6 lg:px-8">
-      <GoalHeader title={goal.title} />
+      <GoalHeader
+        title={goal.title}
+        progress={progress}
+        onSearchChange={setKeyword}
+      />
       <div className="mt-4 flex flex-col gap-8 md:flex-row">
         <TaskColumn title="TO DO" tasks={todoTasks || []} />
         <TaskColumn title="DONE" tasks={doneTasks || []} done />

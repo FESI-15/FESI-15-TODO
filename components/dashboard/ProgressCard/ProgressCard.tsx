@@ -3,8 +3,9 @@ import Image from "next/image";
 
 interface ProgressCardProps {
   title: string;
+  progress: number;
 }
-export default function ProgressCard({ title }: ProgressCardProps) {
+export default function ProgressCard({ title, progress }: ProgressCardProps) {
   return (
     <section className="flex min-w-0 flex-1 flex-col gap-2.5">
       <SectionTitle
@@ -32,7 +33,7 @@ export default function ProgressCard({ title }: ProgressCardProps) {
             </p>
             <div className="mt-1 lg:mt-3 flex items-end gap-1">
               <strong className="text-[48px] lg:text-[80px] leading-[52px] lg:leading-[74px]">
-                74
+                {progress}
               </strong>
               <span className="text-xl lg:text-3xl font-medium leading-6 lg:leading-9">
                 %
