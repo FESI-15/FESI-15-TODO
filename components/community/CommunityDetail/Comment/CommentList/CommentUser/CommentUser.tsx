@@ -7,9 +7,10 @@ import Image from "next/image";
 interface CommentUserProps {
   comment: GetTeamIdPostsPostIdComments200CommentsItem;
   userId: number;
+  onModify: () => void;
 }
 
-export function CommentUser({ comment, userId }: CommentUserProps) {
+export function CommentUser({ comment, userId, onModify }: CommentUserProps) {
   const { mutate: deleteComment } = useDeleteComment(comment.postId);
   const handleDelete = () => {
     deleteComment({ postId: comment.postId, commentId: comment.id });
@@ -33,7 +34,7 @@ export function CommentUser({ comment, userId }: CommentUserProps) {
       </div>
       <KebabButton
         variant="goal"
-        onEdit={() => {}}
+        onEdit={onModify}
         onDelete={handleDelete}
         className="size-5"
       />

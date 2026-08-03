@@ -38,10 +38,14 @@ export const usePostComments = (postId: number) => {
   });
 };
 
-export const usePatchComment = () => {
+export const usePatchComment = (postId: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchComment"],
     mutationFn: (variables: PatchCommentVariables) => patchComment(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: commentsKeys.list(postId) });
+    },
   });
 };
 
