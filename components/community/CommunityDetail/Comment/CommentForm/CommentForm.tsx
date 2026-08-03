@@ -31,18 +31,20 @@ export function CommentForm({ postId }: { postId: number }) {
     <div className="mt-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex items-center gap-3"
+        className="flex items-center gap-3 md:gap-4"
       >
         <FormInput
           name="comment"
           control={control}
           placeholder="댓글을 입력해주세요."
         />
-        <div className="w-16 shrink-0">
-          <Button type="submit" className="w-full" disabled={isPending}>
-            등록
-          </Button>
-        </div>
+        <Button
+          type="submit"
+          className="px-5 shrink-0 md:px-6.5 md:py-3"
+          disabled={isPending}
+        >
+          등록
+        </Button>
       </form>
     </div>
   );

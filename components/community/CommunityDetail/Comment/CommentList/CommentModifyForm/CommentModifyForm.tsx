@@ -49,13 +49,17 @@ export function CommentModifyForm({
       <div className="flex gap-2 justify-end mt-2">
         <Button
           hierarchy="tertiary"
-          className="py-2.5 px-5 text-gray-500"
+          className="py-2.5 px-5 text-gray-500 md:py-2.5 md:px-5 lg:text-sm"
           type="button"
           onClick={onCancel}
         >
           취소
         </Button>
-        <Button className="py-2.5 px-5" type="submit" disabled={isPending}>
+        <Button
+          className="py-2.5 px-5 md:py-2.5 md:px-5 lg:text-sm"
+          type="submit"
+          disabled={isPending}
+        >
           수정
         </Button>
       </div>

@@ -13,7 +13,7 @@ export function CommunityDetailContent({ post }: CommunityDetailContentProps) {
     <div className="pt-4">
       <div dangerouslySetInnerHTML={{ __html: sanitizedContent }} />
       {post.image && (
-        <div className="rounded-lg border border-gray-200 overflow-hidden w-[150px] h-[150px] mt-4">
+        <div className="rounded-lg border border-gray-200 overflow-hidden w-[150px] h-[150px] mt-4 md:w-[232px] md:h-[232px]">
           <Image
             className="w-full h-full object-cover"
             src={post.image}
