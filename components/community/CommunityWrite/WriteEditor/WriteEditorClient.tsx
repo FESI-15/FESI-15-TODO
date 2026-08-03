@@ -5,7 +5,7 @@ import Placeholder from "@tiptap/extension-placeholder";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import StarterKit from "@tiptap/starter-kit";
-import type { UseFormSetValue, useWatch } from "react-hook-form";
+import type { UseFormSetValue } from "react-hook-form";
 import type { WriteFormValues } from "@/types/communityWriteSchema";
 import { EditorToolbar } from "./EditorToolbar";
 import { useEffect, useRef } from "react";
