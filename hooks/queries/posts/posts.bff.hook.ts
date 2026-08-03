@@ -41,10 +41,15 @@ export const usePostPosts = () => {
   });
 };
 
-export const usePatchPost = () => {
+export const usePatchPost = (id: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchPost"],
     mutationFn: (variables: PatchPostVariables) => patchPost(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postsKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: postsKeys.list() });
+    },
   });
 };
 

@@ -3,7 +3,12 @@ import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 import useHeaderStore from "@/store/useHeaderStore";
 
-export function WriteHeader({ isValid }: { isValid: boolean }) {
+interface WriteHeaderProps {
+  isValid: boolean;
+  isEdit?: boolean;
+}
+
+export function WriteHeader({ isValid, isEdit = false }: WriteHeaderProps) {
   const router = useRouter();
   const setTitle = useHeaderStore((s) => s.setTitle);
 
@@ -16,7 +21,9 @@ export function WriteHeader({ isValid }: { isValid: boolean }) {
   };
   return (
     <div className="flex justify-end md:justify-between items-center mb-3">
-      <h2 className="text-xl font-semibold hidden md:block">게시물 작성하기</h2>
+      <h2 className="text-xl font-semibold hidden md:block">
+        {isEdit ? "게시물 수정하기" : "게시물 작성하기"}
+      </h2>
       <div className="flex gap-2">
         <div className="w-[106px]">
           <Button
@@ -36,7 +43,7 @@ export function WriteHeader({ isValid }: { isValid: boolean }) {
             disabled={!isValid}
             size="sm"
           >
-            등록하기
+            {isEdit ? "수정하기" : "등록하기"}
           </Button>
         </div>
       </div>

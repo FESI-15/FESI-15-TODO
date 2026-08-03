@@ -8,13 +8,10 @@ import { ImageUploadInput } from "@/components/common/input/ImageUploadInput/Ima
 import { usePostPosts } from "@/hooks/queries/posts/posts.bff.hook";
 import { useRouter } from "next/navigation";
 import {
-  showSaveSuccessToast,
-  showSaveFailureToast,
-} from "@/components/mypage/toast";
-import {
   WRITE_FORM_SCHEMA,
   type WriteFormValues,
 } from "@/types/communityWriteSchema";
+import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
 
 export function CommunityWrite() {
   const router = useRouter();
@@ -41,10 +38,10 @@ export function CommunityWrite() {
       {
         onSuccess: () => {
           router.push(`/community`);
-          showSaveSuccessToast();
+          showSaveSuccessToast("게시물이 성공적으로 등록되었습니다.");
         },
         onError: () => {
-          showSaveFailureToast();
+          showSaveFailureToast("게시물 등록에 실패하였습니다.");
         },
       },
     );
@@ -55,7 +52,7 @@ export function CommunityWrite() {
         <WriteHeader isValid={formState.isValid} />
         <div className="p-4 bg-white rounded-[24px] flex-1 flex flex-col">
           <WriteTitleInput register={register} watch={watch} />
-          <WriteEditor setValue={setValue} />
+          <WriteEditor setValue={setValue} content={watch("content")} />
           <ImageUploadInput control={control} name="image" />
         </div>
       </form>
