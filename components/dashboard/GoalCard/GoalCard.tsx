@@ -1,4 +1,4 @@
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import type { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 import GoalHeader from "@/components/dashboard/GoalCard/GoalHeader";
 import TaskColumn from "../TaskColumn/TaskColumn";
@@ -10,10 +10,10 @@ interface GoalCardProps {
 }
 
 export default function GoalCard({ goal }: GoalCardProps) {
-  const { control } = useForm<{ search: string }>({
+  const { control, watch } = useForm<{ search: string }>({
     defaultValues: { search: "" },
   });
-  const keyword = useWatch({ control, name: "search" });
+  const keyword = watch("search");
   const { data: todos, isLoading: todosLoading } = useGetTodos({
     goalId: goal.id,
   });
