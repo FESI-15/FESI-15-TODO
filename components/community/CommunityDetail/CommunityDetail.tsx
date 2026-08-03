@@ -20,7 +20,6 @@ export function CommunityDetail({ id }: CommunityDetailProps) {
       <div className="max-w-[768px] mx-auto w-full bg-white rounded-[24px] py-6 px-4 md:p-10">
         <CommunityDetailHeader
           post={postData.data}
-          id={id}
           userId={userMeData?.data.id || 0}
         />
         <CommunityDetailContent post={postData.data} />

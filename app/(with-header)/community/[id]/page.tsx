@@ -5,11 +5,13 @@ import { getQueryClient } from "@/utils/getQueryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 
+interface CommunityDetailPageProps {
+  params: Promise<{ id: string }>;
+}
+
 export default async function CommunityDetailPage({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+}: CommunityDetailPageProps) {
   const { id } = await params;
   const queryClient = getQueryClient();
 

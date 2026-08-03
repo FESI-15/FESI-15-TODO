@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import KebabPopup from "./KebabPopup";
 
 const kebabButtonVariants = cva(
-  "rounded-full items-center justify-center flex",
+  "rounded-full size-6 items-center justify-center flex",
   {
     variants: {
       open: {

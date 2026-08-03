@@ -7,7 +7,7 @@ import { z } from "zod";
 import { GetTeamIdPostsPostIdComments200CommentsItem } from "@/apis/model";
 
 const zodSchema = z.object({
-  content: z.string().min(1),
+  content: z.string().min(1, "댓글을 입력해주세요."),
 });
 
 interface CommentModifyFormProps {

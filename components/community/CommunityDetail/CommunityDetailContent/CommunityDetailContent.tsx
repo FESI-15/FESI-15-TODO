@@ -1,7 +1,6 @@
 import DOMPurify from "isomorphic-dompurify";
 import Image from "next/image";
 import { GetTeamIdPostsPostId200 } from "@/apis/model";
-import { div } from "motion/react-m";
 
 interface CommunityDetailContentProps {
   post: GetTeamIdPostsPostId200;

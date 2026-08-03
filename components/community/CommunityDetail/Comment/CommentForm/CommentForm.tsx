@@ -6,14 +6,15 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const zodSchema = z.object({
-  comment: z.string().min(1),
+  comment: z.string().min(1, "댓글을 입력해주세요."),
 });
 
 type CommentFormValues = z.infer<typeof zodSchema>;
 
 export function CommentForm({ postId }: { postId: number }) {
   const { mutate, isPending } = usePostComments(postId);
-  const { control, handleSubmit } = useForm<CommentFormValues>({
+  const { control, handleSubmit, reset } = useForm<CommentFormValues>({
+    mode: "onSubmit",
     defaultValues: {
       comment: "",
     },
@@ -26,12 +27,13 @@ export function CommentForm({ postId }: { postId: number }) {
         content: data.comment,
       },
     });
+    reset();
   };
   return (
     <div className="mt-4">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex items-center gap-3 md:gap-4"
+        className="flex items-baseline gap-3 md:gap-4"
       >
         <FormInput
           name="comment"

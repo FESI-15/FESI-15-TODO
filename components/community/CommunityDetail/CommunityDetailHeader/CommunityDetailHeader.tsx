@@ -6,23 +6,21 @@ import { Author } from "@/components/common/Author";
 
 interface CommunityDetailHeaderProps {
   post: GetTeamIdPostsPostId200;
-  id: number;
   userId: number;
 }
 
 export function CommunityDetailHeader({
   post,
-  id,
   userId,
 }: CommunityDetailHeaderProps) {
   const router = useRouter();
   const { mutate: deletePost } = useDeletePost();
   const handleEdit = () => {
-    router.push(`/community/${id}/edit`);
+    router.push(`/community/${post.id}/edit`);
   };
   const handleDelete = () => {
     deletePost(
-      { postId: id },
+      { postId: post.id },
       {
         onSuccess: () => {
           router.replace("/community");
