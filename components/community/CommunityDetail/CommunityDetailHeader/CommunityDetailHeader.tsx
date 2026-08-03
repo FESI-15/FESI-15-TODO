@@ -1,8 +1,8 @@
 import type { GetTeamIdPostsPostId200 } from "@/apis/model";
 import KebabButton from "@/components/common/KebabButton/KebabButton";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useDeletePost } from "@/hooks/queries/posts/posts.bff.hook";
+import { Author } from "@/components/common/Author";
 
 interface CommunityDetailHeaderProps {
   post: GetTeamIdPostsPostId200;
@@ -42,18 +42,7 @@ export function CommunityDetailHeader({
           />
         )}
       </div>
-      <div className="flex items-center gap-1">
-        <Image
-          className="rounded-full w-5 h-5 object-cover md:w-6 md:h-6"
-          src={post.writer.image || "/images/sidemenu/profile.png"}
-          alt={post.title}
-          width={20}
-          height={20}
-        />
-        <span className="text-xs text-gray-500 md:text-base md:font-medium">
-          {post.writer.name}
-        </span>
-      </div>
+      <Author image={post.writer.image || ""} name={post.writer.name} />
     </div>
   );
 }

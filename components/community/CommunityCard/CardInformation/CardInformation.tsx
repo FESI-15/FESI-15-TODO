@@ -2,6 +2,7 @@ import type { GetTeamIdPosts200PostsItem } from "@/apis/model";
 import { getRelativeCreatedTime } from "@/utils/getRelativeCreatedTime";
 import { cva } from "class-variance-authority";
 import Image from "next/image";
+import { Author } from "@/components/common/Author";
 
 interface CardInformationProps {
   post: GetTeamIdPosts200PostsItem;
@@ -30,15 +31,8 @@ export function CardInformation({
 }: CardInformationProps) {
   return (
     <div className="flex items-center text-xs text-gray-500 gap-2 md:text-base md:gap-3">
-      <div className="flex items-center gap-1 after-content-dot md:gap-2">
-        <Image
-          className="md:w-6 md:h-6"
-          src={post.writer.image ?? "/images/sidemenu/profile.png"}
-          alt={post.writer.name}
-          width={20}
-          height={20}
-        />
-        <p>{post.writer.name}</p>
+      <div className="after-content-dot">
+        <Author image={post.writer.image || ""} name={post.writer.name} />
       </div>
       {variant === "default" && (
         <p className="after-content-dot">
