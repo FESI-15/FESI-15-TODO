@@ -12,6 +12,7 @@ interface CommentUserProps {
 
 export function CommentUser({ comment, userId, onModify }: CommentUserProps) {
   const { mutate: deleteComment } = useDeleteComment(comment.postId);
+  const isAuthor = userId === comment.writer.id;
   const handleDelete = () => {
     deleteComment({ postId: comment.postId, commentId: comment.id });
   };
@@ -23,16 +24,16 @@ export function CommentUser({ comment, userId, onModify }: CommentUserProps) {
           name={comment.writer.name}
           size="sm"
         />
-        {userId === comment.writer.id && (
-          <Badge variant="yellow">내 댓글</Badge>
-        )}
+        {isAuthor && <Badge variant="yellow">내 댓글</Badge>}
       </div>
-      <KebabButton
-        variant="goal"
-        onEdit={onModify}
-        onDelete={handleDelete}
-        className="size-5 md:size-6"
-      />
+      {isAuthor && (
+        <KebabButton
+          variant="goal"
+          onEdit={onModify}
+          onDelete={handleDelete}
+          className="size-5 md:size-6"
+        />
+      )}
     </div>
   );
 }
