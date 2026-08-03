@@ -1,4 +1,5 @@
 import { CommunityDetail } from "@/components/community/CommunityDetail/CommunityDetail";
+import { getCommentsQueryOptionsServer } from "@/hooks/queries/comments/comments.server";
 import { getPostQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
 import { getQueryClient } from "@/utils/getQueryClient";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -14,6 +15,7 @@ export default async function CommunityDetailPage({
 
   try {
     await queryClient.fetchQuery(getPostQueryOptionsServer(Number(id)));
+    await queryClient.fetchQuery(getCommentsQueryOptionsServer(Number(id)));
   } catch {
     return notFound();
   }
