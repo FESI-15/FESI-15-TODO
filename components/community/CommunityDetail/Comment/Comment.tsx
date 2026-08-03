@@ -1,15 +1,14 @@
 import { useGetComments } from "@/hooks/queries/comments/comments.bff.hook";
 import { CommentForm } from "./CommentForm/CommentForm";
 import { CommentList } from "./CommentList/CommentList";
-import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 
 interface CommentProps {
   postId: number;
+  userId: number;
 }
 
-export function Comment({ postId }: CommentProps) {
+export function Comment({ postId, userId }: CommentProps) {
   const { data: commentData } = useGetComments(postId);
-  const { data: userMeData } = useGetUserMe();
 
   return (
     <div className="mt-10">
@@ -19,7 +18,7 @@ export function Comment({ postId }: CommentProps) {
       <CommentForm postId={postId} />
       <CommentList
         comments={commentData?.data.comments || []}
-        userId={userMeData?.data.id || 0}
+        userId={userId}
       />
     </div>
   );

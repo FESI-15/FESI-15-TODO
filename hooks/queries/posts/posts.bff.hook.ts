@@ -49,8 +49,12 @@ export const usePatchPost = () => {
 };
 
 export const useDeletePost = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["deletePost"],
     mutationFn: (variables: PostIdVariables) => deletePost(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: postsKeys.list() });
+    },
   });
 };
