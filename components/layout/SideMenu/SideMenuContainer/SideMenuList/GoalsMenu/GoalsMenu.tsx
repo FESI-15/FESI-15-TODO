@@ -17,9 +17,14 @@ interface GoalsMenuProps
     href: string;
   };
   isActivePath: (href: string) => boolean;
+  onClose?: () => void;
 }
 
-export default function GoalsMenu({ item, isActivePath }: GoalsMenuProps) {
+export default function GoalsMenu({
+  item,
+  isActivePath,
+  onClose,
+}: GoalsMenuProps) {
   const [isGoalListOpen, setIsGoalListOpen] = useState(false);
   const isActive = isActivePath(item.href);
 
@@ -48,7 +53,7 @@ export default function GoalsMenu({ item, isActivePath }: GoalsMenuProps) {
           height={24}
         />
       </button>
-      {isGoalListOpen && <GoalsMenuList />}
+      {isGoalListOpen && <GoalsMenuList onClose={onClose} />}
     </>
   );
 }

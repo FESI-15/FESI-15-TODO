@@ -22,7 +22,9 @@ export default async function CommunityPage({
     queryClient.prefetchQuery(
       getPostsQueryOptionsServer({ search: searchParams.search ?? "" }),
     ),
-    queryClient.prefetchQuery(getPostsQueryOptionsServer({ type: "best" })),
+    queryClient.prefetchQuery(
+      getPostsQueryOptionsServer({ type: "best", limit: 6 }),
+    ),
   ]);
 
   return (
