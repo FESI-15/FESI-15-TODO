@@ -18,6 +18,40 @@ export const getPostsQueryOptionsServer = (params?: GetTeamIdPostsParams) => ({
   },
 });
 
+export const getPostsInfiniteQueryOptionsServer = (
+  params?: GetTeamIdPostsParams,
+) => ({
+  queryKey: postsKeys.list(params),
+  queryFn: async ({
+    pageParam,
+    signal,
+  }: {
+    pageParam: string | null;
+    signal: AbortSignal;
+  }) => {
+    const headers = await getAuthorizationHeaders();
+
+    if (!headers) {
+      throw new Error("Authentication is required.");
+    }
+
+    const response = await getTeamIdPosts(
+      {
+        ...params,
+        cursor: pageParam ?? undefined,
+      },
+      { headers },
+      signal,
+    );
+
+    return { data: response.data };
+  },
+  initialPageParam: null as string | null,
+  getNextPageParam: (lastPage: {
+    data: Awaited<ReturnType<typeof getTeamIdPosts>>["data"];
+  }) => lastPage.data.nextCursor ?? undefined,
+});
+
 export const getPostQueryOptionsServer = (postId: number) => ({
   queryKey: postsKeys.detail(postId),
   queryFn: async ({ signal }: { signal: AbortSignal }) => {

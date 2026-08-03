@@ -1,4 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 import type { GetTeamIdPostsParams } from "@/apis/model";
 import type {
@@ -19,6 +24,24 @@ export const useGetPosts = (params?: GetTeamIdPostsParams) => {
   return useQuery({
     queryKey: postsKeys.list(params),
     queryFn: ({ signal }) => getPosts(params, undefined, signal),
+  });
+};
+
+// 소통 게시판 목록 무한 스크롤
+export const useGetPostsInfinite = (params?: GetTeamIdPostsParams) => {
+  return useInfiniteQuery({
+    queryKey: postsKeys.list(params),
+    queryFn: ({ pageParam, signal }) =>
+      getPosts(
+        {
+          ...params,
+          cursor: pageParam ?? undefined,
+        },
+        undefined,
+        signal,
+      ),
+    initialPageParam: null as string | null,
+    getNextPageParam: (lastPage) => lastPage.data.nextCursor ?? undefined,
   });
 };
 
