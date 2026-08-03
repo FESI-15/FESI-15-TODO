@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -11,23 +12,29 @@ import {
 } from "@/components/ui/dialog";
 import LanguageSelect from "./LanguageSelect/LanguageSelect";
 import DarkModeToggleButton from "./DarkModeToggleButton/DarkModeToggleButton";
-import { useState } from "react";
 import { Button } from "../../Button";
+import { DEFAULT_LANGUAGE, type LanguageCode } from "@/constants/setting";
 
 interface SettingModalProps {
-  onConfirm: () => void;
+  trigger: React.ReactElement;
+  onConfirm?: () => void;
 }
 
-export default function SettingModal({ onConfirm }: SettingModalProps) {
+export default function SettingModal({
+  trigger,
+  onConfirm,
+}: SettingModalProps) {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
+
   return (
     <Dialog>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger render={trigger} />
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle showCloseButton={true}>설정</DialogTitle>
         </DialogHeader>
-        <LanguageSelect />
+        <LanguageSelect value={language} onChange={setLanguage} />
         <DarkModeToggleButton
           isDarkMode={isDarkMode}
           onToggle={setIsDarkMode}
@@ -46,9 +53,18 @@ export default function SettingModal({ onConfirm }: SettingModalProps) {
                 </Button>
               }
             />
-            <Button fullWidth onClick={onConfirm} hierarchy="primary" size="lg">
-              확인
-            </Button>
+            <DialogClose
+              render={
+                <Button
+                  fullWidth
+                  onClick={onConfirm}
+                  hierarchy="primary"
+                  size="lg"
+                >
+                  확인
+                </Button>
+              }
+            />
           </div>
         </DialogFooter>
       </DialogContent>
