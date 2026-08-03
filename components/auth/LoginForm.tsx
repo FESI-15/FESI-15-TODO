@@ -23,9 +23,9 @@ export function LoginForm() {
     defaultValues: { email: "", password: "" },
   });
 
-  const { mutate, isPending } = usePostAuthLogin({
+  const { mutate, isPending, isSuccess } = usePostAuthLogin({
     mutation: {
-      onSuccess: () => router.push("/dashboard"),
+      onSuccess: () => router.replace("/dashboard"),
       onError: () =>
         setError("password", {
           message: "이메일 또는 비밀번호가 올바르지 않습니다",
@@ -50,7 +50,7 @@ export function LoginForm() {
               className="flex flex-col gap-6 md:gap-8"
             >
               <LoginFormFields control={control} />
-              <Button type="submit" fullWidth disabled={isPending}>
+              <Button type="submit" fullWidth disabled={isPending || isSuccess}>
                 로그인하기
               </Button>
             </form>

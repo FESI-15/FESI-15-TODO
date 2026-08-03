@@ -45,7 +45,7 @@ export default function GoalFilter({
   return (
     <div
       className={cn(
-        "flex w-full items-center gap-2 rounded-2xl border border-gray-100 bg-gray-50 px-3 py-2",
+        "relative flex w-full items-center rounded-2xl border border-gray-100 bg-gray-50",
         className,
       )}
     >
@@ -54,13 +54,13 @@ export default function GoalFilter({
         alt="목표"
         width={32}
         height={32}
-        className="size-8 shrink-0"
+        className="pointer-events-none absolute top-1/2 left-3 size-8 -translate-y-1/2"
       />
       <Dropdown
         control={control}
         name="goalId"
         options={options}
-        className="flex-1 rounded-2xl border-none bg-transparent p-0 text-sm shadow-none data-popup-open:border-none data-popup-open:shadow-none md:rounded-2xl md:p-0 md:text-sm"
+        className="flex-1 rounded-2xl border-none bg-transparent py-2 pr-3 pl-[52px] text-sm shadow-none data-popup-open:border-none data-popup-open:shadow-none md:rounded-2xl md:py-2 md:pr-3 md:pl-[52px] md:text-sm"
       />
     </div>
   );

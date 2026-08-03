@@ -7,12 +7,14 @@ import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
+import { getGoalProgress } from "@/utils/getGoalProgress";
 import Image from "next/image";
 
 export default function Dashboard() {
   const { data: goals } = useGetGoals();
   const { data: todos } = useGetTodos();
   const { data: user } = useGetUserMe();
+  const progress = getGoalProgress(todos?.data.todos ?? []);
 
   return (
     <main className="min-w-0 flex-1 py-8 md:py-12 lg:py-20 px-4 md:px-6">
@@ -22,7 +24,7 @@ export default function Dashboard() {
         </h1>
         <div className="grid gap-8 lg:grid-cols-2">
           <RecentTasksCard todos={todos?.data.todos ?? []} />
-          <ProgressCard title={user?.data.name ?? ""} />
+          <ProgressCard title={user?.data.name ?? ""} progress={progress} />
         </div>
         <section className="flex flex-col gap-2.5">
           <SectionTitle
