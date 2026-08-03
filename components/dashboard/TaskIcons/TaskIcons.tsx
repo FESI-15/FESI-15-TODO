@@ -78,7 +78,7 @@ export default function TaskIcons({
         onDelete={handleDeleteTodo}
       />
       {!recentTodo && (
-        <button type="button" onClick={handleFavorite}>
+        <button aria-label="즐겨찾기" type="button" onClick={handleFavorite}>
           <StarIcon
             className={cn(
               starIconVariants({
