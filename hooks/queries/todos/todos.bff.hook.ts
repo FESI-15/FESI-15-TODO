@@ -14,6 +14,7 @@ import {
 } from "@/apis/todos/todosBff";
 import { todosKeys } from "./todos.key";
 import { favoritesKeys } from "../favorites/favorites.key";
+import { notificationsKeys } from "../notifications/notifications.key";
 
 export const getTodosQueryKey = (params?: GetTeamIdTodosParams) => {
   return ["/api/todos", ...(params ? [params] : [])] as const;
@@ -51,9 +52,13 @@ export const usePatchTodo = () => {
   return useMutation({
     mutationKey: ["patchTodo"],
     mutationFn: (variables: PatchTodoVariables) => patchTodo(variables),
-    onSuccess: () => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
       queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
+
+      if (variables.data.done !== undefined) {
+        queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
+      }
     },
   });
 };

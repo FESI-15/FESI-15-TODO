@@ -21,6 +21,7 @@ export default function SideMenuContainer() {
             alt="Slid to-do"
             width={140}
             height={24}
+            className="h-6 w-[140px]"
           />
         </div>
         <SideMenuList />
@@ -31,7 +32,7 @@ export default function SideMenuContainer() {
         {/* 인증, 인가 시스템 연동 시 profile 전달 */}
         <div className="flex items-center gap-2 mt-6">
           <SideMenuProfile />
-          <SideMenuBell newNotification={true} onClickBell={() => {}} />
+          <SideMenuBell />
         </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ export function AuthLogo() {
         alt="Slid to-do"
         width={140}
         height={24}
+        className="h-6 w-[140px]"
       />
     </div>
   );
