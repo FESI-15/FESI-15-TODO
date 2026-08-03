@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 import type { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 import GoalHeader from "@/components/dashboard/GoalCard/GoalHeader";
 import TaskColumn from "../TaskColumn/TaskColumn";
@@ -10,7 +10,10 @@ interface GoalCardProps {
 }
 
 export default function GoalCard({ goal }: GoalCardProps) {
-  const [keyword, setKeyword] = useState("");
+  const { control } = useForm<{ search: string }>({
+    defaultValues: { search: "" },
+  });
+  const keyword = useWatch({ control, name: "search" });
   const { data: todos, isLoading: todosLoading } = useGetTodos({
     goalId: goal.id,
   });
@@ -26,11 +29,7 @@ export default function GoalCard({ goal }: GoalCardProps) {
 
   return (
     <article className="rounded-[40px] bg-white px-5 py-6 lg:px-8">
-      <GoalHeader
-        title={goal.title}
-        progress={progress}
-        onSearchChange={setKeyword}
-      />
+      <GoalHeader title={goal.title} progress={progress} control={control} />
       <div className="mt-4 flex flex-col gap-8 md:flex-row">
         <TaskColumn title="TO DO" tasks={todoTasks || []} />
         <TaskColumn title="DONE" tasks={doneTasks || []} done />

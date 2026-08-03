@@ -1,29 +1,17 @@
-import { useEffect } from "react";
+import type { Control } from "react-hook-form";
 import { FormInput } from "@/components/common/input/FormInput";
-import { useForm, useWatch } from "react-hook-form";
 
 interface GoalHeaderProps {
   title: string;
   progress: number;
-  onSearchChange: (keyword: string) => void;
+  control: Control<{ search: string }>;
 }
 
 export default function GoalHeader({
   title,
   progress,
-  onSearchChange,
+  control,
 }: GoalHeaderProps) {
-  const { control } = useForm<{ search: string }>({
-    defaultValues: {
-      search: "",
-    },
-  });
-  const keyword = useWatch({ control, name: "search" });
-
-  useEffect(() => {
-    onSearchChange(keyword);
-  }, [keyword, onSearchChange]);
-
   return (
     <div className="flex flex-col gap-4 px-2 xl:flex-row xl:items-center xl:justify-between">
       <div className="flex min-w-0 items-center gap-4">
