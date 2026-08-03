@@ -1,8 +1,16 @@
+import { useEffect } from "react";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
+import useHeaderStore from "@/store/useHeaderStore";
 
 export function WriteHeader({ isValid }: { isValid: boolean }) {
   const router = useRouter();
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    setTitle("게시물 작성하기");
+  }, [setTitle]);
+
   const handleCancel = () => {
     router.back();
   };

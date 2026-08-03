@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useGetTodoFavorites } from "@/hooks/queries/favorites/favorites.bff.hook";
 import TodoList from "@/components/todos/TodoList/TodoList";
 import GoalFilter from "@/components/common/GoalFilter";
 import FavoritesTab, { FavoritesTabValue } from "./FavoritesTab";
+import useHeaderStore from "@/store/useHeaderStore";
 
 const FAVORITES_LIMIT = 100;
 
@@ -13,6 +14,18 @@ export default function Favorites() {
   const [goalId, setGoalId] = useState<number | undefined>(undefined);
 
   const { data } = useGetTodoFavorites({ limit: FAVORITES_LIMIT });
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    setTitle(
+      <>
+        찜한 할 일
+        <span className="text-orange-600 ml-1">
+          {data?.data.totalCount ?? 0}
+        </span>
+      </>,
+    );
+  }, [data?.data.totalCount, setTitle]);
 
   const filteredTodos = useMemo(() => {
     return (data?.data.favorites ?? [])
@@ -26,7 +39,7 @@ export default function Favorites() {
 
   return (
     <div className="max-w-[720px] mx-auto w-full mt-6 px-4 md:mt-12 pb-12">
-      <h2 className="font-semibold md:text-xl lg:text-2xl">
+      <h2 className="font-semibold md:text-xl lg:text-2xl hidden md:block">
         찜한 할 일
         <span className="text-orange-600 ml-1 lg:ml-2">
           {data?.data.totalCount}
