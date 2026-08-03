@@ -9,13 +9,13 @@ import { MyPageEmailField } from "./MyPageEmailField";
 import { MyPageNameField } from "./MyPageNameField";
 import { MyPagePasswordFields } from "./MyPagePasswordFields";
 import { myPageFormSchema, type MyPageFormValues } from "./myPageForm.types";
-import { showSaveFailureToast, showSaveSuccessToast } from "./toast";
 import {
   useGetUserMe,
   useGetUsersCheckNickname,
   usePatchUserMe,
   usePatchUserPassword,
 } from "@/hooks/queries/users/users.bff.hook";
+import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
 
 export function MyPageInfo() {
   const { data: userMe } = useGetUserMe();
@@ -57,7 +57,7 @@ export function MyPageInfo() {
     }
 
     if (isNameChanged && isNameAvailable !== true) {
-      showSaveFailureToast();
+      showSaveFailureToast("이름 중복 확인을 해주세요.");
       return;
     }
 
@@ -72,8 +72,8 @@ export function MyPageInfo() {
     }
 
     const toastOptions = {
-      onSuccess: showSaveSuccessToast,
-      onError: showSaveFailureToast,
+      onSuccess: () => showSaveSuccessToast("저장이 완료되었습니다."),
+      onError: () => showSaveFailureToast("저장이 실패하였습니다."),
     };
 
     await Promise.allSettled([

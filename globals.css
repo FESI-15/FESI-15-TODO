@@ -187,3 +187,58 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
+
+@layer components {
+  /* Editor Content */
+  .editor-content {
+    @apply text-sm text-gray-700;
+  }
+
+  .editor-content p {
+    @apply my-2;
+  }
+
+  .editor-content ul {
+    @apply my-2 list-disc pl-6;
+  }
+
+  .editor-content ol {
+    @apply my-2 list-decimal pl-6;
+  }
+
+  .editor-content li {
+    @apply my-1;
+  }
+
+  .editor-content h1 {
+    @apply my-3 text-3xl font-bold;
+  }
+
+  .editor-content h2 {
+    @apply my-3 text-2xl font-bold;
+  }
+
+  .editor-content blockquote {
+    @apply my-3 border-l-4 border-gray-300 pl-4 text-gray-600;
+  }
+
+  .editor-content strong {
+    @apply font-bold;
+  }
+
+  .editor-content em {
+    @apply italic;
+  }
+
+  .editor-content u {
+    @apply underline;
+  }
+
+  .editor-content [style*="text-align: center"] {
+    @apply text-center;
+  }
+
+  .editor-content [style*="text-align: right"] {
+    @apply text-right;
+  }
+}
