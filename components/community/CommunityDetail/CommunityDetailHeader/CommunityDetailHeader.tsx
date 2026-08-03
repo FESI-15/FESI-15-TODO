@@ -30,16 +30,14 @@ export function CommunityDetailHeader({
         </div>
       </div>
       <div className="flex items-center gap-1">
-        {post.image && (
-          <Image
-            className="rounded-full w-5 h-5 object-cover"
-            src={post.image}
-            alt={post.title}
-            width={20}
-            height={20}
-          />
-        )}
-        <span className="text-xs">{post.writer.name}</span>
+        <Image
+          className="rounded-full w-5 h-5 object-cover"
+          src={post.writer.image || "/images/sidemenu/profile.png"}
+          alt={post.title}
+          width={20}
+          height={20}
+        />
+        <span className="text-xs text-gray-500">{post.writer.name}</span>
       </div>
     </div>
   );
