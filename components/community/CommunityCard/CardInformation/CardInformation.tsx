@@ -35,7 +35,7 @@ export function CardInformation({
         <Author image={post.writer.image || ""} name={post.writer.name} />
       </div>
       {variant === "default" && (
-        <p className="after-content-dot">
+        <p suppressHydrationWarning className="after-content-dot">
           {getRelativeCreatedTime(post.createdAt)}
         </p>
       )}
