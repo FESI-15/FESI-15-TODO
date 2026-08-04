@@ -1,19 +1,50 @@
 "use client";
 
-import { useEffect } from "react";
-import { useGetPosts } from "@/hooks/queries/posts/posts.bff.hook";
+import { useGetPostsInfinite } from "@/hooks/queries/posts/posts.bff.hook";
 import { CommunityHeader } from "./CommunityHeader/CommunityHeader";
 import { CommunityBestView } from "./CommunityBestView/CommunityBestView";
 import { useSearchParams } from "next/navigation";
 import { CommunityList } from "./CommunityList/CommunityPostList";
 import { CreatePostButton } from "./CreatePostButton/CreatePostButton";
+import { useEffect, useRef } from "react";
+import { COMMUNITY_LIMIT } from "@/constants/CommunityLimit";
 import useHeaderStore from "@/store/useHeaderStore";
 
 export function Community() {
   const searchParams = useSearchParams();
-  const { data } = useGetPosts({
-    search: searchParams.get("search") ?? "",
-  });
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetPostsInfinite({
+      search: searchParams.get("search") ?? "",
+      limit: COMMUNITY_LIMIT,
+    });
+
+  const posts = data?.pages.flatMap((page) => page.posts) ?? [];
+
+  useEffect(() => {
+    const target = loadMoreRef.current;
+
+    if (!target || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      {
+        rootMargin: "200px",
+      },
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
   const setTitle = useHeaderStore((s) => s.setTitle);
 
   useEffect(() => {
@@ -26,8 +57,9 @@ export function Community() {
       </h2>
       <CommunityBestView />
       <CommunityHeader />
-      <CommunityList posts={data?.data.posts ?? []} />
+      <CommunityList posts={posts} />
       <CreatePostButton />
+      <div ref={loadMoreRef} />
     </div>
   );
 }

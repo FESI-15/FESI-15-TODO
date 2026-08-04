@@ -2,7 +2,7 @@ import Link from "next/link";
 import * as m from "motion/react-m";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
 
-export default function GoalsMenuList() {
+export default function GoalsMenuList({ onClose }: { onClose?: () => void }) {
   const { data: goals } = useGetGoals();
   if (goals?.data.goals.length === 0) return null;
   return (
@@ -26,6 +26,7 @@ export default function GoalsMenuList() {
         >
           <Link
             href={`/goals/${goalList.id}`}
+            onClick={() => onClose?.()}
             className="py-2 px-6 block hover:bg-orange-200 hover:text-orange-700 text-gray-700"
           >
             <span className="text-sm font-semibold">{goalList.title}</span>

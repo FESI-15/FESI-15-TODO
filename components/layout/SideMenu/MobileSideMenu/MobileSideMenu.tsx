@@ -27,7 +27,7 @@ export default function MobileSideMenu() {
           >
             <Delete className="w-6 h-6 text-gray-400" />
           </button>
-          <SideMenuContainer />
+          <SideMenuContainer onClose={handleClose} />
         </aside>
       )}
     </div>

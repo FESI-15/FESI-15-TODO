@@ -5,7 +5,11 @@ import SideMenuActions from "./SideMenuActions/SideMenuActions";
 import SideMenuProfile from "./SideMenuProfile/SideMenuProfile";
 import SideMenuBell from "./SideMenuBell/SideMenuBell";
 
-export default function SideMenuContainer() {
+export default function SideMenuContainer({
+  onClose,
+}: {
+  onClose?: () => void;
+}) {
   return (
     <div className="flex flex-col md:justify-between flex-1">
       <div>
@@ -24,7 +28,7 @@ export default function SideMenuContainer() {
             className="h-6 w-[140px]"
           />
         </div>
-        <SideMenuList />
+        <SideMenuList onClose={onClose} />
         <SideMenuUtilMenu />
       </div>
       <div>

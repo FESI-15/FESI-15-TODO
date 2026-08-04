@@ -1,7 +1,6 @@
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import AddGoalTodoButton from "../AddGoalTodoButton/AddGoalTodoButton";
 import GoalTodoColumn from "../GoalTodoColumn/GoalTodoColumn";
-import NoteLinkButton from "../NoteLinkButton/NoteLinkButton";
 
 interface GoalTodoListProps {
   goalId: number;
@@ -18,7 +17,6 @@ export default function GoalTodoList({ goalId, todos }: GoalTodoListProps) {
         <div className="mb-3 flex h-10 items-center justify-between px-2">
           <h3 className="text-lg font-semibold text-gray-800">TO DO</h3>
           <div className="flex items-center gap-2">
-            <NoteLinkButton goalId={goalId} />
             <AddGoalTodoButton goalId={goalId} />
           </div>
         </div>

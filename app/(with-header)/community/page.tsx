@@ -4,8 +4,15 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { Suspense } from "react";
-import { getPostsQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
+import {
+  getPostsInfiniteQueryOptionsServer,
+  getPostsQueryOptionsServer,
+} from "@/hooks/queries/posts/posts.server";
 import { Community } from "@/components/community/Community";
+import {
+  COMMUNITY_BEST_LIMIT,
+  COMMUNITY_LIMIT,
+} from "@/constants/CommunityLimit";
 
 interface CommunityPageProps {
   searchParams: {
@@ -19,10 +26,15 @@ export default async function CommunityPage({
   const queryClient = new QueryClient();
 
   await Promise.all([
-    queryClient.prefetchQuery(
-      getPostsQueryOptionsServer({ search: searchParams.search ?? "" }),
+    queryClient.prefetchInfiniteQuery(
+      getPostsInfiniteQueryOptionsServer({
+        search: searchParams.search ?? "",
+        limit: COMMUNITY_LIMIT,
+      }),
     ),
-    queryClient.prefetchQuery(getPostsQueryOptionsServer({ type: "best" })),
+    queryClient.prefetchQuery(
+      getPostsQueryOptionsServer({ type: "best", limit: COMMUNITY_BEST_LIMIT }),
+    ),
   ]);
 
   return (

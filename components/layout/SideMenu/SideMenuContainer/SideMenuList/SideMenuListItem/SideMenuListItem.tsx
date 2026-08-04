@@ -12,16 +12,19 @@ interface SideMenuListItemProps
     VariantProps<typeof sideMenuListIconVariants> {
   item: SideMenuListProps;
   isActivePath: (href: string) => boolean;
+  onClose?: () => void;
 }
 export default function SideMenuListItem({
   item,
   isActivePath,
+  onClose,
 }: SideMenuListItemProps) {
   const isActive = isActivePath(item.href);
 
   return (
     <Link
       href={item.href}
+      onClick={() => onClose?.()}
       className={sideMenuListTextVariants({
         isActive,
       })}

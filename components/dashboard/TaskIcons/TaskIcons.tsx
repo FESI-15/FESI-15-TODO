@@ -45,8 +45,9 @@ export default function TaskIcons({
   recentTodo = false,
 }: TaskIconsProps) {
   const { mutate: updateFavorite } = usePostTodoFavorite();
-  const { mutate: deleteFavorite } = useDeleteTodoFavorite();
-  const { mutate: deleteTodo } = useDeleteTodo();
+  const { mutate: deleteFavorite, isPending: isDeletingFavorite } =
+    useDeleteTodoFavorite();
+  const { mutate: deleteTodo, isPending: isDeletingTodo } = useDeleteTodo();
   const [taskFormOpen, setTaskFormOpen] = useState(false);
 
   const handleDeleteTodo = () => {
@@ -78,7 +79,12 @@ export default function TaskIcons({
         onDelete={handleDeleteTodo}
       />
       {!recentTodo && (
-        <button type="button" onClick={handleFavorite}>
+        <button
+          aria-label="즐겨찾기"
+          disabled={isDeletingFavorite || isDeletingTodo}
+          type="button"
+          onClick={handleFavorite}
+        >
           <StarIcon
             className={cn(
               starIconVariants({
