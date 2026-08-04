@@ -19,7 +19,8 @@ export function Community() {
       limit: COMMUNITY_LIMIT,
     });
 
-  const posts = data?.pages.flatMap((page) => page.data.posts) ?? [];
+  const posts = data?.pages.flatMap((page) => page.posts) ?? [];
+  console.log(posts);
 
   useEffect(() => {
     const target = loadMoreRef.current;

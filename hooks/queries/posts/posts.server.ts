@@ -37,7 +37,7 @@ export const getPostsInfiniteQueryOptionsServer = (
       { headers },
     );
 
-    return { data: response.data };
+    return response.data;
   },
   initialPageParam: null,
   getNextPageParam: (lastPage: GetTeamIdPosts200) => lastPage.nextCursor,

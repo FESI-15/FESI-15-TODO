@@ -5,7 +5,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-import type { GetTeamIdPostsParams } from "@/apis/model";
+import type { GetTeamIdPosts200, GetTeamIdPostsParams } from "@/apis/model";
 import type {
   PatchPostVariables,
   PostIdVariables,
@@ -19,7 +19,6 @@ import {
   postPosts,
 } from "@/apis/posts/postsBff";
 import { postsKeys } from "./posts.key";
-
 export const useGetPosts = (params?: GetTeamIdPostsParams) => {
   return useQuery({
     queryKey: postsKeys.list(params),
@@ -31,16 +30,20 @@ export const useGetPosts = (params?: GetTeamIdPostsParams) => {
 export const useGetPostsInfinite = (params?: GetTeamIdPostsParams) => {
   return useInfiniteQuery({
     queryKey: postsKeys.list(params),
-    queryFn: ({ pageParam }) =>
-      getPosts(
+    queryFn: async ({ pageParam }) => {
+      const response = await getPosts(
         {
           ...params,
           cursor: pageParam ?? undefined,
         },
         undefined,
-      ),
+      );
+
+      return response.data;
+    },
     initialPageParam: null as string | null,
-    getNextPageParam: (lastPage) => lastPage.data.nextCursor ?? undefined,
+    getNextPageParam: (lastPage: GetTeamIdPosts200) =>
+      lastPage.nextCursor ?? undefined,
   });
 };
 

@@ -17,7 +17,7 @@ interface SideMenuListItemProps
 export default function SideMenuListItem({
   item,
   isActivePath,
-  onClose = () => {},
+  onClose,
 }: SideMenuListItemProps) {
   const isActive = isActivePath(item.href);
 

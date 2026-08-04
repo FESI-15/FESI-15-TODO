@@ -34,10 +34,12 @@ export const removeTodoFromFavoritesCache = (
   todoId: number,
 ) => {
   if (!oldData) return oldData;
+  console.log(oldData);
 
   const favorites = oldData.data.favorites.filter(
     (favorite) => favorite.todoId !== todoId,
   );
+  console.log(favorites);
 
   return {
     ...oldData,
