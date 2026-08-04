@@ -6,6 +6,8 @@ import GoalProgress from "./GoalProgress/GoalProgress";
 import GoalTodoList from "./GoalTodoList/GoalTodoList";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { getGoalProgress } from "@/utils/getGoalProgress";
+import useHeaderStore from "@/store/useHeaderStore";
+import { useEffect } from "react";
 
 export default function Goals({ goalId }: { goalId: number }) {
   const { data: userMe } = useGetUserMe();
@@ -13,6 +15,11 @@ export default function Goals({ goalId }: { goalId: number }) {
 
   const todos = todosData?.data.todos ?? [];
   const progress = getGoalProgress(todos);
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    if (userMe?.data.name) setTitle(`${userMe.data.name}님의 목표`);
+  }, [userMe?.data.name, setTitle]);
 
   return (
     <div className="mx-auto w-full max-w-[1312px] p-4 md:pt-12 lg:pt-20">

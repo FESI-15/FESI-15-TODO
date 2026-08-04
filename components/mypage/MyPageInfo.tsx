@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/common/Button";
@@ -15,11 +15,17 @@ import {
   usePatchUserMe,
   usePatchUserPassword,
 } from "@/hooks/queries/users/users.bff.hook";
+import useHeaderStore from "@/store/useHeaderStore";
 import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
 
 export function MyPageInfo() {
   const { data: userMe } = useGetUserMe();
   const user = userMe?.data;
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    setTitle("내 정보 관리");
+  }, [setTitle]);
 
   const {
     control,

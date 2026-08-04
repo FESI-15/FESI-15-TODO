@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
+import useHeaderStore from "@/store/useHeaderStore";
 
 interface WriteHeaderProps {
   isValid: boolean;
@@ -8,9 +10,16 @@ interface WriteHeaderProps {
 
 export function WriteHeader({ isValid, isEdit = false }: WriteHeaderProps) {
   const router = useRouter();
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    setTitle(isEdit ? "게시물 수정하기" : "게시물 작성하기");
+  }, [isEdit, setTitle]);
+
   const handleCancel = () => {
     router.back();
   };
+
   return (
     <div className="flex justify-end md:justify-between items-center mb-3">
       <h2 className="text-xl font-semibold hidden md:block">

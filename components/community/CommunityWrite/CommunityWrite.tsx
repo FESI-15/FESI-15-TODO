@@ -46,6 +46,7 @@ export function CommunityWrite() {
       },
     );
   };
+
   return (
     <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1 p-4 pb-15 md:mt-8 lg:mt-[60px]">
       <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
