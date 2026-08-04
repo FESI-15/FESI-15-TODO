@@ -1,10 +1,9 @@
-export default function Graph({
-  className,
-  value,
-}: {
+interface GraphProps {
   className: string;
   value: number;
-}) {
+}
+
+export default function Graph({ className, value }: GraphProps) {
   return (
     <svg className={className} viewBox="0 0 120 120">
       <circle
