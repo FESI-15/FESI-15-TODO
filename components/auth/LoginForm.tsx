@@ -33,7 +33,11 @@ export function LoginForm() {
     },
   });
 
-  const { loginWithGoogle, isPending: isGooglePending } = useGoogleLogin();
+  const {
+    loginWithGoogle,
+    isPending: isGooglePending,
+    isSuccess: isLoggedIn,
+  } = useGoogleLogin();
 
   const onSubmit = (data: LoginFormValues) => {
     mutate({ data });
@@ -50,7 +54,13 @@ export function LoginForm() {
               className="flex flex-col gap-6 md:gap-8"
             >
               <LoginFormFields control={control} />
-              <Button type="submit" fullWidth disabled={isPending || isSuccess}>
+              <Button
+                type="submit"
+                fullWidth
+                disabled={
+                  isPending || isSuccess || isGooglePending || isLoggedIn
+                }
+              >
                 로그인하기
               </Button>
             </form>
