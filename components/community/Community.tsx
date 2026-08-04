@@ -1,7 +1,6 @@
 "use client";
 
 import { useGetPostsInfinite } from "@/hooks/queries/posts/posts.bff.hook";
-import { useEffect } from "react";
 import { CommunityHeader } from "./CommunityHeader/CommunityHeader";
 import { CommunityBestView } from "./CommunityBestView/CommunityBestView";
 import { useSearchParams } from "next/navigation";
