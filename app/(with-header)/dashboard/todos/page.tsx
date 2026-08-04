@@ -6,6 +6,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Todos from "@/components/todos/Todos";
+import { notFound } from "next/navigation";
 
 interface TodosPageProps {
   searchParams: Promise<{
@@ -20,7 +21,11 @@ export default async function TodosPage({ searchParams }: TodosPageProps) {
   const params: GetTeamIdTodosParams | undefined =
     done === "true" || done === "false" ? { done } : { done: undefined };
 
-  await queryClient.prefetchQuery(getTodosQueryOptionsServer(params));
+  try {
+    await queryClient.fetchQuery(getTodosQueryOptionsServer(params));
+  } catch {
+    return notFound();
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

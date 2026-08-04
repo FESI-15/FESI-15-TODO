@@ -7,30 +7,35 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery(getTodosQueryOptionsServer()),
-    queryClient.prefetchQuery(getGoalsQueryOptionsServer()),
-    queryClient.prefetchQuery(getUserMeQueryOptionsServer()),
-  ]);
+  try {
+    await Promise.all([
+      queryClient.fetchQuery(getTodosQueryOptionsServer()),
+      queryClient.fetchQuery(getGoalsQueryOptionsServer()),
+      queryClient.fetchQuery(getUserMeQueryOptionsServer()),
+    ]);
 
-  const goals = queryClient.getQueryData<
-    Awaited<
-      ReturnType<ReturnType<typeof getGoalsQueryOptionsServer>["queryFn"]>
-    >
-  >(getGoalsQueryOptionsServer().queryKey);
+    const goals = queryClient.getQueryData<
+      Awaited<
+        ReturnType<ReturnType<typeof getGoalsQueryOptionsServer>["queryFn"]>
+      >
+    >(getGoalsQueryOptionsServer().queryKey);
 
-  if (goals) {
-    await Promise.all(
-      goals.data.goals.map((goal) =>
-        queryClient.prefetchQuery(
-          getTodosQueryOptionsServer({ goalId: goal.id }),
+    if (goals) {
+      await Promise.all(
+        goals.data.goals.map((goal) =>
+          queryClient.fetchQuery(
+            getTodosQueryOptionsServer({ goalId: goal.id }),
+          ),
         ),
-      ),
-    );
+      );
+    }
+  } catch {
+    return notFound();
   }
 
   return (

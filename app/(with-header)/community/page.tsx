@@ -13,6 +13,7 @@ import {
   COMMUNITY_BEST_LIMIT,
   COMMUNITY_LIMIT,
 } from "@/constants/CommunityLimit";
+import { notFound } from "next/navigation";
 
 interface CommunityPageProps {
   searchParams: {
@@ -25,17 +26,24 @@ export default async function CommunityPage({
 }: CommunityPageProps) {
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchInfiniteQuery(
-      getPostsInfiniteQueryOptionsServer({
-        search: searchParams.search ?? "",
-        limit: COMMUNITY_LIMIT,
-      }),
-    ),
-    queryClient.prefetchQuery(
-      getPostsQueryOptionsServer({ type: "best", limit: COMMUNITY_BEST_LIMIT }),
-    ),
-  ]);
+  try {
+    await Promise.all([
+      queryClient.fetchInfiniteQuery(
+        getPostsInfiniteQueryOptionsServer({
+          search: searchParams.search ?? "",
+          limit: COMMUNITY_LIMIT,
+        }),
+      ),
+      queryClient.fetchQuery(
+        getPostsQueryOptionsServer({
+          type: "best",
+          limit: COMMUNITY_BEST_LIMIT,
+        }),
+      ),
+    ]);
+  } catch {
+    return notFound();
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -4,6 +4,7 @@ import { HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { dehydrate } from "@tanstack/react-query";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
+import { notFound } from "next/navigation";
 
 export default async function GoalPage({
   params,
@@ -13,13 +14,18 @@ export default async function GoalPage({
   const { id } = await params;
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery(getUserMeQueryOptionsServer()),
-    queryClient.prefetchQuery(
-      getTodosQueryOptionsServer({ goalId: Number(id) }),
-    ),
-    queryClient.prefetchQuery(getGoalQueryOptionsServer(Number(id))),
-  ]);
+  try {
+    await Promise.all([
+      queryClient.fetchQuery(getUserMeQueryOptionsServer()),
+      queryClient.fetchQuery(
+        getTodosQueryOptionsServer({ goalId: Number(id) }),
+      ),
+      queryClient.fetchQuery(getGoalQueryOptionsServer(Number(id))),
+    ]);
+  } catch {
+    return notFound();
+  }
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Goals goalId={Number(id)} />

@@ -2,14 +2,15 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { MyPageInfo } from "@/components/mypage/MyPageInfo";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
 import { getQueryClient } from "@/utils/getQueryClient";
+import { notFound } from "next/navigation";
 
 export default async function MyPagePage() {
   const queryClient = getQueryClient();
 
   try {
     await queryClient.fetchQuery(getUserMeQueryOptionsServer());
-  } catch (error) {
-    throw error;
+  } catch {
+    return notFound();
   }
 
   return (
