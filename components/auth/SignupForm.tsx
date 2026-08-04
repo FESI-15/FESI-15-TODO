@@ -23,7 +23,11 @@ export function SignupForm() {
     defaultValues: { name: "", email: "", password: "", passwordConfirm: "" },
   });
 
-  const { mutate, isPending } = usePostAuthSignup({
+  const {
+    mutate,
+    isPending: isSigningUp,
+    isSuccess: isSignedUp,
+  } = usePostAuthSignup({
     mutation: {
       onSuccess: () => router.push("/dashboard"),
       onError: () =>
@@ -52,7 +56,11 @@ export function SignupForm() {
               className="flex w-full flex-col gap-8"
             >
               <SignupFormFields control={control} />
-              <Button type="submit" fullWidth disabled={isPending}>
+              <Button
+                type="submit"
+                fullWidth
+                disabled={isSigningUp || isGooglePending || isSignedUp}
+              >
                 회원가입 하기
               </Button>
             </form>

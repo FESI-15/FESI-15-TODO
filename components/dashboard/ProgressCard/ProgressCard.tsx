@@ -1,4 +1,5 @@
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
+import Graph from "@/components/common/Graph";
 import Image from "next/image";
 
 interface ProgressCardProps {
@@ -22,13 +23,13 @@ export default function ProgressCard({ title, progress }: ProgressCardProps) {
         내 진행 상황
       </SectionTitle>
       <div className="relative flex h-[186px] lg:h-64 overflow-hidden rounded-[28px] lg:rounded-[40px] bg-blue-200 px-6 lg:px-12 shadow-[0_10px_40px_rgba(0,212,190,0.24)]">
-        <div className="flex items-center gap-8">
-          <div className="relative size-[92px] lg:size-40 rounded-full bg-white/90">
-            <div className="absolute inset-5 rounded-full bg-blue-200" />
-            <div className="absolute -right-1 top-16 size-7 rounded-full bg-white" />
-          </div>
+        <div className="flex items-center gap-8 z-1">
+          <Graph
+            className="size-[92px] lg:size-[160px]"
+            value={progress / 100}
+          />
           <div className="z-10 text-white">
-            <p className="text-sm lg:text-xl font-semibold">
+            <p className="text-sm lg:text-xl font-semibold whitespace-nowrap">
               {title}님의 진행도는
             </p>
             <div className="mt-1 lg:mt-3 flex items-end gap-1">

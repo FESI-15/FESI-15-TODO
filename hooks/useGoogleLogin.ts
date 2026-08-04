@@ -41,8 +41,8 @@ export const useGoogleLogin = () => {
       ),
   );
 
-  const { mutate, isPending } = usePostAuthOauth({
-    mutation: { onSuccess: () => router.push("/dashboard") },
+  const { mutate, isPending, isSuccess } = usePostAuthOauth({
+    mutation: { onSuccess: () => router.replace("/dashboard") },
   });
 
   useEffect(() => {
@@ -75,5 +75,5 @@ export const useGoogleLogin = () => {
     tokenClientRef.current?.requestAccessToken();
   };
 
-  return { loginWithGoogle, isPending };
+  return { loginWithGoogle, isPending, isSuccess };
 };

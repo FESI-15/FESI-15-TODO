@@ -1,0 +1,31 @@
+interface GraphProps {
+  className: string;
+  value: number;
+}
+
+export default function Graph({ className, value }: GraphProps) {
+  return (
+    <svg className={className} viewBox="0 0 120 120">
+      <circle
+        cx="60"
+        cy="60"
+        r="46"
+        fill="none"
+        stroke="rgba(0,0,0,0.15)"
+        strokeWidth="16"
+      />
+      <circle
+        cx="60"
+        cy="60"
+        r="46"
+        fill="none"
+        stroke="white"
+        strokeWidth="16"
+        strokeLinecap="round"
+        strokeDasharray={2 * Math.PI * 46}
+        strokeDashoffset={2 * Math.PI * 46 * (1 - value)}
+        transform="rotate(-90 60 60)"
+      />
+    </svg>
+  );
+}
