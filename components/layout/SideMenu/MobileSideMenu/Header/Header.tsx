@@ -7,7 +7,6 @@ interface HeaderProps {
 }
 export default function Header({ onClickHamburger }: HeaderProps) {
   const title = useHeaderStore((s) => s.title);
-  const actions = useHeaderStore((s) => s.actions);
 
   return (
     <header className="bg-white py-4 px-5 border-b border-gray-200 flex justify-between items-center shadow-sm">
@@ -22,7 +21,7 @@ export default function Header({ onClickHamburger }: HeaderProps) {
         </button>
         <h1 className="text-base font-semibold text-gray-700">{title}</h1>
       </div>
-      {actions ?? <NotificationBell />}
+      <NotificationBell />
     </header>
   );
 }
