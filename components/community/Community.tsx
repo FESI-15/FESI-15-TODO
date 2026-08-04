@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetPostsInfinite } from "@/hooks/queries/posts/posts.bff.hook";
+import { useEffect } from "react";
 import { CommunityHeader } from "./CommunityHeader/CommunityHeader";
 import { CommunityBestView } from "./CommunityBestView/CommunityBestView";
 import { useSearchParams } from "next/navigation";
@@ -8,6 +9,7 @@ import { CommunityList } from "./CommunityList/CommunityPostList";
 import { CreatePostButton } from "./CreatePostButton/CreatePostButton";
 import { useEffect, useRef } from "react";
 import { COMMUNITY_LIMIT } from "@/constants/CommunityLimit";
+import useHeaderStore from "@/store/useHeaderStore";
 
 export function Community() {
   const searchParams = useSearchParams();
@@ -20,7 +22,6 @@ export function Community() {
     });
 
   const posts = data?.pages.flatMap((page) => page.posts) ?? [];
-  console.log(posts);
 
   useEffect(() => {
     const target = loadMoreRef.current;
@@ -45,6 +46,11 @@ export function Community() {
     };
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    setTitle("소통 게시판");
+  }, [setTitle]);
   return (
     <div className="w-full min-w-0 px-4 my-6 md:my-12 lg:my-20 flex flex-col flex-1">
       <h2 className="hidden md:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2">

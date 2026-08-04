@@ -8,13 +8,20 @@ import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import { getGoalProgress } from "@/utils/getGoalProgress";
+import useHeaderStore from "@/store/useHeaderStore";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Dashboard() {
   const { data: goals } = useGetGoals();
   const { data: todos } = useGetTodos();
   const { data: user } = useGetUserMe();
   const progress = getGoalProgress(todos?.data.todos ?? []);
+  const setTitle = useHeaderStore((s) => s.setTitle);
+
+  useEffect(() => {
+    if (user?.data.name) setTitle(`${user.data.name}님의 대시보드`);
+  }, [user?.data.name, setTitle]);
 
   return (
     <main className="min-w-0 flex-1 py-8 md:py-12 lg:py-20 px-4 md:px-6">
