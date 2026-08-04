@@ -40,24 +40,22 @@ export function MyPageNameField({
           중복확인
         </Button>
       </div>
-      {isNameChanged && (
-        <p
-          className={twMerge(
-            "min-h-5 px-1 text-sm font-medium",
-            isNameAvailable === undefined
-              ? ""
-              : isNameAvailable
-                ? "text-[#009D97]"
-                : "text-red-500",
-          )}
-        >
-          {isNameAvailable === undefined
-            ? null
-            : isNameAvailable
-              ? "사용 가능한 이름입니다."
-              : "이미 사용 중인 이름입니다."}
-        </p>
-      )}
+      <p
+        className={twMerge(
+          "min-h-5 px-1 text-sm font-medium",
+          isNameChanged && isNameAvailable !== undefined
+            ? isNameAvailable
+              ? "text-[#009D97]"
+              : "text-red-500"
+            : "",
+        )}
+      >
+        {isNameChanged && isNameAvailable !== undefined
+          ? isNameAvailable
+            ? "사용 가능한 이름입니다."
+            : "이미 사용 중인 이름입니다."
+          : null}
+      </p>
     </div>
   );
 }

@@ -1,6 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
-import type { GetTeamIdNotificationsParams } from "@/apis/model";
+import type {
+  GetTeamIdNotifications200,
+  GetTeamIdNotificationsParams,
+} from "@/apis/model";
 import type {
   NotificationIdVariables,
   PatchNotificationVariables,
@@ -14,10 +21,22 @@ import {
 } from "@/apis/notifications/notificationsBff";
 import { notificationsKeys } from "./notifications.key";
 
-export const useGetNotifications = (params?: GetTeamIdNotificationsParams) => {
-  return useQuery({
+export const useGetNotificationsInfinite = (
+  params?: GetTeamIdNotificationsParams,
+) => {
+  return useInfiniteQuery({
     queryKey: notificationsKeys.list(params),
-    queryFn: ({ signal }) => getNotifications(params, undefined, signal),
+    queryFn: async ({ pageParam }) => {
+      const response = await getNotifications(
+        { ...params, cursor: pageParam ?? undefined },
+        undefined,
+      );
+
+      return response.data;
+    },
+    initialPageParam: null as number | null,
+    getNextPageParam: (lastPage: GetTeamIdNotifications200) =>
+      lastPage.nextCursor ?? undefined,
   });
 };
 

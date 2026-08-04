@@ -43,11 +43,9 @@ export function MyPagePasswordFields({
           placeholder="새 비밀번호를 다시 입력해주세요"
           hideError
         />
-        {passwordError && (
-          <p className="px-1 text-sm font-medium text-red-500">
-            {passwordError}
-          </p>
-        )}
+        <p className="min-h-5 px-1 text-sm font-medium text-red-500">
+          {passwordError ?? null}
+        </p>
       </div>
     </div>
   );

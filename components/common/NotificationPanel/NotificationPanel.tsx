@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { cva } from "class-variance-authority";
 import type { GetTeamIdNotifications200NotificationsItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
@@ -17,6 +18,9 @@ interface NotificationPanelProps {
   hasUnread: boolean;
   onMarkAllRead: () => void;
   onItemClick: (notificationId: number) => void;
+  hasNextPage?: boolean;
+  isFetchingNextPage?: boolean;
+  onLoadMore?: () => void;
   className?: string;
 }
 
@@ -25,8 +29,39 @@ export default function NotificationPanel({
   hasUnread,
   onMarkAllRead,
   onItemClick,
+  hasNextPage,
+  isFetchingNextPage,
+  onLoadMore,
   className,
 }: NotificationPanelProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const loadMoreRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = scrollRef.current;
+    const target = loadMoreRef.current;
+
+    if (!root || !target || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isFetchingNextPage) {
+          onLoadMore?.();
+        }
+      },
+      {
+        root,
+        rootMargin: "100px",
+      },
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [hasNextPage, isFetchingNextPage, onLoadMore]);
+
   return (
     <div
       className={cn(
@@ -53,7 +88,10 @@ export default function NotificationPanel({
           아직 알림이 없어요
         </p>
       ) : (
-        <div className="flex max-h-[360px] flex-col gap-2 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-track]:bg-transparent">
+        <div
+          ref={scrollRef}
+          className="flex max-h-[360px] flex-col gap-2 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-200 [&::-webkit-scrollbar-track]:bg-transparent"
+        >
           {notifications.map((notification) => (
             <NotificationItem
               key={notification.id}
@@ -61,6 +99,7 @@ export default function NotificationPanel({
               onClick={onItemClick}
             />
           ))}
+          <div ref={loadMoreRef} />
         </div>
       )}
     </div>
