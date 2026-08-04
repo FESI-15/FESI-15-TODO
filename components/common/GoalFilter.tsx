@@ -54,13 +54,13 @@ export default function GoalFilter({
         alt="목표"
         width={32}
         height={32}
-        className="pointer-events-none absolute top-1/2 left-3 size-8 -translate-y-1/2"
+        className="pointer-events-none absolute top-1/2 left-4 size-8 -translate-y-1/2"
       />
       <Dropdown
         control={control}
         name="goalId"
         options={options}
-        className="flex-1 rounded-2xl border-none bg-transparent py-2 pr-3 pl-[52px] text-sm shadow-none data-popup-open:border-none data-popup-open:shadow-none md:rounded-2xl md:py-2 md:pr-3 md:pl-[52px] md:text-sm"
+        className="flex-1 rounded-2xl border-none bg-transparent py-4 pr-4 pl-[60px] text-sm shadow-none data-popup-open:border-none data-popup-open:shadow-none md:rounded-2xl md:py-4 md:pr-4 md:pl-[60px] md:text-sm"
       />
     </div>
   );

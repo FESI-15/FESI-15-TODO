@@ -31,7 +31,7 @@ export default function NotificationItem({
     <button
       type="button"
       onClick={() => onClick(notification.id)}
-      className="flex w-full items-start gap-2 rounded-2xl px-2 py-3 text-left"
+      className="flex w-full items-start gap-2 rounded-2xl px-2 py-3 text-left transition-colors hover:bg-gray-50"
     >
       <span
         className={notificationDotVariants({ isRead: notification.isRead })}
