@@ -31,14 +31,13 @@ export const useGetPosts = (params?: GetTeamIdPostsParams) => {
 export const useGetPostsInfinite = (params?: GetTeamIdPostsParams) => {
   return useInfiniteQuery({
     queryKey: postsKeys.list(params),
-    queryFn: ({ pageParam, signal }) =>
+    queryFn: ({ pageParam }) =>
       getPosts(
         {
           ...params,
           cursor: pageParam ?? undefined,
         },
         undefined,
-        signal,
       ),
     initialPageParam: null as string | null,
     getNextPageParam: (lastPage) => lastPage.data.nextCursor ?? undefined,

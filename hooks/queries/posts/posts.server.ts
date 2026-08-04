@@ -1,4 +1,4 @@
-import type { GetTeamIdPostsParams } from "@/apis/model";
+import type { GetTeamIdPosts200, GetTeamIdPostsParams } from "@/apis/model";
 import { getTeamIdPosts, getTeamIdPostsPostId } from "@/apis/posts/posts";
 import { getAuthorizationHeaders } from "@/utils/getAuthorizationHeaders";
 import { postsKeys } from "./posts.key";
@@ -22,13 +22,7 @@ export const getPostsInfiniteQueryOptionsServer = (
   params?: GetTeamIdPostsParams,
 ) => ({
   queryKey: postsKeys.list(params),
-  queryFn: async ({
-    pageParam,
-    signal,
-  }: {
-    pageParam: string | null;
-    signal: AbortSignal;
-  }) => {
+  queryFn: async ({ pageParam }: { pageParam: string | null }) => {
     const headers = await getAuthorizationHeaders();
 
     if (!headers) {
@@ -41,15 +35,12 @@ export const getPostsInfiniteQueryOptionsServer = (
         cursor: pageParam ?? undefined,
       },
       { headers },
-      signal,
     );
 
     return { data: response.data };
   },
-  initialPageParam: null as string | null,
-  getNextPageParam: (lastPage: {
-    data: Awaited<ReturnType<typeof getTeamIdPosts>>["data"];
-  }) => lastPage.data.nextCursor ?? undefined,
+  initialPageParam: null,
+  getNextPageParam: (lastPage: GetTeamIdPosts200) => lastPage.nextCursor,
 });
 
 export const getPostQueryOptionsServer = (postId: number) => ({
