@@ -1,32 +1,43 @@
 "use client";
-const DESKTOP_BREAKPOINT = 1024;
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import MobileSideMenu from "./MobileSideMenu/MobileSideMenu";
 import TabletSideMenu from "./TabletSideMenu/TabletSideMenu";
 
+const DESKTOP_MEDIA_QUERY = "(min-width: 1025px)";
+
+const subscribeDesktop = (callback: () => void) => {
+  const mediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
+
+  mediaQuery.addEventListener("change", callback);
+
+  return () => {
+    mediaQuery.removeEventListener("change", callback);
+  };
+};
+
+const getDesktopSnapshot = () => {
+  return window.matchMedia(DESKTOP_MEDIA_QUERY).matches;
+};
+
+const getServerSnapshot = () => {
+  return false;
+};
+
 export default function SideMenu() {
-  const [open, setOpen] = useState(true);
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktop,
+    getDesktopSnapshot,
+    getServerSnapshot,
+  );
+
+  const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
+
+  const open = isDesktop || isTabletMenuOpen;
 
   const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
+    setIsTabletMenuOpen((prevOpen) => !prevOpen);
   };
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(
-      `(max-width: ${DESKTOP_BREAKPOINT}px)`,
-    );
-
-    const handleChange = (event: MediaQueryListEvent) => {
-      setOpen(!event.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => {
-      mediaQuery.removeEventListener("change", handleChange);
-    };
-  }, []);
 
   return (
     <div className="relative pt-[57px] md:pt-0">

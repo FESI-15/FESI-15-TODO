@@ -13,7 +13,6 @@ import {
   COMMUNITY_BEST_LIMIT,
   COMMUNITY_LIMIT,
 } from "@/constants/CommunityLimit";
-import { notFound } from "next/navigation";
 
 interface CommunityPageProps {
   searchParams: {
@@ -42,7 +41,7 @@ export default async function CommunityPage({
       ),
     ]);
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (

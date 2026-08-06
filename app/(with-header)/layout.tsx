@@ -5,7 +5,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { notFound } from "next/navigation";
 
 export default async function WithHeaderLayout({
   children,
@@ -17,7 +16,7 @@ export default async function WithHeaderLayout({
   try {
     await queryClient.fetchQuery(getUserMeQueryOptionsServer());
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (

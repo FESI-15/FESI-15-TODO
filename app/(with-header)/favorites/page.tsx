@@ -5,7 +5,6 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Favorites from "@/components/favorites/Favorites";
-import { notFound } from "next/navigation";
 
 const FAVORITES_LIMIT = 100;
 
@@ -17,7 +16,7 @@ export default async function FavoritesPage() {
       getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
     );
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (

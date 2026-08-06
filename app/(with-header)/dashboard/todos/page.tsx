@@ -6,7 +6,6 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Todos from "@/components/todos/Todos";
-import { notFound } from "next/navigation";
 
 interface TodosPageProps {
   searchParams: Promise<{
@@ -24,7 +23,7 @@ export default async function TodosPage({ searchParams }: TodosPageProps) {
   try {
     await queryClient.fetchQuery(getTodosQueryOptionsServer(params));
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (

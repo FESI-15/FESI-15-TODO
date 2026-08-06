@@ -9,7 +9,6 @@ import { getCalendarGridRange } from "@/components/calendar/calendarGrid.utils";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
-import { notFound } from "next/navigation";
 
 export default async function CalendarPage() {
   const queryClient = new QueryClient();
@@ -28,7 +27,7 @@ export default async function CalendarPage() {
       queryClient.fetchQuery(getUserMeQueryOptionsServer()),
     ]);
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (

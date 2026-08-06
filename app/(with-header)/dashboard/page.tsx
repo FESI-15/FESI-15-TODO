@@ -7,7 +7,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { notFound } from "next/navigation";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
@@ -35,7 +34,7 @@ export default async function DashboardPage() {
       );
     }
   } catch {
-    return notFound();
+    throw new Error();
   }
 
   return (
