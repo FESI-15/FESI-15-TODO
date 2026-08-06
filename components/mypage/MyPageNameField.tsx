@@ -1,10 +1,19 @@
 "use client";
 
 import { Control } from "react-hook-form";
-import { twMerge } from "tailwind-merge";
+import { cva } from "class-variance-authority";
 import { Button } from "@/components/common/Button";
 import { FormInput } from "@/components/common/input/FormInput";
 import type { MyPageFormValues } from "./myPageForm.types";
+
+const nameAvailabilityTextVariants = cva("min-h-5 px-1 text-sm font-medium", {
+  variants: {
+    isAvailable: {
+      true: "text-[#009D97]",
+      false: "text-red-500",
+    },
+  },
+});
 
 interface MyPageNameFieldProps {
   control: Control<MyPageFormValues>;
@@ -41,14 +50,12 @@ export function MyPageNameField({
         </Button>
       </div>
       <p
-        className={twMerge(
-          "min-h-5 px-1 text-sm font-medium",
-          isNameChanged && isNameAvailable !== undefined
-            ? isNameAvailable
-              ? "text-[#009D97]"
-              : "text-red-500"
-            : "",
-        )}
+        className={nameAvailabilityTextVariants({
+          isAvailable:
+            isNameChanged && isNameAvailable !== undefined
+              ? isNameAvailable
+              : undefined,
+        })}
       >
         {isNameChanged && isNameAvailable !== undefined
           ? isNameAvailable
