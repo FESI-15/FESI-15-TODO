@@ -1,24 +1,43 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { PatchNotificationVariables } from "@/apis/notifications/notificationsBff";
 import {
-  useGetNotificationsInfinite,
-  usePatchNotification,
-  usePatchNotifications,
-} from "@/hooks/queries/notifications/notifications.bff.hook";
+  patchNotification,
+  patchNotifications,
+} from "@/apis/notifications/notificationsBff";
+import { useGetNotificationsInfinite } from "@/hooks/queries/notifications/notifications.bff.hook";
+import { notificationsKeys } from "@/hooks/queries/notifications/notifications.key";
+import type { Notification } from "@/types/notification";
 
-const NOTIFICATION_LIST_LIMIT = 20;
+const NOTIFICATION_LIST_LIMIT = 10;
 
 export const useNotificationCenter = () => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetNotificationsInfinite({ limit: NOTIFICATION_LIST_LIMIT });
-  const { mutate: markAllRead } = usePatchNotifications();
-  const { mutate: markOneRead } = usePatchNotification();
+  const { mutate: markAllRead } = useMutation({
+    mutationKey: ["patchNotifications"],
+    mutationFn: () => patchNotifications(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
+    },
+  });
+  const { mutate: markOneRead } = useMutation({
+    mutationKey: ["patchNotification"],
+    mutationFn: (variables: PatchNotificationVariables) =>
+      patchNotification(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
+    },
+  });
 
-  const notifications = data?.pages.flatMap((page) => page.notifications) ?? [];
+  const notifications = (data?.pages.flatMap((page) => page.notifications) ??
+    []) as Notification[];
   const hasUnread = notifications.some((notification) => !notification.isRead);
 
   useEffect(() => {

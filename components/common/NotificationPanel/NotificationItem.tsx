@@ -1,10 +1,6 @@
 import Image from "next/image";
 import { cva } from "class-variance-authority";
-import type { GetTeamIdNotifications200NotificationsItem } from "@/apis/model";
-import {
-  getNotificationCommentContent,
-  getNotificationUserImage,
-} from "@/types/notification";
+import type { Notification } from "@/types/notification";
 import { getRelativeCreatedTime } from "@/utils/getRelativeCreatedTime";
 
 const notificationDotVariants = cva("mt-1.5 size-1.5 shrink-0 rounded-full", {
@@ -16,7 +12,7 @@ const notificationDotVariants = cva("mt-1.5 size-1.5 shrink-0 rounded-full", {
 });
 
 interface NotificationItemProps {
-  notification: GetTeamIdNotifications200NotificationsItem;
+  notification: Notification;
   onClick: (notificationId: number) => void;
 }
 
@@ -24,8 +20,8 @@ export default function NotificationItem({
   notification,
   onClick,
 }: NotificationItemProps) {
-  const commentContent = getNotificationCommentContent(notification.data);
-  const userImage = getNotificationUserImage(notification.data);
+  const commentContent =
+    notification.type === "comment" ? notification.data.commentContent : null;
 
   return (
     <button
@@ -52,7 +48,7 @@ export default function NotificationItem({
         </div>
         <div className="relative size-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
           <Image
-            src={userImage || "/images/sidemenu/profile.png"}
+            src={notification.data.userImage || "/images/sidemenu/profile.png"}
             alt="profile"
             fill
             sizes="40px"

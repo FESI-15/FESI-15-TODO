@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { cva } from "class-variance-authority";
-import type { GetTeamIdNotifications200NotificationsItem } from "@/apis/model";
+import type { Notification } from "@/types/notification";
 import { cn } from "@/utils/cn";
 import NotificationItem from "./NotificationItem";
 
@@ -20,7 +20,7 @@ interface NotificationPagination {
 }
 
 interface NotificationPanelProps {
-  notifications: GetTeamIdNotifications200NotificationsItem[];
+  notifications: Notification[];
   hasUnread: boolean;
   onMarkAllRead: () => void;
   onItemClick: (notificationId: number) => void;
