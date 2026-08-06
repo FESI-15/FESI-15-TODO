@@ -1,4 +1,5 @@
 import Dashboard from "@/components/dashboard/Dashboard";
+import { Skeleton } from "@/components/ui/skeleton";
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
@@ -40,6 +41,25 @@ export default async function DashboardPage() {
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Dashboard />
+      {/* <div className="mt-8 px-4">
+        <div className="w-full flex justify-between items-center">
+          <Skeleton className="w-[141px] h-[32px]" />
+          <Skeleton className="w-[71px] h-[20px]" />
+        </div>
+        <div>
+          <Skeleton className="w-full h-[186px] mt-2.5" />
+        </div>
+
+        <div className="mt-10">
+          <Skeleton className="w-[115px] h-[32px]" />
+          <Skeleton className="w-full h-[186px] mt-2.5" />
+        </div>
+
+        <div className="mt-10">
+          <Skeleton className="w-[123px] h-[40px]" />
+          <Skeleton className="w-full h-[500px] mt-3" />
+        </div>
+      </div> */}
     </HydrationBoundary>
   );
 }
