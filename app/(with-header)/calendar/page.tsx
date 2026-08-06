@@ -26,8 +26,8 @@ export default async function CalendarPage() {
       queryClient.fetchQuery(getGoalsQueryOptionsServer()),
       queryClient.fetchQuery(getUserMeQueryOptionsServer()),
     ]);
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

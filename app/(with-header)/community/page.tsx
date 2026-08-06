@@ -40,8 +40,8 @@ export default async function CommunityPage({
         }),
       ),
     ]);
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

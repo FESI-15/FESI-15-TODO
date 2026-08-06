@@ -8,8 +8,8 @@ export default async function MyPagePage() {
 
   try {
     await queryClient.fetchQuery(getUserMeQueryOptionsServer());
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

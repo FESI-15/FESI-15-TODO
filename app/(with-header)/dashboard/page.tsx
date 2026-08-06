@@ -33,8 +33,8 @@ export default async function DashboardPage() {
         ),
       );
     }
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

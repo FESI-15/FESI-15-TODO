@@ -6,6 +6,8 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 export default async function WithHeaderLayout({
   children,
 }: Readonly<{
@@ -15,8 +17,8 @@ export default async function WithHeaderLayout({
 
   try {
     await queryClient.fetchQuery(getUserMeQueryOptionsServer());
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

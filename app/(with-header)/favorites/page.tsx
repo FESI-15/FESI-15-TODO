@@ -15,8 +15,8 @@ export default async function FavoritesPage() {
     await queryClient.fetchQuery(
       getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
     );
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

@@ -17,8 +17,8 @@ export default async function CommunityEditPage({
 
   try {
     await queryClient.fetchQuery(getPostQueryOptionsServer(Number(id)));
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

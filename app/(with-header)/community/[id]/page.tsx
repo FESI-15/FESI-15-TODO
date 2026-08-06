@@ -17,8 +17,8 @@ export default async function CommunityDetailPage({
   try {
     await queryClient.fetchQuery(getPostQueryOptionsServer(Number(id)));
     await queryClient.fetchQuery(getCommentsQueryOptionsServer(Number(id)));
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

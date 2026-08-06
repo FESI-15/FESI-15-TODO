@@ -22,8 +22,8 @@ export default async function TodosPage({ searchParams }: TodosPageProps) {
 
   try {
     await queryClient.fetchQuery(getTodosQueryOptionsServer(params));
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (

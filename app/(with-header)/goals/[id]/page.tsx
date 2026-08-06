@@ -21,8 +21,8 @@ export default async function GoalPage({
       ),
       queryClient.fetchQuery(getGoalQueryOptionsServer(Number(id))),
     ]);
-  } catch {
-    throw new Error();
+  } catch (error) {
+    throw error;
   }
 
   return (
