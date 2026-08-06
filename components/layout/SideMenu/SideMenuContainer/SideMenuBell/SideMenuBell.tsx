@@ -36,9 +36,7 @@ export default function SideMenuBell() {
           hasUnread={hasUnread}
           onMarkAllRead={onMarkAllRead}
           onItemClick={onMarkOneRead}
-          hasNextPage={hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-          onLoadMore={onLoadMore}
+          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
           className="absolute bottom-0 left-full z-50 ml-2"
         />
       )}

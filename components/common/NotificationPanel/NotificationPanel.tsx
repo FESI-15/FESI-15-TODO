@@ -13,14 +13,18 @@ const markAllReadButtonVariants = cva("text-xs font-semibold", {
   },
 });
 
+interface NotificationPagination {
+  hasNextPage?: boolean;
+  isFetchingNextPage?: boolean;
+  onLoadMore?: () => void;
+}
+
 interface NotificationPanelProps {
   notifications: GetTeamIdNotifications200NotificationsItem[];
   hasUnread: boolean;
   onMarkAllRead: () => void;
   onItemClick: (notificationId: number) => void;
-  hasNextPage?: boolean;
-  isFetchingNextPage?: boolean;
-  onLoadMore?: () => void;
+  pagination?: NotificationPagination;
   className?: string;
 }
 
@@ -29,11 +33,10 @@ export default function NotificationPanel({
   hasUnread,
   onMarkAllRead,
   onItemClick,
-  hasNextPage,
-  isFetchingNextPage,
-  onLoadMore,
+  pagination,
   className,
 }: NotificationPanelProps) {
+  const { hasNextPage, isFetchingNextPage, onLoadMore } = pagination ?? {};
   const scrollRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 

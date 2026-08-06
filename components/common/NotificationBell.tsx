@@ -39,9 +39,7 @@ export default function NotificationBell({
           hasUnread={hasUnread}
           onMarkAllRead={onMarkAllRead}
           onItemClick={onMarkOneRead}
-          hasNextPage={hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-          onLoadMore={onLoadMore}
+          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
           className={cn("absolute top-full right-0 z-50 mt-2", panelClassName)}
         />
       )}
