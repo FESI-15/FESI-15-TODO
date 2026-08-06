@@ -11,9 +11,13 @@ const FAVORITES_LIMIT = 100;
 export default async function FavoritesPage() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(
-    getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
-  );
+  try {
+    await queryClient.fetchQuery(
+      getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
+    );
+  } catch (error) {
+    throw error;
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

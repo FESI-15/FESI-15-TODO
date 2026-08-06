@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/common/Button";
+import Link from "next/link";
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
@@ -10,8 +10,6 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ error, reset }: ErrorPageProps) {
-  const router = useRouter();
-
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -26,7 +24,12 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
         <Button hierarchy="secondary" onClick={reset}>
           다시 시도
         </Button>
-        <Button onClick={() => router.replace("/login")}>로그인하기</Button>
+        <Link
+          href="/login"
+          className="text-sm md:text-lg font-semibold text-white bg-orange-600 px-4 py-3 md:px-4.5 md:py-3.5 rounded-full"
+        >
+          로그인하기
+        </Link>
       </div>
     </div>
   );

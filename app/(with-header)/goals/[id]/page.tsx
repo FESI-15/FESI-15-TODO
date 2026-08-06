@@ -13,13 +13,18 @@ export default async function GoalPage({
   const { id } = await params;
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery(getUserMeQueryOptionsServer()),
-    queryClient.prefetchQuery(
-      getTodosQueryOptionsServer({ goalId: Number(id) }),
-    ),
-    queryClient.prefetchQuery(getGoalQueryOptionsServer(Number(id))),
-  ]);
+  try {
+    await Promise.all([
+      queryClient.fetchQuery(getUserMeQueryOptionsServer()),
+      queryClient.fetchQuery(
+        getTodosQueryOptionsServer({ goalId: Number(id) }),
+      ),
+      queryClient.fetchQuery(getGoalQueryOptionsServer(Number(id))),
+    ]);
+  } catch (error) {
+    throw error;
+  }
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Goals goalId={Number(id)} />

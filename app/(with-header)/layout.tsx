@@ -6,13 +6,21 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
+export const dynamic = "force-dynamic";
+
 export default async function WithHeaderLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(getUserMeQueryOptionsServer());
+
+  try {
+    await queryClient.fetchQuery(getUserMeQueryOptionsServer());
+  } catch (error) {
+    throw error;
+  }
+
   return (
     <div className="flex-col flex md:flex-row flex-1">
       <HydrationBoundary state={dehydrate(queryClient)}>

@@ -20,7 +20,11 @@ export default async function TodosPage({ searchParams }: TodosPageProps) {
   const params: GetTeamIdTodosParams | undefined =
     done === "true" || done === "false" ? { done } : { done: undefined };
 
-  await queryClient.prefetchQuery(getTodosQueryOptionsServer(params));
+  try {
+    await queryClient.fetchQuery(getTodosQueryOptionsServer(params));
+  } catch (error) {
+    throw error;
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

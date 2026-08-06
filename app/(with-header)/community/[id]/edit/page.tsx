@@ -2,7 +2,6 @@ import { HydrationBoundary } from "@tanstack/react-query";
 
 import { getQueryClient } from "@/utils/getQueryClient";
 import { getPostQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
-import { notFound } from "next/navigation";
 import { dehydrate } from "@tanstack/react-query";
 import { CommunityEdit } from "@/components/community/CommunityEdit/CommunityEdit";
 
@@ -18,8 +17,8 @@ export default async function CommunityEditPage({
 
   try {
     await queryClient.fetchQuery(getPostQueryOptionsServer(Number(id)));
-  } catch {
-    return notFound();
+  } catch (error) {
+    throw error;
   }
 
   return (

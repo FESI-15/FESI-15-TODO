@@ -14,17 +14,21 @@ export default async function CalendarPage() {
   const queryClient = new QueryClient();
   const { start, end } = getCalendarGridRange(new Date());
 
-  await Promise.all([
-    queryClient.prefetchQuery(
-      getTodosQueryOptionsServer({
-        from: format(start, "yyyy-MM-dd"),
-        to: format(end, "yyyy-MM-dd"),
-        limit: 100,
-      }),
-    ),
-    queryClient.prefetchQuery(getGoalsQueryOptionsServer()),
-    queryClient.prefetchQuery(getUserMeQueryOptionsServer()),
-  ]);
+  try {
+    await Promise.all([
+      queryClient.fetchQuery(
+        getTodosQueryOptionsServer({
+          from: format(start, "yyyy-MM-dd"),
+          to: format(end, "yyyy-MM-dd"),
+          limit: 100,
+        }),
+      ),
+      queryClient.fetchQuery(getGoalsQueryOptionsServer()),
+      queryClient.fetchQuery(getUserMeQueryOptionsServer()),
+    ]);
+  } catch (error) {
+    throw error;
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
