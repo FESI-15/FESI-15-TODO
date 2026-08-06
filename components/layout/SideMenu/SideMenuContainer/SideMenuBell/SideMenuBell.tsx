@@ -5,18 +5,7 @@ import NotificationPanel from "@/components/common/NotificationPanel/Notificatio
 import { useNotificationCenter } from "@/hooks/useNotificationCenter";
 
 export default function SideMenuBell() {
-  const {
-    open,
-    containerRef,
-    toggleOpen,
-    notifications,
-    hasUnread,
-    onMarkAllRead,
-    onMarkOneRead,
-    hasNextPage,
-    isFetchingNextPage,
-    onLoadMore,
-  } = useNotificationCenter();
+  const { open, containerRef, toggleOpen, hasUnread } = useNotificationCenter();
 
   return (
     <div ref={containerRef} className="relative hidden md:block">
@@ -31,14 +20,7 @@ export default function SideMenuBell() {
         <Bell className="text-gray-500" width={24} height={24} />
       </button>
       {open && (
-        <NotificationPanel
-          notifications={notifications}
-          hasUnread={hasUnread}
-          onMarkAllRead={onMarkAllRead}
-          onItemClick={onMarkOneRead}
-          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
-          className="absolute bottom-0 left-full z-50 ml-2"
-        />
+        <NotificationPanel className="absolute bottom-0 left-full z-50 ml-2" />
       )}
     </div>
   );

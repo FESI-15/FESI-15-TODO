@@ -1,8 +1,15 @@
 import { useEffect, useRef } from "react";
 import { cva } from "class-variance-authority";
+import {
+  useGetNotificationsInfinite,
+  usePatchNotification,
+  usePatchNotifications,
+} from "@/hooks/queries/notifications/notifications.bff.hook";
 import type { Notification } from "@/types/notification";
 import { cn } from "@/utils/cn";
 import NotificationItem from "./NotificationItem";
+
+const NOTIFICATION_LIST_LIMIT = 10;
 
 const markAllReadButtonVariants = cva("text-xs font-semibold", {
   variants: {
@@ -13,30 +20,30 @@ const markAllReadButtonVariants = cva("text-xs font-semibold", {
   },
 });
 
-interface NotificationPagination {
-  hasNextPage?: boolean;
-  isFetchingNextPage?: boolean;
-  onLoadMore?: () => void;
-}
-
 interface NotificationPanelProps {
-  notifications: Notification[];
-  hasUnread: boolean;
-  onMarkAllRead: () => void;
-  onItemClick: (notificationId: number) => void;
-  pagination?: NotificationPagination;
   className?: string;
 }
 
 export default function NotificationPanel({
-  notifications,
-  hasUnread,
-  onMarkAllRead,
-  onItemClick,
-  pagination,
   className,
 }: NotificationPanelProps) {
-  const { hasNextPage, isFetchingNextPage, onLoadMore } = pagination ?? {};
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetNotificationsInfinite({ limit: NOTIFICATION_LIST_LIMIT });
+  const notifications = (data?.pages.flatMap((page) => page.notifications) ??
+    []) as Notification[];
+  const hasUnread = notifications.some((notification) => !notification.isRead);
+
+  const { mutate: markAllRead } = usePatchNotifications();
+  const { mutate: markOneRead } = usePatchNotification();
+
+  const handleMarkAllRead = () => {
+    if (!hasUnread) {
+      return;
+    }
+
+    markAllRead();
+  };
+
   const scrollRef = useRef<HTMLDivElement>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +56,7 @@ export default function NotificationPanel({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !isFetchingNextPage) {
-          onLoadMore?.();
+          fetchNextPage();
         }
       },
       {
@@ -63,7 +70,7 @@ export default function NotificationPanel({
     return () => {
       observer.disconnect();
     };
-  }, [hasNextPage, isFetchingNextPage, onLoadMore]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
     <div
@@ -78,7 +85,7 @@ export default function NotificationPanel({
         </p>
         <button
           type="button"
-          onClick={onMarkAllRead}
+          onClick={handleMarkAllRead}
           disabled={!hasUnread}
           className={markAllReadButtonVariants({ hasUnread })}
         >
@@ -99,7 +106,7 @@ export default function NotificationPanel({
             <NotificationItem
               key={notification.id}
               notification={notification}
-              onClick={onItemClick}
+              onMarkRead={markOneRead}
             />
           ))}
           <div ref={loadMoreRef} />

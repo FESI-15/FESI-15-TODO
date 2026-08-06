@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cva } from "class-variance-authority";
+import type { PatchNotificationVariables } from "@/apis/notifications/notificationsBff";
 import type { Notification } from "@/types/notification";
 import { getRelativeCreatedTime } from "@/utils/getRelativeCreatedTime";
 
@@ -13,20 +14,28 @@ const notificationDotVariants = cva("mt-1.5 size-1.5 shrink-0 rounded-full", {
 
 interface NotificationItemProps {
   notification: Notification;
-  onClick: (notificationId: number) => void;
+  onMarkRead: (variables: PatchNotificationVariables) => void;
 }
 
 export default function NotificationItem({
   notification,
-  onClick,
+  onMarkRead,
 }: NotificationItemProps) {
   const commentContent =
     notification.type === "comment" ? notification.data.commentContent : null;
 
+  const handleClick = () => {
+    if (notification.isRead) {
+      return;
+    }
+
+    onMarkRead({ notificationId: notification.id, data: { isRead: true } });
+  };
+
   return (
     <button
       type="button"
-      onClick={() => onClick(notification.id)}
+      onClick={handleClick}
       className="flex w-full items-start gap-2 rounded-2xl px-2 py-3 text-left transition-colors hover:bg-gray-50"
     >
       <span
