@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cva } from "class-variance-authority";
-import type { PatchNotificationVariables } from "@/apis/notifications/notificationsBff";
+import { usePatchNotification } from "@/hooks/queries/notifications/notifications.bff.hook";
 import type { Notification } from "@/types/notification";
 import { getRelativeCreatedTime } from "@/utils/getRelativeCreatedTime";
 
@@ -14,22 +14,22 @@ const notificationDotVariants = cva("mt-1.5 size-1.5 shrink-0 rounded-full", {
 
 interface NotificationItemProps {
   notification: Notification;
-  onMarkRead: (variables: PatchNotificationVariables) => void;
 }
 
 export default function NotificationItem({
   notification,
-  onMarkRead,
 }: NotificationItemProps) {
   const commentContent =
     notification.type === "comment" ? notification.data.commentContent : null;
+
+  const { mutate: markOneRead } = usePatchNotification();
 
   const handleClick = () => {
     if (notification.isRead) {
       return;
     }
 
-    onMarkRead({ notificationId: notification.id, data: { isRead: true } });
+    markOneRead({ notificationId: notification.id, data: { isRead: true } });
   };
 
   return (

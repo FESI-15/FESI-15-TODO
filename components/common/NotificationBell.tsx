@@ -12,7 +12,16 @@ interface NotificationBellProps {
 export default function NotificationBell({
   panelClassName,
 }: NotificationBellProps) {
-  const { open, containerRef, toggleOpen, hasUnread } = useNotificationCenter();
+  const {
+    open,
+    containerRef,
+    toggleOpen,
+    notifications,
+    hasUnread,
+    hasNextPage,
+    isFetchingNextPage,
+    onLoadMore,
+  } = useNotificationCenter();
 
   return (
     <div ref={containerRef} className="relative">
@@ -24,6 +33,9 @@ export default function NotificationBell({
       </button>
       {open && (
         <NotificationPanel
+          notifications={notifications}
+          hasUnread={hasUnread}
+          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
           className={cn("absolute top-full right-0 z-50 mt-2", panelClassName)}
         />
       )}

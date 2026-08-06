@@ -10,9 +10,8 @@ export const useNotificationCenter = () => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { data } = useGetNotificationsInfinite({
-    limit: NOTIFICATION_LIST_LIMIT,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetNotificationsInfinite({ limit: NOTIFICATION_LIST_LIMIT });
 
   const notifications = (data?.pages.flatMap((page) => page.notifications) ??
     []) as Notification[];
@@ -44,6 +43,10 @@ export const useNotificationCenter = () => {
     open,
     containerRef,
     toggleOpen,
+    notifications,
     hasUnread,
+    hasNextPage,
+    isFetchingNextPage,
+    onLoadMore: fetchNextPage,
   };
 };
