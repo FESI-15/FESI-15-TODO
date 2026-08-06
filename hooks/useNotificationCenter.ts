@@ -1,23 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  useGetNotifications,
-  usePatchNotification,
-  usePatchNotifications,
-} from "@/hooks/queries/notifications/notifications.bff.hook";
+import { useGetNotificationsInfinite } from "@/hooks/queries/notifications/notifications.bff.hook";
+import type { Notification } from "@/types/notification";
 
-const NOTIFICATION_LIST_LIMIT = 20;
+const NOTIFICATION_LIST_LIMIT = 10;
 
 export const useNotificationCenter = () => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const { data } = useGetNotifications({ limit: NOTIFICATION_LIST_LIMIT });
-  const { mutate: markAllRead } = usePatchNotifications();
-  const { mutate: markOneRead } = usePatchNotification();
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useGetNotificationsInfinite({ limit: NOTIFICATION_LIST_LIMIT });
 
-  const notifications = data?.data.notifications ?? [];
+  const notifications = (data?.pages.flatMap((page) => page.notifications) ??
+    []) as Notification[];
   const hasUnread = notifications.some((notification) => !notification.isRead);
 
   useEffect(() => {
@@ -42,33 +39,14 @@ export const useNotificationCenter = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMarkAllRead = () => {
-    if (!hasUnread) {
-      return;
-    }
-
-    markAllRead();
-  };
-
-  const handleMarkOneRead = (notificationId: number) => {
-    const target = notifications.find(
-      (notification) => notification.id === notificationId,
-    );
-
-    if (!target || target.isRead) {
-      return;
-    }
-
-    markOneRead({ notificationId, data: { isRead: true } });
-  };
-
   return {
     open,
     containerRef,
     toggleOpen,
     notifications,
     hasUnread,
-    onMarkAllRead: handleMarkAllRead,
-    onMarkOneRead: handleMarkOneRead,
+    hasNextPage,
+    isFetchingNextPage,
+    onLoadMore: fetchNextPage,
   };
 };

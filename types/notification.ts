@@ -1,10 +1,30 @@
-const isRecord = (value: unknown): value is Record<string, unknown> =>
-  typeof value === "object" && value !== null;
+import type { GetTeamIdNotifications200NotificationsItem } from "@/apis/model";
 
-export const getNotificationUserImage = (data: unknown): string | null =>
-  isRecord(data) && typeof data.userImage === "string" ? data.userImage : null;
+interface NotificationCommentData {
+  postTitle: string;
+  commentContent: string;
+  commentAuthor: string;
+  userImage: string | null;
+}
 
-export const getNotificationCommentContent = (data: unknown): string | null =>
-  isRecord(data) && typeof data.commentContent === "string"
-    ? data.commentContent
-    : null;
+interface NotificationTodoData {
+  todoTitle: string;
+  goalTitle: string | null;
+  userImage: string | null;
+}
+
+interface NotificationGoalData {
+  goalTitle: string;
+  totalTodos: number;
+  userImage: string | null;
+}
+
+type NotificationBase = Omit<
+  GetTeamIdNotifications200NotificationsItem,
+  "type" | "data"
+>;
+
+export type Notification =
+  | (NotificationBase & { type: "comment"; data: NotificationCommentData })
+  | (NotificationBase & { type: "todo"; data: NotificationTodoData })
+  | (NotificationBase & { type: "goal"; data: NotificationGoalData });

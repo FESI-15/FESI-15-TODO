@@ -11,8 +11,9 @@ export default function SideMenuBell() {
     toggleOpen,
     notifications,
     hasUnread,
-    onMarkAllRead,
-    onMarkOneRead,
+    hasNextPage,
+    isFetchingNextPage,
+    onLoadMore,
   } = useNotificationCenter();
 
   return (
@@ -31,8 +32,7 @@ export default function SideMenuBell() {
         <NotificationPanel
           notifications={notifications}
           hasUnread={hasUnread}
-          onMarkAllRead={onMarkAllRead}
-          onItemClick={onMarkOneRead}
+          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
           className="absolute bottom-0 left-full z-50 ml-2"
         />
       )}

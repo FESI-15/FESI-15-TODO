@@ -18,8 +18,9 @@ export default function NotificationBell({
     toggleOpen,
     notifications,
     hasUnread,
-    onMarkAllRead,
-    onMarkOneRead,
+    hasNextPage,
+    isFetchingNextPage,
+    onLoadMore,
   } = useNotificationCenter();
 
   return (
@@ -34,8 +35,7 @@ export default function NotificationBell({
         <NotificationPanel
           notifications={notifications}
           hasUnread={hasUnread}
-          onMarkAllRead={onMarkAllRead}
-          onItemClick={onMarkOneRead}
+          pagination={{ hasNextPage, isFetchingNextPage, onLoadMore }}
           className={cn("absolute top-full right-0 z-50 mt-2", panelClassName)}
         />
       )}

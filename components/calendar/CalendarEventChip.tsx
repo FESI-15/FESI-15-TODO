@@ -23,7 +23,10 @@ interface CalendarEventChipProps {
 
 export default function CalendarEventChip({ todo }: CalendarEventChipProps) {
   return (
-    <div className={calendarEventChipVariants({ done: todo.done })}>
+    <div
+      className={calendarEventChipVariants({ done: todo.done })}
+      onClick={(e) => e.stopPropagation()}
+    >
       {todo.done && <Check className="size-4 shrink-0" />}
       <TaskModal todo={todo}>
         <span className="block w-full truncate text-left">{todo.title}</span>
