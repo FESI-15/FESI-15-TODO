@@ -8,17 +8,9 @@ import Image from "next/image";
 interface GoalCardListProps {
   goals: GetTeamIdGoals200GoalsItem[];
   todos: GetTeamIdTodos200TodosItem[];
-  isLoading: boolean;
 }
 
-export default function GoalCardList({
-  goals,
-  todos,
-  isLoading,
-}: GoalCardListProps) {
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+export default function GoalCardList({ goals, todos }: GoalCardListProps) {
   return goals.length === 0 ? (
     <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
       <Image

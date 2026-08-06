@@ -13,7 +13,7 @@ import GoalCardList from "./GoalCardList/GoalCardList";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 
 export default function Dashboard() {
-  const { data: goals, isLoading: isGoalsLoading } = useGetGoals();
+  const { data: goals } = useGetGoals();
   const { data: todos } = useGetTodos();
   const { data: user } = useGetUserMe();
   const progress = getGoalProgress(todos?.data.todos ?? []);
@@ -50,7 +50,6 @@ export default function Dashboard() {
           <GoalCardList
             goals={goals?.data.goals ?? []}
             todos={todos?.data.todos ?? []}
-            isLoading={isGoalsLoading}
           />
         </section>
       </div>
