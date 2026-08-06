@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { PatchNotificationVariables } from "@/apis/notifications/notificationsBff";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   patchNotification,
   patchNotifications,
@@ -20,21 +19,6 @@ export const useNotificationCenter = () => {
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetNotificationsInfinite({ limit: NOTIFICATION_LIST_LIMIT });
-  const { mutate: markAllRead } = useMutation({
-    mutationKey: ["patchNotifications"],
-    mutationFn: () => patchNotifications(),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
-    },
-  });
-  const { mutate: markOneRead } = useMutation({
-    mutationKey: ["patchNotification"],
-    mutationFn: (variables: PatchNotificationVariables) =>
-      patchNotification(variables),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
-    },
-  });
 
   const notifications = (data?.pages.flatMap((page) => page.notifications) ??
     []) as Notification[];
@@ -62,15 +46,16 @@ export const useNotificationCenter = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleMarkAllRead = () => {
+  const handleMarkAllRead = async () => {
     if (!hasUnread) {
       return;
     }
 
-    markAllRead();
+    await patchNotifications();
+    queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
   };
 
-  const handleMarkOneRead = (notificationId: number) => {
+  const handleMarkOneRead = async (notificationId: number) => {
     const target = notifications.find(
       (notification) => notification.id === notificationId,
     );
@@ -79,7 +64,8 @@ export const useNotificationCenter = () => {
       return;
     }
 
-    markOneRead({ notificationId, data: { isRead: true } });
+    await patchNotification({ notificationId, data: { isRead: true } });
+    queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
   };
 
   return {
