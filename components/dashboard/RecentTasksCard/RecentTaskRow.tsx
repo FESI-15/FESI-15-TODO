@@ -8,11 +8,11 @@ interface RecentTaskRowProps {
 
 export default function RecentTaskRow({ todo }: RecentTaskRowProps) {
   return (
-    <li className="flex min-w-0 items-center justify-between gap-4 px-2 py-2.5">
+    <li className="flex min-w-0 items-center justify-between gap-4 px-1 py-1.5 lg:py-2.5">
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <DashboardCheckbox checked={todo.done} taskId={todo.id} />
         <TaskModal todo={todo}>
-          <p className="truncate text-left text-sm font-semibold text-white">
+          <p className="truncate text-left text-sm font-semibold text-white pr-4 lg:text-base">
             {todo.title}
           </p>
         </TaskModal>

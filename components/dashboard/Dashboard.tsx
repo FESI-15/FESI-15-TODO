@@ -29,7 +29,7 @@ export default function Dashboard() {
         <h1 className="px-2 text-2xl font-semibold text-gray-900 hidden md:block">
           {user?.data.name}님의 대시보드
         </h1>
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           <RecentTasksCard todos={todos?.data.todos ?? []} />
           <ProgressCard title={user?.data.name ?? ""} progress={progress} />
         </div>
