@@ -16,7 +16,7 @@ export default function MobileSideMenu() {
     setIsOpen(false);
   };
   return (
-    <div className="block fixed top-0 left-0 w-full z-50 md:hidden">
+    <div className="block fixed top-0 left-0 w-full z-50 lg:hidden">
       <Header onClickHamburger={handleOpen} />
       {isOpen && (
         <aside className="fixed top-0 left-0 flex h-full w-full flex-col bg-white z-50 py-4 px-5 overflow-y-auto">
