@@ -21,7 +21,10 @@ export function CommunityBestView() {
         }}
       >
         {data?.data.posts.map((post) => (
-          <SwiperSlide key={post.id} className="mb-12 !w-[260px] md:!w-[384px]">
+          <SwiperSlide
+            key={post.id}
+            className="md:mb-[54px] lg:mb-[62px] !w-[260px] md:!w-[384px]"
+          >
             <BestViewCard post={post} />
           </SwiperSlide>
         ))}

@@ -7,13 +7,13 @@ export default function SideMenuActions() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex items-center gap-2 md:gap-4 md:mt-0 mt-10">
+    <div className="flex items-center gap-2 lg:gap-4 lg:mt-0 mt-10">
       <GoalsModal open={open} onOpenChange={setOpen}>
         <NewGoalButton />
       </GoalsModal>
       <TaskFormModal>
-        <div className="flex items-center justify-center gap-1 text-orange-500 py-3 flex-1 bg-white border border-orange-300 rounded-full md:aspect-square md:rounded-4xl md:flex-col hover:bg-gray-50 hover:text-orange-600 hover:border-orange-500">
-          <NewTodo className="md:w-10 md:h-10 w-6 h-6" />
+        <div className="flex items-center w-full lg:w-[120px] justify-center gap-1 text-orange-500 py-3 flex-1 bg-white border border-orange-300 rounded-full lg:aspect-square lg:rounded-4xl lg:flex-col hover:bg-gray-50 hover:text-orange-600 hover:border-orange-500">
+          <NewTodo className="lg:w-10 lg:h-10 w-6 h-6" />
           <span className="font-semibold md:text-lg">새 할일</span>
         </div>
       </TaskFormModal>
