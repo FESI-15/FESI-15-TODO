@@ -6,6 +6,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Todos from "@/components/todos/Todos";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface TodosPageProps {
   searchParams: Promise<{
