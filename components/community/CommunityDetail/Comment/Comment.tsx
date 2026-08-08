@@ -12,7 +12,7 @@ export function Comment({ postId, userId }: CommentProps) {
 
   return (
     <div className="mt-10 md:mt-14">
-      <div className="font-semibold text-gray-800 flex items-center gap-[2px] md:text-lg md:gap-1">
+      <div className="font-semibold text-gray-800 dark:text-foreground flex items-center gap-[2px] md:text-lg md:gap-1">
         댓글 <p className="text-orange-600">{commentData?.data.totalCount}</p>
       </div>
       <CommentForm postId={postId} />

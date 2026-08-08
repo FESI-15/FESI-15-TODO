@@ -144,7 +144,7 @@ export default function TaskFormModal(props: TaskFormModalProps) {
               <DialogClose
                 render={
                   <Button
-                    className="text-gray-500"
+                    className="text-gray-500 dark:text-white"
                     fullWidth
                     hierarchy="tertiary"
                     size="lg"

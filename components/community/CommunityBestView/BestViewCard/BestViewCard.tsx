@@ -7,11 +7,11 @@ export function BestViewCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
   return (
     <article>
       <Link
-        className="w-[260px] block bg-white shadow-md rounded-[16px] py-4 px-8 md:p-8 md:w-[384px]"
+        className="w-[260px] block bg-white dark:bg-card shadow-md rounded-[16px] py-4 px-8 md:p-8 md:w-[384px]"
         href={`/community/${post.id}`}
       >
         <div>
-          <p className="font-semibold text-gray-900 mb-3 md:text-xl md:font-semibold md:mb-4">
+          <p className="font-semibold text-gray-900 dark:text-foreground mb-3 md:text-xl md:font-semibold md:mb-4">
             {post.title}
           </p>
           <div className="size-[100px] relative">

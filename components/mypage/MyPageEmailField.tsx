@@ -10,13 +10,16 @@ interface MyPageEmailFieldProps {
 export function MyPageEmailField({ email }: MyPageEmailFieldProps) {
   return (
     <Field className="gap-2">
-      <FieldLabel className="text-sm md:text-base font-semibold text-gray-700">
+      <FieldLabel className="text-sm md:text-base font-semibold text-gray-700 dark:text-foreground">
         이메일
       </FieldLabel>
       <ShadcnInput
         readOnly
         value={email ?? ""}
-        className={twMerge(inputVariants({ variant: "text" }), "bg-[#FAFAFA]")}
+        className={twMerge(
+          inputVariants({ variant: "text" }),
+          "bg-[#FAFAFA] dark:bg-muted",
+        )}
       />
     </Field>
   );

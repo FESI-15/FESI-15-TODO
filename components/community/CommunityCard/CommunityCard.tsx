@@ -9,16 +9,16 @@ export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
   return (
     <li>
       <Link
-        className="flex justify-between items-center gap-6 px-2 py-6 border-b border-gray-300 hover:shadow-md transition-all duration-300 md:px-4 md:py-10"
+        className="flex justify-between items-center gap-6 px-2 py-6 border-b border-gray-300 dark:border-border hover:shadow-md transition-all duration-300 md:px-4 md:py-10"
         href={`/community/${post.id}`}
       >
         <div>
-          <p className="text-sm font-semibold mb-1 text-gray-900 truncate md:text-xl md:font-semibold md:mb-4">
+          <p className="text-sm font-semibold mb-1 text-gray-900 dark:text-foreground truncate md:text-xl md:font-semibold md:mb-4">
             {post.title}
           </p>
           <div
             dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-            className="text-sm text-gray-700 line-clamp-2"
+            className="text-sm text-gray-700 dark:text-muted-foreground line-clamp-2"
           />
           <div className="mt-3 md:mt-6">
             <CardInformation post={post} />

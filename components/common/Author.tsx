@@ -25,7 +25,7 @@ const AuthorImageVariant = cva("rounded-full overflow-hidden", {
   },
 });
 
-const AuthorNameVariant = cva("text-gray-500", {
+const AuthorNameVariant = cva("text-gray-500 dark:text-muted-foreground", {
   variants: {
     size: {
       sm: "text-xs md:text-sm",

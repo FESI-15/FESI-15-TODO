@@ -43,7 +43,8 @@ export default function CalendarGrid({
         month_grid: "flex h-full w-full flex-1 flex-col border-collapse",
         weeks: "flex h-full flex-1 flex-col",
         weekdays: "flex w-full",
-        weekday: "flex-1 py-2 text-center text-sm font-medium text-gray-500",
+        weekday:
+          "flex-1 py-2 text-center text-sm font-medium text-gray-500 dark:text-muted-foreground",
         week: "flex w-full flex-1",
         month_caption: "hidden",
         nav: "hidden",

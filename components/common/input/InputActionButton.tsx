@@ -23,7 +23,7 @@ export function InputActionButton({
   if (variant === "link") {
     return (
       <>
-        <span className="pointer-events-none absolute left-4 text-gray-500">
+        <span className="pointer-events-none absolute left-4 text-gray-500 dark:text-muted-foreground">
           <LinkIcon className="h-5 w-5 md:h-6 md:w-6" />
         </span>
         {value && (
@@ -33,7 +33,7 @@ export function InputActionButton({
             className="absolute right-4"
             aria-label="링크 삭제"
           >
-            <CloseIcon className="h-5 w-5 shrink-0 text-gray-400 md:h-6 md:w-6" />
+            <CloseIcon className="h-5 w-5 shrink-0 text-gray-400 dark:text-muted-foreground md:h-6 md:w-6" />
           </button>
         )}
       </>
@@ -51,7 +51,7 @@ export function InputActionButton({
         )}
         aria-label="검색"
       >
-        <SearchIcon className="h-5 w-5 text-gray-400" />
+        <SearchIcon className="h-5 w-5 text-gray-400 dark:text-muted-foreground" />
       </button>
     );
   }
@@ -65,9 +65,9 @@ export function InputActionButton({
         aria-label={isPasswordVisible ? "비밀번호 숨기기" : "비밀번호 보기"}
       >
         {isPasswordVisible ? (
-          <EyeIcon className="h-5 w-5 text-gray-400" />
+          <EyeIcon className="h-5 w-5 text-gray-400 dark:text-muted-foreground" />
         ) : (
-          <EyeOffIcon className="h-5 w-5 text-gray-400" />
+          <EyeOffIcon className="h-5 w-5 text-gray-400 dark:text-muted-foreground" />
         )}
       </button>
     );

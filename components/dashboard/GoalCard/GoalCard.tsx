@@ -28,7 +28,7 @@ export default function GoalCard({ goal }: GoalCardProps) {
   const progress = getGoalProgress(todos?.data.todos ?? []);
 
   return (
-    <article className="rounded-[40px] bg-white px-5 py-6 lg:px-8">
+    <article className="rounded-[40px] bg-white dark:bg-card px-5 py-6 lg:px-8">
       <GoalHeader title={goal.title} progress={progress} control={control} />
       <div className="mt-4 flex flex-col gap-8 md:flex-row">
         <TaskColumn title="TO DO" tasks={todoTasks || []} />

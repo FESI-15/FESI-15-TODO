@@ -23,13 +23,13 @@ export default function CalendarDayOverflow({
   return (
     <Popover>
       <PopoverTrigger
-        className="text-left text-xs font-medium text-gray-500 hover:text-gray-700"
+        className="text-left text-xs font-medium text-gray-500 dark:text-muted-foreground hover:text-gray-700 dark:hover:text-foreground"
         onClick={(e) => e.stopPropagation()}
       >
         +{hiddenCount}
       </PopoverTrigger>
       <PopoverContent align="start" className="w-56">
-        <p className="px-1 pb-1 text-xs font-semibold text-gray-500">
+        <p className="px-1 pb-1 text-xs font-semibold text-gray-500 dark:text-muted-foreground">
           {format(date, "yyyy.MM.dd")}
         </p>
         <div className="flex flex-col gap-1">

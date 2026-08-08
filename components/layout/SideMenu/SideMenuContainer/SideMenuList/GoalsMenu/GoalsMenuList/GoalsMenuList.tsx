@@ -27,7 +27,7 @@ export default function GoalsMenuList({ onClose }: { onClose?: () => void }) {
           <Link
             href={`/goals/${goalList.id}`}
             onClick={() => onClose?.()}
-            className="py-2 px-6 block hover:bg-orange-200 hover:text-orange-700 text-gray-700"
+            className="py-2 px-6 block hover:bg-orange-200 hover:text-orange-700 text-gray-700 dark:text-foreground dark:hover:bg-orange-500/10"
           >
             <span className="text-sm font-semibold">{goalList.title}</span>
           </Link>

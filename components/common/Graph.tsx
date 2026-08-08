@@ -11,7 +11,7 @@ export default function Graph({ className, value }: GraphProps) {
         cy="60"
         r="46"
         fill="none"
-        stroke="rgba(0,0,0,0.15)"
+        className="stroke-black/15 dark:stroke-white/15"
         strokeWidth="16"
       />
       <circle
@@ -19,7 +19,7 @@ export default function Graph({ className, value }: GraphProps) {
         cy="60"
         r="46"
         fill="none"
-        stroke="white"
+        className="stroke-white dark:stroke-[#56ffff]"
         strokeWidth="16"
         strokeLinecap="round"
         strokeDasharray={2 * Math.PI * 46}

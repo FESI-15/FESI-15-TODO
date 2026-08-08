@@ -1,22 +1,22 @@
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const sideMenuListTextVariants = cva(
-  "flex items-center justify-between py-3.5 px-4 rounded-[20px] text-gray-700 w-full font-semibold hover:text-orange-700 group",
+  "flex items-center justify-between py-3.5 px-4 rounded-[20px] text-gray-700 dark:text-foreground w-full font-semibold hover:text-orange-700 group",
   {
     variants: {
       isActive: {
-        true: "bg-orange-200 text-orange-700",
+        true: "bg-orange-200 text-orange-700 dark:bg-[#d1632b] dark:text-white",
       },
     },
   },
 );
 
 export const sideMenuListIconVariants = cva(
-  "w-6 h-6 text-gray-300 group-hover:text-orange-600",
+  "w-6 h-6 text-gray-300 dark:text-muted-foreground group-hover:text-orange-600",
   {
     variants: {
       isActive: {
-        true: "text-orange-600",
+        true: "text-orange-600 dark:text-white",
       },
     },
   },

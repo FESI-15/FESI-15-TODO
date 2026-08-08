@@ -18,7 +18,7 @@ export function MyPagePasswordFields({
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <p className="px-1 text-base font-semibold text-gray-700">
+      <p className="px-1 text-base font-semibold text-gray-700 dark:text-foreground">
         비밀번호 변경
       </p>
       <div className="flex w-full flex-col gap-3">

@@ -13,7 +13,7 @@ export default function AttachmentSection({
   if (!link && !imageUrl) return null;
   return (
     <div className="mt-6">
-      <p className="text-sm font-semibold text-gray-700 md:text-base">
+      <p className="text-sm font-semibold text-gray-700 dark:text-white md:text-base">
         첨부 자료
       </p>
       {link && (
@@ -26,7 +26,7 @@ export default function AttachmentSection({
           />
           <Link
             href={link}
-            className="text-gray-700 hover:underline"
+            className="text-gray-700 dark:text-foreground hover:underline"
             target="_blank"
           >
             {link}
@@ -34,7 +34,7 @@ export default function AttachmentSection({
         </div>
       )}
       {imageUrl && (
-        <div className="mt-2 aspect-2/1 overflow-hidden rounded-lg border border-gray-200">
+        <div className="mt-2 aspect-2/1 overflow-hidden rounded-lg border border-gray-200 dark:border-border">
           <Image
             src={imageUrl}
             alt="image"

@@ -45,7 +45,7 @@ export default function GoalFilter({
   return (
     <div
       className={cn(
-        "relative flex w-full items-center rounded-2xl border border-gray-100 bg-gray-50",
+        "relative flex w-full items-center rounded-2xl border border-gray-100 dark:border-border bg-gray-50 dark:bg-card",
         className,
       )}
     >

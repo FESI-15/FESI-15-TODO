@@ -26,7 +26,7 @@ export default function Dashboard() {
   return (
     <main className="min-w-0 flex-1 py-8 md:py-12 lg:py-20 px-4 md:px-6">
       <div className="mx-auto flex max-w-[1312px] flex-col gap-8">
-        <h1 className="px-2 text-2xl font-semibold text-gray-900 hidden md:block">
+        <h1 className="px-2 text-2xl font-semibold text-gray-900 dark:text-foreground hidden md:block">
           {user?.data.name}님의 대시보드
         </h1>
         <div className="grid gap-8 lg:grid-cols-2">
@@ -48,7 +48,7 @@ export default function Dashboard() {
             목표 별 할일
           </SectionTitle>
           {goals?.data.goals.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
+            <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white dark:bg-card rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
               <Image
                 className="md:w-[130px] md:h-[140px]"
                 src="/icons/common/no_data.svg"
@@ -56,7 +56,7 @@ export default function Dashboard() {
                 width={80}
                 height={85}
               />
-              <p className="text-gray-500 text-sm font-medium md:text-base">
+              <p className="text-gray-500 dark:text-muted-foreground text-sm font-medium md:text-base">
                 최근에 등록한 목표가 없어요
               </p>
             </div>

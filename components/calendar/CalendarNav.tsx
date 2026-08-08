@@ -26,9 +26,9 @@ export default function CalendarNav({
           aria-label="이전 달"
           onClick={() => onMonthChange(subMonths(month, 1))}
         >
-          <DoubleArrow className="size-6 rotate-180 text-gray-400" />
+          <DoubleArrow className="size-6 rotate-180 text-gray-400 dark:text-muted-foreground" />
         </button>
-        <span className="text-lg font-semibold whitespace-nowrap text-gray-800">
+        <span className="text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-foreground">
           {format(month, "yyyy년 M월", { locale: ko })}
         </span>
         <button
@@ -36,7 +36,7 @@ export default function CalendarNav({
           aria-label="다음 달"
           onClick={() => onMonthChange(addMonths(month, 1))}
         >
-          <DoubleArrow className="size-6 text-gray-400" />
+          <DoubleArrow className="size-6 text-gray-400 dark:text-muted-foreground" />
         </button>
       </div>
       <GoalFilter

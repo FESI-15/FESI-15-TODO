@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePostAuthLogout } from "@/hooks/queries/auth/auth.bff.hook";
 import SettingModal from "@/components/common/Modal/SettingModal/SettingModal";
+import SettingsIcon from "@/public/icons/sidemenu/settings.svg";
+import LogoutIcon from "@/public/icons/sidemenu/logout.svg";
 
 export default function SideMenuUtilMenu() {
   const router = useRouter();
@@ -23,14 +24,9 @@ export default function SideMenuUtilMenu() {
           trigger={
             <button
               type="button"
-              className="flex items-center gap-2.5 text-gray-500 px-4 py-3.5 w-full"
+              className="flex items-center gap-2.5 text-gray-500 dark:text-muted-foreground px-4 py-3.5 w-full"
             >
-              <Image
-                src="/icons/sidemenu/settings.svg"
-                alt="settings"
-                width={24}
-                height={24}
-              />
+              <SettingsIcon className="size-6 text-gray-300 dark:text-muted-foreground" />
               <span className="font-semibold text-lg">설정</span>
             </button>
           }
@@ -40,14 +36,9 @@ export default function SideMenuUtilMenu() {
         <button
           type="button"
           onClick={() => logout()}
-          className="flex items-center gap-2.5 text-gray-500 px-4 py-3.5 w-full"
+          className="flex items-center gap-2.5 text-gray-500 dark:text-muted-foreground px-4 py-3.5 w-full"
         >
-          <Image
-            src="/icons/sidemenu/logout.svg"
-            alt="logout"
-            width={24}
-            height={24}
-          />
+          <LogoutIcon className="size-6 text-gray-300 dark:text-muted-foreground" />
           <span className="font-semibold text-lg">로그아웃</span>
         </button>
       </li>

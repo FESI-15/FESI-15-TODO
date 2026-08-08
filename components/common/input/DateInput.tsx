@@ -72,7 +72,7 @@ export function DateInput<T extends FieldValues>({
             hasValue: Boolean(date),
           })}
         >
-          <CalendarIcon className="h-5 w-5 shrink-0 text-gray-500 md:h-6 md:w-6" />
+          <CalendarIcon className="h-5 w-5 shrink-0 text-gray-500 dark:text-muted-foreground md:h-6 md:w-6" />
           {formattedDate ?? placeholder}
         </PopoverTrigger>
         <PopoverContent className="w-auto px-6 py-5" align="start">

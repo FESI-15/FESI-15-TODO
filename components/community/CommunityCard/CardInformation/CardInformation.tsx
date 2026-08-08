@@ -30,7 +30,7 @@ export function CardInformation({
   variant = "default",
 }: CardInformationProps) {
   return (
-    <div className="flex items-center text-xs text-gray-500 gap-2 md:text-base md:gap-3">
+    <div className="flex items-center text-xs text-gray-500 dark:text-muted-foreground gap-2 md:text-base md:gap-3">
       <div className="after-content-dot">
         <Author image={post.writer.image || ""} name={post.writer.name} />
       </div>

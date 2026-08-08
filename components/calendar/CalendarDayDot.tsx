@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 const calendarDayDotVariants = cva("size-1.5 rounded-full", {
   variants: {
     done: {
-      true: "bg-gray-300",
+      true: "bg-gray-300 dark:bg-muted",
       false: "bg-orange-500",
     },
   },
