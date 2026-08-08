@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SlidLogo from "@/public/icons/sidemenu/Slid to-do.svg";
 
 export function AuthLogo() {
   return (
@@ -9,13 +10,7 @@ export function AuthLogo() {
         width={48}
         height={48}
       />
-      <Image
-        src="/icons/sidemenu/Slid to-do.svg"
-        alt="Slid to-do"
-        width={140}
-        height={24}
-        className="h-6 w-[140px]"
-      />
+      <SlidLogo className="h-6 w-[140px] text-gray-700 dark:text-white" />
     </div>
   );
 }

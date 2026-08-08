@@ -9,8 +9,8 @@ const calendarDayButtonVariants = cva(
     variants: {
       state: {
         today: "bg-orange-500 text-white",
-        outside: "text-gray-300",
-        default: "text-gray-800",
+        outside: "text-gray-300 dark:text-muted-foreground/40",
+        default: "text-gray-800 dark:text-foreground",
       },
     },
   },

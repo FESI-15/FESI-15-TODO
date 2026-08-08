@@ -71,7 +71,7 @@ export function Dropdown<T extends FieldValues>({
     >
       <SelectPrimitive.Trigger className={cn(triggerVariants(), className)}>
         <SelectPrimitive.Value
-          className="flex flex-1 text-left data-placeholder:text-gray-400"
+          className="flex flex-1 text-left data-placeholder:text-gray-400 dark:data-placeholder:text-muted-foreground"
           placeholder={placeholder}
         />
         <ChevronDownIcon className={cn(iconVariants())} aria-hidden />

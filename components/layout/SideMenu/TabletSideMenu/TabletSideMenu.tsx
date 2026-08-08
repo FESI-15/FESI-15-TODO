@@ -21,7 +21,7 @@ const sideMenuSpaceVariants = cva("w-[60px]", {
 });
 
 export const tabletSideMenuButtonVariants = cva(
-  "block text-gray-300 hover:text-gray-400",
+  "block text-gray-300 hover:text-gray-400 dark:text-muted-foreground dark:hover:text-foreground",
   {
     variants: {
       open: {
@@ -32,7 +32,7 @@ export const tabletSideMenuButtonVariants = cva(
   },
 );
 export const tabletSideMenuVariants = cva(
-  "hidden md:flex fixed top-0 left-0 bg-white rounded-r-[48px] shadow-xl z-50 h-screen flex-col",
+  "hidden md:flex fixed top-0 left-0 bg-white dark:bg-sidebar rounded-r-[48px] shadow-xl z-50 h-screen flex-col",
   {
     variants: {
       open: {

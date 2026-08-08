@@ -49,7 +49,7 @@ export function CommentModifyForm({
       <div className="flex gap-2 justify-end mt-2">
         <Button
           hierarchy="tertiary"
-          className="py-2.5 px-5 text-gray-500 md:py-2.5 md:px-5 lg:text-sm"
+          className="py-2.5 px-5 text-gray-500 dark:text-muted-foreground md:py-2.5 md:px-5 lg:text-sm"
           type="button"
           onClick={onCancel}
         >

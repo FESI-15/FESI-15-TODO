@@ -73,12 +73,12 @@ export function TagInput<T extends FieldValues>({
       {label && (
         <FieldLabel
           htmlFor={inputId}
-          className="pl-1 text-base font-semibold text-gray-700"
+          className="pl-1 text-base font-semibold text-gray-700 dark:text-white"
         >
           {label}
         </FieldLabel>
       )}
-      <div className="flex flex-wrap items-center gap-2 rounded-[12px] border border-gray-300 bg-white p-3 text-sm transition-colors focus-within:border-orange-500 md:rounded-[16px] md:p-4 md:text-base">
+      <div className="flex flex-wrap items-center gap-2 rounded-[12px] border border-gray-300 dark:border-border bg-white dark:bg-card p-3 text-sm transition-colors focus-within:border-orange-500 md:rounded-[16px] md:p-4 md:text-base">
         {tags.map((tag, index) => (
           <Badge
             key={`${tag}-${index}`}
@@ -97,7 +97,7 @@ export function TagInput<T extends FieldValues>({
           onChange={(event) => setInputValue(event.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={tags.length === 0 ? placeholder : ""}
-          className="min-w-[80px] flex-1 bg-transparent text-gray-700 placeholder:text-gray-500 focus:outline-none"
+          className="min-w-[80px] flex-1 bg-transparent text-gray-700 dark:text-white placeholder:text-gray-500 dark:placeholder:text-muted-foreground focus:outline-none"
         />
       </div>
       {fieldState.invalid && <FieldError errors={[fieldState.error]} />}

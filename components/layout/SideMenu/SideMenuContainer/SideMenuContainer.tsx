@@ -4,6 +4,7 @@ import SideMenuUtilMenu from "./SideMenuUtilMenu/SideMenuUtilMenu";
 import SideMenuActions from "./SideMenuActions/SideMenuActions";
 import SideMenuProfile from "./SideMenuProfile/SideMenuProfile";
 import SideMenuBell from "./SideMenuBell/SideMenuBell";
+import SlidLogo from "@/public/icons/sidemenu/Slid to-do.svg";
 
 export default function SideMenuContainer({
   onClose,
@@ -20,13 +21,7 @@ export default function SideMenuContainer({
             width={48}
             height={48}
           />
-          <Image
-            src="/icons/sidemenu/Slid to-do.svg"
-            alt="Slid to-do"
-            width={140}
-            height={24}
-            className="h-6 w-[140px]"
-          />
+          <SlidLogo className="h-6 w-[140px] text-gray-700 dark:text-white" />
         </div>
         <SideMenuList onClose={onClose} />
         <SideMenuUtilMenu />

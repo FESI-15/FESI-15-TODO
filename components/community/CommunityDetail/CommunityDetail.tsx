@@ -17,7 +17,7 @@ export function CommunityDetail({ id }: CommunityDetailProps) {
   if (!postData) return null;
   return (
     <div className="px-4 my-4 md:my-12 lg:my-18 w-full">
-      <div className="max-w-[768px] mx-auto w-full bg-white rounded-[24px] py-6 px-4 md:p-10">
+      <div className="max-w-[768px] mx-auto w-full bg-white dark:bg-card rounded-[24px] py-6 px-4 md:p-10">
         <CommunityDetailHeader
           post={postData.data}
           userId={userMeData?.data.id || 0}

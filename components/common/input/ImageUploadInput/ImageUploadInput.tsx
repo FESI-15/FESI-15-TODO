@@ -91,10 +91,10 @@ export function ImageUploadInput<T extends FieldValues>({
                 handleBoxClick();
               }
             }}
-            className="flex cursor-pointer flex-col items-center justify-center gap-0.5 rounded-2xl border border-dashed border-gray-300 bg-gray-50 py-6 transition-colors"
+            className="flex cursor-pointer flex-col items-center justify-center gap-0.5 rounded-2xl border border-dashed border-gray-300 dark:border-border bg-gray-50 dark:bg-card py-6 transition-colors"
           >
-            <UploadIcon className="h-6 w-6 text-gray-400" />
-            <span className="text-base font-medium text-gray-400">
+            <UploadIcon className="h-6 w-6 text-gray-400 dark:text-muted-foreground" />
+            <span className="text-base font-medium text-gray-400 dark:text-muted-foreground">
               이미지 첨부
             </span>
           </div>

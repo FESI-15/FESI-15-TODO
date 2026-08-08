@@ -12,7 +12,7 @@ export const buttonVariants = cva(
         secondary:
           "bg-transparent border border-orange-500 text-orange-500 hover:border-orange-600 hover:text-orange-600 disabled:border-gray-500 disabled:text-gray-500",
         tertiary:
-          "bg-transparent border border-gray-300 text-gray-300 hover:border-gray-500 hover:text-gray-500 disabled:border-gray-300 disabled:text-gray-300",
+          "bg-transparent border border-gray-300 dark:border-border text-gray-300 dark:text-muted-foreground hover:border-gray-500 hover:text-gray-500 dark:hover:border-foreground dark:hover:text-foreground disabled:border-gray-300 disabled:text-gray-300 dark:disabled:border-border dark:disabled:text-muted-foreground",
       },
       size: {
         lg: "py-3 px-4 text-sm md:py-[14px] md:px-[18px] md:text-base lg:text-lg",

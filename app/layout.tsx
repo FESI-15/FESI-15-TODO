@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { ThemeProvider } from "next-themes";
 import "@/globals.css";
 import { QueryProviders } from "../providers/Queryproviders";
 import LazyMotionProvider from "@/providers/LazyMotionProvider";
@@ -75,12 +76,21 @@ export default function RootLayout({
     <html
       lang="ko"
       className={cn("h-full", "antialiased", pretendard.variable, "font-sans")}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col font-sans bg-gray-100">
-        <QueryProviders>
-          <LazyMotionProvider>{children}</LazyMotionProvider>
-        </QueryProviders>
-        <Toaster />
+      <body className="flex min-h-full flex-col font-sans bg-gray-100 dark:bg-background">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          enableColorScheme={false}
+        >
+          <QueryProviders>
+            <LazyMotionProvider>{children}</LazyMotionProvider>
+          </QueryProviders>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

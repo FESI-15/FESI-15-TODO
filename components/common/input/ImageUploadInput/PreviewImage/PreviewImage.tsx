@@ -22,10 +22,10 @@ export default function PreviewImage({
         <button
           type="button"
           onClick={handleRemove}
-          className="absolute right-[10px] top-[10px] flex h-[18px] w-[18px] cursor-pointer items-center justify-center rounded-full bg-white/80"
+          className="absolute right-[10px] top-[10px] flex h-[18px] w-[18px] cursor-pointer items-center justify-center rounded-full bg-white/80 dark:bg-card/80"
           aria-label="이미지 삭제"
         >
-          <CloseIcon className="h-full w-full text-gray-500" />
+          <CloseIcon className="h-full w-full text-gray-500 dark:text-muted-foreground" />
         </button>
       </div>
     </div>

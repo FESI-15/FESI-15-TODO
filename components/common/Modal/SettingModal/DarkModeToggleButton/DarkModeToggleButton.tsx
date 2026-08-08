@@ -12,11 +12,11 @@ export default function DarkModeToggleButton({
 }: DarkModeToggleButtonProps) {
   return (
     <div className="mt-4">
-      <p className="mb-2 text-sm font-semibold text-gray-700 md:text-base">
+      <p className="mb-2 text-sm font-semibold text-gray-700 dark:text-foreground md:text-base">
         다크 모드
       </p>
       <div className="p-2 flex items-center gap-2 w-[224px] relative">
-        <div className="z-0 bg-gray-100 rounded-full p-2 w-full h-full absolute top-0 left-0">
+        <div className="z-0 bg-gray-100 dark:bg-muted rounded-full p-2 w-full h-full absolute top-0 left-0">
           <m.div
             animate={{ x: isDarkMode ? 108 : 0 }}
             transition={{ duration: 0.2, ease: "easeInOut", type: "spring" }}

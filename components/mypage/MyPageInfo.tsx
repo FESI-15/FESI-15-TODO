@@ -103,7 +103,7 @@ export function MyPageInfo() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[560px] flex-col items-center gap-12 rounded-[32px] bg-white px-8 py-8"
+      className="flex w-full max-w-[560px] flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card px-8 py-8"
     >
       <ProfileImageInput control={control} name="image" />
 

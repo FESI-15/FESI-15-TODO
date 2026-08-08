@@ -37,7 +37,7 @@ export default function Todos() {
 
   return (
     <div className="max-w-[720px] mx-auto w-full mt-6 px-4 md:mt-12 pb-12">
-      <h2 className="font-semibold md:text-xl lg:text-2xl hidden md:block">
+      <h2 className="font-semibold md:text-xl lg:text-2xl hidden md:block dark:text-foreground">
         모든 할 일
         <span className="text-orange-600 ml-1 lg:ml-2">
           {todos?.data.todos.length}

@@ -24,7 +24,7 @@ export default function TodoList({
             width={80}
             height={85}
           />
-          <p className="text-gray-500 text-sm font-medium md:text-base mt-2.5 md:mt-4 md:text-base">
+          <p className="text-gray-500 dark:text-muted-foreground text-sm font-medium md:text-base mt-2.5 md:mt-4 md:text-base">
             {emptyMessage}
           </p>
         </div>

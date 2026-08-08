@@ -36,26 +36,26 @@ export default function NotificationItem({
     <button
       type="button"
       onClick={handleClick}
-      className="flex w-full items-start gap-2 rounded-2xl px-2 py-3 text-left transition-colors hover:bg-gray-50"
+      className="flex w-full items-start gap-2 rounded-2xl px-2 py-3 text-left transition-colors hover:bg-gray-50 dark:hover:bg-accent"
     >
       <span
         className={notificationDotVariants({ isRead: notification.isRead })}
       />
       <div className="flex flex-1 items-center gap-3">
         <div className="flex flex-1 flex-col gap-1">
-          <p className="line-clamp-2 text-sm font-medium tracking-[-0.03em] text-gray-700">
+          <p className="line-clamp-2 text-sm font-medium tracking-[-0.03em] text-gray-700 dark:text-foreground">
             {notification.message}
           </p>
           {commentContent && (
-            <p className="truncate text-sm text-gray-500">
+            <p className="truncate text-sm text-gray-500 dark:text-muted-foreground">
               &ldquo;{commentContent}&rdquo;
             </p>
           )}
-          <p className="text-xs text-gray-400">
+          <p className="text-xs text-gray-400 dark:text-muted-foreground">
             {getRelativeCreatedTime(notification.createdAt)}
           </p>
         </div>
-        <div className="relative size-10 shrink-0 overflow-hidden rounded-full bg-gray-100">
+        <div className="relative size-10 shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-muted">
           <Image
             src={notification.data.userImage || "/images/sidemenu/profile.png"}
             alt="profile"

@@ -22,7 +22,7 @@ export default function ProgressCard({ title, progress }: ProgressCardProps) {
       >
         내 진행 상황
       </SectionTitle>
-      <div className="relative flex h-[186px] lg:h-64 overflow-hidden rounded-[28px] lg:rounded-[40px] bg-blue-200 px-6 lg:px-12 shadow-[0_10px_40px_rgba(0,212,190,0.24)]">
+      <div className="relative flex h-[186px] lg:h-64 overflow-hidden rounded-[28px] lg:rounded-[40px] bg-blue-200 dark:bg-[#03585b] px-6 lg:px-12 shadow-[0_10px_40px_rgba(0,212,190,0.24)] dark:shadow-none">
         <div className="flex items-center gap-8 z-1">
           <Graph
             className="size-[92px] lg:size-[160px]"

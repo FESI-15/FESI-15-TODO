@@ -9,7 +9,7 @@ const TABS: { label: string; value: FavoritesTabValue }[] = [
 ];
 
 const FavoritesTabVariants = cva(
-  "font-bold text-gray-400 py-2 px-4 rounded-[12px]",
+  "font-bold text-gray-400 dark:text-muted-foreground py-2 px-4 rounded-[12px]",
   {
     variants: {
       isActive: {

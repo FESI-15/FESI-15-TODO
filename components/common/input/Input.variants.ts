@@ -1,7 +1,8 @@
 import { cva } from "class-variance-authority";
 
 // 라벨
-export const inputLabelClassName = "pl-1 text-base font-semibold text-gray-700";
+export const inputLabelClassName =
+  "pl-1 text-base font-semibold text-gray-700 dark:text-foreground";
 
 export const inputFieldVariants = cva("", {
   variants: {
@@ -16,7 +17,7 @@ export const inputFieldVariants = cva("", {
 });
 
 export const inputVariants = cva(
-  "rounded-[12px] p-3 text-sm placeholder:text-sm md:text-base md:p-4 md:rounded-[16px] md:placeholder:text-base w-full border border-gray-300 bg-white text-gray-700 transition-colors placeholder:text-gray-500 focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0",
+  "rounded-[12px] p-3 text-sm placeholder:text-sm md:text-base md:p-4 md:rounded-[16px] md:placeholder:text-base w-full border border-gray-300 dark:border-border bg-white dark:bg-card text-gray-700 dark:text-foreground transition-colors placeholder:text-gray-500 dark:placeholder:text-muted-foreground focus-visible:border-orange-500 focus-visible:ring-0 aria-invalid:border-red-500 aria-invalid:ring-0",
   {
     variants: {
       hasLeftIcon: {
@@ -37,7 +38,7 @@ export const inputVariants = cva(
 );
 
 // 비밀번호 PasswordInput
-export const eyeIconVariants = cva("text-gray-500", {
+export const eyeIconVariants = cva("text-gray-500 dark:text-muted-foreground", {
   variants: {
     size: {
       desktop: "h-6 w-6",
@@ -64,7 +65,7 @@ export const tagInputFieldVariants = cva("", {
 });
 
 export const tagInputBoxVariants = cva(
-  "p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 bg-white transition-colors focus-within:border-orange-500",
+  "p-3 text-sm md:text-base md:p-4 flex flex-wrap items-center gap-2 rounded-2xl border border-gray-300 dark:border-border bg-white dark:bg-card transition-colors focus-within:border-orange-500",
   {
     variants: {
       size: {
@@ -77,12 +78,12 @@ export const tagInputBoxVariants = cva(
 );
 
 export const dateInputTriggerVariants = cva(
-  "p-3 md:p-4 text-sm md:text-base flex w-full items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 bg-white text-left transition-colors outline-none",
+  "p-3 md:p-4 text-sm md:text-base flex w-full items-center gap-2 rounded-[12px] md:rounded-[16px] border border-gray-300 dark:border-border bg-white dark:bg-card text-left transition-colors outline-none",
   {
     variants: {
       hasValue: {
-        true: "text-gray-700",
-        false: "text-gray-500",
+        true: "text-gray-700 dark:text-foreground",
+        false: "text-gray-500 dark:text-muted-foreground",
       },
     },
     defaultVariants: { hasValue: false },
@@ -90,7 +91,7 @@ export const dateInputTriggerVariants = cva(
 );
 
 export const dateInputIconVariants = cva(
-  "shrink-0 text-gray-500 h-5 w-5 md:h-6 md:w-6",
+  "shrink-0 text-gray-500 dark:text-muted-foreground h-5 w-5 md:h-6 md:w-6",
   {
     variants: {
       size: {

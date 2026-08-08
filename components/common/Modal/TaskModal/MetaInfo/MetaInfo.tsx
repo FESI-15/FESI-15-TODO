@@ -20,9 +20,11 @@ export default function MetaInfo({ target, deadline, tags }: MetaInfoProps) {
             width={18}
             height={18}
           />
-          <span className="text-sm font-medium text-gray-400">목표</span>
+          <span className="text-sm font-medium text-gray-400 dark:text-muted-foreground">
+            목표
+          </span>
         </dt>
-        <dd className="text-sm text-gray-700">{target}</dd>
+        <dd className="text-sm text-gray-700 dark:text-foreground">{target}</dd>
       </div>
       <div className="flex items-center gap-2">
         <dt className="flex items-center gap-1">
@@ -32,14 +34,22 @@ export default function MetaInfo({ target, deadline, tags }: MetaInfoProps) {
             width={18}
             height={18}
           />
-          <span className="text-sm font-medium text-gray-400">마감기한</span>
+          <span className="text-sm font-medium text-gray-400 dark:text-muted-foreground">
+            마감기한
+          </span>
         </dt>
-        <dd className="text-sm text-gray-700">{deadline}</dd>
+        <dd className="text-sm text-gray-700 dark:text-foreground">
+          {deadline}
+        </dd>
       </div>
       <div className="flex items-center gap-2">
         <dt className="flex items-center gap-1">
-          <span className="text-base font-semibold text-gray-400">#</span>
-          <span className="text-sm font-medium text-gray-400">태그</span>
+          <span className="text-base font-semibold text-gray-400 dark:text-muted-foreground">
+            #
+          </span>
+          <span className="text-sm font-medium text-gray-400 dark:text-muted-foreground">
+            태그
+          </span>
         </dt>
         <dd className="flex items-center gap-1">
           {tags.map((tag, index) => (

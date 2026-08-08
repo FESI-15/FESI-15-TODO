@@ -59,7 +59,7 @@ export default function CheckboxBasic<T extends FieldValues>({
         {label && (
           <FieldLabel
             className={cn(
-              "flex-none text-sm font-medium whitespace-nowrap text-gray-500",
+              "flex-none text-sm font-medium whitespace-nowrap text-gray-500 dark:text-muted-foreground",
               labelClassName,
             )}
             htmlFor={checkboxId}

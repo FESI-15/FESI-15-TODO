@@ -10,7 +10,7 @@ const calendarEventChipVariants = cva(
   {
     variants: {
       done: {
-        true: "border-gray-300 bg-gray-50 text-gray-400",
+        true: "border-gray-300 dark:border-border bg-gray-50 dark:bg-muted text-gray-400 dark:text-muted-foreground",
         false: "border-orange-300 bg-orange-100 text-orange-600",
       },
     },

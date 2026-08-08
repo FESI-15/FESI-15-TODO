@@ -29,9 +29,11 @@ export function CommunityDetailHeader({
     );
   };
   return (
-    <div className="flex flex-col gap-4 pb-4 border-b border-gray-200">
+    <div className="flex flex-col gap-4 pb-4 border-b border-gray-200 dark:border-border">
       <div className="flex items-center justify-between gap-2 md:gap-4">
-        <h1 className="font-semibold md:text-2xl">{post.title}</h1>
+        <h1 className="font-semibold md:text-2xl dark:text-foreground">
+          {post.title}
+        </h1>
         {userId === post.writer.id && (
           <KebabButton
             variant="goal"

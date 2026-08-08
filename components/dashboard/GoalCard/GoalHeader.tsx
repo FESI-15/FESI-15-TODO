@@ -15,11 +15,11 @@ export default function GoalHeader({
   return (
     <div className="flex flex-col gap-4 px-2 xl:flex-row xl:items-center xl:justify-between">
       <div className="flex min-w-0 items-center gap-4">
-        <h3 className="min-w-0 flex-1 truncate text-base font-semibold text-gray-700">
+        <h3 className="min-w-0 flex-1 truncate text-base font-semibold text-gray-700 dark:text-foreground">
           {title}
         </h3>
         <div className="flex shrink-0 items-center gap-2">
-          <div className="h-2 w-60 overflow-hidden rounded-full bg-gray-200">
+          <div className="h-2 w-60 overflow-hidden rounded-full bg-gray-200 dark:bg-muted">
             <div
               className="h-full rounded-full bg-orange-500"
               style={{ width: `${progress}%` }}

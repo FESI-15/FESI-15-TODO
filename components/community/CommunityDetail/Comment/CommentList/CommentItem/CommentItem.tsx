@@ -25,10 +25,10 @@ export function CommentItem({ comment, userId }: CommentItemProps) {
         />
       ) : (
         <div>
-          <p className="text-gray-700 mt-3 text-sm md:text-base">
+          <p className="text-gray-700 dark:text-foreground mt-3 text-sm md:text-base">
             {comment.content}
           </p>
-          <p className="mt-2 text-gray-400 text-xs md:text-sm">
+          <p className="mt-2 text-gray-400 dark:text-muted-foreground text-xs md:text-sm">
             {format(comment.createdAt, "yyyy.MM.dd")}
           </p>
         </div>

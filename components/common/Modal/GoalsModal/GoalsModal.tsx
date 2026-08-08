@@ -114,7 +114,7 @@ export default function GoalsModal({
               <DialogClose
                 render={
                   <Button
-                    className="text-gray-500"
+                    className="text-gray-500 dark:text-muted-foreground"
                     fullWidth
                     hierarchy="tertiary"
                     size="lg"

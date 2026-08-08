@@ -22,7 +22,7 @@ const kebabButtonVariants = cva(
       {
         open: true,
         variant: ["default", "recentTodo"],
-        class: "bg-white",
+        class: "bg-white dark:bg-card",
       },
     ],
     defaultVariants: {
@@ -36,7 +36,7 @@ const kebabButtonIconVariants = cva("size-[14px] text-orange-600", {
     variant: {
       default: "",
       recentTodo: "",
-      goal: "text-gray-400 size-6",
+      goal: "text-gray-400 dark:text-muted-foreground size-6",
     },
   },
   defaultVariants: {
