@@ -14,7 +14,6 @@
 
 - 배포 사이트: https://fesi-15-todo-nine.vercel.app/
 - 저장소: https://github.com/FESI-15/FESI-15-TODO
-- 팀: D.P. (코드잇 프론트엔드 단기심화 15기 2팀)
 - 진행 기간: 2026.07.10 ~ 2026.08.21
 
 ## ✨ 주요 기능
@@ -70,37 +69,44 @@
 
 ## 👥 팀원
 
-| 이름   | 역할              | GitHub                                         |
-| ------ | ----------------- | ----------------------------------------------- |
-| 임동현 | 프론트엔드 (팀장) | [@DHyeon98](https://github.com/DHyeon98)       |
-| 장민영 | 프론트엔드        | [@minyeong123](https://github.com/minyeong123) |
+| 이름   | 역할              | 담당                                                                                                            | GitHub                                         |
+| ------ | ----------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| 임동현 | 프론트엔드 (팀장) | 대시보드, 목표 관리, 할일 관리, 소통게시판, 사이드메뉴, 스켈레톤 UI, API 세팅(orval, BFF 패턴, React Query SSR) | [@DHyeon98](https://github.com/DHyeon98)       |
+| 장민영 | 프론트엔드        | 랜딩페이지, 인증(구글 소셜 로그인, 미들웨어(proxy)), 캘린더, 찜한 할일, 알림, 다크 모드, 마이페이지             | [@minyeong123](https://github.com/minyeong123) |
 
 ## 📁 폴더 구조
 
 ```text
-app/                # 라우팅
-components/
-  common/           # 2개 이상 컴포넌트에서 쓰이는 공통 컴포넌트
-  layout/           # header, footer, nav 등 레이아웃 컴포넌트
-  ui/               # shadcn/ui 기반 컴포넌트
-  auth/             # 로그인/회원가입 전용 컴포넌트
-  dashboard/        # 대시보드 전용 컴포넌트
-  goals/            # 목표 전용 컴포넌트
-  todos/            # 할일 전용 컴포넌트
-  calendar/         # 캘린더 전용 컴포넌트
-  community/        # 커뮤니티 전용 컴포넌트
-  favorites/        # 즐겨찾기 전용 컴포넌트
-  mypage/           # 마이페이지 전용 컴포넌트
-  landing/          # 랜딩 페이지 전용 컴포넌트
-hooks/              # 커스텀 훅
-apis/               # API 요청 함수
-providers/          # React Query, Motion 등 Provider
-store/              # 전역 상태 (Zustand)
-types/              # 타입 정의
-constants/          # 상수
-utils/              # 2곳 이상에서 쓰이는 유틸 함수
-test/               # 테스트 유틸, mock
-public/             # 정적 파일
+.
+├── app/                  # 라우팅
+├── components/
+│   ├── common/           # 2개 이상 컴포넌트에서 쓰이는 공통 컴포넌트
+│   ├── layout/           # 사이드메뉴 등 레이아웃 컴포넌트
+│   ├── ui/               # shadcn/ui 기반 컴포넌트
+│   ├── auth/             # 로그인/회원가입 전용 컴포넌트
+│   ├── dashboard/        # 대시보드 전용 컴포넌트
+│   ├── goals/            # 목표 전용 컴포넌트
+│   ├── todos/            # 할일 전용 컴포넌트
+│   ├── calendar/         # 캘린더 전용 컴포넌트
+│   ├── community/        # 커뮤니티 전용 컴포넌트
+│   ├── favorites/        # 즐겨찾기 전용 컴포넌트
+│   ├── mypage/           # 마이페이지 전용 컴포넌트
+│   └── landing/          # 랜딩 페이지 전용 컴포넌트
+├── hooks/                # 커스텀 훅
+├── apis/                 # API 요청 함수
+├── providers/            # React Query, Motion 등 Provider
+├── store/                # 전역 상태 (Zustand)
+├── types/                # 타입 정의
+├── constants/            # 상수
+├── utils/                # 2곳 이상에서 쓰이는 유틸 함수
+├── test/                 # 테스트 유틸, mock
+├── public/
+│   ├── fonts/            # 폰트 파일
+│   ├── icons/            # 아이콘 SVG
+│   └── images/           # 이미지 파일
+├── proxy.ts              # 인증 미들웨어 (보호 경로 접근 제어)
+├── package.json
+└── .env                  # 환경 변수
 ```
 
 ## 📐 개발 컨벤션
@@ -131,3 +137,7 @@ public/             # 정적 파일
 - main에 직접 push 금지, 무조건 feature 브랜치에서 작업
 - PR은 최소 1명 리뷰 후 merge
 - merge 전에 `npm run test` / `npm run type-check` 확인
+
+## 🔧 트러블슈팅
+
+## 🎯 개선 목표
