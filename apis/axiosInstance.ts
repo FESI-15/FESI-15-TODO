@@ -44,21 +44,25 @@ apiClient.interceptors.request.use((config) => {
   );
 });
 
-let refreshPromise: Promise<PostTeamIdAuthRefresh200> | null = null;
+const refreshPromiseMap = new Map<string, Promise<PostTeamIdAuthRefresh200>>();
 
 const refreshAccessToken = (refreshToken: string) => {
-  if (!refreshPromise) {
-    refreshPromise = apiClient
-      .post<PostTeamIdAuthRefresh200>("/auth/refresh", {
-        refreshToken,
-      } satisfies PostTeamIdAuthRefreshBody)
-      .then(({ data }) => data)
-      .finally(() => {
-        refreshPromise = null;
-      });
+  const existingPromise = refreshPromiseMap.get(refreshToken);
+  if (existingPromise) {
+    return existingPromise;
   }
 
-  return refreshPromise;
+  const promise = apiClient
+    .post<PostTeamIdAuthRefresh200>("/auth/refresh", {
+      refreshToken,
+    } satisfies PostTeamIdAuthRefreshBody)
+    .then(({ data }) => data)
+    .finally(() => {
+      refreshPromiseMap.delete(refreshToken);
+    });
+
+  refreshPromiseMap.set(refreshToken, promise);
+  return promise;
 };
 
 apiClient.interceptors.response.use(
