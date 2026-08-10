@@ -50,7 +50,7 @@ export function Community() {
     setTitle("소통 게시판");
   }, [setTitle]);
   return (
-    <div className="w-full min-w-0 px-4 my-6 md:my-12 lg:my-20 flex flex-col flex-1">
+    <div className="w-full max-w-[1200px] mx-auto min-w-0 px-4 my-6 md:my-12 lg:my-20 flex flex-col flex-1">
       <h2 className="hidden lg:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2 dark:text-foreground">
         소통 게시판
       </h2>

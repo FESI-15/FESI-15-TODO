@@ -9,21 +9,24 @@ interface CardInformationProps {
   variant?: "default" | "best";
 }
 
-const cardInformationVariant = cva("flex items-center gap-[2px]", {
-  variants: {
-    variant: {
-      default: "",
-      best: "ml-auto",
+const cardInformationVariant = cva(
+  "flex text-xs md:text-base items-center gap-[2px]",
+  {
+    variants: {
+      variant: {
+        default: "",
+        best: "ml-auto",
+      },
+      afterContentDot: {
+        default: "after-content-dot",
+        best: "",
+      },
     },
-    afterContentDot: {
-      default: "after-content-dot",
-      best: "",
+    defaultVariants: {
+      variant: "default",
     },
   },
-  defaultVariants: {
-    variant: "default",
-  },
-});
+);
 
 export function CardInformation({
   post,
