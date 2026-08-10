@@ -17,7 +17,7 @@ export default function SideMenuBell() {
   } = useNotificationCenter();
 
   return (
-    <div ref={containerRef} className="relative hidden md:block">
+    <div ref={containerRef} className="relative hidden lg:block">
       <button
         className="relative block rounded-full border border-gray-200 dark:border-border p-4"
         type="button"

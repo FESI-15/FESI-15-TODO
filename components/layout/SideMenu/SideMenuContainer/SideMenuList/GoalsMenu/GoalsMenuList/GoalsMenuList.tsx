@@ -1,13 +1,17 @@
 import Link from "next/link";
 import * as m from "motion/react-m";
-import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
+import { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 
-export default function GoalsMenuList({ onClose }: { onClose?: () => void }) {
-  const { data: goals } = useGetGoals();
-  if (goals?.data.goals.length === 0) return null;
+export default function GoalsMenuList({
+  goals,
+  onClose,
+}: {
+  goals: GetTeamIdGoals200GoalsItem[];
+  onClose?: () => void;
+}) {
   return (
     <ul className="flex flex-col mt-2">
-      {goals?.data.goals.map((goalList, index) => (
+      {goals.map((goalList, index) => (
         <m.li
           key={goalList.id}
           className="last:border-b-2 border-orange-500"

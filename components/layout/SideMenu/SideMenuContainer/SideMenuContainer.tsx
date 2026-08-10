@@ -12,7 +12,7 @@ export default function SideMenuContainer({
   onClose?: () => void;
 }) {
   return (
-    <div className="flex flex-col md:justify-between flex-1">
+    <div className="flex flex-col lg:justify-between flex-1">
       <div>
         <div className="flex items-center gap-4 pl-2 mb-10">
           <Image

@@ -8,11 +8,11 @@ interface TabletSideMenuProps {
   onToggle: () => void;
 }
 
-const sideMenuSpaceVariants = cva("w-[60px]", {
+const sideMenuSpaceVariants = cva("hidden lg:block", {
   variants: {
     open: {
-      true: "lg:w-[300px]",
-      false: "lg:w-[60px]",
+      true: "w-[320px]",
+      false: "w-[60px]",
     },
   },
   defaultVariants: {
@@ -32,7 +32,7 @@ export const tabletSideMenuButtonVariants = cva(
   },
 );
 export const tabletSideMenuVariants = cva(
-  "hidden md:flex fixed top-0 left-0 bg-white dark:bg-sidebar rounded-r-[48px] shadow-xl z-50 h-screen flex-col",
+  "hidden lg:flex fixed top-0 left-0 bg-white dark:bg-sidebar rounded-r-[48px] shadow-xl z-50 h-screen flex-col",
   {
     variants: {
       open: {

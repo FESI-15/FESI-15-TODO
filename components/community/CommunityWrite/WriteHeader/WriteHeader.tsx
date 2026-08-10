@@ -21,8 +21,8 @@ export function WriteHeader({ isValid, isEdit = false }: WriteHeaderProps) {
   };
 
   return (
-    <div className="flex justify-end md:justify-between items-center mb-3">
-      <h2 className="text-xl font-semibold hidden md:block dark:text-foreground">
+    <div className="flex justify-end lg:justify-between items-center mb-3">
+      <h2 className="text-xl font-semibold hidden lg:block dark:text-foreground">
         {isEdit ? "게시물 수정하기" : "게시물 작성하기"}
       </h2>
       <div className="flex gap-2">

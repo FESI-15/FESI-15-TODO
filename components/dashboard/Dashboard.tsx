@@ -1,16 +1,16 @@
 "use client";
 
-import GoalCard from "@/components/dashboard/GoalCard/GoalCard";
 import ProgressCard from "@/components/dashboard/ProgressCard/ProgressCard";
 import RecentTasksCard from "@/components/dashboard/RecentTasksCard/RecentTasksCard";
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
-import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import { getGoalProgress } from "@/utils/getGoalProgress";
 import useHeaderStore from "@/store/useHeaderStore";
 import Image from "next/image";
 import { useEffect } from "react";
+import GoalCardList from "./GoalCardList/GoalCardList";
+import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 
 export default function Dashboard() {
   const { data: goals } = useGetGoals();
@@ -24,12 +24,12 @@ export default function Dashboard() {
   }, [user?.data.name, setTitle]);
 
   return (
-    <main className="min-w-0 flex-1 py-8 md:py-12 lg:py-20 px-4 md:px-6">
+    <main className="min-w-0 flex-1 py-8 lg:py-20 px-4 md:px-6">
       <div className="mx-auto flex max-w-[1312px] flex-col gap-8">
-        <h1 className="px-2 text-2xl font-semibold text-gray-900 dark:text-foreground hidden md:block">
+        <h1 className="px-2 text-2xl font-semibold text-gray-900 dark:text-foreground hidden lg:block">
           {user?.data.name}님의 대시보드
         </h1>
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-8 md:grid-cols-2">
           <RecentTasksCard todos={todos?.data.todos ?? []} />
           <ProgressCard title={user?.data.name ?? ""} progress={progress} />
         </div>
@@ -47,26 +47,10 @@ export default function Dashboard() {
           >
             목표 별 할일
           </SectionTitle>
-          {goals?.data.goals.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white dark:bg-card rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
-              <Image
-                className="md:w-[130px] md:h-[140px]"
-                src="/icons/common/no_data.svg"
-                alt="flag"
-                width={80}
-                height={85}
-              />
-              <p className="text-gray-500 dark:text-muted-foreground text-sm font-medium md:text-base">
-                최근에 등록한 목표가 없어요
-              </p>
-            </div>
-          ) : (
-            <div className="flex flex-col gap-8">
-              {goals?.data.goals.map((goal) => (
-                <GoalCard key={goal.id} goal={goal} />
-              ))}
-            </div>
-          )}
+          <GoalCardList
+            goals={goals?.data.goals ?? []}
+            todos={todos?.data.todos ?? []}
+          />
         </section>
       </div>
     </main>

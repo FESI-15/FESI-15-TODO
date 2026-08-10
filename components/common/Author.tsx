@@ -25,14 +25,17 @@ const AuthorImageVariant = cva("rounded-full overflow-hidden", {
   },
 });
 
-const AuthorNameVariant = cva("text-gray-500 dark:text-muted-foreground", {
-  variants: {
-    size: {
-      sm: "text-xs md:text-sm",
-      md: "text-sm md:text-base",
+const AuthorNameVariant = cva(
+  "text-gray-500 dark:text-muted-foreground truncate max-w-[75px] md:max-w-[400px]",
+  {
+    variants: {
+      size: {
+        sm: "text-xs md:text-sm",
+        md: "text-sm md:text-base",
+      },
     },
   },
-});
+);
 
 export function Author({ image, name, size = "md" }: AuthorProps) {
   return (
