@@ -6,7 +6,7 @@ import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import TaskModal from "@/components/common/Modal/TaskModal/TaskModal";
 
 const calendarEventChipVariants = cva(
-  "flex w-full items-center gap-1 rounded-md border px-2 py-1 text-xs font-semibold",
+  "flex w-full items-center gap-1 rounded-md border text-xs font-semibold px-2 py-1",
   {
     variants: {
       done: {
@@ -23,13 +23,12 @@ interface CalendarEventChipProps {
 
 export default function CalendarEventChip({ todo }: CalendarEventChipProps) {
   return (
-    <div
-      className={calendarEventChipVariants({ done: todo.done })}
-      onClick={(e) => e.stopPropagation()}
-    >
-      {todo.done && <Check className="size-4 shrink-0" />}
+    <div onClick={(e) => e.stopPropagation()}>
       <TaskModal todo={todo}>
-        <span className="block w-full truncate text-left">{todo.title}</span>
+        <div className={calendarEventChipVariants({ done: todo.done })}>
+          {todo.done && <Check className="size-4 shrink-0" />}
+          <span className="block w-full truncate text-left">{todo.title}</span>
+        </div>
       </TaskModal>
     </div>
   );
