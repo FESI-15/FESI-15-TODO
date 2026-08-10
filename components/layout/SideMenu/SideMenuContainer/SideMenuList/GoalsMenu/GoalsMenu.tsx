@@ -6,6 +6,7 @@ import {
 } from "../sideMenuListVariants";
 import GoalsMenuList from "./GoalsMenuList/GoalsMenuList";
 import { VariantProps } from "class-variance-authority";
+import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
 
 interface GoalsMenuProps
   extends
@@ -25,9 +26,11 @@ export default function GoalsMenu({
   isActivePath,
   onClose,
 }: GoalsMenuProps) {
+  const { data: goals } = useGetGoals();
   const [isGoalListOpen, setIsGoalListOpen] = useState(false);
   const isActive = isActivePath(item.href);
 
+  if (goals?.data.goals.length === 0) return null;
   return (
     <>
       <button
@@ -53,7 +56,9 @@ export default function GoalsMenu({
           height={24}
         />
       </button>
-      {isGoalListOpen && <GoalsMenuList onClose={onClose} />}
+      {isGoalListOpen && (
+        <GoalsMenuList goals={goals?.data.goals || []} onClose={onClose} />
+      )}
     </>
   );
 }

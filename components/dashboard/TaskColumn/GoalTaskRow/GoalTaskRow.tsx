@@ -9,7 +9,7 @@ interface GoalTaskRowProps {
   todo: GetTeamIdTodos200TodosItem;
 }
 const taskTitleVariant = cva(
-  "truncate text-left text-sm font-medium lg:text-base group-hover:text-orange-600 group-hover:font-semibold pr-4",
+  "truncate max-w-[550px] text-left text-sm font-medium lg:text-base group-hover:text-orange-600 group-hover:font-semibold pr-4",
   {
     variants: {
       done: {
