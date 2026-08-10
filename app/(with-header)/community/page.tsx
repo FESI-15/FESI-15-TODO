@@ -13,7 +13,6 @@ import {
   COMMUNITY_BEST_LIMIT,
   COMMUNITY_LIMIT,
 } from "@/constants/CommunityLimit";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface CommunityPageProps {
   searchParams: Promise<{
@@ -50,9 +49,6 @@ export default async function CommunityPage({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense>
         <Community />
-        <div className="py-6">
-          <Skeleton className="w-full h-[800px]" />
-        </div>
       </Suspense>
     </HydrationBoundary>
   );
