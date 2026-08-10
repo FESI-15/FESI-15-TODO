@@ -50,15 +50,19 @@ export function Community() {
     setTitle("소통 게시판");
   }, [setTitle]);
   return (
-    <div className="w-full max-w-[1200px] mx-auto min-w-0 px-4 my-6 md:my-12 lg:my-20 flex flex-col flex-1">
-      <h2 className="hidden lg:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2 dark:text-foreground">
-        소통 게시판
-      </h2>
-      <CommunityBestView />
-      <CommunityHeader />
-      <CommunityList posts={posts} />
-      <CreatePostButton />
-      <div ref={loadMoreRef} />
+    <div className="max-w-[1200px] my-6 md:my-12 lg:my-20 mx-auto min-w-0">
+      <div className="px-4 md:px-6">
+        <h2 className="hidden lg:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2 dark:text-foreground">
+          소통 게시판
+        </h2>
+        <CommunityBestView />
+      </div>
+      <div className="w-full px-4 md:px-6 flex flex-col flex-1">
+        <CommunityHeader />
+        <CommunityList posts={posts} />
+        <CreatePostButton />
+        <div ref={loadMoreRef} />
+      </div>
     </div>
   );
 }

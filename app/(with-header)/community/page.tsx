@@ -50,7 +50,7 @@ export default async function CommunityPage({
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Suspense>
         <Community />
-        <div>
+        <div className="py-6">
           <Skeleton className="w-full h-[800px]" />
         </div>
       </Suspense>
