@@ -71,7 +71,8 @@ apiClient.interceptors.response.use(
     if (
       !axios.isAxiosError(error) ||
       error.response?.status !== 401 ||
-      originalRequest._retry
+      originalRequest._retry ||
+      originalRequest.url === "/auth/refresh"
     ) {
       return Promise.reject(error);
     }
