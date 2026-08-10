@@ -12,7 +12,7 @@ interface GoalCardListProps {
 
 export default function GoalCardList({ goals, todos }: GoalCardListProps) {
   return goals.length === 0 ? (
-    <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
+    <div className="flex flex-col items-center justify-center h-[185px] gap-2.5 bg-white dark:bg-card rounded-[26px] md:h-[363px] md:gap-4 md:rounded-[32px] lg:h-[428px] lg:rounded-[40px]">
       <Image
         className="md:w-[130px] md:h-[140px]"
         src="/icons/common/no_data.svg"
@@ -20,7 +20,7 @@ export default function GoalCardList({ goals, todos }: GoalCardListProps) {
         width={80}
         height={85}
       />
-      <p className="text-gray-500 text-sm font-medium md:text-base">
+      <p className="text-gray-500 dark:text-muted-foreground text-sm font-medium md:text-base">
         최근에 등록한 목표가 없어요
       </p>
     </div>

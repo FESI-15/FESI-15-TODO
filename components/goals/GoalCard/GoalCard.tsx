@@ -28,7 +28,7 @@ export default function GoalCard({ goalId }: { goalId: number }) {
   };
 
   return (
-    <div className="flex items-center justify-between rounded-[16px] bg-white p-4 md:p-6 md:text-xl md:rounded-[24px] lg:text-2xl lg:gap-4 lg:rounded-[32px] lg:px-10 lg:py-15 w-full">
+    <div className="flex items-center justify-between rounded-[16px] bg-white dark:bg-card p-4 md:p-6 md:text-xl md:rounded-[24px] lg:text-2xl lg:gap-4 lg:rounded-[32px] lg:px-10 lg:py-15 w-full">
       <div className="flex items-center gap-3">
         <Image
           className="lg:size-10"
@@ -37,7 +37,7 @@ export default function GoalCard({ goalId }: { goalId: number }) {
           width={32}
           height={32}
         />
-        <div className="truncate font-semibold text-gray-700 lg:text-2xl">
+        <div className="truncate font-semibold text-gray-700 dark:text-foreground lg:text-2xl">
           {goal?.data.title}
         </div>
       </div>

@@ -26,7 +26,7 @@ export default function Dashboard() {
   return (
     <main className="min-w-0 flex-1 py-8 lg:py-20 px-4 md:px-6">
       <div className="mx-auto flex max-w-[1312px] flex-col gap-8">
-        <h1 className="px-2 text-2xl font-semibold text-gray-900 hidden lg:block">
+        <h1 className="px-2 text-2xl font-semibold text-gray-900 dark:text-foreground hidden lg:block">
           {user?.data.name}님의 대시보드
         </h1>
         <div className="grid gap-8 md:grid-cols-2">

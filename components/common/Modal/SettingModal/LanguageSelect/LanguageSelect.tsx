@@ -26,7 +26,7 @@ export default function LanguageSelect({
 
   return (
     <div className="mt-8">
-      <p className="mb-2 text-sm font-semibold text-gray-700 md:text-base">
+      <p className="mb-2 text-sm font-semibold text-gray-700 dark:text-foreground md:text-base">
         언어
       </p>
       <SelectPrimitive.Root

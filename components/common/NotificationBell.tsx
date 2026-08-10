@@ -29,7 +29,11 @@ export default function NotificationBell({
         {hasUnread && (
           <span className="absolute top-0 right-0.5 w-2 h-2 bg-orange-500 rounded-full" />
         )}
-        <Bell className="text-gray-400" width={24} height={24} />
+        <Bell
+          className="text-gray-400 dark:text-muted-foreground"
+          width={24}
+          height={24}
+        />
       </button>
       {open && (
         <NotificationPanel

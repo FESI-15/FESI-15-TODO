@@ -16,8 +16,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-6 px-8 py-[120px]">
-      <h1 className="text-2xl font-semibold text-black">문제가 발생했습니다</h1>
-      <p className="text-base text-gray-500">
+      <h1 className="text-2xl font-semibold text-black dark:text-foreground">
+        문제가 발생했습니다
+      </h1>
+      <p className="text-base text-gray-500 dark:text-muted-foreground">
         일시적인 오류이거나 로그인이 만료되었을 수 있어요.
       </p>
       <div className="flex gap-3">

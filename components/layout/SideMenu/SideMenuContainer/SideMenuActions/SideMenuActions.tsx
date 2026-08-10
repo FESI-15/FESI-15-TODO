@@ -12,7 +12,7 @@ export default function SideMenuActions() {
         <NewGoalButton />
       </GoalsModal>
       <TaskFormModal>
-        <div className="flex items-center w-full lg:w-[120px] justify-center gap-1 text-orange-500 py-3 flex-1 bg-white border border-orange-300 rounded-full lg:aspect-square lg:rounded-4xl lg:flex-col hover:bg-gray-50 hover:text-orange-600 hover:border-orange-500">
+        <div className="flex items-center w-full lg:w-[120px] justify-center gap-1 text-orange-500 dark:text-foreground py-3 flex-1 bg-white dark:bg-card border border-orange-300 dark:border-border rounded-full lg:aspect-square lg:rounded-4xl lg:flex-col hover:bg-gray-50 dark:hover:bg-accent hover:text-orange-600 hover:border-orange-500">
           <NewTodo className="lg:w-10 lg:h-10 w-6 h-6" />
           <span className="font-semibold md:text-lg">새 할일</span>
         </div>

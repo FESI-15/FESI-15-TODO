@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import {
   Dialog,
   DialogClose,
@@ -11,9 +12,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import LanguageSelect from "./LanguageSelect/LanguageSelect";
-import DarkModeToggleButton from "./DarkModeToggleButton/DarkModeToggleButton";
 import { Button } from "../../Button";
 import { DEFAULT_LANGUAGE, type LanguageCode } from "@/constants/setting";
+
+const DarkModeToggleButtonContainer = dynamic(
+  () => import("./DarkModeToggleButton/DarkModeToggleButtonContainer"),
+  { ssr: false },
+);
 
 interface SettingModalProps {
   trigger: React.ReactElement;
@@ -24,7 +29,6 @@ export default function SettingModal({
   trigger,
   onConfirm,
 }: SettingModalProps) {
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
 
   return (
@@ -35,16 +39,13 @@ export default function SettingModal({
           <DialogTitle showCloseButton={true}>설정</DialogTitle>
         </DialogHeader>
         <LanguageSelect value={language} onChange={setLanguage} />
-        <DarkModeToggleButton
-          isDarkMode={isDarkMode}
-          onToggle={setIsDarkMode}
-        />
+        <DarkModeToggleButtonContainer />
         <DialogFooter>
           <div className="flex gap-2 w-full mt-10">
             <DialogClose
               render={
                 <Button
-                  className="text-gray-500"
+                  className="text-gray-500 dark:text-white"
                   fullWidth
                   hierarchy="tertiary"
                   size="lg"

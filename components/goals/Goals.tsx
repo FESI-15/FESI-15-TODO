@@ -23,7 +23,7 @@ export default function Goals({ goalId }: { goalId: number }) {
 
   return (
     <div className="mx-auto w-full max-w-[1312px] p-4 md:pt-8 lg:pt-20">
-      <h2 className="mb-5 hidden px-2 text-xl font-semibold text-black lg:block lg:text-2xl">
+      <h2 className="mb-5 hidden px-2 text-xl font-semibold text-black dark:text-foreground lg:block lg:text-2xl">
         {userMe?.data.name}님의 목표
       </h2>
       <div className="flex flex-col gap-4 lg:flex-row md:gap-6 lg:gap-8">

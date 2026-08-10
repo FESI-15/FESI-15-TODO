@@ -14,13 +14,15 @@ export default function CalendarSelectedDatePanel({
   todos,
 }: CalendarSelectedDatePanelProps) {
   return (
-    <div className="flex flex-col gap-3 border-t border-gray-100 px-2 pt-4 lg:hidden">
-      <p className="text-sm font-semibold text-gray-700">
+    <div className="flex flex-col gap-3 border-t border-gray-100 dark:border-border px-2 pt-4 lg:hidden">
+      <p className="text-sm font-semibold text-gray-700 dark:text-foreground">
         {format(date, "yyyy. MM. dd")}
       </p>
       <div className="flex flex-col gap-2">
         {todos.length === 0 ? (
-          <p className="text-sm text-gray-400">등록된 할일이 없어요</p>
+          <p className="text-sm text-gray-400 dark:text-muted-foreground">
+            등록된 할일이 없어요
+          </p>
         ) : (
           todos.map((todo) => <CalendarEventChip key={todo.id} todo={todo} />)
         )}

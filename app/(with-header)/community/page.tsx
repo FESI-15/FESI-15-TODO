@@ -15,21 +15,22 @@ import {
 } from "@/constants/CommunityLimit";
 
 interface CommunityPageProps {
-  searchParams: {
-    search: string;
-  };
+  searchParams: Promise<{
+    search?: string;
+  }>;
 }
 
 export default async function CommunityPage({
   searchParams,
 }: CommunityPageProps) {
+  const { search } = await searchParams;
   const queryClient = new QueryClient();
 
   try {
     await Promise.all([
       queryClient.fetchInfiniteQuery(
         getPostsInfiniteQueryOptionsServer({
-          search: searchParams.search ?? "",
+          search: search ?? "",
           limit: COMMUNITY_LIMIT,
         }),
       ),

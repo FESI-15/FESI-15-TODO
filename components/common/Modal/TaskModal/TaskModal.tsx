@@ -60,7 +60,7 @@ export default function TaskModal({
             />
           </>
         ) : (
-          <p className="text-sm font-medium text-gray-500">
+          <p className="text-sm font-medium text-gray-500 dark:text-muted-foreground">
             {isLoading ? "Loading..." : "Loading..."}
           </p>
         )}

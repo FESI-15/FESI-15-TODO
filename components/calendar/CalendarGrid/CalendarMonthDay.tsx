@@ -33,7 +33,7 @@ export default function CalendarMonthDay({
     <td
       onClick={() => onSelectedDateChange(day.date)}
       className={cn(
-        "h-24 min-w-0 flex-1 cursor-pointer border border-gray-100 align-top lg:h-full",
+        "h-24 min-w-0 flex-1 cursor-pointer border border-gray-100 dark:border-border align-top lg:h-full",
         isSameDay(day.date, selectedDate) && "bg-orange-alpha-20",
         className,
       )}
@@ -58,7 +58,7 @@ export default function CalendarMonthDay({
             <CalendarDayDot key={todo.id} done={todo.done} />
           ))}
           {hiddenCount > 0 && (
-            <span className="text-[10px] font-medium text-gray-400">
+            <span className="text-[10px] font-medium text-gray-400 dark:text-muted-foreground">
               +{hiddenCount}
             </span>
           )}

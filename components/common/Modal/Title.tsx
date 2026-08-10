@@ -22,7 +22,9 @@ export default function Title({
 }: TitleProps) {
   return (
     <div className={variants({ marginBottom })}>
-      <p className="text-sm font-semibold text-gray-700">{children}</p>
+      <p className="text-sm font-semibold text-gray-700 dark:text-white">
+        {children}
+      </p>
       {essential && (
         <span className="text-orange-500 text-sm font-semibold">*</span>
       )}
