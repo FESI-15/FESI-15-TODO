@@ -1,4 +1,3 @@
-import Dashboard from "@/components/dashboard/Dashboard";
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
@@ -7,6 +6,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
