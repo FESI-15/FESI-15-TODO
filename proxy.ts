@@ -56,8 +56,6 @@ export const proxy = async (request: NextRequest) => {
   const accessToken = request.cookies.get(ACCESS_TOKEN_COOKIE_NAME)?.value;
   const refreshToken = request.cookies.get(REFRESH_TOKEN_COOKIE_NAME)?.value;
 
-  // 서버 컴포넌트 렌더링 도중에는 쿠키를 바꿀 수 없으므로, 만료된 액세스
-  // 토큰은 렌더링 전인 여기서 미리 갱신하고 같은 주소로 다시 요청시킨다.
   if (accessToken && isAccessTokenExpired(accessToken) && refreshToken) {
     const refreshed = await refreshTokens(refreshToken);
     const secure = process.env.NODE_ENV === "production";
