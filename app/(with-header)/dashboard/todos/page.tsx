@@ -6,6 +6,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Todos from "@/components/todos/Todos";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 interface TodosPageProps {
   searchParams: Promise<{
@@ -18,7 +19,9 @@ export default async function TodosPage({ searchParams }: TodosPageProps) {
   const { done } = await searchParams;
 
   const params: GetTeamIdTodosParams | undefined =
-    done === "true" || done === "false" ? { done } : { done: undefined };
+    done === "true" || done === "false"
+      ? { done, limit: TODOS_LIMIT }
+      : { done: undefined, limit: TODOS_LIMIT };
 
   try {
     await queryClient.fetchQuery(getTodosQueryOptionsServer(params));

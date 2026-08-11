@@ -8,10 +8,11 @@ import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { getGoalProgress } from "@/utils/getGoalProgress";
 import useHeaderStore from "@/store/useHeaderStore";
 import { useEffect } from "react";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default function Goals({ goalId }: { goalId: number }) {
   const { data: userMe } = useGetUserMe();
-  const { data: todosData } = useGetTodos({ goalId });
+  const { data: todosData } = useGetTodos({ goalId, limit: TODOS_LIMIT });
 
   const todos = todosData?.data.todos ?? [];
   const progress = getGoalProgress(todos);

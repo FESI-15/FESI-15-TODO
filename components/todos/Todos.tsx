@@ -8,6 +8,7 @@ import TodoList from "./TodoList/TodoList";
 import { useSearchParams } from "next/navigation";
 import { GetTeamIdTodosParams } from "@/apis/model";
 import useHeaderStore from "@/store/useHeaderStore";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default function Todos() {
   const searchParams = useSearchParams();
@@ -18,8 +19,8 @@ export default function Todos() {
   const params: GetTeamIdTodosParams | undefined = isGetTeamIdTodosDone(
     doneParam,
   )
-    ? { done: doneParam }
-    : { done: undefined };
+    ? { done: doneParam, limit: TODOS_LIMIT }
+    : { done: undefined, limit: TODOS_LIMIT };
 
   const { data: todos } = useGetTodos(params);
   const setTitle = useHeaderStore((s) => s.setTitle);
