@@ -22,8 +22,8 @@ export default function GoalTodoColumn({
   return (
     <section className="min-w-0 flex-1">
       {showMobileTitle && (
-        <div className="mb-3 flex h-10 items-center px-2 lg:hidden">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-foreground">
+        <div className="mb-2 md:mb-3 flex h-10 items-center px-2 lg:hidden">
+          <h3 className="md:text-lg font-semibold text-gray-800 dark:text-foreground">
             {title}
           </h3>
         </div>

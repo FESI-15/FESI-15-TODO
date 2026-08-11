@@ -1,8 +1,8 @@
-# 슬리드 투두 (Sleed Todo)
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-![랜딩 페이지](public/images/readme/landing.png)
+## Getting Started
 
-## ☑️ 슬리드 투두는 어떤 서비스인가요?
+First, run the development server:
 
 > 정리부터 실행까지, 목표 기반 할일 관리 서비스
 
@@ -74,7 +74,7 @@
 | 임동현 | 프론트엔드 (팀장) | 대시보드, 목표 관리, 할일 관리, 소통게시판, 사이드메뉴, 스켈레톤 UI, API 세팅(orval, BFF 패턴, React Query SSR) | [@DHyeon98](https://github.com/DHyeon98)       |
 | 장민영 | 프론트엔드        | 랜딩페이지, 인증(구글 소셜 로그인, 미들웨어(proxy)), 캘린더, 찜한 할일, 알림, 다크 모드, 마이페이지             | [@minyeong123](https://github.com/minyeong123) |
 
-## 📁 폴더 구조
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 ```text
 .
@@ -109,29 +109,18 @@
 └── .env                  # 환경 변수
 ```
 
-## 📐 개발 컨벤션
+## Learn More
 
-### 커밋 컨벤션
+To learn more about Next.js, take a look at the following resources:
 
-| 타입       | 설명                           | 예시                                           |
-| ---------- | ------------------------------ | ---------------------------------------------- |
-| `feat`     | 새로운 기능 추가               | `feat: Todo 수정 기능 추가`                    |
-| `fix`      | 버그 수정                      | `fix: 완료된 Todo가 다시 활성화되는 문제 수정` |
-| `refactor` | 기능 변경 없이 코드 개선       | `refactor: API 호출 로직 분리`                 |
-| `style`    | 코드 스타일 변경 (로직 변경 X) | `style: import 정렬`                           |
-| `test`     | 테스트 코드                    | `test: 로그인 API 테스트 추가`                 |
-| `docs`     | 문서 수정                      | `docs: 브랜치 전략 추가`                       |
-| `chore`    | 설정, 패키지, 빌드             | `chore: React Query 설치`                      |
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### 코드 스타일
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-- Prettier 필수
-- 함수는 `const` 사용
-- Props는 `interface` 사용
-- 상수는 대문자 사용
-- 컴포넌트는 `function` 사용
+## Deploy on Vercel
 
-### Git 브랜치 전략
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 - `feature → main`
 - main에 직접 push 금지, 무조건 feature 브랜치에서 작업

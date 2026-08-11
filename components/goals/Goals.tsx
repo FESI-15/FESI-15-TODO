@@ -22,7 +22,7 @@ export default function Goals({ goalId }: { goalId: number }) {
   }, [userMe?.data.name, setTitle]);
 
   return (
-    <div className="mx-auto w-full max-w-[1312px] p-4 md:pt-8 lg:pt-20">
+    <div className="mx-auto w-full max-w-[1312px] p-4 pt-8 md:pt-12 lg:pt-20">
       <h2 className="mb-5 hidden px-2 text-xl font-semibold text-black dark:text-foreground lg:block lg:text-2xl">
         {userMe?.data.name}님의 목표
       </h2>

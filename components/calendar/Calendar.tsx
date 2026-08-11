@@ -28,7 +28,7 @@ export default function Calendar() {
     todosByDate[format(selectedDate, "yyyy-MM-dd")] ?? [];
 
   return (
-    <main className="min-w-0 flex-1 px-4 py-8 pb-30 md:px-6 md:py-12 md:pb-12 lg:py-10">
+    <main className="min-w-0 flex-1 px-4 py-8 pb-30 md:px-6 md:py-12 md:pb-12 lg:py-20">
       <div className="mx-auto flex w-full flex-col gap-6 lg:max-w-[1280px]">
         <CalendarHeader />
         <div className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-card p-4 md:p-6 lg:h-[912px]">
