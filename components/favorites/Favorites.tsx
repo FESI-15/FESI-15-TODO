@@ -38,21 +38,23 @@ export default function Favorites() {
   }, [data, tab, goalId]);
 
   return (
-    <div className="max-w-[720px] mx-auto w-full mt-6 px-4 md:mt-12 pb-12">
-      <h2 className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground">
-        찜한 할 일
-        <span className="text-orange-600 ml-1 lg:ml-2">
-          {data?.data.totalCount}
-        </span>
-      </h2>
-      <div className="px-2 flex justify-between items-center lg:mt-6">
-        <FavoritesTab value={tab} onChange={setTab} />
+    <div className="my-6 px-4 md:my-12 md:px-6 lg:my-20 w-full">
+      <div className="max-w-[720px] mx-auto w-full">
+        <h2 className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground">
+          찜한 할 일
+          <span className="text-orange-600 ml-1 lg:ml-2">
+            {data?.data.totalCount}
+          </span>
+        </h2>
+        <div className="px-2 flex justify-between items-center lg:mt-6">
+          <FavoritesTab value={tab} onChange={setTab} />
+        </div>
+        <TodoList
+          todos={filteredTodos}
+          emptyMessage="아직 찜한 할 일이 없어요"
+          filterSlot={<GoalFilter goalId={goalId} onGoalIdChange={setGoalId} />}
+        />
       </div>
-      <TodoList
-        todos={filteredTodos}
-        emptyMessage="아직 찜한 할 일이 없어요"
-        filterSlot={<GoalFilter goalId={goalId} onGoalIdChange={setGoalId} />}
-      />
     </div>
   );
 }

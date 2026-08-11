@@ -36,7 +36,7 @@ export default function Todos() {
   }, [todos?.data.todos.length, setTitle]);
 
   return (
-    <div className="mt-6 px-4 lg:mt-12 pb-12 w-full">
+    <div className="my-6 px-4 md:my-12 md:px-6 lg:my-20 w-full">
       <div className="max-w-[720px] mx-auto w-full">
         <h2 className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground">
           모든 할 일
