@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CommunityLoading() {
   return (
-    <div className="py-6 mb:py-12 max-w-[1200px] mx-auto w-full lg:py-20">
+    <div className="py-6 md:py-12 max-w-[1200px] mx-auto w-full lg:py-20">
       <div className="px-4 md:px-6">
         <Skeleton className="w-[106px] h-8 hidden lg:block mb-10" />
         <div className="flex gap-4">
