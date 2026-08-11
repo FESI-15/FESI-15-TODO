@@ -1,5 +1,4 @@
 import { CommunityDetail } from "@/components/community/CommunityDetail/CommunityDetail";
-import { Skeleton } from "@/components/ui/skeleton";
 import { getCommentsQueryOptionsServer } from "@/hooks/queries/comments/comments.server";
 import { getPostQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
 import { getQueryClient } from "@/utils/getQueryClient";
