@@ -44,21 +44,25 @@ apiClient.interceptors.request.use((config) => {
   );
 });
 
-let refreshPromise: Promise<PostTeamIdAuthRefresh200> | null = null;
+const refreshPromiseMap = new Map<string, Promise<PostTeamIdAuthRefresh200>>();
 
 const refreshAccessToken = (refreshToken: string) => {
-  if (!refreshPromise) {
-    refreshPromise = apiClient
-      .post<PostTeamIdAuthRefresh200>("/auth/refresh", {
-        refreshToken,
-      } satisfies PostTeamIdAuthRefreshBody)
-      .then(({ data }) => data)
-      .finally(() => {
-        refreshPromise = null;
-      });
+  const existingPromise = refreshPromiseMap.get(refreshToken);
+  if (existingPromise) {
+    return existingPromise;
   }
 
-  return refreshPromise;
+  const promise = apiClient
+    .post<PostTeamIdAuthRefresh200>("/auth/refresh", {
+      refreshToken,
+    } satisfies PostTeamIdAuthRefreshBody)
+    .then(({ data }) => data)
+    .finally(() => {
+      refreshPromiseMap.delete(refreshToken);
+    });
+
+  refreshPromiseMap.set(refreshToken, promise);
+  return promise;
 };
 
 apiClient.interceptors.response.use(
@@ -89,23 +93,25 @@ apiClient.interceptors.response.use(
       const data = await refreshAccessToken(refreshToken);
       const secure = process.env.NODE_ENV === "production";
 
-      cookieStore.set(ACCESS_TOKEN_COOKIE_NAME, data.accessToken, {
-        httpOnly: true,
-        secure,
-        sameSite: "lax",
-        path: "/",
-        maxAge: ACCESS_TOKEN_MAX_AGE,
-      });
-
-      if (data.refreshToken) {
-        cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+      try {
+        cookieStore.set(ACCESS_TOKEN_COOKIE_NAME, data.accessToken, {
           httpOnly: true,
           secure,
           sameSite: "lax",
           path: "/",
-          maxAge: REFRESH_TOKEN_MAX_AGE,
+          maxAge: ACCESS_TOKEN_MAX_AGE,
         });
-      }
+
+        if (data.refreshToken) {
+          cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+            httpOnly: true,
+            secure,
+            sameSite: "lax",
+            path: "/",
+            maxAge: REFRESH_TOKEN_MAX_AGE,
+          });
+        }
+      } catch {}
 
       originalRequest.headers = {
         ...originalRequest.headers,
