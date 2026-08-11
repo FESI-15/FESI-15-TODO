@@ -93,23 +93,25 @@ apiClient.interceptors.response.use(
       const data = await refreshAccessToken(refreshToken);
       const secure = process.env.NODE_ENV === "production";
 
-      cookieStore.set(ACCESS_TOKEN_COOKIE_NAME, data.accessToken, {
-        httpOnly: true,
-        secure,
-        sameSite: "lax",
-        path: "/",
-        maxAge: ACCESS_TOKEN_MAX_AGE,
-      });
-
-      if (data.refreshToken) {
-        cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+      try {
+        cookieStore.set(ACCESS_TOKEN_COOKIE_NAME, data.accessToken, {
           httpOnly: true,
           secure,
           sameSite: "lax",
           path: "/",
-          maxAge: REFRESH_TOKEN_MAX_AGE,
+          maxAge: ACCESS_TOKEN_MAX_AGE,
         });
-      }
+
+        if (data.refreshToken) {
+          cookieStore.set(REFRESH_TOKEN_COOKIE_NAME, data.refreshToken, {
+            httpOnly: true,
+            secure,
+            sameSite: "lax",
+            path: "/",
+            maxAge: REFRESH_TOKEN_MAX_AGE,
+          });
+        }
+      } catch {}
 
       originalRequest.headers = {
         ...originalRequest.headers,
