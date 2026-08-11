@@ -4,6 +4,7 @@ import { getQueryClient } from "@/utils/getQueryClient";
 import { getPostQueryOptionsServer } from "@/hooks/queries/posts/posts.server";
 import { dehydrate } from "@tanstack/react-query";
 import { CommunityEdit } from "@/components/community/CommunityEdit/CommunityEdit";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface CommunityEditPageProps {
   params: Promise<{ id: string }>;
