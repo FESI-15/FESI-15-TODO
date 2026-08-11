@@ -30,7 +30,7 @@ export default function SideMenuContainer({
         <SideMenuActions />
         {/* 인증, 인가 시스템 연동 시 profile 전달 */}
         <div className="flex items-center gap-2 mt-6">
-          <SideMenuProfile />
+          <SideMenuProfile onClose={onClose} />
           <SideMenuBell />
         </div>
       </div>

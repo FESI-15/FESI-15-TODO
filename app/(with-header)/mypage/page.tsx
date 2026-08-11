@@ -14,11 +14,13 @@ export default async function MyPagePage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="flex w-full flex-col items-start gap-10 px-8 py-[72px] lg:items-center">
-        <h1 className="px-1 text-2xl font-semibold text-black dark:text-foreground hidden md:block">
-          내 정보 관리
-        </h1>
-        <MyPageInfo />
+      <div className="w-full p-4 md:px-8 md:py-12 lg:py-[72px]">
+        <div className="w-full lg:max-w-[560px] mx-auto">
+          <h1 className="px-1 mb-10 text-2xl font-semibold text-black dark:text-foreground hidden lg:block">
+            내 정보 관리
+          </h1>
+          <MyPageInfo />
+        </div>
       </div>
     </HydrationBoundary>
   );
