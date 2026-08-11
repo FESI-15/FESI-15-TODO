@@ -7,7 +7,7 @@ import GoalFilter from "@/components/common/GoalFilter";
 import FavoritesTab, { FavoritesTabValue } from "./FavoritesTab";
 import useHeaderStore from "@/store/useHeaderStore";
 
-const FAVORITES_LIMIT = 100;
+const FAVORITES_LIMIT = 30;
 
 export default function Favorites() {
   const [tab, setTab] = useState<FavoritesTabValue>("all");
@@ -15,17 +15,6 @@ export default function Favorites() {
 
   const { data } = useGetTodoFavorites({ limit: FAVORITES_LIMIT });
   const setTitle = useHeaderStore((s) => s.setTitle);
-
-  useEffect(() => {
-    setTitle(
-      <>
-        찜한 할 일
-        <span className="text-orange-600 ml-1">
-          {data?.data.totalCount ?? 0}
-        </span>
-      </>,
-    );
-  }, [data?.data.totalCount, setTitle]);
 
   const filteredTodos = useMemo(() => {
     return (data?.data.favorites ?? [])
@@ -37,13 +26,22 @@ export default function Favorites() {
       .map((favorite) => favorite.todo);
   }, [data, tab, goalId]);
 
+  useEffect(() => {
+    setTitle(
+      <>
+        찜한 할 일
+        <span className="text-orange-600 ml-1">{filteredTodos.length}</span>
+      </>,
+    );
+  }, [filteredTodos.length, setTitle]);
+
   return (
     <div className="my-6 px-4 md:my-12 md:px-6 lg:my-20 w-full">
       <div className="max-w-[720px] mx-auto w-full">
         <h2 className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground">
           찜한 할 일
           <span className="text-orange-600 ml-1 lg:ml-2">
-            {data?.data.totalCount}
+            {filteredTodos.length}
           </span>
         </h2>
         <div className="px-2 flex justify-between items-center lg:mt-6">

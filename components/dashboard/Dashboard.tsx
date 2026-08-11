@@ -11,10 +11,11 @@ import Image from "next/image";
 import { useEffect } from "react";
 import GoalCardList from "./GoalCardList/GoalCardList";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default function Dashboard() {
   const { data: goals } = useGetGoals();
-  const { data: todos } = useGetTodos();
+  const { data: todos } = useGetTodos({ limit: TODOS_LIMIT });
   const { data: user } = useGetUserMe();
   const progress = getGoalProgress(todos?.data.todos ?? []);
   const setTitle = useHeaderStore((s) => s.setTitle);

@@ -7,13 +7,16 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Dashboard from "@/components/dashboard/Dashboard";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
 
   try {
     await Promise.all([
-      queryClient.fetchQuery(getTodosQueryOptionsServer()),
+      queryClient.fetchQuery(
+        getTodosQueryOptionsServer({ limit: TODOS_LIMIT }),
+      ),
       queryClient.fetchQuery(getGoalsQueryOptionsServer()),
       queryClient.fetchQuery(getUserMeQueryOptionsServer()),
     ]);

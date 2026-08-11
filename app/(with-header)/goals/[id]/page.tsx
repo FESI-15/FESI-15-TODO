@@ -4,6 +4,7 @@ import { HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { dehydrate } from "@tanstack/react-query";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default async function GoalPage({
   params,
@@ -17,7 +18,7 @@ export default async function GoalPage({
     await Promise.all([
       queryClient.fetchQuery(getUserMeQueryOptionsServer()),
       queryClient.fetchQuery(
-        getTodosQueryOptionsServer({ goalId: Number(id) }),
+        getTodosQueryOptionsServer({ goalId: Number(id), limit: TODOS_LIMIT }),
       ),
       queryClient.fetchQuery(getGoalQueryOptionsServer(Number(id))),
     ]);
