@@ -4,6 +4,7 @@ import { cva } from "class-variance-authority";
 import { Check } from "lucide-react";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import TaskModal from "@/components/common/Modal/TaskModal/TaskModal";
+import { useState } from "react";
 
 const calendarEventChipVariants = cva(
   "flex w-full items-center gap-1 rounded-md border text-xs font-semibold px-2 py-1",
@@ -22,14 +23,29 @@ interface CalendarEventChipProps {
 }
 
 export default function CalendarEventChip({ todo }: CalendarEventChipProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenChange = (open: boolean) => {
+    setIsOpen(open);
+  };
+
   return (
     <div onClick={(e) => e.stopPropagation()}>
-      <TaskModal todo={todo}>
-        <div className={calendarEventChipVariants({ done: todo.done })}>
-          {todo.done && <Check className="size-4 shrink-0" />}
-          <span className="block w-full truncate text-left">{todo.title}</span>
-        </div>
-      </TaskModal>
+      <button
+        type="button"
+        onClick={() => setIsOpen(true)}
+        className={calendarEventChipVariants({ done: todo.done })}
+      >
+        {todo.done && <Check className="size-4 shrink-0" />}
+        <span className="block w-full truncate text-left">{todo.title}</span>
+      </button>
+      {isOpen && (
+        <TaskModal
+          todo={todo}
+          isOpen={isOpen}
+          onOpenChange={handleOpenChange}
+        ></TaskModal>
+      )}
     </div>
   );
 }
