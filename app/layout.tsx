@@ -81,10 +81,6 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", pretendard.variable, "font-sans")}
       suppressHydrationWarning
     >
-      <meta
-        name="google-site-verification"
-        content="_muejfGGuKrtJKzi3NCWl-U0BHQtUROsMPTBlJqhUlA"
-      />
       <body className="flex min-h-full flex-col font-sans bg-gray-100 dark:bg-background">
         <ThemeProvider
           attribute="class"
