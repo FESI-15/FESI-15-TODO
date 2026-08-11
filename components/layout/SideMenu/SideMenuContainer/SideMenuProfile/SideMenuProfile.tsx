@@ -2,12 +2,13 @@ import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SideMenuProfile() {
+export default function SideMenuProfile({ onClose }: { onClose?: () => void }) {
   const { data: user } = useGetUserMe();
   return (
     <Link
       href="/mypage"
       className="flex items-center gap-2 p-2 border border-gray-200 dark:border-border rounded-full flex-1"
+      onClick={onClose}
     >
       <div className="w-[38px] h-[38px] rounded-full bg-gray-200 dark:bg-muted overflow-hidden">
         <Image
