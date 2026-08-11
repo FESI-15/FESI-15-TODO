@@ -16,22 +16,22 @@ const AuthorContainerVariant = cva("flex items-center gap-1", {
   },
 });
 
-const AuthorImageVariant = cva("rounded-full overflow-hidden", {
+const AuthorImageVariant = cva("size-5 rounded-full overflow-hidden", {
   variants: {
     size: {
-      sm: "size-5",
+      sm: "",
       md: "md:size-6",
     },
   },
 });
 
 const AuthorNameVariant = cva(
-  "text-gray-500 dark:text-muted-foreground truncate max-w-[75px] md:max-w-[400px]",
+  "text-gray-500 text-xs dark:text-muted-foreground truncate max-w-[75px] md:max-w-[400px]",
   {
     variants: {
       size: {
-        sm: "text-xs md:text-sm",
-        md: "text-sm md:text-base",
+        sm: "md:text-sm",
+        md: "md:text-base",
       },
     },
   },

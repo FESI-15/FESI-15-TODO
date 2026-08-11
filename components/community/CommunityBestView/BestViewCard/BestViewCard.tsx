@@ -11,7 +11,7 @@ export function BestViewCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
         href={`/community/${post.id}`}
       >
         <div>
-          <p className="font-semibold text-gray-900 dark:text-foreground mb-3 md:text-xl md:font-semibold md:mb-4">
+          <p className="font-semibold text-gray-900 truncate dark:text-foreground mb-3 md:text-xl md:font-semibold md:mb-4">
             {post.title}
           </p>
           <div className="size-[100px] relative">

@@ -64,15 +64,20 @@ export function CommunityEdit({ id }: CommunityEditProps) {
     }
   }, [isPostLoading, isMeLoading, postData, meData, id, router]);
   return (
-    <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1 p-4 pb-15 md:mt-8 lg:mt-[60px]">
-      <form className="flex flex-col flex-1" onSubmit={handleSubmit(onSubmit)}>
-        <WriteHeader isValid={formState.isValid} isEdit />
-        <div className="p-4 bg-white dark:bg-card rounded-[24px] flex-1 flex flex-col">
-          <WriteTitleInput register={register} watch={watch} />
-          <WriteEditor setValue={setValue} content={watch("content")} />
-          <ImageUploadInput control={control} name="image" />
-        </div>
-      </form>
+    <div className="flex px-4 md:my-12 lg:my-20 w-full flex-1">
+      <div className="max-w-[768px] mx-auto w-full flex flex-col flex-1">
+        <form
+          className="flex flex-col flex-1"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <WriteHeader isValid={formState.isValid} isEdit />
+          <div className="p-4 bg-white dark:bg-card rounded-[24px] flex-1 flex flex-col">
+            <WriteTitleInput register={register} watch={watch} />
+            <WriteEditor setValue={setValue} content={watch("content")} />
+            <ImageUploadInput control={control} name="image" />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
