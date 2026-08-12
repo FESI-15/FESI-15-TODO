@@ -40,6 +40,7 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fesi-15-todo-nine.vercel.app"),
   title: "슬리드 투두",
   description: "투두 리스트 서비스입니다.",
   icons: {
@@ -47,6 +48,21 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "_muejfGGuKrtJKzi3NCWl-U0BHQtUROsMPTBlJqhUlA",
+  },
+  openGraph: {
+    title: "슬리드 투두",
+    description: "투두 리스트 서비스입니다.",
+    url: "/",
+    siteName: "슬리드 투두",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "슬리드 투두",
+      },
+    ],
+    type: "website",
   },
 };
 
