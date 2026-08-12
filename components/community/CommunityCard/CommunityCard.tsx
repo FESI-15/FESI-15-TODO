@@ -4,7 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
 
-export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
+interface CommunityCardProps {
+  post: GetTeamIdPosts200PostsItem;
+}
+
+export function CommunityCard({ post }: CommunityCardProps) {
   const sanitizedContent = DOMPurify.sanitize(post.content);
   return (
     <li>
@@ -31,6 +35,8 @@ export function CommunityCard({ post }: { post: GetTeamIdPosts200PostsItem }) {
             alt={post.title}
             width={72}
             height={72}
+            fetchPriority="high"
+            loading="eager"
           />
         )}
       </Link>
