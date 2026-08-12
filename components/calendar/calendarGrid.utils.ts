@@ -20,17 +20,16 @@ export const getCalendarGridRange = (month: Date) => {
 };
 
 export const groupTodosByDate = (todos: GetTeamIdTodos200TodosItem[]) => {
-  return todos.reduce<Record<string, GetTeamIdTodos200TodosItem[]>>(
-    (acc, todo) => {
-      if (!todo.dueDate) {
-        return acc;
-      }
+  const result: Record<string, GetTeamIdTodos200TodosItem[]> = {};
 
-      const dateKey = format(new Date(todo.dueDate), "yyyy-MM-dd");
-      acc[dateKey] = [...(acc[dateKey] ?? []), todo];
+  for (const todo of todos) {
+    if (!todo.dueDate) {
+      continue;
+    }
 
-      return acc;
-    },
-    {},
-  );
+    const dateKey = format(new Date(todo.dueDate), "yyyy-MM-dd");
+    (result[dateKey] ??= []).push(todo);
+  }
+
+  return result;
 };

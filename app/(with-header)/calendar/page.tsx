@@ -9,6 +9,7 @@ import { getCalendarGridRange } from "@/components/calendar/calendarGrid.utils";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
+import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default async function CalendarPage() {
   const queryClient = new QueryClient();
@@ -20,7 +21,7 @@ export default async function CalendarPage() {
         getTodosQueryOptionsServer({
           from: format(start, "yyyy-MM-dd"),
           to: format(end, "yyyy-MM-dd"),
-          limit: 100,
+          limit: TODOS_LIMIT,
         }),
       ),
       queryClient.fetchQuery(getGoalsQueryOptionsServer()),
