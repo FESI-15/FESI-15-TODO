@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,9 +17,11 @@ import {
 } from "@/components/auth/authForm.types";
 import { usePostAuthLogin } from "@/hooks/queries/auth/auth.bff.hook";
 import { useGoogleLogin } from "@/hooks/useGoogleLogin";
+import { GOOGLE_OAUTH_SCRIPT_SRC } from "@/constants/auth";
 
 export function LoginForm() {
   const router = useRouter();
+  const [isGoogleScriptReady, setIsGoogleScriptReady] = useState(false);
   const { control, handleSubmit, setError } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
@@ -35,10 +39,9 @@ export function LoginForm() {
 
   const {
     loginWithGoogle,
-    prepareGoogleLogin,
     isPending: isGooglePending,
     isSuccess: isLoggedIn,
-  } = useGoogleLogin();
+  } = useGoogleLogin(isGoogleScriptReady);
 
   const onSubmit = (data: LoginFormValues) => {
     mutate({ data });
@@ -46,6 +49,11 @@ export function LoginForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-background px-5.5">
+      <Script
+        src={GOOGLE_OAUTH_SCRIPT_SRC}
+        strategy="lazyOnload"
+        onReady={() => setIsGoogleScriptReady(true)}
+      />
       <div className="flex w-full max-w-100 flex-col gap-8 md:gap-10">
         <div className="flex flex-col gap-4 md:gap-6">
           <div className="flex flex-col gap-10">
@@ -79,7 +87,6 @@ export function LoginForm() {
         <SocialLoginSection
           label="SNS 계정으로 로그인"
           onClickGoogle={loginWithGoogle}
-          onPrepareGoogle={prepareGoogleLogin}
           isGooglePending={isGooglePending}
         />
       </div>

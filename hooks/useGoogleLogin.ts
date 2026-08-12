@@ -1,13 +1,9 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import {
-  GOOGLE_CLIENT_ID,
-  GOOGLE_OAUTH_SCOPE,
-  GOOGLE_OAUTH_SCRIPT_SRC,
-} from "@/constants/auth";
+import { GOOGLE_CLIENT_ID, GOOGLE_OAUTH_SCOPE } from "@/constants/auth";
 import { usePostAuthOauth } from "@/hooks/queries/auth/auth.bff.hook";
 
 interface GoogleTokenClient {
@@ -30,62 +26,33 @@ declare global {
   }
 }
 
-export const useGoogleLogin = () => {
+export const useGoogleLogin = (isScriptReady: boolean) => {
   const router = useRouter();
   const tokenClientRef = useRef<GoogleTokenClient | null>(null);
-  const scriptLoadPromiseRef = useRef<Promise<void> | null>(null);
 
   const { mutate, isPending, isSuccess } = usePostAuthOauth({
     mutation: { onSuccess: () => router.replace("/dashboard") },
   });
 
-  const loadScript = useCallback(() => {
-    if (scriptLoadPromiseRef.current) return scriptLoadPromiseRef.current;
+  useEffect(() => {
+    if (!isScriptReady || !window.google || !GOOGLE_CLIENT_ID) return;
 
-    scriptLoadPromiseRef.current = new Promise<void>((resolve) => {
-      if (document.querySelector(`script[src="${GOOGLE_OAUTH_SCRIPT_SRC}"]`)) {
-        resolve();
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src = GOOGLE_OAUTH_SCRIPT_SRC;
-      script.async = true;
-      script.onload = () => resolve();
-      document.head.appendChild(script);
+    tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: GOOGLE_OAUTH_SCOPE,
+      callback: (response) => {
+        if (!response.access_token) return;
+        mutate({
+          provider: "google",
+          data: { token: response.access_token },
+        });
+      },
     });
+  }, [isScriptReady, mutate]);
 
-    return scriptLoadPromiseRef.current;
-  }, []);
+  const loginWithGoogle = () => {
+    tokenClientRef.current?.requestAccessToken();
+  };
 
-  const ensureTokenClient = useCallback(async () => {
-    await loadScript();
-
-    if (!tokenClientRef.current && window.google && GOOGLE_CLIENT_ID) {
-      tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
-        client_id: GOOGLE_CLIENT_ID,
-        scope: GOOGLE_OAUTH_SCOPE,
-        callback: (response) => {
-          if (!response.access_token) return;
-          mutate({
-            provider: "google",
-            data: { token: response.access_token },
-          });
-        },
-      });
-    }
-
-    return tokenClientRef.current;
-  }, [loadScript, mutate]);
-
-  const prepareGoogleLogin = useCallback(() => {
-    void ensureTokenClient();
-  }, [ensureTokenClient]);
-
-  const loginWithGoogle = useCallback(async () => {
-    const client = await ensureTokenClient();
-    client?.requestAccessToken();
-  }, [ensureTokenClient]);
-
-  return { loginWithGoogle, prepareGoogleLogin, isPending, isSuccess };
+  return { loginWithGoogle, isPending, isSuccess };
 };

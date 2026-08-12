@@ -3,14 +3,12 @@ import { SocialButton } from "@/components/common/SocialButton";
 interface SocialLoginSectionProps {
   label: string;
   onClickGoogle: () => void;
-  onPrepareGoogle: () => void;
   isGooglePending: boolean;
 }
 
 export function SocialLoginSection({
   label,
   onClickGoogle,
-  onPrepareGoogle,
   isGooglePending,
 }: SocialLoginSectionProps) {
   return (
@@ -26,8 +24,6 @@ export function SocialLoginSection({
         <SocialButton
           provider="google"
           onClick={onClickGoogle}
-          onMouseEnter={onPrepareGoogle}
-          onFocus={onPrepareGoogle}
           disabled={isGooglePending}
         />
       </div>
