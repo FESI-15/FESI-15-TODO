@@ -13,7 +13,7 @@ export const myPageFormSchema = z
       .string()
       .min(1, "이름을 입력해주세요")
       .max(20, "이름은 20자 이하로 입력해주세요"),
-    image: z.string().optional(),
+    image: z.string().nullable().optional(),
     currentPassword: optionalPasswordField,
     newPassword: optionalPasswordField,
     confirmPassword: optionalPasswordField,

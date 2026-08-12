@@ -35,7 +35,7 @@ export function MyPageInfo() {
     resolver: zodResolver(myPageFormSchema),
     defaultValues: {
       name: user?.name ?? "",
-      image: user?.image ?? undefined,
+      image: user?.image ?? null,
       currentPassword: "",
       newPassword: "",
       confirmPassword: "",

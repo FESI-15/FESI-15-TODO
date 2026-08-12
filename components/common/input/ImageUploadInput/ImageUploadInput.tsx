@@ -41,7 +41,7 @@ export function ImageUploadInput<T extends FieldValues>({
     setSelectedFile(file);
 
     if (!file) {
-      field.onChange(undefined);
+      field.onChange(null);
       return;
     }
 
@@ -74,11 +74,6 @@ export function ImageUploadInput<T extends FieldValues>({
       onFileChange: handleFileChange,
     });
 
-  const handlePreviewImageRemove = () => {
-    handleRemove();
-    field.onChange(null);
-  };
-
   const imagePreviewUrl = previewUrl ?? fieldPreviewUrl ?? "";
 
   return (
@@ -86,7 +81,7 @@ export function ImageUploadInput<T extends FieldValues>({
       {imagePreviewUrl && (
         <PreviewImage
           previewUrl={imagePreviewUrl}
-          handleRemove={handlePreviewImageRemove}
+          handleRemove={handleRemove}
         />
       )}
       {!imagePreviewUrl && (
