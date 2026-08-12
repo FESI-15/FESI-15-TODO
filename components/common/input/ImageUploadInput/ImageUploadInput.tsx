@@ -78,12 +78,7 @@ export function ImageUploadInput<T extends FieldValues>({
 
   return (
     <Field data-invalid={fieldState.invalid}>
-      {imagePreviewUrl && (
-        <PreviewImage
-          previewUrl={imagePreviewUrl}
-          handleRemove={handleRemove}
-        />
-      )}
+      <PreviewImage previewUrl={imagePreviewUrl} handleRemove={handleRemove} />
       {!imagePreviewUrl && (
         <>
           <div
