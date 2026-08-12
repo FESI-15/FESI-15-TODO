@@ -48,6 +48,8 @@ export default function ProgressCard({ title, progress }: ProgressCardProps) {
           alt="progress"
           width={222}
           height={215}
+          priority
+          fetchPriority="high"
         />
       </div>
     </section>

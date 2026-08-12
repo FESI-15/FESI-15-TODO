@@ -1,6 +1,13 @@
-import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
 import PlusIcon from "@/public/icons/common/plus.svg";
+import dynamic from "next/dynamic";
 
+const TaskFormModal = dynamic(
+  () => import("@/components/common/Modal/TaskFormModal/TaskFormModal"),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
 export default function AddTodoButton() {
   return (
     <TaskFormModal>

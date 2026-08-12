@@ -13,10 +13,12 @@ import type { GetTeamIdTodosTodoId200 } from "@/apis/model";
 import { formatDate } from "date-fns";
 
 interface TaskModalProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   todo?: GetTeamIdTodosTodoId200;
   isLoading?: boolean;
   onTriggerMouseEnter?: () => void;
+  isOpen: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export default function TaskModal({
@@ -24,16 +26,20 @@ export default function TaskModal({
   todo,
   isLoading = false,
   onTriggerMouseEnter,
+  isOpen,
+  onOpenChange,
 }: TaskModalProps) {
   const deadline = todo?.dueDate
     ? formatDate(new Date(todo.dueDate), "yyyy-MM-dd")
     : "";
 
   return (
-    <Dialog>
-      <DialogTrigger onMouseEnter={onTriggerMouseEnter}>
-        {children}
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+      {children && (
+        <DialogTrigger onMouseEnter={onTriggerMouseEnter}>
+          {children}
+        </DialogTrigger>
+      )}
       <DialogContent showCloseButton={false}>
         {todo ? (
           <>

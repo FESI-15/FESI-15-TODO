@@ -4,9 +4,21 @@ import {
 } from "@/hooks/queries/goals/goals.bff.hook";
 import KebabButton from "@/components/common/KebabButton/KebabButton";
 import { useState } from "react";
-import GoalsModal from "@/components/common/Modal/GoalsModal/GoalsModal";
 import Image from "next/image";
-import Popup from "@/components/common/Modal/Popup";
+import dynamic from "next/dynamic";
+
+const GoalsModal = dynamic(
+  () => import("@/components/common/Modal/GoalsModal/GoalsModal"),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
+
+const Popup = dynamic(() => import("@/components/common/Modal/Popup"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export default function GoalCard({ goalId }: { goalId: number }) {
   const { data: goal } = useGetGoal(goalId);

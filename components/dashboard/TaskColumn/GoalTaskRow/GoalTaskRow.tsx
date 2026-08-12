@@ -2,8 +2,17 @@ import DashboardCheckbox from "@/components/dashboard/DashBoardCheckbox/DashBoar
 import TaskIcons from "@/components/dashboard/TaskIcons/TaskIcons";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
-import TaskModal from "@/components/common/Modal/TaskModal/TaskModal";
 import { cva } from "class-variance-authority";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+
+const TaskModal = dynamic(
+  () => import("@/components/common/Modal/TaskModal/TaskModal"),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
 
 interface GoalTaskRowProps {
   todo: GetTeamIdTodos200TodosItem;
@@ -21,6 +30,8 @@ const taskTitleVariant = cva(
 );
 
 export default function GoalTaskRow({ todo }: GoalTaskRowProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <li
       className={cn(
@@ -29,10 +40,21 @@ export default function GoalTaskRow({ todo }: GoalTaskRowProps) {
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <DashboardCheckbox checked={todo.done} taskId={todo.id} />
-        <TaskModal todo={todo}>
-          <p className={taskTitleVariant({ done: todo.done })}>{todo.title}</p>
-        </TaskModal>
+        <button
+          type="button"
+          className={taskTitleVariant({ done: todo.done })}
+          onClick={() => setIsOpen(true)}
+        >
+          {todo.title}
+        </button>
       </div>
+      {isOpen && (
+        <TaskModal
+          todo={todo}
+          isOpen={isOpen}
+          onOpenChange={(open) => setIsOpen(open)}
+        />
+      )}
       <TaskIcons todo={todo} recentTodo={false} />
     </li>
   );

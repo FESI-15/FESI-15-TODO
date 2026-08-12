@@ -130,7 +130,7 @@ export default function TaskFormModal(props: TaskFormModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger>{children}</DialogTrigger>
+      {children && <DialogTrigger>{children}</DialogTrigger>}
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle showCloseButton={true}>
