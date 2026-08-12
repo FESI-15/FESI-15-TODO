@@ -3,15 +3,17 @@ import GoalTaskRow from "@/components/dashboard/TaskColumn/GoalTaskRow/GoalTaskR
 import ListCard from "@/components/common/ListCard";
 import Image from "next/image";
 
+interface TodoListProps {
+  todos: GetTeamIdTodos200TodosItem[];
+  emptyMessage?: string;
+  filterSlot?: React.ReactNode;
+}
+
 export default function TodoList({
   todos,
   emptyMessage = "아직 등록한 할 일이 없어요",
   filterSlot,
-}: {
-  todos: GetTeamIdTodos200TodosItem[];
-  emptyMessage?: string;
-  filterSlot?: React.ReactNode;
-}) {
+}: TodoListProps) {
   return (
     <ListCard>
       {filterSlot && <div className="mb-5 shrink-0">{filterSlot}</div>}
