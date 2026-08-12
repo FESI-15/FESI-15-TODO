@@ -1,6 +1,5 @@
 import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import { getTodosQueryOptionsServer } from "@/hooks/queries/todos/todos.server";
-import { getUserMeQueryOptionsServer } from "@/hooks/queries/users/users.server";
 import {
   dehydrate,
   HydrationBoundary,
@@ -18,24 +17,7 @@ export default async function DashboardPage() {
         getTodosQueryOptionsServer({ limit: TODOS_LIMIT }),
       ),
       queryClient.fetchQuery(getGoalsQueryOptionsServer()),
-      queryClient.fetchQuery(getUserMeQueryOptionsServer()),
     ]);
-
-    const goals = queryClient.getQueryData<
-      Awaited<
-        ReturnType<ReturnType<typeof getGoalsQueryOptionsServer>["queryFn"]>
-      >
-    >(getGoalsQueryOptionsServer().queryKey);
-
-    if (goals) {
-      await Promise.all(
-        goals.data.goals.map((goal) =>
-          queryClient.fetchQuery(
-            getTodosQueryOptionsServer({ goalId: goal.id }),
-          ),
-        ),
-      );
-    }
   } catch (error) {
     throw error;
   }

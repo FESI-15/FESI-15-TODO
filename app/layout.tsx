@@ -29,6 +29,11 @@ const pretendard = localFont({
       weight: "700",
       style: "normal",
     },
+    {
+      path: "../public/fonts/Pretendard-ExtraBold.subset.woff2",
+      weight: "800",
+      style: "normal",
+    },
   ],
   display: "swap",
   variable: "--font-pretendard",
@@ -39,6 +44,9 @@ export const metadata: Metadata = {
   description: "투두 리스트 서비스입니다.",
   icons: {
     icon: "/favicon.ico",
+  },
+  verification: {
+    google: "_muejfGGuKrtJKzi3NCWl-U0BHQtUROsMPTBlJqhUlA",
   },
 };
 

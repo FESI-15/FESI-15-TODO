@@ -12,7 +12,15 @@ import {
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { useDeleteTodo } from "@/hooks/queries/todos/todos.bff.hook";
 import { useState } from "react";
-import TaskFormModal from "@/components/common/Modal/TaskFormModal/TaskFormModal";
+import dynamic from "next/dynamic";
+
+const TaskFormModal = dynamic(
+  () => import("@/components/common/Modal/TaskFormModal/TaskFormModal"),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
 
 const IconVariants = cva(
   "bg-orange-200 rounded-full size-6 items-center justify-center flex",

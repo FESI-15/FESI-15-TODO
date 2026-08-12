@@ -25,8 +25,8 @@ export default async function WithHeaderLayout({
     <div className="flex-col overflow-x-hidden flex lg:flex-row flex-1">
       <HydrationBoundary state={dehydrate(queryClient)}>
         <SideMenu />
+        {children}
       </HydrationBoundary>
-      {children}
     </div>
   );
 }
