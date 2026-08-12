@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import {
-  GOOGLE_CLIENT_ID,
-  GOOGLE_OAUTH_SCOPE,
-  GOOGLE_OAUTH_SCRIPT_SRC,
-} from "@/constants/auth";
+import { GOOGLE_CLIENT_ID, GOOGLE_OAUTH_SCOPE } from "@/constants/auth";
 import { usePostAuthOauth } from "@/hooks/queries/auth/auth.bff.hook";
 
 interface GoogleTokenClient {
@@ -30,33 +26,16 @@ declare global {
   }
 }
 
-export const useGoogleLogin = () => {
+export const useGoogleLogin = (isScriptReady: boolean) => {
   const router = useRouter();
   const tokenClientRef = useRef<GoogleTokenClient | null>(null);
-  const [isScriptLoaded, setIsScriptLoaded] = useState(
-    () =>
-      typeof document !== "undefined" &&
-      Boolean(
-        document.querySelector(`script[src="${GOOGLE_OAUTH_SCRIPT_SRC}"]`),
-      ),
-  );
 
   const { mutate, isPending, isSuccess } = usePostAuthOauth({
     mutation: { onSuccess: () => router.replace("/dashboard") },
   });
 
   useEffect(() => {
-    if (isScriptLoaded) return;
-
-    const script = document.createElement("script");
-    script.src = GOOGLE_OAUTH_SCRIPT_SRC;
-    script.async = true;
-    script.onload = () => setIsScriptLoaded(true);
-    document.head.appendChild(script);
-  }, [isScriptLoaded]);
-
-  useEffect(() => {
-    if (!isScriptLoaded || !window.google || !GOOGLE_CLIENT_ID) return;
+    if (!isScriptReady || !window.google || !GOOGLE_CLIENT_ID) return;
 
     tokenClientRef.current = window.google.accounts.oauth2.initTokenClient({
       client_id: GOOGLE_CLIENT_ID,
@@ -69,7 +48,7 @@ export const useGoogleLogin = () => {
         });
       },
     });
-  }, [isScriptLoaded, mutate]);
+  }, [isScriptReady, mutate]);
 
   const loginWithGoogle = () => {
     tokenClientRef.current?.requestAccessToken();
