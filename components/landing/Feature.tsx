@@ -21,9 +21,9 @@ const FEATURES = [
 
 export function Feature() {
   return (
-    <section className="flex w-full justify-center bg-orange-500 px-15 py-13 md:px-20 md:py-20.25 lg:px-10 lg:py-39.25">
+    <section className="flex w-full justify-center bg-orange-500 py-13 md:py-20.25 lg:py-39.25">
       <div className="flex w-full max-w-[1300px] flex-col items-center gap-11.5 md:gap-13.5 lg:flex-row lg:items-start lg:justify-between">
-        <div className="flex flex-col gap-11 self-start text-left lg:w-118.5 lg:shrink-0">
+        <div className="flex flex-col gap-11 self-start px-6 text-left md:px-20 lg:w-118.5 lg:shrink-0 lg:px-10">
           <m.div
             className="flex flex-col gap-1 md:gap-3 lg:gap-4.5"
             initial="hidden"
