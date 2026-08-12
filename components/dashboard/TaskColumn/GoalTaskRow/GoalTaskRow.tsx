@@ -32,10 +32,6 @@ const taskTitleVariant = cva(
 export default function GoalTaskRow({ todo }: GoalTaskRowProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-  };
-
   return (
     <li
       className={cn(
@@ -56,7 +52,7 @@ export default function GoalTaskRow({ todo }: GoalTaskRowProps) {
         <TaskModal
           todo={todo}
           isOpen={isOpen}
-          onOpenChange={handleOpenChange}
+          onOpenChange={(open) => setIsOpen(open)}
         />
       )}
       <TaskIcons todo={todo} recentTodo={false} />

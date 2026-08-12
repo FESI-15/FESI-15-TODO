@@ -25,10 +25,6 @@ interface CalendarEventChipProps {
 export default function CalendarEventChip({ todo }: CalendarEventChipProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-  };
-
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <button
@@ -43,7 +39,7 @@ export default function CalendarEventChip({ todo }: CalendarEventChipProps) {
         <TaskModal
           todo={todo}
           isOpen={isOpen}
-          onOpenChange={handleOpenChange}
+          onOpenChange={(open) => setIsOpen(open)}
         ></TaskModal>
       )}
     </div>

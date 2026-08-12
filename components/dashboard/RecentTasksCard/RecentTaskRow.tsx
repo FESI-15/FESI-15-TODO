@@ -19,10 +19,6 @@ interface RecentTaskRowProps {
 export default function RecentTaskRow({ todo }: RecentTaskRowProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-  };
-
   return (
     <li className="flex min-w-0 items-center justify-between gap-4 px-1 py-1.5 lg:py-2.5">
       <div className="flex min-w-0 flex-1 items-center gap-2">
@@ -38,7 +34,7 @@ export default function RecentTaskRow({ todo }: RecentTaskRowProps) {
           <TaskModal
             todo={todo}
             isOpen={isOpen}
-            onOpenChange={handleOpenChange}
+            onOpenChange={(open) => setIsOpen(open)}
           />
         )}
       </div>

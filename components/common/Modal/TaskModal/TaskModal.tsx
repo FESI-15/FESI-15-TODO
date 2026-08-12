@@ -35,9 +35,11 @@ export default function TaskModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogTrigger onMouseEnter={onTriggerMouseEnter}>
-        {children}
-      </DialogTrigger>
+      {children && (
+        <DialogTrigger onMouseEnter={onTriggerMouseEnter}>
+          {children}
+        </DialogTrigger>
+      )}
       <DialogContent showCloseButton={false}>
         {todo ? (
           <>
