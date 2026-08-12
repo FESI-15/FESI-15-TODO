@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import GoogleIcon from "@/public/icons/common/google.svg";
-import KakaoIcon from "@/public/icons/common/kakao.svg";
 
 const socialButtonVariants = cva(
   "flex items-center justify-center w-14 h-14 p-3 rounded-full",
@@ -9,7 +8,6 @@ const socialButtonVariants = cva(
     variants: {
       provider: {
         google: "bg-white border border-[#DDDDDD]",
-        kakao: "bg-[#FFEE01]",
       },
     },
   },
@@ -19,7 +17,7 @@ interface SocialButtonProps
   extends
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof socialButtonVariants> {
-  provider: "google" | "kakao";
+  provider: "google";
 }
 
 export function SocialButton({
@@ -34,7 +32,6 @@ export function SocialButton({
       {...props}
     >
       {provider === "google" && <GoogleIcon className="w-6 h-6" />}
-      {provider === "kakao" && <KakaoIcon className="w-6 h-6" />}
     </button>
   );
 }

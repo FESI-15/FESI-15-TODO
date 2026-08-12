@@ -35,6 +35,7 @@ export function LoginForm() {
 
   const {
     loginWithGoogle,
+    prepareGoogleLogin,
     isPending: isGooglePending,
     isSuccess: isLoggedIn,
   } = useGoogleLogin();
@@ -78,6 +79,7 @@ export function LoginForm() {
         <SocialLoginSection
           label="SNS 계정으로 로그인"
           onClickGoogle={loginWithGoogle}
+          onPrepareGoogle={prepareGoogleLogin}
           isGooglePending={isGooglePending}
         />
       </div>

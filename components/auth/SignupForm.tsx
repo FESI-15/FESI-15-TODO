@@ -37,7 +37,11 @@ export function SignupForm() {
     },
   });
 
-  const { loginWithGoogle, isPending: isGooglePending } = useGoogleLogin();
+  const {
+    loginWithGoogle,
+    prepareGoogleLogin,
+    isPending: isGooglePending,
+  } = useGoogleLogin();
 
   const onSubmit = (data: SignupFormValues) => {
     mutate({
@@ -78,6 +82,7 @@ export function SignupForm() {
         <SocialLoginSection
           label="SNS 계정으로 회원가입"
           onClickGoogle={loginWithGoogle}
+          onPrepareGoogle={prepareGoogleLogin}
           isGooglePending={isGooglePending}
         />
       </div>
