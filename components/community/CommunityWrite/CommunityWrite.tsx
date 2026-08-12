@@ -32,7 +32,7 @@ export function CommunityWrite() {
         data: {
           title: data.title,
           content: data.content,
-          image: data.image,
+          image: data.image ?? undefined,
         },
       },
       {

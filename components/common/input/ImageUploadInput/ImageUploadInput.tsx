@@ -73,11 +73,20 @@ export function ImageUploadInput<T extends FieldValues>({
       file: selectedFile,
       onFileChange: handleFileChange,
     });
+
+  const handlePreviewImageRemove = () => {
+    handleRemove();
+    field.onChange(null);
+  };
+
   const imagePreviewUrl = previewUrl ?? fieldPreviewUrl ?? "";
 
   return (
     <Field data-invalid={fieldState.invalid}>
-      <PreviewImage previewUrl={imagePreviewUrl} handleRemove={handleRemove} />
+      <PreviewImage
+        previewUrl={imagePreviewUrl}
+        handleRemove={handlePreviewImageRemove}
+      />
       {!imagePreviewUrl && (
         <>
           <div
