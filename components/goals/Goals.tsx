@@ -9,6 +9,7 @@ import { getGoalProgress } from "@/utils/getGoalProgress";
 import useHeaderStore from "@/store/useHeaderStore";
 import { useEffect } from "react";
 import { TODOS_LIMIT } from "@/constants/pagination";
+import { m } from "framer-motion";
 
 export default function Goals({ goalId }: { goalId: number }) {
   const { data: userMe } = useGetUserMe();
@@ -23,7 +24,12 @@ export default function Goals({ goalId }: { goalId: number }) {
   }, [userMe?.data.name, setTitle]);
 
   return (
-    <div className="mx-auto w-full max-w-[1312px] p-4 pt-8 md:pt-12 lg:pt-20">
+    <m.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="mx-auto w-full max-w-[1312px] p-4 pt-8 md:pt-12 lg:pt-20"
+    >
       <h2 className="mb-5 hidden px-2 text-xl font-semibold text-black dark:text-foreground lg:block lg:text-2xl">
         {userMe?.data.name}님의 목표
       </h2>
@@ -32,6 +38,6 @@ export default function Goals({ goalId }: { goalId: number }) {
         <GoalProgress progress={progress} />
       </div>
       <GoalTodoList goalId={goalId} todos={todos} />
-    </div>
+    </m.div>
   );
 }

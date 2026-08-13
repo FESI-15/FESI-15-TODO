@@ -30,7 +30,7 @@ const toastVariants = cva(
       type: {
         default: "bg-popover text-popover-foreground",
         success:
-          "bg-[#FFF8E4] text-[#EF6C00] text-sm font-semibold shadow-[0_8px_24px_-4px_rgba(239,108,0,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(239,108,0,0.35)]",
+          "bg-[#4AA155] text-[#ffffff] text-sm font-semibold shadow-[0_8px_24px_-4px_rgba(74,161,85,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(74,161,85,0.35)]",
         error:
           "bg-[#FEF3F2] text-[#B42318] text-sm font-semibold shadow-[0_8px_24px_-4px_rgba(180,35,24,0.25)] hover:shadow-[0_12px_28px_-4px_rgba(180,35,24,0.35)]",
         info: "bg-popover text-popover-foreground",
@@ -142,7 +142,7 @@ function ToastClose({
       aria-label="Close toast"
       render={render}
       className={cn(
-        "relative shrink-0 text-muted-foreground after:absolute after:-inset-2 hover:text-foreground",
+        "relative shrink-0 text-white after:absolute after:-inset-2 hover:text-white",
         className,
       )}
       {...props}
