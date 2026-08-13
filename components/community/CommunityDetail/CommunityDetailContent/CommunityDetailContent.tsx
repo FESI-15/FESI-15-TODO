@@ -22,8 +22,8 @@ export function CommunityDetailContent({ post }: CommunityDetailContentProps) {
             alt="community-image"
             width={150}
             height={150}
-            fetchPriority="high"
-            loading="eager"
+            fetchPriority="low"
+            loading="lazy"
           />
         </div>
       )}

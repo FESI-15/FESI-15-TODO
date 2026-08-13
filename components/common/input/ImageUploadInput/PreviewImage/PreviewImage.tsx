@@ -20,8 +20,8 @@ export default function PreviewImage({
           src={previewUrl}
           alt="첨부 이미지 미리보기"
           className="h-full w-full object-cover"
-          fetchPriority="high"
-          loading="eager"
+          fetchPriority="low"
+          loading="lazy"
         />
         <button
           type="button"

@@ -35,8 +35,8 @@ export function CommunityCard({ post }: CommunityCardProps) {
             alt={post.title}
             width={72}
             height={72}
-            fetchPriority="high"
-            loading="eager"
+            fetchPriority="low"
+            loading="lazy"
           />
         )}
       </Link>

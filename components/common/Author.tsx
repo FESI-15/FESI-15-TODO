@@ -47,8 +47,8 @@ export function Author({ image, name, size = "md" }: AuthorProps) {
           alt={name}
           width={20}
           height={20}
-          fetchPriority="high"
-          loading="eager"
+          fetchPriority="low"
+          loading="lazy"
         />
       </div>
       <p className={AuthorNameVariant({ size })}>{name}</p>
