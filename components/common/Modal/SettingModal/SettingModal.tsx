@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import {
   Dialog,
@@ -11,9 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import LanguageSelect from "./LanguageSelect/LanguageSelect";
 import { Button } from "../../Button";
-import { DEFAULT_LANGUAGE, type LanguageCode } from "@/constants/setting";
 
 const DarkModeToggleButtonContainer = dynamic(
   () => import("./DarkModeToggleButton/DarkModeToggleButtonContainer"),
@@ -29,8 +26,6 @@ export default function SettingModal({
   trigger,
   onConfirm,
 }: SettingModalProps) {
-  const [language, setLanguage] = useState<LanguageCode>(DEFAULT_LANGUAGE);
-
   return (
     <Dialog>
       <DialogTrigger render={trigger} />
@@ -38,7 +33,6 @@ export default function SettingModal({
         <DialogHeader>
           <DialogTitle showCloseButton={true}>설정</DialogTitle>
         </DialogHeader>
-        <LanguageSelect value={language} onChange={setLanguage} />
         <DarkModeToggleButtonContainer />
         <DialogFooter>
           <div className="flex gap-2 w-full mt-10">

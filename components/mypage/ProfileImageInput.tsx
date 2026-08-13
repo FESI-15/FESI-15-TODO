@@ -74,6 +74,7 @@ export function ProfileImageInput<T extends FieldValues>({
           height={132}
           unoptimized={displayUrl.startsWith("blob:")}
           className="size-full object-cover"
+          preload
         />
       </div>
       <button

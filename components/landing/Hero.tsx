@@ -54,7 +54,7 @@ export function Hero() {
           alt="슬리드투두 대시보드 미리보기"
           width={1317}
           height={641}
-          priority
+          preload
           fetchPriority="high"
           placeholder="blur"
           sizes="(min-width: 1024px) 1317px, 100vw"
