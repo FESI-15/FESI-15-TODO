@@ -119,8 +119,10 @@ apiClient.interceptors.response.use(
       };
       return apiClient(originalRequest);
     } catch (refreshError) {
-      cookieStore.delete(ACCESS_TOKEN_COOKIE_NAME);
-      cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
+      try {
+        cookieStore.delete(ACCESS_TOKEN_COOKIE_NAME);
+        cookieStore.delete(REFRESH_TOKEN_COOKIE_NAME);
+      } catch {}
       return Promise.reject(refreshError);
     }
   },
