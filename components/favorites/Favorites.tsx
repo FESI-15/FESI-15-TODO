@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetTodoFavorites } from "@/hooks/queries/favorites/favorites.bff.hook";
 import TodoList from "@/components/todos/TodoList/TodoList";
 import GoalFilter from "@/components/common/GoalFilter";
 import FavoritesTab, { FavoritesTabValue } from "./FavoritesTab";
 import useHeaderStore from "@/store/useHeaderStore";
-
-const FAVORITES_LIMIT = 30;
+import { FAVORITES_LIMIT } from "@/constants/pagination";
 
 export default function Favorites() {
   const [tab, setTab] = useState<FavoritesTabValue>("all");
@@ -16,15 +15,13 @@ export default function Favorites() {
   const { data } = useGetTodoFavorites({ limit: FAVORITES_LIMIT });
   const setTitle = useHeaderStore((s) => s.setTitle);
 
-  const filteredTodos = useMemo(() => {
-    return (data?.data.favorites ?? [])
-      .filter(
-        ({ todo }) =>
-          (tab === "all" || todo.done === (tab === "done")) &&
-          (!goalId || todo.goal?.id === goalId),
-      )
-      .map((favorite) => favorite.todo);
-  }, [data, tab, goalId]);
+  const filteredTodos = (data?.data.favorites ?? [])
+    .filter(
+      ({ todo }) =>
+        (tab === "all" || todo.done === (tab === "done")) &&
+        (!goalId || todo.goal?.id === goalId),
+    )
+    .map((favorite) => favorite.todo);
 
   useEffect(() => {
     setTitle(
