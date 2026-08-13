@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
+import { TODOS_LIMIT } from "@/constants/pagination";
 import CalendarHeader from "./CalendarHeader";
 import CalendarNav from "./CalendarNav";
 import CalendarGrid from "./CalendarGrid/CalendarGrid";
@@ -19,7 +20,7 @@ export default function Calendar() {
     from: format(start, "yyyy-MM-dd"),
     to: format(end, "yyyy-MM-dd"),
     goalId,
-    limit: 100,
+    limit: TODOS_LIMIT,
   });
 
   const todos = todosData?.data.todos ?? [];
