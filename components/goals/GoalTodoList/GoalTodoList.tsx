@@ -1,7 +1,7 @@
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import AddGoalTodoButton from "../AddGoalTodoButton/AddGoalTodoButton";
 import GoalTodoColumn from "../GoalTodoColumn/GoalTodoColumn";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 interface GoalTodoListProps {
   goalId: number;

@@ -46,7 +46,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
             </p>
           </div>
         ) : (
-          <ul className="flex flex-col justify-between h-full">
+          <ul className="flex flex-col gap-2 h-full">
             {todos.slice(0, 4).map((todo) => (
               <RecentTaskRow key={todo.id} todo={todo} />
             ))}
