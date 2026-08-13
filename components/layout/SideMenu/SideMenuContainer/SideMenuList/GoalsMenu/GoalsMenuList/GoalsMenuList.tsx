@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 import { GetTeamIdGoals200GoalsItem } from "@/apis/model";
 
 export default function GoalsMenuList({
