@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import { DayPicker, type DayProps } from "react-day-picker";
 import { ko } from "date-fns/locale";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
@@ -24,15 +23,12 @@ export default function CalendarGrid({
   onSelectedDateChange,
   todosByDate,
 }: CalendarGridProps) {
-  const Day = useCallback(
-    (props: DayProps) => (
-      <CalendarMonthDay
-        {...props}
-        todosByDate={todosByDate}
-        onSelectedDateChange={onSelectedDateChange}
-      />
-    ),
-    [todosByDate, onSelectedDateChange],
+  const Day = (props: DayProps) => (
+    <CalendarMonthDay
+      {...props}
+      todosByDate={todosByDate}
+      onSelectedDateChange={onSelectedDateChange}
+    />
   );
 
   return (

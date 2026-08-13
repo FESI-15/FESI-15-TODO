@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { format } from "date-fns";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { TODOS_LIMIT } from "@/constants/pagination";
@@ -24,7 +24,7 @@ export default function Calendar() {
   });
 
   const todos = todosData?.data.todos;
-  const todosByDate = useMemo(() => groupTodosByDate(todos ?? []), [todos]);
+  const todosByDate = groupTodosByDate(todos ?? []);
   const selectedDateTodos =
     todosByDate[format(selectedDate, "yyyy-MM-dd")] ?? [];
 
