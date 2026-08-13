@@ -1,6 +1,7 @@
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import AddGoalTodoButton from "../AddGoalTodoButton/AddGoalTodoButton";
 import GoalTodoColumn from "../GoalTodoColumn/GoalTodoColumn";
+import { m } from "framer-motion";
 
 interface GoalTodoListProps {
   goalId: number;
@@ -13,7 +14,12 @@ export default function GoalTodoList({ goalId, todos }: GoalTodoListProps) {
 
   return (
     <div className="mt-12 flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:gap-8">
-      <div className="min-w-0">
+      <m.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="min-w-0"
+      >
         <div className="mb-3 flex h-10 items-center justify-between px-2">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-foreground">
             TO DO
@@ -27,15 +33,20 @@ export default function GoalTodoList({ goalId, todos }: GoalTodoListProps) {
           todos={todoItems}
           showMobileTitle={false}
         />
-      </div>
-      <div className="min-w-0">
+      </m.div>
+      <m.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="min-w-0"
+      >
         <div className="mb-3 hidden h-10 items-center px-2 lg:flex">
           <h3 className="text-lg font-semibold text-gray-800 dark:text-foreground">
             DONE
           </h3>
         </div>
         <GoalTodoColumn title="DONE" todos={doneItems} />
-      </div>
+      </m.div>
     </div>
   );
 }
