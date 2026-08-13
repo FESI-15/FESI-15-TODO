@@ -1,12 +1,14 @@
 import SectionTitle from "@/components/dashboard/SectionTitle/SectionTitle";
 import Graph from "@/components/common/Graph";
 import Image from "next/image";
+import useCountAnimation from "@/hooks/useCountAnimation";
 
 interface ProgressCardProps {
   title: string;
   progress: number;
 }
 export default function ProgressCard({ title, progress }: ProgressCardProps) {
+  const { count } = useCountAnimation(progress);
   return (
     <section className="flex min-w-0 flex-1 flex-col gap-2.5">
       <SectionTitle
@@ -34,7 +36,7 @@ export default function ProgressCard({ title, progress }: ProgressCardProps) {
             </p>
             <div className="mt-1 lg:mt-3 flex items-end gap-1">
               <strong className="text-[48px] lg:text-[80px] leading-[52px] lg:leading-[74px]">
-                {progress}
+                {count}
               </strong>
               <span className="text-xl lg:text-3xl font-medium leading-6 lg:leading-9">
                 %
@@ -48,8 +50,8 @@ export default function ProgressCard({ title, progress }: ProgressCardProps) {
           alt="progress"
           width={222}
           height={215}
-          priority
-          fetchPriority="high"
+          fetchPriority="low"
+          loading="lazy"
         />
       </div>
     </section>

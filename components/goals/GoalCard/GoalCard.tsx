@@ -48,6 +48,8 @@ export default function GoalCard({ goalId }: { goalId: number }) {
           alt="goal"
           width={32}
           height={32}
+          fetchPriority="low"
+          loading="lazy"
         />
         <div className="truncate font-semibold text-gray-700 dark:text-foreground lg:text-2xl">
           {goal?.data.title}

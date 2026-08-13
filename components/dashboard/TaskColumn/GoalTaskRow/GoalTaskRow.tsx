@@ -22,7 +22,7 @@ const taskTitleVariant = cva(
   {
     variants: {
       done: {
-        true: "text-gray-500 dark:text-muted-foreground",
+        true: "text-gray-500 line-through dark:text-muted-foreground",
         false: "text-gray-800 dark:text-foreground",
       },
     },

@@ -30,6 +30,8 @@ export default function DarkModeToggleButton({
             alt="sun"
             width={24}
             height={24}
+            fetchPriority="low"
+            loading="lazy"
           />
         </button>
         <button className="py-2 flex-1 z-10" onClick={() => onToggle(true)}>
@@ -39,6 +41,8 @@ export default function DarkModeToggleButton({
             alt="moon"
             width={24}
             height={24}
+            fetchPriority="low"
+            loading="lazy"
           />
         </button>
       </div>
