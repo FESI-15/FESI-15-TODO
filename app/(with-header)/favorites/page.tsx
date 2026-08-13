@@ -1,4 +1,5 @@
 import { getTodoFavoritesQueryOptionsServer } from "@/hooks/queries/favorites/favorites.server";
+import { getGoalsQueryOptionsServer } from "@/hooks/queries/goals/goals.server";
 import {
   dehydrate,
   HydrationBoundary,
@@ -11,9 +12,12 @@ export default async function FavoritesPage() {
   const queryClient = new QueryClient();
 
   try {
-    await queryClient.fetchQuery(
-      getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
-    );
+    await Promise.all([
+      queryClient.fetchQuery(
+        getTodoFavoritesQueryOptionsServer({ limit: FAVORITES_LIMIT }),
+      ),
+      queryClient.fetchQuery(getGoalsQueryOptionsServer()),
+    ]);
   } catch (error) {
     throw error;
   }
