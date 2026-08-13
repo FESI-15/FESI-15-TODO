@@ -5,8 +5,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Favorites from "@/components/favorites/Favorites";
-
-const FAVORITES_LIMIT = 100;
+import { FAVORITES_LIMIT } from "@/constants/pagination";
 
 export default async function FavoritesPage() {
   const queryClient = new QueryClient();
