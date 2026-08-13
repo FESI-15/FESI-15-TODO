@@ -23,8 +23,8 @@ export default function Calendar() {
     limit: TODOS_LIMIT,
   });
 
-  const todos = todosData?.data.todos;
-  const todosByDate = groupTodosByDate(todos ?? []);
+  const todos = todosData?.data.todos ?? [];
+  const todosByDate = groupTodosByDate(todos);
   const selectedDateTodos =
     todosByDate[format(selectedDate, "yyyy-MM-dd")] ?? [];
 
@@ -45,7 +45,7 @@ export default function Calendar() {
               onMonthChange={setMonth}
               selectedDate={selectedDate}
               onSelectedDateChange={setSelectedDate}
-              todosByDate={todosByDate}
+              todos={todos}
             />
           </div>
           <CalendarSelectedDatePanel

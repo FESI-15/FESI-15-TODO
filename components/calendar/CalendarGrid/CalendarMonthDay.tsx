@@ -1,5 +1,6 @@
 "use client";
 
+import { isSameDay } from "date-fns";
 import type { DayProps } from "react-day-picker";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import { cn } from "@/utils/cn";
@@ -11,15 +12,16 @@ const MAX_VISIBLE_TODOS = 3;
 
 interface CalendarMonthDayProps extends DayProps {
   todosByDate: Record<string, GetTeamIdTodos200TodosItem[]>;
+  selectedDate: Date;
   onSelectedDateChange: (date: Date) => void;
 }
 
 export default function CalendarMonthDay({
   day,
-  modifiers,
   className,
   children,
   todosByDate,
+  selectedDate,
   onSelectedDateChange,
   ...tdProps
 }: CalendarMonthDayProps) {
@@ -32,7 +34,7 @@ export default function CalendarMonthDay({
       onClick={() => onSelectedDateChange(day.date)}
       className={cn(
         "h-24 min-w-0 flex-1 cursor-pointer border border-gray-100 dark:border-border align-top lg:h-full",
-        modifiers.selected && "bg-orange-alpha-20",
+        isSameDay(day.date, selectedDate) && "bg-orange-alpha-20",
         className,
       )}
       {...tdProps}

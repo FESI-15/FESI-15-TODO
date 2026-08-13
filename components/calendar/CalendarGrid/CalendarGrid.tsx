@@ -1,9 +1,12 @@
 "use client";
 
-import { DayPicker, type DayProps } from "react-day-picker";
+import { DayPicker } from "react-day-picker";
 import { ko } from "date-fns/locale";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
-import { CALENDAR_WEEK_STARTS_ON } from "../calendarGrid.utils";
+import {
+  CALENDAR_WEEK_STARTS_ON,
+  groupTodosByDate,
+} from "../calendarGrid.utils";
 import CalendarMonthDay from "./CalendarMonthDay";
 import CalendarMonthDayButton from "./CalendarMonthDayButton";
 import CalendarChevron from "./CalendarChevron";
@@ -13,7 +16,7 @@ interface CalendarGridProps {
   onMonthChange: (month: Date) => void;
   selectedDate: Date;
   onSelectedDateChange: (date: Date) => void;
-  todosByDate: Record<string, GetTeamIdTodos200TodosItem[]>;
+  todos: GetTeamIdTodos200TodosItem[];
 }
 
 export default function CalendarGrid({
@@ -21,24 +24,15 @@ export default function CalendarGrid({
   onMonthChange,
   selectedDate,
   onSelectedDateChange,
-  todosByDate,
+  todos,
 }: CalendarGridProps) {
-  const Day = (props: DayProps) => (
-    <CalendarMonthDay
-      {...props}
-      todosByDate={todosByDate}
-      onSelectedDateChange={onSelectedDateChange}
-    />
-  );
+  const todosByDate = groupTodosByDate(todos);
 
   return (
     <DayPicker
-      mode="single"
-      required
-      selected={selectedDate}
-      onSelect={onSelectedDateChange}
       month={month}
       onMonthChange={onMonthChange}
+      onDayClick={(date) => onSelectedDateChange(date)}
       showOutsideDays
       weekStartsOn={CALENDAR_WEEK_STARTS_ON}
       locale={ko}
@@ -56,7 +50,14 @@ export default function CalendarGrid({
         nav: "hidden",
       }}
       components={{
-        Day,
+        Day: (props) => (
+          <CalendarMonthDay
+            {...props}
+            todosByDate={todosByDate}
+            selectedDate={selectedDate}
+            onSelectedDateChange={onSelectedDateChange}
+          />
+        ),
         DayButton: CalendarMonthDayButton,
         Chevron: CalendarChevron,
       }}
