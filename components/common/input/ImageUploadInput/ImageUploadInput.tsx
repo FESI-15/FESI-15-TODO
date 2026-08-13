@@ -41,7 +41,7 @@ export function ImageUploadInput<T extends FieldValues>({
     setSelectedFile(file);
 
     if (!file) {
-      field.onChange(undefined);
+      field.onChange(null);
       return;
     }
 
@@ -73,6 +73,7 @@ export function ImageUploadInput<T extends FieldValues>({
       file: selectedFile,
       onFileChange: handleFileChange,
     });
+
   const imagePreviewUrl = previewUrl ?? fieldPreviewUrl ?? "";
 
   return (

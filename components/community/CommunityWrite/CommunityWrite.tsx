@@ -21,7 +21,7 @@ export function CommunityWrite() {
       defaultValues: {
         title: "",
         content: "",
-        image: undefined,
+        image: null,
       },
       resolver: zodResolver(WRITE_FORM_SCHEMA),
     });
@@ -32,7 +32,7 @@ export function CommunityWrite() {
         data: {
           title: data.title,
           content: data.content,
-          image: data.image,
+          image: data.image ?? undefined,
         },
       },
       {

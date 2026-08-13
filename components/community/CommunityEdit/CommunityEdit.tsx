@@ -30,7 +30,7 @@ export function CommunityEdit({ id }: CommunityEditProps) {
       defaultValues: {
         title: postData?.data.title || "",
         content: postData?.data.content || "",
-        image: postData?.data.image || undefined,
+        image: postData?.data.image || null,
       },
       resolver: zodResolver(WRITE_FORM_SCHEMA),
     });

@@ -16,6 +16,8 @@ export function CommunityList({ posts }: CommunityListProps) {
           alt="no-data"
           width={80}
           height={85}
+          fetchPriority="high"
+          loading="eager"
         />
         <p className="text-gray-500 dark:text-muted-foreground text-sm font-medium md:text-base">
           아직 등록된 게시물이 없어요.

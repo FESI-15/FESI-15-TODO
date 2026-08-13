@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { imagePreviewClassName } from "../../Input.variants";
 import CloseIcon from "@/public/icons/input/img-delete.svg";
 
@@ -13,11 +14,14 @@ export default function PreviewImage({
   return (
     <div className="w-fit">
       <div className={imagePreviewClassName}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
+          width={160}
+          height={101}
           src={previewUrl}
           alt="첨부 이미지 미리보기"
           className="h-full w-full object-cover"
+          fetchPriority="high"
+          loading="eager"
         />
         <button
           type="button"
