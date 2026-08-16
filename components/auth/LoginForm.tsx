@@ -29,7 +29,12 @@ export function LoginForm() {
 
   const { mutate, isPending, isSuccess } = usePostAuthLogin({
     mutation: {
-      onSuccess: () => router.replace("/dashboard"),
+      onSuccess: () => {
+        if (!localStorage.getItem("isFirstLoggedIn")) {
+          localStorage.setItem("isFirstLoggedIn", "true");
+        }
+        router.replace("/dashboard");
+      },
       onError: () =>
         setError("password", {
           message: "이메일 또는 비밀번호가 올바르지 않습니다",
