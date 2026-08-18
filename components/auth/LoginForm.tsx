@@ -6,6 +6,8 @@ import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { m } from "motion/react";
+import { Loader2Icon } from "lucide-react";
 
 import { AuthLogo } from "@/components/auth/AuthLogo";
 import { Button } from "@/components/common/Button";
@@ -35,10 +37,11 @@ export function LoginForm() {
         }
         router.replace("/dashboard");
       },
-      onError: () =>
+      onError: () => {
         setError("password", {
           message: "이메일 또는 비밀번호가 올바르지 않습니다",
-        }),
+        });
+      },
     },
   });
 
@@ -59,7 +62,12 @@ export function LoginForm() {
         strategy="lazyOnload"
         onReady={() => setIsGoogleScriptReady(true)}
       />
-      <div className="flex w-full max-w-100 flex-col gap-8 md:gap-10">
+      <m.div
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
+        className="flex w-full max-w-100 flex-col gap-8 md:gap-10"
+      >
         <div className="flex flex-col gap-4 md:gap-6">
           <div className="flex flex-col gap-10">
             <AuthLogo />
@@ -75,6 +83,9 @@ export function LoginForm() {
                   isPending || isSuccess || isGooglePending || isLoggedIn
                 }
               >
+                {isPending && (
+                  <Loader2Icon className="mr-2 animate-spin" size={18} />
+                )}
                 로그인하기
               </Button>
             </form>
@@ -89,12 +100,18 @@ export function LoginForm() {
           </p>
         </div>
 
-        <SocialLoginSection
-          label="SNS 계정으로 로그인"
-          onClickGoogle={loginWithGoogle}
-          isGooglePending={isGooglePending}
-        />
-      </div>
+        <m.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1, ease: "easeOut" }}
+        >
+          <SocialLoginSection
+            label="SNS 계정으로 로그인"
+            onClickGoogle={loginWithGoogle}
+            isGooglePending={isGooglePending}
+          />
+        </m.div>
+      </m.div>
     </div>
   );
 }
