@@ -10,9 +10,13 @@ import CalendarGrid from "./CalendarGrid/CalendarGrid";
 import CalendarSelectedDatePanel from "./CalendarSelectedDatePanel";
 import { getCalendarGridRange, groupTodosByDate } from "./calendarGrid.utils";
 
-export default function Calendar() {
-  const [month, setMonth] = useState(() => new Date());
-  const [selectedDate, setSelectedDate] = useState(() => new Date());
+interface CalendarProps {
+  initialDate: Date;
+}
+
+export default function Calendar({ initialDate }: CalendarProps) {
+  const [month, setMonth] = useState(initialDate);
+  const [selectedDate, setSelectedDate] = useState(initialDate);
   const [goalId, setGoalId] = useState<number | undefined>(undefined);
 
   const { start, end } = getCalendarGridRange(month);
