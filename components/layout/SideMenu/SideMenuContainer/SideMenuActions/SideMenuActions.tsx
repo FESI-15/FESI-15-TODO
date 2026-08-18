@@ -28,12 +28,11 @@ export default function SideMenuActions() {
       <button
         type="button"
         onClick={() => setGoalModalOpen(true)}
-        className="flex w-full lg:w-[120px] lg:aspect-square items-center justify-center gap-1 text-white py-3 flex-1 bg-orange-500 rounded-full lg:aspect-square lg:rounded-4xl lg:flex-col hover:bg-orange-600"
+        className="flex w-full lg:w-[140px] items-center justify-center gap-1 text-white py-3 flex-1 bg-orange-500 rounded-full hover:bg-orange-600"
       >
         <Image
           src="/icons/sidemenu/new_goals.svg"
           alt="new_goals"
-          className="lg:w-10 lg:h-10"
           width={24}
           height={24}
         />
@@ -42,9 +41,9 @@ export default function SideMenuActions() {
       <button
         type="button"
         onClick={() => setTodoModalOpen(true)}
-        className="flex items-center w-full lg:w-[120px] lg:aspect-square justify-center gap-1 text-orange-500 dark:text-foreground py-3 flex-1 bg-white dark:bg-card border border-orange-300 dark:border-border rounded-full lg:aspect-square lg:rounded-4xl lg:flex-col hover:bg-gray-50 dark:hover:bg-accent hover:text-orange-600 hover:border-orange-500"
+        className="flex items-center w-full lg:w-[140px] justify-center gap-1 text-orange-500 dark:text-foreground py-3 flex-1 bg-white dark:bg-card border border-orange-300 dark:border-border rounded-full hover:bg-gray-50 dark:hover:bg-accent hover:text-orange-600 hover:border-orange-500"
       >
-        <NewTodo className="lg:w-10 lg:h-10 w-6 h-6" />
+        <NewTodo className="w-6 h-6" />
         <span className="font-semibold md:text-lg">새 할일</span>
       </button>
       {goalModalOpen && (

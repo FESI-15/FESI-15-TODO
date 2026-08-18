@@ -14,7 +14,7 @@ export default function SideMenuContainer({
   return (
     <div className="flex flex-col lg:justify-between flex-1">
       <div>
-        <div className="flex items-center gap-4 pl-2 mb-10">
+        <div className="flex items-center gap-4 pl-2 mb-6">
           <Image
             src="/icons/sidemenu/symbol.svg"
             alt="symbol"

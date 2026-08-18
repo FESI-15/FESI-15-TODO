@@ -112,7 +112,6 @@ export default function FirstVisitModal({
                 key={index}
               >
                 <div
-                  key={index}
                   className={bgColorVariants({
                     bgColor: step.bgColor as "#FFE5B7" | "#C7F2EB" | "#EEF4FC",
                   })}
