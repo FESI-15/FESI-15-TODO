@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 import useHeaderStore from "@/store/useHeaderStore";
-
+import { m } from "motion/react";
 interface WriteHeaderProps {
   isValid: boolean;
   isEdit?: boolean;
@@ -21,7 +21,12 @@ export function WriteHeader({ isValid, isEdit = false }: WriteHeaderProps) {
   };
 
   return (
-    <div className="flex justify-end lg:justify-between items-center mb-3">
+    <m.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex justify-end lg:justify-between items-center mb-3"
+    >
       <h2 className="text-xl font-semibold hidden lg:block dark:text-foreground">
         {isEdit ? "게시물 수정하기" : "게시물 작성하기"}
       </h2>
@@ -48,6 +53,6 @@ export function WriteHeader({ isValid, isEdit = false }: WriteHeaderProps) {
           </Button>
         </div>
       </div>
-    </div>
+    </m.div>
   );
 }

@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useGetUserMe } from "@/hooks/queries/users/users.bff.hook";
 import { showSaveFailureToast } from "@/utils/toast";
-
+import { m } from "motion/react";
 interface CommunityEditProps {
   id: number;
 }
@@ -71,11 +71,16 @@ export function CommunityEdit({ id }: CommunityEditProps) {
           onSubmit={handleSubmit(onSubmit)}
         >
           <WriteHeader isValid={formState.isValid} isEdit />
-          <div className="p-4 bg-white dark:bg-card rounded-[24px] flex-1 flex flex-col">
+          <m.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="p-4 bg-white dark:bg-card rounded-[24px] flex-1 flex flex-col"
+          >
             <WriteTitleInput register={register} watch={watch} />
             <WriteEditor setValue={setValue} content={watch("content")} />
             <ImageUploadInput control={control} name="image" />
-          </div>
+          </m.div>
         </form>
       </div>
     </div>
