@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CommunityCard } from "../CommunityCard/CommunityCard";
 import { GetTeamIdPosts200PostsItem } from "@/apis/model";
+import { m } from "motion/react";
 
 interface CommunityListProps {
   posts: GetTeamIdPosts200PostsItem[];
@@ -26,8 +27,16 @@ export function CommunityList({ posts }: CommunityListProps) {
     );
   return (
     <ul>
-      {posts.map((post) => (
-        <CommunityCard key={post.id} post={post} />
+      {posts.map((post, index) => (
+        <li key={post.id}>
+          <m.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 + index * 0.1 }}
+          >
+            <CommunityCard post={post} />
+          </m.div>
+        </li>
       ))}
     </ul>
   );

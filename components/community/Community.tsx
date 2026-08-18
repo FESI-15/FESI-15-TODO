@@ -9,6 +9,7 @@ import { CreatePostButton } from "./CreatePostButton/CreatePostButton";
 import { useEffect, useRef } from "react";
 import { COMMUNITY_LIMIT } from "@/constants/CommunityLimit";
 import useHeaderStore from "@/store/useHeaderStore";
+import { m } from "motion/react";
 
 export function Community() {
   const searchParams = useSearchParams();
@@ -52,10 +53,23 @@ export function Community() {
   return (
     <div className="max-w-[1200px] w-full my-6 md:my-12 lg:my-20 mx-auto min-w-0">
       <div className="px-4 md:px-6">
-        <h2 className="hidden lg:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2 dark:text-foreground">
+        <m.h2
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="hidden lg:block text-xl font-semibold mb-9 lg:mb-10 lg:text-2xl lg:font-semibold ml-2 dark:text-foreground"
+        >
           소통 게시판
-        </h2>
-        <CommunityBestView />
+        </m.h2>
+        <div>
+          <m.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+          >
+            <CommunityBestView />
+          </m.div>
+        </div>
       </div>
       <div className="w-full px-4 md:px-6 flex flex-col flex-1">
         <CommunityHeader />
