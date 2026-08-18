@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { m, type Variants } from "motion/react";
 import { Button } from "@/components/common/Button";
 import { ProfileImageInput } from "./ProfileImageInput";
 import { MyPageEmailField } from "./MyPageEmailField";
@@ -17,6 +18,25 @@ import {
 } from "@/hooks/queries/users/users.bff.hook";
 import useHeaderStore from "@/store/useHeaderStore";
 import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
+
+const formContainerVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: "easeOut",
+      staggerChildren: 0.2,
+      delayChildren: 0.25,
+    },
+  },
+};
+
+const formItemVariants: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export function MyPageInfo() {
   const { data: userMe } = useGetUserMe();
@@ -101,30 +121,51 @@ export function MyPageInfo() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
-    >
-      <ProfileImageInput control={control} name="image" />
+    <>
+      <m.h1
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="px-1 mb-10 text-2xl font-semibold text-black dark:text-foreground hidden lg:block"
+      >
+        내 정보 관리
+      </m.h1>
+      <m.form
+        onSubmit={handleSubmit(onSubmit)}
+        variants={formContainerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
+      >
+        <ProfileImageInput control={control} name="image" />
 
-      <div className="flex w-full flex-col gap-10">
-        <div className="flex w-full flex-col gap-4">
-          <MyPageEmailField email={user?.email} />
-          <MyPageNameField
-            control={control}
-            isNameChanged={isNameChanged}
-            canCheck={canCheck}
-            isNameAvailable={isNameAvailable}
-            onCheck={() => setCheckedName(nameValue)}
-          />
+        <div className="flex w-full flex-col gap-10">
+          <div className="flex w-full flex-col gap-4">
+            <m.div variants={formItemVariants}>
+              <MyPageEmailField email={user?.email} />
+            </m.div>
+            <m.div variants={formItemVariants}>
+              <MyPageNameField
+                control={control}
+                isNameChanged={isNameChanged}
+                canCheck={canCheck}
+                isNameAvailable={isNameAvailable}
+                onCheck={() => setCheckedName(nameValue)}
+              />
+            </m.div>
+          </div>
+
+          <m.div variants={formItemVariants}>
+            <MyPagePasswordFields control={control} errors={errors} />
+          </m.div>
         </div>
 
-        <MyPagePasswordFields control={control} errors={errors} />
-      </div>
-
-      <Button type="submit" fullWidth>
-        저장하기
-      </Button>
-    </form>
+        <m.div variants={formItemVariants} className="w-full">
+          <Button type="submit" fullWidth>
+            저장하기
+          </Button>
+        </m.div>
+      </m.form>
+    </>
   );
 }
