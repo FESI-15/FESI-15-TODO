@@ -73,7 +73,6 @@ export default function Favorites() {
             filterSlot={
               <GoalFilter goalId={goalId} onGoalIdChange={setGoalId} />
             }
-            animated
           />
         </m.div>
       </m.div>

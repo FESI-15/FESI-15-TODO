@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { m, type Variants } from "motion/react";
+import { m } from "motion/react";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { TODOS_LIMIT } from "@/constants/pagination";
 import CalendarHeader from "./CalendarHeader";
@@ -10,16 +10,6 @@ import CalendarNav from "./CalendarNav";
 import CalendarGrid from "./CalendarGrid/CalendarGrid";
 import CalendarSelectedDatePanel from "./CalendarSelectedDatePanel";
 import { getCalendarGridRange, groupTodosByDate } from "./calendarGrid.utils";
-
-const calendarContainerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const calendarItemVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
 
 interface CalendarProps {
   initialDate: Date;
@@ -45,17 +35,18 @@ export default function Calendar({ initialDate }: CalendarProps) {
 
   return (
     <main className="min-w-0 flex-1 px-4 py-8 pb-30 md:px-6 md:py-12 md:pb-12 lg:py-20">
-      <m.div
-        className="mx-auto flex w-full flex-col gap-6 lg:max-w-[1280px]"
-        variants={calendarContainerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <m.div variants={calendarItemVariants}>
+      <div className="mx-auto flex w-full flex-col gap-6 lg:max-w-[1280px]">
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <CalendarHeader />
         </m.div>
         <m.div
-          variants={calendarItemVariants}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
           className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-card p-4 md:p-6 lg:h-[912px]"
         >
           <CalendarNav
@@ -78,7 +69,7 @@ export default function Calendar({ initialDate }: CalendarProps) {
             todos={selectedDateTodos}
           />
         </m.div>
-      </m.div>
+      </div>
     </main>
   );
 }

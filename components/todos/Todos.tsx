@@ -74,7 +74,7 @@ export default function Todos() {
           </div>
         </m.div>
         <m.div variants={todosItemVariants}>
-          <TodoList todos={todos?.data.todos || []} animated />
+          <TodoList todos={todos?.data.todos || []} />
         </m.div>
       </m.div>
     </div>

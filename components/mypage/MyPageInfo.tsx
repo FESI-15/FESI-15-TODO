@@ -137,7 +137,9 @@ export function MyPageInfo() {
         animate="visible"
         className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
       >
-        <ProfileImageInput control={control} name="image" />
+        <m.div variants={formItemVariants}>
+          <ProfileImageInput control={control} name="image" />
+        </m.div>
 
         <div className="flex w-full flex-col gap-10">
           <div className="flex w-full flex-col gap-4">
