@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import Dashboard from "@/components/dashboard/Dashboard";
 import { TODOS_LIMIT } from "@/constants/pagination";
+import FirstVisit from "@/components/dashboard/FirstVisit/FirstVisit";
 
 export default async function DashboardPage() {
   const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ export default async function DashboardPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <FirstVisit />
       <Dashboard />
     </HydrationBoundary>
   );

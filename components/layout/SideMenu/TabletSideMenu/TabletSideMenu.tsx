@@ -25,7 +25,7 @@ export const tabletSideMenuButtonVariants = cva(
   {
     variants: {
       open: {
-        true: "mb-8 ml-auto rotate-180",
+        true: "mb-4 ml-auto rotate-180",
         false: "mb-0 mx-auto",
       },
     },

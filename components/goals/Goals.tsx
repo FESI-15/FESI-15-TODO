@@ -9,7 +9,7 @@ import { getGoalProgress } from "@/utils/getGoalProgress";
 import useHeaderStore from "@/store/useHeaderStore";
 import { useEffect } from "react";
 import { TODOS_LIMIT } from "@/constants/pagination";
-import { m } from "framer-motion";
+import { m } from "motion/react";
 
 export default function Goals({ goalId }: { goalId: number }) {
   const { data: userMe } = useGetUserMe();

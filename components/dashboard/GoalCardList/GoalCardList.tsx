@@ -4,6 +4,7 @@ import {
 } from "@/apis/model";
 import GoalCard from "../GoalCard/GoalCard";
 import Image from "next/image";
+import { m } from "motion/react";
 
 interface GoalCardListProps {
   goals: GetTeamIdGoals200GoalsItem[];
@@ -26,12 +27,19 @@ export default function GoalCardList({ goals, todos }: GoalCardListProps) {
     </div>
   ) : (
     <div className="flex flex-col gap-8">
-      {goals.map((goal) => (
-        <GoalCard
+      {goals.map((goal, index) => (
+        <m.div
           key={goal.id}
-          goal={goal}
-          todos={todos.filter((todo) => todo.goal?.id === goal.id)}
-        />
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 + index * 0.3 }}
+        >
+          <GoalCard
+            key={goal.id}
+            goal={goal}
+            todos={todos.filter((todo) => todo.goal?.id === goal.id)}
+          />
+        </m.div>
       ))}
     </div>
   );
