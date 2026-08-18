@@ -15,7 +15,7 @@ export function CommentItem({ comment, userId }: CommentItemProps) {
     setIsModify(true);
   };
   return (
-    <li>
+    <>
       <CommentUser comment={comment} userId={userId} onModify={handleModify} />
       {isModify ? (
         <CommentModifyForm
@@ -33,6 +33,6 @@ export function CommentItem({ comment, userId }: CommentItemProps) {
           </p>
         </div>
       )}
-    </li>
+    </>
   );
 }
