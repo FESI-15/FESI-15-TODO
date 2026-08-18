@@ -13,7 +13,8 @@ import { TODOS_LIMIT } from "@/constants/pagination";
 
 export default async function CalendarPage() {
   const queryClient = new QueryClient();
-  const { start, end } = getCalendarGridRange(new Date());
+  const today = new Date();
+  const { start, end } = getCalendarGridRange(today);
 
   try {
     await Promise.all([
@@ -33,7 +34,7 @@ export default async function CalendarPage() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Calendar />
+      <Calendar initialDate={today} />
     </HydrationBoundary>
   );
 }

@@ -9,7 +9,7 @@ export function AuthLogo() {
         alt="symbol"
         width={48}
         height={48}
-        priority
+        preload
       />
       <SlidLogo className="h-6 w-[140px] text-gray-700 dark:text-white" />
     </div>
