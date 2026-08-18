@@ -121,7 +121,7 @@ export function MyPageInfo() {
         <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
         >
           <ProfileImageInput control={control} name="image" />
         </m.div>
@@ -131,14 +131,14 @@ export function MyPageInfo() {
             <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
             >
               <MyPageEmailField email={user?.email} />
             </m.div>
             <m.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.65 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
             >
               <MyPageNameField
                 control={control}
@@ -153,7 +153,7 @@ export function MyPageInfo() {
           <m.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.85 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.8 }}
           >
             <MyPagePasswordFields control={control} errors={errors} />
           </m.div>
@@ -162,7 +162,7 @@ export function MyPageInfo() {
         <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 1.05 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 1.4 }}
           className="w-full"
         >
           <Button type="submit" fullWidth>
