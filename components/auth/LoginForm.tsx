@@ -6,7 +6,7 @@ import Script from "next/script";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { m, useAnimation } from "motion/react";
+import { m } from "motion/react";
 import { Loader2Icon } from "lucide-react";
 
 import { AuthLogo } from "@/components/auth/AuthLogo";
@@ -24,7 +24,6 @@ import { GOOGLE_OAUTH_SCRIPT_SRC } from "@/constants/auth";
 export function LoginForm() {
   const router = useRouter();
   const [isGoogleScriptReady, setIsGoogleScriptReady] = useState(false);
-  const shakeControls = useAnimation();
   const { control, handleSubmit, setError } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
@@ -36,10 +35,6 @@ export function LoginForm() {
       onError: () => {
         setError("password", {
           message: "이메일 또는 비밀번호가 올바르지 않습니다",
-        });
-        shakeControls.start({
-          x: [0, -8, 8, -6, 6, -3, 3, 0],
-          transition: { duration: 0.4, ease: "easeInOut" },
         });
       },
     },
@@ -75,9 +70,7 @@ export function LoginForm() {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-6 md:gap-8"
             >
-              <m.div animate={shakeControls}>
-                <LoginFormFields control={control} />
-              </m.div>
+              <LoginFormFields control={control} />
               <Button
                 type="submit"
                 fullWidth
