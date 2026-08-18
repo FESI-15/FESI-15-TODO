@@ -1,6 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
+import { AnimatePresence, m } from "motion/react";
 import type { GetTeamIdTodos200TodosItem } from "@/apis/model";
 import CalendarEventChip from "./CalendarEventChip";
 
@@ -18,15 +19,24 @@ export default function CalendarSelectedDatePanel({
       <p className="text-sm font-semibold text-gray-700 dark:text-foreground">
         {format(date, "yyyy. MM. dd")}
       </p>
-      <div className="flex flex-col gap-2">
-        {todos.length === 0 ? (
-          <p className="text-sm text-gray-400 dark:text-muted-foreground">
-            등록된 할일이 없어요
-          </p>
-        ) : (
-          todos.map((todo) => <CalendarEventChip key={todo.id} todo={todo} />)
-        )}
-      </div>
+      <AnimatePresence mode="wait">
+        <m.div
+          key={format(date, "yyyy-MM-dd")}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
+          className="flex flex-col gap-2"
+        >
+          {todos.length === 0 ? (
+            <p className="text-sm text-gray-400 dark:text-muted-foreground">
+              등록된 할일이 없어요
+            </p>
+          ) : (
+            todos.map((todo) => <CalendarEventChip key={todo.id} todo={todo} />)
+          )}
+        </m.div>
+      </AnimatePresence>
     </div>
   );
 }

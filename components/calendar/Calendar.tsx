@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { format } from "date-fns";
+import { format, isAfter } from "date-fns";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { TODOS_LIMIT } from "@/constants/pagination";
 import CalendarHeader from "./CalendarHeader";
@@ -12,8 +12,14 @@ import { getCalendarGridRange, groupTodosByDate } from "./calendarGrid.utils";
 
 export default function Calendar() {
   const [month, setMonth] = useState(() => new Date());
+  const [direction, setDirection] = useState(0);
   const [selectedDate, setSelectedDate] = useState(() => new Date());
   const [goalId, setGoalId] = useState<number | undefined>(undefined);
+
+  const handleMonthChange = (newMonth: Date) => {
+    setDirection(isAfter(newMonth, month) ? 1 : -1);
+    setMonth(newMonth);
+  };
 
   const { start, end } = getCalendarGridRange(month);
   const { data: todosData } = useGetTodos({
@@ -35,14 +41,15 @@ export default function Calendar() {
         <div className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-card p-4 md:p-6 lg:h-[912px]">
           <CalendarNav
             month={month}
-            onMonthChange={setMonth}
+            onMonthChange={handleMonthChange}
             goalId={goalId}
             onGoalIdChange={setGoalId}
           />
           <div className="min-h-0 flex-1">
             <CalendarGrid
               month={month}
-              onMonthChange={setMonth}
+              onMonthChange={handleMonthChange}
+              direction={direction}
               selectedDate={selectedDate}
               onSelectedDateChange={setSelectedDate}
               todos={todos}

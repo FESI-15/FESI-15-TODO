@@ -2,6 +2,7 @@
 
 import { addMonths, format, subMonths } from "date-fns";
 import { ko } from "date-fns/locale";
+import { AnimatePresence, m } from "motion/react";
 import DoubleArrow from "@/public/icons/sidemenu/double_arrow.svg";
 import GoalFilter from "@/components/common/GoalFilter";
 
@@ -28,9 +29,18 @@ export default function CalendarNav({
         >
           <DoubleArrow className="size-6 rotate-180 text-gray-400 dark:text-muted-foreground" />
         </button>
-        <span className="text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-foreground">
-          {format(month, "yyyy년 M월", { locale: ko })}
-        </span>
+        <AnimatePresence mode="wait">
+          <m.span
+            key={format(month, "yyyy-MM")}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="text-lg font-semibold whitespace-nowrap text-gray-800 dark:text-foreground"
+          >
+            {format(month, "yyyy년 M월", { locale: ko })}
+          </m.span>
+        </AnimatePresence>
         <button
           type="button"
           aria-label="다음 달"
