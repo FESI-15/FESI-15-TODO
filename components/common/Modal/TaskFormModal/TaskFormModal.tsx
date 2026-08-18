@@ -137,7 +137,10 @@ export default function TaskFormModal(props: TaskFormModalProps) {
             {isModify ? "할 일 수정" : "할 일 생성"}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="max-h-[500px] overflow-y-auto overflow-x-hidden md:max-h-none md:overflow-hidden"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <Form control={control} />
           <DialogFooter>
             <div className="flex gap-2 w-full mt-4 md:mt-10">

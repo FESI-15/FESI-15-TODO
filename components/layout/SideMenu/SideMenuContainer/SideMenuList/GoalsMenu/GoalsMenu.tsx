@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   sideMenuListIconVariants,
   sideMenuListTextVariants,
@@ -29,10 +29,25 @@ export default function GoalsMenu({
   const { data: goals } = useGetGoals();
   const [isGoalListOpen, setIsGoalListOpen] = useState(false);
   const isActive = isActivePath(item.href);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        isGoalListOpen
+      ) {
+        setIsGoalListOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isGoalListOpen]);
 
   if (goals?.data.goals.length === 0) return null;
   return (
-    <>
+    <div className="relative">
       <button
         type="button"
         className={sideMenuListTextVariants({
@@ -49,7 +64,9 @@ export default function GoalsMenu({
           <span className="text-lg font-semibold">{item.name}</span>
         </div>
         <Image
-          className={isGoalListOpen ? "rotate-180" : ""}
+          className={
+            isGoalListOpen ? "rotate-180 lg:-rotate-90" : "lg:-rotate-90"
+          }
           src="/icons/common/chevron-down.svg"
           alt="chevron-down"
           width={24}
@@ -57,8 +74,13 @@ export default function GoalsMenu({
         />
       </button>
       {isGoalListOpen && (
-        <GoalsMenuList goals={goals?.data.goals || []} onClose={onClose} />
+        <div
+          className="mt-2 lg:absolute right-[-200px] lg:border lg:border-gray-200 lg:shadow-lg overflow-hidden lg:rounded-lg top-0 bg-white lg:dark:bg-background"
+          ref={menuRef}
+        >
+          <GoalsMenuList goals={goals?.data.goals || []} onClose={onClose} />
+        </div>
       )}
-    </>
+    </div>
   );
 }
