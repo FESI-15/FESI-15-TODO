@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { m, type Variants } from "motion/react";
+import { m } from "motion/react";
 import { Button } from "@/components/common/Button";
 import { ProfileImageInput } from "./ProfileImageInput";
 import { MyPageEmailField } from "./MyPageEmailField";
@@ -18,25 +18,6 @@ import {
 } from "@/hooks/queries/users/users.bff.hook";
 import useHeaderStore from "@/store/useHeaderStore";
 import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
-
-const formContainerVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: "easeOut",
-      staggerChildren: 0.2,
-      delayChildren: 0.25,
-    },
-  },
-};
-
-const formItemVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
 
 export function MyPageInfo() {
   const { data: userMe } = useGetUserMe();
@@ -132,21 +113,33 @@ export function MyPageInfo() {
       </m.h1>
       <m.form
         onSubmit={handleSubmit(onSubmit)}
-        variants={formContainerVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
       >
-        <m.div variants={formItemVariants}>
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+        >
           <ProfileImageInput control={control} name="image" />
         </m.div>
 
         <div className="flex w-full flex-col gap-10">
           <div className="flex w-full flex-col gap-4">
-            <m.div variants={formItemVariants}>
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
+            >
               <MyPageEmailField email={user?.email} />
             </m.div>
-            <m.div variants={formItemVariants}>
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut", delay: 0.65 }}
+            >
               <MyPageNameField
                 control={control}
                 isNameChanged={isNameChanged}
@@ -157,12 +150,21 @@ export function MyPageInfo() {
             </m.div>
           </div>
 
-          <m.div variants={formItemVariants}>
+          <m.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.85 }}
+          >
             <MyPagePasswordFields control={control} errors={errors} />
           </m.div>
         </div>
 
-        <m.div variants={formItemVariants} className="w-full">
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 1.05 }}
+          className="w-full"
+        >
           <Button type="submit" fullWidth>
             저장하기
           </Button>
