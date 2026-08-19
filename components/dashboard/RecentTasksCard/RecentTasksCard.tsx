@@ -32,7 +32,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
           모두 보기
           <Image
             src="/icons/dashboard/chevron.svg"
-            alt="chevron-right"
+            alt=""
             width={20}
             height={20}
           />
