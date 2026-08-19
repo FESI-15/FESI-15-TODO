@@ -104,71 +104,40 @@ export function MyPageInfo() {
   return (
     <>
       <m.h1
-        initial={{ opacity: 0, y: 12 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.5 }}
         className="px-1 mb-10 text-2xl font-semibold text-black dark:text-foreground hidden lg:block"
       >
         내 정보 관리
       </m.h1>
       <m.form
-        onSubmit={handleSubmit(onSubmit)}
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
       >
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-        >
-          <ProfileImageInput control={control} name="image" />
-        </m.div>
+        <ProfileImageInput control={control} name="image" />
 
         <div className="flex w-full flex-col gap-10">
           <div className="flex w-full flex-col gap-4">
-            <m.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
-            >
-              <MyPageEmailField email={user?.email} />
-            </m.div>
-            <m.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
-            >
-              <MyPageNameField
-                control={control}
-                isNameChanged={isNameChanged}
-                canCheck={canCheck}
-                isNameAvailable={isNameAvailable}
-                onCheck={() => setCheckedName(nameValue)}
-              />
-            </m.div>
+            <MyPageEmailField email={user?.email} />
+            <MyPageNameField
+              control={control}
+              isNameChanged={isNameChanged}
+              canCheck={canCheck}
+              isNameAvailable={isNameAvailable}
+              onCheck={() => setCheckedName(nameValue)}
+            />
           </div>
 
-          <m.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.8 }}
-          >
-            <MyPagePasswordFields control={control} errors={errors} />
-          </m.div>
+          <MyPagePasswordFields control={control} errors={errors} />
         </div>
 
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 1.4 }}
-          className="w-full"
-        >
-          <Button type="submit" fullWidth>
-            저장하기
-          </Button>
-        </m.div>
+        <Button type="submit" fullWidth>
+          저장하기
+        </Button>
       </m.form>
     </>
   );
