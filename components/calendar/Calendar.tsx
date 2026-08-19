@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
+import { m } from "motion/react";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import { TODOS_LIMIT } from "@/constants/pagination";
 import CalendarHeader from "./CalendarHeader";
@@ -35,8 +36,19 @@ export default function Calendar({ initialDate }: CalendarProps) {
   return (
     <main className="min-w-0 flex-1 px-4 py-8 pb-30 md:px-6 md:py-12 md:pb-12 lg:py-20">
       <div className="mx-auto flex w-full flex-col gap-6 lg:max-w-[1280px]">
-        <CalendarHeader />
-        <div className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-card p-4 md:p-6 lg:h-[912px]">
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <CalendarHeader />
+        </m.div>
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+          className="flex flex-col gap-4 rounded-3xl bg-white dark:bg-card p-4 md:p-6 lg:h-[912px]"
+        >
           <CalendarNav
             month={month}
             onMonthChange={setMonth}
@@ -56,7 +68,7 @@ export default function Calendar({ initialDate }: CalendarProps) {
             date={selectedDate}
             todos={selectedDateTodos}
           />
-        </div>
+        </m.div>
       </div>
     </main>
   );

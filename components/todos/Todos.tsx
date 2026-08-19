@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { m } from "motion/react";
 import { useGetTodos } from "@/hooks/queries/todos/todos.bff.hook";
 import TodosTab from "./TodosTab/TodosTab";
 import AddTodoButton from "./AddTodoButton/AddTodoButton";
@@ -39,19 +40,35 @@ export default function Todos() {
   return (
     <div className="my-6 px-4 md:my-12 md:px-6 lg:my-20 w-full">
       <div className="max-w-[720px] mx-auto w-full">
-        <h2 className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground">
+        <m.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="font-semibold md:text-xl lg:text-2xl hidden lg:block dark:text-foreground"
+        >
           모든 할 일
           <span className="text-orange-600 ml-1 lg:ml-2">
             {todos?.data.todos.length}
           </span>
-        </h2>
-        <div className="px-2 flex justify-between items-center lg:mt-6">
+        </m.h2>
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          className="px-2 flex justify-between items-center lg:mt-6"
+        >
           <TodosTab />
           <div>
             <AddTodoButton />
           </div>
-        </div>
-        <TodoList todos={todos?.data.todos || []} />
+        </m.div>
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+        >
+          <TodoList todos={todos?.data.todos || []} />
+        </m.div>
       </div>
     </div>
   );

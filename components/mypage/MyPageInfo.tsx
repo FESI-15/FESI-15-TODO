@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { m } from "motion/react";
 import { Button } from "@/components/common/Button";
 import { ProfileImageInput } from "./ProfileImageInput";
 import { MyPageEmailField } from "./MyPageEmailField";
@@ -101,30 +102,43 @@ export function MyPageInfo() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
-    >
-      <ProfileImageInput control={control} name="image" />
+    <>
+      <m.h1
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="px-1 mb-10 text-2xl font-semibold text-black dark:text-foreground hidden lg:block"
+      >
+        내 정보 관리
+      </m.h1>
+      <m.form
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
+      >
+        <ProfileImageInput control={control} name="image" />
 
-      <div className="flex w-full flex-col gap-10">
-        <div className="flex w-full flex-col gap-4">
-          <MyPageEmailField email={user?.email} />
-          <MyPageNameField
-            control={control}
-            isNameChanged={isNameChanged}
-            canCheck={canCheck}
-            isNameAvailable={isNameAvailable}
-            onCheck={() => setCheckedName(nameValue)}
-          />
+        <div className="flex w-full flex-col gap-10">
+          <div className="flex w-full flex-col gap-4">
+            <MyPageEmailField email={user?.email} />
+            <MyPageNameField
+              control={control}
+              isNameChanged={isNameChanged}
+              canCheck={canCheck}
+              isNameAvailable={isNameAvailable}
+              onCheck={() => setCheckedName(nameValue)}
+            />
+          </div>
+
+          <MyPagePasswordFields control={control} errors={errors} />
         </div>
 
-        <MyPagePasswordFields control={control} errors={errors} />
-      </div>
-
-      <Button type="submit" fullWidth>
-        저장하기
-      </Button>
-    </form>
+        <Button type="submit" fullWidth>
+          저장하기
+        </Button>
+      </m.form>
+    </>
   );
 }
