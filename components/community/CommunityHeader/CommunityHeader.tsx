@@ -2,6 +2,7 @@
 import { FormInput } from "@/components/common/input/FormInput";
 import { FieldValues, useForm } from "react-hook-form";
 import { useRouter, useSearchParams } from "next/navigation";
+import { m } from "motion/react";
 
 export function CommunityHeader() {
   const router = useRouter();
@@ -15,7 +16,11 @@ export function CommunityHeader() {
     router.push(`/community?search=${data.search}`);
   };
   return (
-    <div>
+    <m.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormInput
           variant="search"
@@ -24,6 +29,6 @@ export function CommunityHeader() {
           name="search"
         />
       </form>
-    </div>
+    </m.div>
   );
 }

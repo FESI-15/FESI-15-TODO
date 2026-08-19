@@ -11,7 +11,7 @@ interface TabletSideMenuProps {
 const sideMenuSpaceVariants = cva("hidden lg:block", {
   variants: {
     open: {
-      true: "w-[320px]",
+      true: "w-[360px]",
       false: "w-[60px]",
     },
   },

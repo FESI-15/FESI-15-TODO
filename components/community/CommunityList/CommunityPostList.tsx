@@ -1,11 +1,25 @@
 import Image from "next/image";
 import { CommunityCard } from "../CommunityCard/CommunityCard";
 import { GetTeamIdPosts200PostsItem } from "@/apis/model";
+import { m } from "motion/react";
 
 interface CommunityListProps {
   posts: GetTeamIdPosts200PostsItem[];
 }
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const listVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.15, delayChildren: 0.45 },
+  },
+};
 export function CommunityList({ posts }: CommunityListProps) {
   if (!posts.length)
     return (
@@ -25,10 +39,12 @@ export function CommunityList({ posts }: CommunityListProps) {
       </div>
     );
   return (
-    <ul>
-      {posts.map((post) => (
-        <CommunityCard key={post.id} post={post} />
+    <m.ul variants={listVariants} initial="hidden" animate="visible">
+      {posts.map((post, index) => (
+        <m.li key={post.id} variants={itemVariants}>
+          <CommunityCard post={post} />
+        </m.li>
       ))}
-    </ul>
+    </m.ul>
   );
 }
