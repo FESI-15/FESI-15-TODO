@@ -7,6 +7,19 @@ interface CommunityListProps {
   posts: GetTeamIdPosts200PostsItem[];
 }
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const listVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { staggerChildren: 0.15, delayChildren: 0.45 },
+  },
+};
 export function CommunityList({ posts }: CommunityListProps) {
   if (!posts.length)
     return (
@@ -26,18 +39,12 @@ export function CommunityList({ posts }: CommunityListProps) {
       </div>
     );
   return (
-    <ul>
+    <m.ul variants={listVariants} initial="hidden" animate="visible">
       {posts.map((post, index) => (
-        <li key={post.id}>
-          <m.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45 + index * 0.1 }}
-          >
-            <CommunityCard post={post} />
-          </m.div>
-        </li>
+        <m.li key={post.id} variants={itemVariants}>
+          <CommunityCard post={post} />
+        </m.li>
       ))}
-    </ul>
+    </m.ul>
   );
 }

@@ -61,15 +61,13 @@ export function Community() {
         >
           소통 게시판
         </m.h2>
-        <div>
-          <m.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-          >
-            <CommunityBestView />
-          </m.div>
-        </div>
+        <m.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          <CommunityBestView />
+        </m.div>
       </div>
       <div className="w-full px-4 md:px-6 flex flex-col flex-1">
         <CommunityHeader />
