@@ -2,7 +2,6 @@
 
 import CheckboxBasic from "@/components/common/CheckboxBasic";
 import { usePatchTodo } from "@/hooks/queries/todos/todos.bff.hook";
-import { showSaveSuccessToast } from "@/utils/toast";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -36,14 +35,7 @@ export default function DashboardCheckbox({
 
   const handleCheckedChange = (isChecked: boolean) => {
     if (isChecked) {
-      patchTodo(
-        { todoId: taskId, data: { done: true } },
-        {
-          onSuccess: () => {
-            showSaveSuccessToast("할 일을 완료했습니다.");
-          },
-        },
-      );
+      patchTodo({ todoId: taskId, data: { done: true } });
     } else {
       patchTodo({ todoId: taskId, data: { done: false } });
     }

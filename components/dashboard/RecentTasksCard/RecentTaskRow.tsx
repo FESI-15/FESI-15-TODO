@@ -25,6 +25,7 @@ export default function RecentTaskRow({ todo }: RecentTaskRowProps) {
         <DashboardCheckbox checked={todo.done} taskId={todo.id} />
         <button
           type="button"
+          data-testid="todo-title"
           className="truncate text-left text-sm font-semibold text-white pr-4 lg:text-base"
           onClick={() => setIsOpen(true)}
         >
