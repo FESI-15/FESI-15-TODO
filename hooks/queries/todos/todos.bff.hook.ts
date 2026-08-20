@@ -15,6 +15,7 @@ import {
 import { todosKeys } from "./todos.key";
 import { favoritesKeys } from "../favorites/favorites.key";
 import { notificationsKeys } from "../notifications/notifications.key";
+import { showSaveSuccessToast } from "@/utils/toast";
 
 interface TodosCache {
   data: GetTeamIdTodos200;
@@ -72,11 +73,7 @@ export const usePatchTodo = () => {
               ? { ...todo, done: variables.data.done }
               : todo,
           );
-
-          return {
-            ...oldData,
-            todos: todo,
-          };
+          return { ...oldData, data: { ...oldData.data, todos: todo } };
         },
       );
       return { previousTodos };
@@ -84,7 +81,9 @@ export const usePatchTodo = () => {
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: todosKeys.all() });
       queryClient.invalidateQueries({ queryKey: favoritesKeys.all() });
-
+      if (variables.data.done) {
+        showSaveSuccessToast("할 일을 완료했습니다.");
+      }
       if (variables.data.done !== undefined) {
         queryClient.invalidateQueries({ queryKey: notificationsKeys.all() });
       }

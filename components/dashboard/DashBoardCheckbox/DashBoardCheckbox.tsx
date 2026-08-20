@@ -36,14 +36,7 @@ export default function DashboardCheckbox({
 
   const handleCheckedChange = (isChecked: boolean) => {
     if (isChecked) {
-      patchTodo(
-        { todoId: taskId, data: { done: true } },
-        {
-          onSuccess: () => {
-            showSaveSuccessToast("할 일을 완료했습니다.");
-          },
-        },
-      );
+      patchTodo({ todoId: taskId, data: { done: true } });
     } else {
       patchTodo({ todoId: taskId, data: { done: false } });
     }
