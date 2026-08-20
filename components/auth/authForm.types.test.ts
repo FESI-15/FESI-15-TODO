@@ -20,7 +20,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe("이름을 입력해주세요");
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("이름을 입력해주세요");
       }
     });
 
@@ -32,9 +33,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "이름은 20자 이하로 입력해주세요",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("이름은 20자 이하로 입력해주세요");
       }
     });
   });
@@ -50,7 +50,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe("이메일을 입력해주세요");
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("이메일을 입력해주세요");
       }
     });
 
@@ -59,9 +60,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "올바른 이메일 형식이 아닙니다",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("올바른 이메일 형식이 아닙니다");
       }
     });
   });
@@ -81,9 +81,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "비밀번호는 8자 이상 입력해주세요",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("비밀번호는 8자 이상 입력해주세요");
       }
     });
 
@@ -92,9 +91,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "비밀번호를 한 번 더 입력해주세요",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("비밀번호를 한 번 더 입력해주세요");
       }
     });
 
@@ -103,9 +101,8 @@ describe("signupSchema", () => {
       const result = signupSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "비밀번호가 일치하지 않습니다",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("비밀번호가 일치하지 않습니다");
       }
     });
   });
@@ -125,7 +122,8 @@ describe("loginSchema", () => {
       const result = loginSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe("이메일을 입력해주세요");
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("이메일을 입력해주세요");
       }
     });
 
@@ -134,9 +132,8 @@ describe("loginSchema", () => {
       const result = loginSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe(
-          "올바른 이메일 형식이 아닙니다",
-        );
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("올바른 이메일 형식이 아닙니다");
       }
     });
   });
@@ -152,7 +149,8 @@ describe("loginSchema", () => {
       const result = loginSchema.safeParse(data);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues[0].message).toBe("비밀번호를 입력해주세요");
+        const errorMessage = result.error.issues[0].message;
+        expect(errorMessage).toBe("비밀번호를 입력해주세요");
       }
     });
   });

@@ -1,24 +1,24 @@
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { useRouter } from "next/navigation";
-import { postAuthLogin } from "@/apis/auth/authBff";
+import { postAuthSignup } from "@/apis/auth/authBff";
 import { renderWithQueryClient } from "@/utils/renderWithQueryClient";
-import { LoginForm } from "./LoginForm";
+import { SignupForm } from "./SignupForm";
 
 jest.mock("next/navigation", () => ({ useRouter: jest.fn() }));
-jest.mock("@/apis/auth/authBff", () => ({ postAuthLogin: jest.fn() }));
+jest.mock("@/apis/auth/authBff", () => ({ postAuthSignup: jest.fn() }));
 jest.mock("@/hooks/useGoogleLogin", () => ({
   useGoogleLogin: () => ({ loginWithGoogle: jest.fn(), isPending: false }),
 }));
 
-describe("LoginForm", () => {
-  const replace = jest.fn();
+describe("SignupForm", () => {
+  const push = jest.fn();
 
   beforeEach(() => {
-    replace.mockClear();
-    jest.mocked(postAuthLogin).mockClear();
+    push.mockClear();
+    jest.mocked(postAuthSignup).mockClear();
     jest.mocked(useRouter).mockReturnValue({
-      push: jest.fn(),
-      replace,
+      push,
+      replace: jest.fn(),
       back: jest.fn(),
       forward: jest.fn(),
       refresh: jest.fn(),
@@ -26,75 +26,83 @@ describe("LoginForm", () => {
     });
   });
 
-  describe("렌더링", () => {
-    test("입력창과 제출 버튼이 렌더링되어야 함", () => {
-      renderWithQueryClient(<LoginForm />);
-      expect(
-        screen.getByPlaceholderText("이메일을 입력해주세요"),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByPlaceholderText("비밀번호를 입력해주세요"),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: "로그인하기" }),
-      ).toBeInTheDocument();
-    });
-  });
-
   describe("유효성 검사", () => {
-    test("필드를 비운 채 제출하면 에러 메시지가 노출되고 API가 호출되지 않아야 함", async () => {
-      renderWithQueryClient(<LoginForm />);
-      fireEvent.click(screen.getByRole("button", { name: "로그인하기" }));
-      expect(
-        await screen.findByText("이메일을 입력해주세요"),
-      ).toBeInTheDocument();
-      expect(postAuthLogin).not.toHaveBeenCalled();
+    test("필드를 비운 채 제출하면 API가 호출되지 않아야 함", async () => {
+      renderWithQueryClient(<SignupForm />);
+      const submitButton = screen.getByRole("button", {
+        name: "회원가입 하기",
+      });
+
+      fireEvent.click(submitButton);
+
+      const errorMessage = await screen.findByText("이름을 입력해주세요");
+      expect(errorMessage).toBeInTheDocument();
+      expect(postAuthSignup).not.toHaveBeenCalled();
     });
   });
 
   describe("제출 성공", () => {
     test("API가 올바른 데이터로 호출되고 대시보드로 이동해야 함", async () => {
       jest
-        .mocked(postAuthLogin)
-        .mockResolvedValue({} as Awaited<ReturnType<typeof postAuthLogin>>);
-
-      renderWithQueryClient(<LoginForm />);
-
-      fireEvent.change(screen.getByPlaceholderText("이메일을 입력해주세요"), {
-        target: { value: "test@naver.com" },
+        .mocked(postAuthSignup)
+        .mockResolvedValue({} as Awaited<ReturnType<typeof postAuthSignup>>);
+      renderWithQueryClient(<SignupForm />);
+      const nameInput = screen.getByLabelText("이름");
+      const emailInput = screen.getByLabelText("이메일");
+      const passwordInput = screen.getByLabelText("비밀번호");
+      const passwordConfirmInput = screen.getByLabelText("비밀번호 확인");
+      const submitButton = screen.getByRole("button", {
+        name: "회원가입 하기",
       });
-      fireEvent.change(screen.getByPlaceholderText("비밀번호를 입력해주세요"), {
+
+      fireEvent.change(nameInput, { target: { value: "김민식" } });
+      fireEvent.change(emailInput, { target: { value: "test@naver.com" } });
+      fireEvent.change(passwordInput, { target: { value: "test1234" } });
+      fireEvent.change(passwordConfirmInput, {
         target: { value: "test1234" },
       });
-      fireEvent.click(screen.getByRole("button", { name: "로그인하기" }));
+      fireEvent.click(submitButton);
 
       await waitFor(() => {
-        expect(postAuthLogin).toHaveBeenCalledWith(
-          { data: { email: "test@naver.com", password: "test1234" } },
+        expect(postAuthSignup).toHaveBeenCalledWith(
+          {
+            data: {
+              name: "김민식",
+              email: "test@naver.com",
+              password: "test1234",
+            },
+          },
           undefined,
         );
-        expect(replace).toHaveBeenCalledWith("/dashboard");
+        expect(push).toHaveBeenCalledWith("/dashboard");
       });
     });
   });
 
   describe("제출 실패", () => {
-    test("API 호출이 실패하면 비밀번호 필드에 에러 메시지가 노출되어야 함", async () => {
-      jest.mocked(postAuthLogin).mockRejectedValue(new Error("로그인 실패"));
-
-      renderWithQueryClient(<LoginForm />);
-
-      fireEvent.change(screen.getByPlaceholderText("이메일을 입력해주세요"), {
-        target: { value: "test@naver.com" },
+    test("API 호출이 실패하면 이메일 필드에 에러 메시지가 노출되어야 함", async () => {
+      jest.mocked(postAuthSignup).mockRejectedValue(new Error("가입 실패"));
+      renderWithQueryClient(<SignupForm />);
+      const nameInput = screen.getByLabelText("이름");
+      const emailInput = screen.getByLabelText("이메일");
+      const passwordInput = screen.getByLabelText("비밀번호");
+      const passwordConfirmInput = screen.getByLabelText("비밀번호 확인");
+      const submitButton = screen.getByRole("button", {
+        name: "회원가입 하기",
       });
-      fireEvent.change(screen.getByPlaceholderText("비밀번호를 입력해주세요"), {
+
+      fireEvent.change(nameInput, { target: { value: "김민식" } });
+      fireEvent.change(emailInput, { target: { value: "test@naver.com" } });
+      fireEvent.change(passwordInput, { target: { value: "test1234" } });
+      fireEvent.change(passwordConfirmInput, {
         target: { value: "test1234" },
       });
-      fireEvent.click(screen.getByRole("button", { name: "로그인하기" }));
+      fireEvent.click(submitButton);
 
-      expect(
-        await screen.findByText("이메일 또는 비밀번호가 올바르지 않습니다"),
-      ).toBeInTheDocument();
+      const errorMessage = await screen.findByText(
+        "이미 가입된 이메일이거나 요청이 올바르지 않습니다",
+      );
+      expect(errorMessage).toBeInTheDocument();
     });
   });
 });
