@@ -1,7 +1,6 @@
 import { renderWithQueryClient } from "@/utils/renderWithQueryClient";
 import GoalCardList from "./GoalCardList";
-import { screen } from "@testing-library/dom";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { mockTodos } from "@/mocks/todos";
 import { mockGoals } from "@/mocks/goals";
 
