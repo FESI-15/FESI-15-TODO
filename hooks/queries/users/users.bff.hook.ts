@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import type { GetTeamIdUsersCheckNicknameParams } from "@/apis/model";
 import type {
@@ -32,9 +32,13 @@ export const useGetUsersCheckNickname = (
 };
 
 export const usePatchUserMe = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["patchUserMe"],
     mutationFn: (variables: PatchUserMeVariables) => patchUserMe(variables),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: usersKeys.me() });
+    },
   });
 };
 
