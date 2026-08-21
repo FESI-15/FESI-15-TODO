@@ -81,27 +81,22 @@ export function MyPageInfo() {
       return showSaveFailureToast("변경할 정보가 없습니다.");
     }
 
-    const toastOptions = {
-      onSuccess: () => showSaveSuccessToast("저장이 완료되었습니다."),
-      onError: () => showSaveFailureToast("저장이 실패하였습니다."),
-    };
-
     await Promise.allSettled([
       shouldUpdateProfile
-        ? patchUserMe(
-            { data: { name: values.name, image: values.image } },
-            toastOptions,
-          )
+        ? patchUserMe({ data: { name: values.name, image: values.image } })
         : Promise.resolve(),
       shouldUpdatePassword
-        ? patchUserPassword(
-            {
-              data: { currentPassword, newPassword: values.newPassword ?? "" },
-            },
-            toastOptions,
-          )
+        ? patchUserPassword({
+            data: { currentPassword, newPassword: values.newPassword ?? "" },
+          })
         : Promise.resolve(),
-    ]);
+    ])
+      .then(() => {
+        showSaveSuccessToast("저장이 완료되었습니다.");
+      })
+      .catch(() => {
+        showSaveFailureToast("저장이 실패하였습니다.");
+      });
   };
 
   const canSubmit =
