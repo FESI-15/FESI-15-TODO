@@ -8,27 +8,23 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "../../Button";
-
-const DarkModeToggleButtonContainer = dynamic(
-  () => import("./DarkModeToggleButton/DarkModeToggleButtonContainer"),
-  { ssr: false },
-);
+import DarkModeToggleButtonContainer from "./DarkModeToggleButton/DarkModeToggleButtonContainer";
 
 interface SettingModalProps {
-  trigger: React.ReactElement;
+  open: boolean;
+  onClose: () => void;
   onConfirm?: () => void;
 }
 
 export default function SettingModal({
-  trigger,
+  open,
   onConfirm,
+  onClose,
 }: SettingModalProps) {
   return (
-    <Dialog>
-      <DialogTrigger render={trigger} />
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent showCloseButton={false}>
         <DialogHeader>
           <DialogTitle showCloseButton={true}>설정</DialogTitle>

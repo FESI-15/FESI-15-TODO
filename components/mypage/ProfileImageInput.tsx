@@ -66,7 +66,7 @@ export function ProfileImageInput<T extends FieldValues>({
 
   return (
     <div className="relative size-[132px] shrink-0">
-      <div className="size-[132px] overflow-hidden rounded-full bg-gray-100 dark:bg-muted">
+      <div className="size-[132px] overflow-hidden rounded-full border border-gray-200 bg-white dark:border-border dark:bg-muted">
         <Image
           src={displayUrl}
           alt="프로필 이미지 미리보기"
