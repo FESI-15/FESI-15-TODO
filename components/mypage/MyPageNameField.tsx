@@ -1,6 +1,6 @@
 "use client";
 
-import { Control } from "react-hook-form";
+import { Control, useController } from "react-hook-form";
 import { cva } from "class-variance-authority";
 import { Button } from "@/components/common/Button";
 import { FormInput } from "@/components/common/input/FormInput";
@@ -18,18 +18,22 @@ const nameAvailabilityTextVariants = cva("min-h-5 px-1 text-sm font-medium", {
 interface MyPageNameFieldProps {
   control: Control<MyPageFormValues>;
   isNameChanged: boolean;
-  canCheck: boolean;
+  checkedName: string | null;
   isNameAvailable: boolean | undefined;
-  onCheck: () => void;
+  onCheck: (name: string) => void;
 }
 
 export function MyPageNameField({
   control,
   isNameChanged,
-  canCheck,
+  checkedName,
   isNameAvailable,
   onCheck,
 }: MyPageNameFieldProps) {
+  const { field } = useController({ control, name: "name" });
+  const isChecked = checkedName !== null && checkedName === field.value;
+  const canCheck = isNameChanged && field.value.length > 0 && !isChecked;
+
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="flex w-full items-end gap-2">
@@ -44,7 +48,7 @@ export function MyPageNameField({
           hierarchy="secondary"
           className="shrink-0 whitespace-nowrap rounded-[12px] p-3 text-sm md:rounded-[16px] md:p-4 md:text-base lg:text-base"
           disabled={!canCheck}
-          onClick={onCheck}
+          onClick={() => onCheck(field.value)}
         >
           중복확인
         </Button>
@@ -52,12 +56,12 @@ export function MyPageNameField({
       <p
         className={nameAvailabilityTextVariants({
           isAvailable:
-            isNameChanged && isNameAvailable !== undefined
+            isChecked && isNameAvailable !== undefined
               ? isNameAvailable
               : undefined,
         })}
       >
-        {isNameChanged && isNameAvailable !== undefined
+        {isChecked && isNameAvailable !== undefined
           ? isNameAvailable
             ? "사용 가능한 이름입니다."
             : "이미 사용 중인 이름입니다."

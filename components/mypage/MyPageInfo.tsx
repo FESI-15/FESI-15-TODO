@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { m } from "motion/react";
 import { Button } from "@/components/common/Button";
@@ -31,7 +31,7 @@ export function MyPageInfo() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, dirtyFields },
   } = useForm<MyPageFormValues>({
     resolver: zodResolver(myPageFormSchema),
     defaultValues: {
@@ -43,24 +43,19 @@ export function MyPageInfo() {
     },
   });
 
-  const nameValue = useWatch({ control, name: "name" });
-  const imageValue = useWatch({ control, name: "image" });
-  const currentPasswordValue = useWatch({ control, name: "currentPassword" });
   const [checkedName, setCheckedName] = useState<string | null>(null);
 
-  const isNameChanged = user !== undefined && nameValue !== user.name;
-  const isImageChanged =
-    user !== undefined && imageValue !== (user.image ?? null);
-  const isPasswordChanged = (currentPasswordValue ?? "") !== "";
+  const isNameChanged = !!dirtyFields.name;
+  const isImageChanged = !!dirtyFields.image;
+  const isPasswordChanged = !!dirtyFields.currentPassword;
   const isSubmitDisabled =
     !isNameChanged && !isImageChanged && !isPasswordChanged;
-  const isChecked = checkedName !== null && checkedName === nameValue;
-  const canCheck = isNameChanged && nameValue.length > 0 && !isChecked;
 
   const { data: nicknameCheck } = useGetUsersCheckNickname({
     name: checkedName ?? "",
   });
-  const isNameAvailable = isChecked ? nicknameCheck?.data.available : undefined;
+  const isNameAvailable =
+    checkedName !== null ? nicknameCheck?.data.available : undefined;
 
   const { mutateAsync: patchUserMe } = usePatchUserMe();
   const { mutateAsync: patchUserPassword } = usePatchUserPassword();
@@ -133,9 +128,9 @@ export function MyPageInfo() {
             <MyPageNameField
               control={control}
               isNameChanged={isNameChanged}
-              canCheck={canCheck}
+              checkedName={checkedName}
               isNameAvailable={isNameAvailable}
-              onCheck={() => setCheckedName(nameValue)}
+              onCheck={setCheckedName}
             />
           </div>
 
