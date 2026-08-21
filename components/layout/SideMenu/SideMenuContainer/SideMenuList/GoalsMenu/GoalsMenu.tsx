@@ -7,6 +7,7 @@ import {
 import GoalsMenuList from "./GoalsMenuList/GoalsMenuList";
 import { VariantProps } from "class-variance-authority";
 import { useGetGoals } from "@/hooks/queries/goals/goals.bff.hook";
+import { showSaveFailureToast } from "@/utils/toast";
 
 interface GoalsMenuProps
   extends
@@ -36,6 +37,13 @@ export default function GoalsMenu({
     onClose?.();
   };
 
+  const handleClick = () => {
+    if (goals?.data.goals.length === 0) {
+      return showSaveFailureToast("목표를 생성해주세요.");
+    }
+    setIsGoalListOpen(true);
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -50,7 +58,6 @@ export default function GoalsMenu({
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isGoalListOpen]);
 
-  if (goals?.data.goals.length === 0) return null;
   return (
     <li>
       <div className="relative">
@@ -59,7 +66,7 @@ export default function GoalsMenu({
           className={sideMenuListTextVariants({
             isActive,
           })}
-          onClick={() => setIsGoalListOpen((prev) => !prev)}
+          onClick={handleClick}
         >
           <div className="flex items-center gap-2">
             <item.icon
