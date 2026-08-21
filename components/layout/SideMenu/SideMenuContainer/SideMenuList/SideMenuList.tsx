@@ -9,23 +9,23 @@ export default function SideMenuList({ onClose }: { onClose?: () => void }) {
 
   return (
     <ul className="flex flex-col gap-3">
-      {SIDE_MENU_LIST.map((item) => (
-        <li key={item.name}>
-          {item.name !== "목표" ? (
-            <SideMenuListItem
-              item={item}
-              isActivePath={isActivePath}
-              onClose={onClose}
-            />
-          ) : (
-            <GoalsMenu
-              item={item}
-              isActivePath={isActivePath}
-              onClose={onClose}
-            />
-          )}
-        </li>
-      ))}
+      {SIDE_MENU_LIST.map((item) =>
+        item.name !== "목표" ? (
+          <SideMenuListItem
+            key={item.name}
+            item={item}
+            isActivePath={isActivePath}
+            onClose={onClose}
+          />
+        ) : (
+          <GoalsMenu
+            key={item.name}
+            item={item}
+            isActivePath={isActivePath}
+            onClose={onClose}
+          />
+        ),
+      )}
     </ul>
   );
 }

@@ -31,6 +31,11 @@ export default function GoalsMenu({
   const isActive = isActivePath(item.href);
   const menuRef = useRef<HTMLDivElement>(null);
 
+  const handleClose = () => {
+    setIsGoalListOpen(false);
+    onClose?.();
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -47,40 +52,45 @@ export default function GoalsMenu({
 
   if (goals?.data.goals.length === 0) return null;
   return (
-    <div className="relative">
-      <button
-        type="button"
-        className={sideMenuListTextVariants({
-          isActive,
-        })}
-        onClick={() => setIsGoalListOpen((prev) => !prev)}
-      >
-        <div className="flex items-center gap-2">
-          <item.icon
-            className={sideMenuListIconVariants({
-              isActive,
-            })}
-          />
-          <span className="text-lg font-semibold">{item.name}</span>
-        </div>
-        <Image
-          className={
-            isGoalListOpen ? "rotate-180 lg:-rotate-90" : "lg:-rotate-90"
-          }
-          src="/icons/common/chevron-down.svg"
-          alt="chevron-down"
-          width={24}
-          height={24}
-        />
-      </button>
-      {isGoalListOpen && (
-        <div
-          className="mt-2 lg:absolute right-[-200px] lg:border lg:border-gray-200 lg:shadow-lg overflow-hidden lg:rounded-lg top-0 bg-white lg:dark:bg-background"
-          ref={menuRef}
+    <li>
+      <div className="relative">
+        <button
+          type="button"
+          className={sideMenuListTextVariants({
+            isActive,
+          })}
+          onClick={() => setIsGoalListOpen((prev) => !prev)}
         >
-          <GoalsMenuList goals={goals?.data.goals || []} onClose={onClose} />
-        </div>
-      )}
-    </div>
+          <div className="flex items-center gap-2">
+            <item.icon
+              className={sideMenuListIconVariants({
+                isActive,
+              })}
+            />
+            <span className="text-lg font-semibold">{item.name}</span>
+          </div>
+          <Image
+            className={
+              isGoalListOpen ? "rotate-180 lg:-rotate-90" : "lg:-rotate-90"
+            }
+            src="/icons/common/chevron-down.svg"
+            alt="chevron-down"
+            width={24}
+            height={24}
+          />
+        </button>
+        {isGoalListOpen && (
+          <div
+            className="mt-2 lg:absolute right-[-200px] lg:border lg:border-gray-200 lg:shadow-lg overflow-hidden lg:rounded-lg top-0 lg:bg-white lg:dark:bg-background"
+            ref={menuRef}
+          >
+            <GoalsMenuList
+              goals={goals?.data.goals || []}
+              onClose={handleClose}
+            />
+          </div>
+        )}
+      </div>
+    </li>
   );
 }
