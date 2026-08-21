@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { m } from "motion/react";
 import { Button } from "@/components/common/Button";
@@ -20,6 +20,7 @@ import useHeaderStore from "@/store/useHeaderStore";
 import { showSaveFailureToast, showSaveSuccessToast } from "@/utils/toast";
 
 export function MyPageInfo() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { data: userMe } = useGetUserMe();
   const user = userMe?.data;
   const setTitle = useHeaderStore((s) => s.setTitle);
@@ -31,9 +32,11 @@ export function MyPageInfo() {
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    watch,
+    formState: { errors, isValid },
   } = useForm<MyPageFormValues>({
     resolver: zodResolver(myPageFormSchema),
+    mode: "onChange",
     defaultValues: {
       name: user?.name ?? "",
       image: user?.image ?? null,
@@ -43,7 +46,7 @@ export function MyPageInfo() {
     },
   });
 
-  const nameValue = useWatch({ control, name: "name" });
+  const nameValue = watch("name");
   const [checkedName, setCheckedName] = useState<string | null>(null);
 
   const isNameChanged = user !== undefined && nameValue !== user.name;
@@ -75,32 +78,29 @@ export function MyPageInfo() {
     const shouldUpdatePassword = currentPassword !== "";
 
     if (!shouldUpdateProfile && !shouldUpdatePassword) {
-      return;
+      return showSaveFailureToast("변경할 정보가 없습니다.");
     }
-
-    const toastOptions = {
-      onSuccess: () => showSaveSuccessToast("저장이 완료되었습니다."),
-      onError: () => showSaveFailureToast("저장이 실패하였습니다."),
-    };
 
     await Promise.allSettled([
       shouldUpdateProfile
-        ? patchUserMe(
-            { data: { name: values.name, image: values.image } },
-            toastOptions,
-          )
+        ? patchUserMe({ data: { name: values.name, image: values.image } })
         : Promise.resolve(),
       shouldUpdatePassword
-        ? patchUserPassword(
-            {
-              data: { currentPassword, newPassword: values.newPassword ?? "" },
-            },
-            toastOptions,
-          )
+        ? patchUserPassword({
+            data: { currentPassword, newPassword: values.newPassword ?? "" },
+          })
         : Promise.resolve(),
-    ]);
+    ])
+      .then(() => {
+        showSaveSuccessToast("저장이 완료되었습니다.");
+      })
+      .catch(() => {
+        showSaveFailureToast("저장이 실패하였습니다.");
+      });
   };
 
+  const canSubmit =
+    isValid || isNameAvailable === true || selectedFile !== null;
   return (
     <>
       <m.h1
@@ -118,7 +118,12 @@ export function MyPageInfo() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full flex-col items-center gap-12 rounded-[32px] bg-white dark:bg-card p-5 md:py-10 md:px-8"
       >
-        <ProfileImageInput control={control} name="image" />
+        <ProfileImageInput
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+          control={control}
+          name="image"
+        />
 
         <div className="flex w-full flex-col gap-10">
           <div className="flex w-full flex-col gap-4">
@@ -135,7 +140,7 @@ export function MyPageInfo() {
           <MyPagePasswordFields control={control} errors={errors} />
         </div>
 
-        <Button type="submit" fullWidth>
+        <Button type="submit" fullWidth disabled={!canSubmit}>
           저장하기
         </Button>
       </m.form>

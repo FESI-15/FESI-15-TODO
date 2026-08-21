@@ -32,7 +32,7 @@ export const myPageFormSchema = z
 
     if (currentPassword === "") {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: "현재 비밀번호를 입력해주세요",
         path: ["currentPassword"],
       });
@@ -41,7 +41,7 @@ export const myPageFormSchema = z
     const newPasswordResult = newPasswordSchema.safeParse(newPassword);
     if (!newPasswordResult.success) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: newPasswordResult.error.issues[0].message,
         path: ["newPassword"],
       });
@@ -49,7 +49,7 @@ export const myPageFormSchema = z
 
     if (confirmPassword !== newPassword) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: "비밀번호가 일치하지 않습니다",
         path: ["confirmPassword"],
       });
