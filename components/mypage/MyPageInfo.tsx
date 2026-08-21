@@ -44,9 +44,16 @@ export function MyPageInfo() {
   });
 
   const nameValue = useWatch({ control, name: "name" });
+  const imageValue = useWatch({ control, name: "image" });
+  const currentPasswordValue = useWatch({ control, name: "currentPassword" });
   const [checkedName, setCheckedName] = useState<string | null>(null);
 
   const isNameChanged = user !== undefined && nameValue !== user.name;
+  const isImageChanged =
+    user !== undefined && imageValue !== (user.image ?? null);
+  const isPasswordChanged = (currentPasswordValue ?? "") !== "";
+  const isSubmitDisabled =
+    !isNameChanged && !isImageChanged && !isPasswordChanged;
   const isChecked = checkedName !== null && checkedName === nameValue;
   const canCheck = isNameChanged && nameValue.length > 0 && !isChecked;
 
@@ -135,7 +142,7 @@ export function MyPageInfo() {
           <MyPagePasswordFields control={control} errors={errors} />
         </div>
 
-        <Button type="submit" fullWidth>
+        <Button type="submit" fullWidth disabled={isSubmitDisabled}>
           저장하기
         </Button>
       </m.form>
