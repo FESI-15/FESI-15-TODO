@@ -16,18 +16,21 @@ interface ProfileImageInputProps<T extends FieldValues> extends Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "defaultValue" | "name" | "onBlur" | "onChange" | "value"
 > {
+  selectedFile: File | null;
+  setSelectedFile: (file: File | null) => void;
   control: Control<T>;
   name: FieldPath<T>;
 }
 
 export function ProfileImageInput<T extends FieldValues>({
+  selectedFile,
+  setSelectedFile,
   control,
   name,
   ...props
 }: ProfileImageInputProps<T>) {
   const { mutateAsync: postImages } = usePostImages();
   const { field } = useController({ control, name });
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = async (file: File | null) => {
     setSelectedFile(file);
