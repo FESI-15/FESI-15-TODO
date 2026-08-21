@@ -22,21 +22,23 @@ export default function SideMenuListItem({
   const isActive = isActivePath(item.href);
 
   return (
-    <Link
-      href={item.href}
-      onClick={() => onClose?.()}
-      className={sideMenuListTextVariants({
-        isActive,
-      })}
-    >
-      <div className="flex items-center gap-2">
-        <item.icon
-          className={sideMenuListIconVariants({
-            isActive,
-          })}
-        />
-        <span className="text-lg">{item.name}</span>
-      </div>
-    </Link>
+    <li>
+      <Link
+        href={item.href}
+        onClick={() => onClose?.()}
+        className={sideMenuListTextVariants({
+          isActive,
+        })}
+      >
+        <div className="flex items-center gap-2">
+          <item.icon
+            className={sideMenuListIconVariants({
+              isActive,
+            })}
+          />
+          <span className="text-lg">{item.name}</span>
+        </div>
+      </Link>
+    </li>
   );
 }

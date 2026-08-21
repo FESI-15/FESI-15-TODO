@@ -38,7 +38,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
           />
         </Link>
       </div>
-      <div className="py-4.5 lg:h-64 rounded-[28px] lg:rounded-[40px] bg-orange-500 dark:bg-[#572810] flex flex-col p-4 lg:px-8 lg:py-[30px] shadow-[0_10px_40px_rgba(255,158,89,0.4)] dark:shadow-none dark:border dark:border-[#a44d1d]">
+      <div className="py-4.5 h-[186px] lg:h-64 rounded-[28px] lg:rounded-[40px] bg-orange-500 dark:bg-[#572810] flex flex-col p-4 lg:px-8 lg:py-[30px] shadow-[0_10px_40px_rgba(255,158,89,0.4)] dark:shadow-none dark:border dark:border-[#a44d1d]">
         {todos.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
             <p className="text-white font-semibold">
@@ -46,7 +46,7 @@ export default function RecentTasksCard({ todos }: RecentTasksCardProps) {
             </p>
           </div>
         ) : (
-          <ul className="flex flex-col gap-2 h-full">
+          <ul className="flex flex-col gap-0.5 lg:gap-2 h-full">
             {todos.slice(0, 4).map((todo) => (
               <RecentTaskRow key={todo.id} todo={todo} />
             ))}
